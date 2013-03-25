@@ -1,3 +1,5 @@
+source ~/.profile
+
 alias s="ssh -l tritchford tritchford-macbookpro.local"
 alias x="ssh -l admin ax.to"
 export EDITOR="emacs -nw"
@@ -15,7 +17,7 @@ alias pr="pushd $ROOT"
 alias p="popd"
 alias new="$ROOT/rec/scripts/new/new.py"
 alias Aquamacs="/Applications/Aquamacs.app/Contents/MacOS/Aquamacs"
-alias echomesh="python /development/echomesh/code/python/Main.py /development/echomesh"
+alias echomesh="python /development/echomesh/code/python/Echomesh.py"
 
 alias ..="cd .."
 alias ...="cd ../.."

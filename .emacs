@@ -69,10 +69,14 @@
 ;; (require 'pymacs)
 ;; (pymacs-load "ropemacs" "rope-")
 (require 'gnugo)
-(setq auto-mode-alist (cons '("\\.csd$" . csound-csd-mode) auto-mode-alist))
-(autoload 'csound-csd-mode "csound-csd" "Csound CSD major mode." t)
+;;(setq auto-mode-alist (cons '("\\.csd$" . csound-csd-mode) auto-mode-alist))
+;;(autoload 'csound-csd-mode "csound-csd" "Csound CSD major mode." t)
 
 (require 'stef-elisp "stef-elisp/stef-elisp")
+
+(require 'git-gutter)
+;;(global-git-gutter-mode nil)
+(add-hook 'python-mode-hook 'git-gutter-mode)
 
 (global-font-lock-mode t)
 (column-number-mode t)
@@ -220,6 +224,15 @@ FILENAME should lack slashes."
             (delete-file filename)
             (set-visited-file-name newname)
             (set-buffer-modified-p nil) t))))
+
+
+(defun cycle-windows (&optional reverse)
+   "Cycle the windows' buffers. If given a prefix argument, cycle in reverse."
+   (interactive "P")
+   (dolist (window (butlast (if reverse (reverse (window-list)) (window-list))))
+     (let ((next-window-buffer (window-buffer (next-window window 0))))
+       (set-window-buffer (next-window window 0) (window-buffer window))
+       (set-window-buffer window next-window-buffer))))
 
 (defun rotate-windows ()
  "If you have 2 windows, it swaps them."
