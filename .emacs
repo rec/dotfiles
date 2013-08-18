@@ -8,7 +8,7 @@
  '(fill-column 80)
  '(global-mark-ring-max 256)
  '(grep-command "grep --exclude \\*.pyc -nHR * -e ")
- '(gud-gdb-command-name "gdb --annotate=1")
+ '(gud-gdb-command-name "gdb --annotate=1")  ;; DOESN'T WORK.
  '(indent-tabs-mode nil)
  '(java-indent 2)
  '(kill-ring-max 1024)
@@ -20,108 +20,48 @@
  '(template-auto-insert t)
  '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
 )
-;; cd /development/rec/projects/slow/Builds/MacOSX && xcodebuild -project Slow.xcodeproj -configuration Debug
-
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  ;; '(default ((t (:inherit nil :stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Courier"))))
-)
-
-;;(eval-after-load "pymacs"
-;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
-
-;; (electric-pair-mode +1)
-
-(when (fboundp 'winner-mode)
-  (winner-mode 1))
-
-;; (require 'switch-window)
-
-(require 'dired-x)
-
-(setq grep-use-null-device nil)
-
-(setq dired-omit-files
-      (rx (or (seq bol (? ".") "#")         ;; emacs autosave files
-             (seq "~" eol)                 ;; backup-files
-             (seq ".pyc" eol)              ;; compiled python files
-             (seq ".pyo" eol)              ;; compiled python files
-             (seq bol "CVS" eol)           ;; CVS dirs
-             )))
-
-
-(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
-
-;; Make sizes human-readable by default, sort version numbers
-;; correctly, and put dotfiles and capital-letters first.
-(setq-default dired-listing-switches "-alhv")
-
-(setq dired-recursive-copies 'always)
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
 
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-exec "pymacs" nil t)
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-autoload "pymacs")
-;; (require 'pymacs)
-;; (pymacs-load "ropemacs" "rope-")
-;;(require 'gnugo)
-;;(setq auto-mode-alist (cons '("\\.csd$" . csound-csd-mode) auto-mode-alist))
-;;(autoload 'csound-csd-mode "csound-csd" "Csound CSD major mode." t)
-
-(require 'stef-elisp "stef-elisp/stef-elisp")
-
+(require 'dired-x)
 (require 'git-gutter)
-;;(global-git-gutter-mode nil)
-
-(defun ggm()
-  (git-gutter-mode t)
-)
-(add-hook 'python-mode-hook 'ggm)
-
-(global-font-lock-mode t)
-(column-number-mode t)
-(auto-compression-mode 1)
-
-(require 'template)
-;;(require 'zencoding-mode)
 (require 'protobuf-mode)
+(require 'saveplace)
+(require 'template)
+(require 'uniquify)
 (require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+(setq grep-use-null-device nil)
+
+(setq-default dired-listing-switches "-alhv")
+(setq dired-recursive-copies 'always)
+
+(setq dired-omit-files
+      (rx (or
+           (seq bol (? ".") "#")         ;; emacs autosave files
+           (seq "~" eol)                 ;; backup-files
+           (seq ".pyc" eol)              ;; compiled python files
+           (seq ".pyo" eol)              ;; compiled python files
+           (seq bol "CVS" eol)           ;; CVS dirs
+           )))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (dired-omit-mode t)
+            ))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (git-gutter-mode t)
+            ))
 
 (add-hook 'yaml-mode-hook
-          '(lambda ()
-             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-
-;; (require 'eproject-0.4/eproject)
-
-(template-initialize)
-(blink-cursor-mode nil)
-(set-cursor-color 'DeepSkyBlue)
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-(setq zoom-font-frame-local-flag nil)
-(require 'saveplace)
-
-(setq backup-by-copying-when-mismatch t)
-(add-hook 'write-file-hooks 'delete-trailing-whitespace)
-
-(defun make-auto-save-file-name ()
-  (concat autosave-dir
-   (if buffer-file-name
-      (concat "#" (file-name-nondirectory buffer-file-name) "#")
-    (expand-file-name
-     (concat "#%" (buffer-name) "#")))))
-
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+          (lambda ()
+            (define-key yaml-mode-map "\C-m" 'newline-and-indent)
+            ))
+(add-hook 'write-file-hooks
+          'delete-trailing-whitespace
+)
 
 (defun my-c-mode-common-hook ()
   (setq c-basic-offset 2)
@@ -141,6 +81,34 @@
 )
 
 (add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
+
+(global-font-lock-mode t)
+(column-number-mode t)
+(auto-compression-mode t)
+(desktop-save-mode t)
+
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+(add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
+(add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
+
+(template-initialize)
+(blink-cursor-mode nil)
+(set-cursor-color 'DeepSkyBlue)
+
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+(setq zoom-font-frame-local-flag nil)
+
+(setq backup-by-copying-when-mismatch t)
+
+(defun make-auto-save-file-name ()
+  (concat autosave-dir
+   (if buffer-file-name
+      (concat "#" (file-name-nondirectory buffer-file-name) "#")
+    (expand-file-name
+     (concat "#%" (buffer-name) "#")))))
+
 
 ;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
 ;; list contains regexp=>directory mappings; filenames matching a regexp are
@@ -162,8 +130,6 @@
  "Return T so that auto save files are always created, no matter where
 the original file is stored."
  t)
-
-(desktop-save-mode 1)
 
 ;;  Make all auto-save files go into my garbage directory.  When root or others
 ;;  load my .emacs file, $_GARBAGE will not be set, so auto-save files will be
@@ -206,41 +172,7 @@ FILENAME should lack slashes."
                          nil
                          (null current-prefix-arg)))))
 
-;; Three functions from http://steve.yegge.googlepages.com/my-dot-emacs-file
-
-(defun rename-file-and-buffer (new-name)
- "Renames both current buffer and file it's visiting to NEW-NAME."
- (interactive "sNew name: ")
- (let ((name (buffer-name))
-       (filename (buffer-file-name)))
- (if (not filename)
-     (message "Buffer '%s' is not visiting a file!" name)
- (if (get-buffer new-name)
-     (message "A buffer named '%s' already exists!" new-name)
-   (progn
-     (rename-file name new-name 1)
-     (rename-buffer new-name)
-     (set-visited-file-name new-name)
-     (set-buffer-modified-p nil))))))
-
-
-(defun move-buffer-file (dir)
- "Moves both current buffer and file it's visiting to DIR."
- (interactive "DNew directory: ")
- (let* ((name (buffer-name))
-        (filename (buffer-file-name))
-        (dir
-         (if (string-match dir "\\(?:/\\|\\\\)$")
-             (substring dir 0 -1) dir))
-        (newname (concat dir "/" name)))
-
-   (if (not filename)
-       (message "Buffer '%s' is not visiting a file!" name)
-     (progn (copy-file filename newname 1)
-            (delete-file filename)
-            (set-visited-file-name newname)
-            (set-buffer-modified-p nil) t))))
-
+(put 'dired-find-alternate-file 'disabled nil)
 
 (defun cycle-windows (&optional reverse)
    "Cycle the windows' buffers. If given a prefix argument, cycle in reverse."
@@ -250,96 +182,30 @@ FILENAME should lack slashes."
        (set-window-buffer (next-window window 0) (window-buffer window))
        (set-window-buffer window next-window-buffer))))
 
-(defun rotate-windows ()
- "If you have 2 windows, it swaps them."
- (interactive)
- (cond
-
-  ((= (count-windows) 2)
-   (let* ((w1 (first (window-list)))
-          (w2 (second (window-list)))
-          (b1 (window-buffer w1))
-          (b2 (window-buffer w2))
-          (s1 (window-start w1))
-          (s2 (window-start w2)))
-     (set-window-buffer w1 b2)
-     (set-window-buffer w2 b1)
-     (set-window-start w1 s2)
-     (set-window-start w2 s1)))
-
-  ((= (count-windows) 3)
-   (let* ((w1 (first (window-list)))
-          (w2 (second (window-list)))
-          (w3 (third (window-list)))
-
-          (b1 (window-buffer w1))
-          (b2 (window-buffer w2))
-          (b3 (window-buffer w3))
-
-          (s1 (window-start w1))
-          (s2 (window-start w2))
-          (s3 (window-start w3))
-          )
-     (set-window-buffer w1 b3)
-     (set-window-buffer w2 b1)
-     (set-window-buffer w3 b2)
-
-     (set-window-start w1 s3)
-     (set-window-start w2 s1)
-     (set-window-start w3 s2)
-     ))
-
-  ((= (count-windows) 4)
-   (let* ((w1 (first (window-list)))
-          (w2 (second (window-list)))
-          (w3 (third (window-list)))
-          (w4 (fourth (window-list)))
-
-          (b1 (window-buffer w1))
-          (b2 (window-buffer w2))
-          (b3 (window-buffer w3))
-          (b4 (window-buffer w4))
-
-          (s1 (window-start w1))
-          (s2 (window-start w2))
-          (s3 (window-start w3))
-          (s4 (window-start w4))
-          )
-     (set-window-buffer w1 b4)
-     (set-window-buffer w2 b1)
-     (set-window-buffer w3 b2)
-     (set-window-buffer w4 b3)
-
-     (set-window-start w1 s4)
-     (set-window-start w2 s1)
-     (set-window-start w3 s2)
-     (set-window-start w4 s3)
-     ))))
-
 (defun rotate-file-suffix (file)
   "Returns one rotation through the file"
   (let* ((patterns
-        '(("_test\\.cpp" ".h")
+        '(
+          ("_test\\.cpp" ".h")
           ("\\.h" ".cpp")
           ("\\.cpp" ".proto")
           ("\\.proto" "_test.cpp")
- ;;         ("\\.js" "_test.js")
- ;;         ("_test\\.js" ".js")
           ("\\.cc" ".h")
           ("\\.cpp" "_test.cpp")
           ("_test\\.py" ".py")
-          ("\\.py" "_test.py")))
+          ("\\.py" "_test.py")
+          ))
          (working t))
   (while (and patterns working)
     (setq pattern (pop patterns))
     (if (string-match (car pattern) file)
         (progn
-          (setq file (replace-regexp-in-string (car pattern)
-                                               (cadr pattern)
-                                               file))
+          (setq file
+                (replace-regexp-in-string (car pattern)
+                                          (cadr pattern)
+                                          file))
           (setq working nil)))))
   file)
-
 
 (defun mapcar-head (fn-head fn-rest list)
       "Like MAPCAR, but applies a different function to the first element."
@@ -392,7 +258,6 @@ FILENAME should lack slashes."
     (if cml (progn (delete-region beg end) (insert cml))) ))
 
 
-
 (defun rotate-tests ()
   "Rotate between a file and its test file."
   (interactive)
@@ -408,15 +273,6 @@ FILENAME should lack slashes."
         (progn
         (if (file-readable-p new-file)
             (progn  (find-file new-file) (setq working2 nil))))))))
-
-;; (defun open-file-at-point()
-;;   ""
-;;   (interactive)
-;;   (if (string-match "include \"\\(.*\\)\".*" (thing-at-point 'line))
-;;       ;; (if (file-readable-p (match-string 1))
-;;           ())));;)
-;; ;;          (find-file (match-string 1))));;)
-
 
 (defun to-two()
   (interactive)
@@ -593,6 +449,140 @@ FILENAME should lack slashes."
 ;; (global-set-key [f13] 'save-buffer)
 ;; (global-set-key [f14] 'save-some-buffers)
 
-(add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
-(add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
-(put 'dired-find-alternate-file 'disabled nil)
+;; (electric-pair-mode +1)
+;; (require 'dired-x)
+
+;;(when (fboundp 'winner-mode)  ;; Doesn't work.
+;;  (winner-mode 1))
+
+;; (autoload 'pymacs-apply "pymacs")
+;; (autoload 'pymacs-call "pymacs")
+;; (autoload 'pymacs-eval "pymacs" nil t)
+;; (autoload 'pymacs-exec "pymacs" nil t)
+;; (autoload 'pymacs-load "pymacs" nil t)
+;; (autoload 'pymacs-autoload "pymacs")
+;; (require 'pymacs)
+;; (pymacs-load "ropemacs" "rope-")
+;;(require 'gnugo)
+;;(setq auto-mode-alist (cons '("\\.csd$" . csound-csd-mode) auto-mode-alist))
+;;(autoload 'csound-csd-mode "csound-csd" "Csound CSD major mode." t)
+
+;; (require 'stef-elisp "stef-elisp/stef-elisp")
+
+;;(require 'zencoding-mode)
+;; (require 'eproject-0.4/eproject)
+
+
+;; ;; Three functions from http://steve.yegge.googlepages.com/my-dot-emacs-file
+
+;; (defun rename-file-and-buffer (new-name)
+;;  "Renames both current buffer and file it's visiting to NEW-NAME."
+;;  (interactive "sNew name: ")
+;;  (let ((name (buffer-name))
+;;        (filename (buffer-file-name)))
+;;  (if (not filename)
+;;      (message "Buffer '%s' is not visiting a file!" name)
+;;  (if (get-buffer new-name)
+;;      (message "A buffer named '%s' already exists!" new-name)
+;;    (progn
+;;      (rename-file name new-name 1)
+;;      (rename-buffer new-name)
+;;      (set-visited-file-name new-name)
+;;      (set-buffer-modified-p nil))))))
+
+
+;; (defun move-buffer-file (dir)
+;;  "Moves both current buffer and file it's visiting to DIR."
+;;  (interactive "DNew directory: ")
+;;  (let* ((name (buffer-name))
+;;         (filename (buffer-file-name))
+;;         (dir
+;;          (if (string-match dir "\\(?:/\\|\\\\)$")
+;;              (substring dir 0 -1) dir))
+;;         (newname (concat dir "/" name)))
+
+;;    (if (not filename)
+;;        (message "Buffer '%s' is not visiting a file!" name)
+;;      (progn (copy-file filename newname 1)
+;;             (delete-file filename)
+;;             (set-visited-file-name newname)
+;;             (set-buffer-modified-p nil) t))))
+
+;; (defun rotate-windows ()
+;;  "If you have 2 windows, it swaps them."
+;;  (interactive)
+;;  (cond
+
+;;   ((= (count-windows) 2)
+;;    (let* ((w1 (first (window-list)))
+;;           (w2 (second (window-list)))
+;;           (b1 (window-buffer w1))
+;;           (b2 (window-buffer w2))
+;;           (s1 (window-start w1))
+;;           (s2 (window-start w2)))
+;;      (set-window-buffer w1 b2)
+;;      (set-window-buffer w2 b1)
+;;      (set-window-start w1 s2)
+;;      (set-window-start w2 s1)))
+
+;;   ((= (count-windows) 3)
+;;    (let* ((w1 (first (window-list)))
+;;           (w2 (second (window-list)))
+;;           (w3 (third (window-list)))
+
+;;           (b1 (window-buffer w1))
+;;           (b2 (window-buffer w2))
+;;           (b3 (window-buffer w3))
+
+;;           (s1 (window-start w1))
+;;           (s2 (window-start w2))
+;;           (s3 (window-start w3))
+;;           )
+;;      (set-window-buffer w1 b3)
+;;      (set-window-buffer w2 b1)
+;;      (set-window-buffer w3 b2)
+
+;;      (set-window-start w1 s3)
+;;      (set-window-start w2 s1)
+;;      (set-window-start w3 s2)
+;;      ))
+
+;;   ((= (count-windows) 4)
+;;    (let* ((w1 (first (window-list)))
+;;           (w2 (second (window-list)))
+;;           (w3 (third (window-list)))
+;;           (w4 (fourth (window-list)))
+
+;;           (b1 (window-buffer w1))
+;;           (b2 (window-buffer w2))
+;;           (b3 (window-buffer w3))
+;;           (b4 (window-buffer w4))
+
+;;           (s1 (window-start w1))
+;;           (s2 (window-start w2))
+;;           (s3 (window-start w3))
+;;           (s4 (window-start w4))
+;;           )
+;;      (set-window-buffer w1 b4)
+;;      (set-window-buffer w2 b1)
+;;      (set-window-buffer w3 b2)
+;;      (set-window-buffer w4 b3)
+
+;;      (set-window-start w1 s4)
+;;      (set-window-start w2 s1)
+;;      (set-window-start w3 s2)
+;;      (set-window-start w4 s3)
+;;      ))))
+
+;; (defun ggm() (git-gutter-mode t) )
+;; (add-hook 'python-mode-hook 'ggm)
+
+;; (defun open-file-at-point()
+;;   ""
+;;   (interactive)
+;;   (if (string-match "include \"\\(.*\\)\".*" (thing-at-point 'line))
+;;       ;; (if (file-readable-p (match-string 1))
+;;           ())));;)
+;; ;;          (find-file (match-string 1))));;)
+
+
