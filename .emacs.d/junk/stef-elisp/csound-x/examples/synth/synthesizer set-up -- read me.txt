@@ -1,0 +1,17 @@
+example set-up for a CSD-based MIDI synthesizer
+===============================================
+
+(WARNING: the scripts provided here are for Windows; and you will need Keykit)
+
+1) put the files csound-csd-synth.el, csound-csd-synth.bat and bamboo.bat in the same folder, preferably in your Path. 
+
+2) in csound-csd-synth.el, write your own settings (directories and options), then put bamboo-synth.csd correspondingly, in SYNTHS-dir
+
+that's it. 
+now the command:
+        
+        bamboo music.wav music.mid
+
+will compile an audio file "music.wav" (in SFDIR) from the MIDI file "music.mid" (supposed to live in MIDI-dir since no path is specified).
+
+note that the arguments may appear in any order. the extensions ".wav" and ".mid" are required, though.

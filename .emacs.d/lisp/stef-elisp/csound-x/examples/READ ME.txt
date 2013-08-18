@@ -1,0 +1,5 @@
+27variations.csd  -  an example from the csound-x documentation. illustrates how embedded emacs lisp code can be used to explore an algorithm.
+
+bamboo.csd   -   an example composition where Emacs Lisp is used to control a very complex instrument, making it possible to render very dumb MIDI data in a quite lively manner. Keykit was used to write the composition, based on fractal melodies. All of this is exposed in the <ELISP> area of the file.
+
+synth/       -   the same instrument and lisp code, set-up as a command-line MIDI files synthesizer (for Windows)
