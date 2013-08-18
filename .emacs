@@ -18,7 +18,7 @@
  '(standard-indent 2)
  '(tab-width 2)
  '(template-auto-insert t)
-'(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
+ '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
 )
 ;; cd /development/rec/projects/slow/Builds/MacOSX && xcodebuild -project Slow.xcodeproj -configuration Debug
 
@@ -33,22 +33,25 @@
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
+;; (electric-pair-mode +1)
+
+(when (fboundp 'winner-mode)
+  (winner-mode 1))
+
+;; (require 'switch-window)
+
 (require 'dired-x)
 
 (setq grep-use-null-device nil)
 
 (setq dired-omit-files
       (rx (or (seq bol (? ".") "#")         ;; emacs autosave files
-              (seq "~" eol)                 ;; backup-files
-              (seq ".pyc" eol)              ;; compiled python files
-              (seq ".pyo" eol)              ;; compiled python files
-              (seq bol "CVS" eol)           ;; CVS dirs
-              )))
+             (seq "~" eol)                 ;; backup-files
+             (seq ".pyc" eol)              ;; compiled python files
+             (seq ".pyo" eol)              ;; compiled python files
+             (seq bol "CVS" eol)           ;; CVS dirs
+             )))
 
-(setq dired-omit-extensions
-      (append dired-latex-unclean-extensions
-              dired-bibtex-unclean-extensions
-              dired-texinfo-unclean-extensions))
 
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
@@ -68,7 +71,7 @@
 ;; (autoload 'pymacs-autoload "pymacs")
 ;; (require 'pymacs)
 ;; (pymacs-load "ropemacs" "rope-")
-(require 'gnugo)
+;;(require 'gnugo)
 ;;(setq auto-mode-alist (cons '("\\.csd$" . csound-csd-mode) auto-mode-alist))
 ;;(autoload 'csound-csd-mode "csound-csd" "Csound CSD major mode." t)
 
@@ -76,15 +79,26 @@
 
 (require 'git-gutter)
 ;;(global-git-gutter-mode nil)
-(add-hook 'python-mode-hook 'git-gutter-mode)
+
+(defun ggm()
+  (git-gutter-mode t)
+)
+(add-hook 'python-mode-hook 'ggm)
 
 (global-font-lock-mode t)
 (column-number-mode t)
 (auto-compression-mode 1)
 
 (require 'template)
-(require 'zencoding-mode)
+;;(require 'zencoding-mode)
 (require 'protobuf-mode)
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
 ;; (require 'eproject-0.4/eproject)
 
 (template-initialize)
@@ -123,6 +137,7 @@
 
 (defun my-python-mode-common-hook ()
   (setq python-basic-offset 2)
+;;  (define-key python-mode-map "\C-m" 'newline-and-indent)
 )
 
 (add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
@@ -206,7 +221,8 @@ FILENAME should lack slashes."
      (rename-file name new-name 1)
      (rename-buffer new-name)
      (set-visited-file-name new-name)
-(set-buffer-modified-p nil)))))) ;;
+     (set-buffer-modified-p nil))))))
+
 
 (defun move-buffer-file (dir)
  "Moves both current buffer and file it's visiting to DIR."
@@ -310,7 +326,9 @@ FILENAME should lack slashes."
  ;;         ("\\.js" "_test.js")
  ;;         ("_test\\.js" ".js")
           ("\\.cc" ".h")
-          ("\\.cpp" "_test.cpp")))
+          ("\\.cpp" "_test.cpp")
+          ("_test\\.py" ".py")
+          ("\\.py" "_test.py")))
          (working t))
   (while (and patterns working)
     (setq pattern (pop patterns))
@@ -390,7 +408,6 @@ FILENAME should lack slashes."
         (progn
         (if (file-readable-p new-file)
             (progn  (find-file new-file) (setq working2 nil))))))))
-
 
 ;; (defun open-file-at-point()
 ;;   ""
@@ -578,5 +595,4 @@ FILENAME should lack slashes."
 
 (add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
-
-
+(put 'dired-find-alternate-file 'disabled nil)

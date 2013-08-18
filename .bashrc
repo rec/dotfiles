@@ -10,7 +10,7 @@ export PATH="/usr/local/git/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/us
 alias git=hub
 export APPENGINE="/Speedy applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources"
 #export PYTHONPATH="$APPENGINE/google_appengine:$APPENGINE/google_appengine/lib"
-export PYTHONPATH=""
+#export PYTHONPATH=""
 export D=/development
 
 alias pr="pushd $ROOT"
@@ -18,6 +18,7 @@ alias p="popd"
 alias new="$ROOT/rec/scripts/new/new.py"
 alias Aquamacs="/Applications/Aquamacs.app/Contents/MacOS/Aquamacs"
 alias echomesh="python /development/echomesh/code/python/Echomesh.py"
+alias em="python /development/echomesh/code/python/Echomesh.py"
 
 alias ..="cd .."
 alias ...="cd ../.."
