@@ -1,3 +1,5 @@
+[push]
+	default = simple
 [user]
-	name = Tom Ritchford
 	email = tom@swirly.com
+	name = Tom Ritchford

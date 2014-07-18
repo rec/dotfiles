@@ -1,0 +1,7 @@
+*
+!.emacs
+!.emacs.d/
+!.env
+!.bashrc
+!.gitignore
+!.alias

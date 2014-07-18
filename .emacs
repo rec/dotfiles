@@ -1,49 +1,87 @@
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(c-basic-offset 2)
- '(compile-command "cd ~/Documents/development/Max && make -k")
- '(fill-column 80)
- '(global-mark-ring-max 256)
- '(grep-command "grep --exclude \\*.pyc -nHR * -e ")
- '(gud-gdb-command-name "gdb --annotate=1")  ;; DOESN'T WORK.
- '(indent-tabs-mode nil)
- '(java-indent 2)
- '(kill-ring-max 1024)
- '(large-file-warning-threshold nil)
- '(mark-ring-max 256)
- '(python-indent 2)
- '(standard-indent 2)
- '(tab-width 2)
- '(template-auto-insert t)
- '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
-)
+(server-start)
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(c-basic-offset 4)
+ '(column-number-mode t)
+ '(compile-command "cd /development/rippled && source ~/.bashrc && scons -j7 && build/rippled --unittest && npm test")
+ '(cursor-type (quote box) t)
+ '(fill-column 80)
+ '(global-mark-ring-max 256)
+ '(global-whitespace-mode t)
+ '(grep-command "grep --exclude \\*.pyc -nHR * -e ")
+ '(gud-gdb-command-name "gdb --annotate=1")
+ '(indent-tabs-mode nil)
+ '(indicate-buffer-boundaries (quote left))
+ '(java-indent 4)
+ '(js-indent-level 4)
+ '(kill-ring-max 1024)
+ '(large-file-warning-threshold nil)
+ '(mark-ring-max 256)
+ '(ns-antialias-text nil)
+ '(ns-tool-bar-display-mode (quote both) t)
+ '(ns-tool-bar-size-mode (quote regular) t)
+ '(py-indent-offset 4)
+ '(python-indent 4)
+ '(python-indent-offset 4)
+ '(shell-cd-regexp "\\(cd\\|f\\)")
+ '(standard-indent 4)
+ '(tab-width 4)
+ '(template-auto-insert t)
+ '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
+ '(tool-bar-mode nil)
+ '(visual-line-mode nil t))
+
+(setq-default line-spacing 3)
+
 (require 'dired-x)
 (require 'git-gutter)
+(require 'google-c-style)
+(require 'guess-style)
+(require 'ido)
 (require 'protobuf-mode)
 (require 'saveplace)
 (require 'template)
 (require 'uniquify)
 (require 'yaml-mode)
 
+(require 'whitespace)
+ (setq whitespace-style '(face empty tabs lines-tail trailing))
+ (global-whitespace-mode t)
+
+;; Failed experiment with dirtrack mode.
+;;(add-hook 'shell-mode-hook 'dirtrack-mode)
+;;(setq dirtrack-list '("^.*\\(.*\\)\\$$" 1 nil))
+
+;; (require 'handy-functions)
+
+;; (add-to-list 'load-path "~/.emacs.d/lisp/guess-style")
+;; (autoload 'guess-style-set-variable "guess-style" nil t)
+;; (autoload 'guess-style-guess-variable "guess-style")
+;; (autoload 'guess-style-guess-all "guess-style" nil t)
+;; (add-hook 'python-mode-hook guess-style-guess-tabs-mode)
+;; (add-hook 'python-mode-hook (lambda ()
+;;                               (when indent-tabs-mode
+;;                                 (guess-style-guess-tab-width)))
+
 (setq grep-use-null-device nil)
 
 (setq-default dired-listing-switches "-alhv")
 (setq dired-recursive-copies 'always)
 
-(setq dired-omit-files
-      (rx (or
-           (seq bol (? ".") "#")         ;; emacs autosave files
-           (seq "~" eol)                 ;; backup-files
-           (seq ".pyc" eol)              ;; compiled python files
-           (seq ".pyo" eol)              ;; compiled python files
-           (seq bol "CVS" eol)           ;; CVS dirs
-           )))
+;; (setq dired-omit-files
+;;       (rx (or
+;;            (seq bol (? ".") "#")         ;; emacs autosave files
+;;            (seq "~" eol)                 ;; backup-files
+;;            (seq ".pyc" eol)              ;; compiled python files
+;;            (seq ".pyo" eol)              ;; compiled python files
+;;            (seq bol "CVS" eol)           ;; CVS dirs
+;; )))
 
 (add-hook 'dired-mode-hook
           (lambda ()
@@ -59,28 +97,20 @@
           (lambda ()
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)
             ))
+
 (add-hook 'write-file-hooks
           'delete-trailing-whitespace
 )
 
-(defun my-c-mode-common-hook ()
-  (setq c-basic-offset 2)
-  (c-set-offset 'innamespace 0)
-  (c-set-offset 'access-label -1)
-  (c-set-offset 'case-label -1)
-  (c-set-offset 'statement-case-intro -1)
-  (c-set-offset 'member-init-intro 4)
-  ;; (subword-mode 0)
-)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;; (defun my-python-mode-common-hook ()
+;;   (setq python-basic-offset 4)
+;; ;;  (define-key python-mode-map "\C-m" 'newline-and-indent)
+;; )
 
-(defun my-python-mode-common-hook ()
-  (setq python-basic-offset 2)
-;;  (define-key python-mode-map "\C-m" 'newline-and-indent)
-)
-
-(add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
+;; (add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
 
 (global-font-lock-mode t)
 (column-number-mode t)
@@ -92,10 +122,11 @@
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 (add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 
 (template-initialize)
 (blink-cursor-mode nil)
-(set-cursor-color 'DeepSkyBlue)
 
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 (setq zoom-font-frame-local-flag nil)
@@ -186,12 +217,15 @@ FILENAME should lack slashes."
   "Returns one rotation through the file"
   (let* ((patterns
         '(
+          ("_test\\.cpp" ".pyx")
           ("_test\\.cpp" ".h")
           ("\\.h" ".cpp")
           ("\\.cpp" ".proto")
           ("\\.proto" "_test.cpp")
           ("\\.cc" ".h")
           ("\\.cpp" "_test.cpp")
+          ("\\.cpp" ".pyx")
+          ("\\.pyx" ".h")
           ("_test\\.py" ".py")
           ("\\.py" "_test.py")
           ))
@@ -268,11 +302,12 @@ FILENAME should lack slashes."
     (while working2
       (setq old-file new-file)
       (setq new-file (rotate-file-suffix new-file))
-      (if (or (string= new-file filename) (string= new-file old-file))
-          (progn (setq working2 nil))
+      (if (or (string= new-file filename)
+              (string= new-file old-file))
+          (progn (setq working2 nil))  ;; We're done!
         (progn
-        (if (file-readable-p new-file)
-            (progn  (find-file new-file) (setq working2 nil))))))))
+          (if (file-readable-p new-file)
+              (progn (find-file new-file) (setq working2 nil))))))))
 
 (defun to-two()
   (interactive)
@@ -354,235 +389,65 @@ FILENAME should lack slashes."
 )
 
 (global-set-key [f1] 'next-error)
-(global-set-key [A-f1] 'goto-line)
+(global-set-key [s-f1] 'goto-line)
 
 (global-set-key [f2] 'rotate-tests)
-(global-set-key [A-M-up] 'rotate-tests)
-(global-set-key [A-f2] 'rotate-windows)
+(global-set-key [s-M-up] 'rotate-tests)
+(global-set-key [s-f2] 'rotate-windows)
 
 (global-set-key [f3] 'do-list-buffers)
 
 (global-set-key [f4] 'switch-to-buffer)
-(global-set-key [A-f4] 'shell)
+(global-set-key [s-f4] 'shell)
 
 (global-set-key [f5] 'find-file)
-(global-set-key [A-f5] 'reload-file)
+(global-set-key [s-f5] 'reload-file)
 
 (global-set-key [f7] 'compile)
 
-(global-set-key [A-f6] 'home-dired)
+(global-set-key [s-f6] 'home-dired)
 (global-set-key [f6] 'default-dired)
 
-(global-set-key [A-f8] 'grep)
-;;(global-set-key [A-f8] 'grep-root)
+(global-set-key [s-f8] 'grep)
+;;(global-set-key [s-f8] 'grep-root)
 
 (defun to-grep() (interactive) (switch-to-buffer "*grep*"))
 (global-set-key [f8] 'to-grep)
 
-(global-set-key [A-f9] 'kmacro-call-macro)
+(global-set-key [s-f9] 'kmacro-call-macro)
 (global-set-key [f9] 'enlarge-window)
 
 (global-set-key [f10] 'query-replace)
-(global-set-key [A-f10] 'tags-query-replace)
+(global-set-key [s-f10] 'tags-query-replace)
 
-(global-set-key [A-f11] 'yank-pop)
+(global-set-key [s-f11] 'yank-pop)
 (global-set-key [f11] 'yank)
 
-(global-set-key [A-f12] 'append-next-kill)
+(global-set-key [s-f12] 'append-next-kill)
 (global-set-key [f12] 'kill-line)
 
 (global-set-key [f13] 'delete-other-windows)
-(global-set-key [A-f13] 'to-two)
+(global-set-key [s-f13] 'to-two)
 
 (global-set-key [f14] 'split-window-vertically)
-(global-set-key [A-f14] 'split-window-horizontally)
+(global-set-key [s-f14] 'split-window-horizontally)
 
 (global-set-key [f15] 'exchange-point-and-mark)
-(global-set-key [A-f15] 'balance-windows)
+(global-set-key [s-f15] 'balance-windows)
 
 (defun back-window()
   (interactive)
   (other-window -1)
 )
 
-(global-set-key [A-up] 'back-window)
-(global-set-key [A-down] 'other-window)
-
-(fset 'make-cpp
-   [?\C-x ?\C-v ?\C-a ?\C-k ?\C-y return ?\C-x ?\C-w ?\C-y backspace ?c ?p ?p return ?\C-k ?\C-k ?\C-s ?n ?a ?m ?e ?s ?p ?a ?c ?e ?  ?\C-a ?\C-  escape ?< ?\C-w return return up up ?# ?i ?n ?c ?l ?u ?d ?e ?  ?\" ?\C-y ?\M-y ?\M-y ?\" ?\C-a ?\M-f right right ?\M-d ?\M-d kp-delete ?\C-a escape ?> ?\C-r ?# ?e ?n ?d ?\C-a ?\C-k backspace ?\C-  escape ?< escape ?- ?2 ?\C-x ?\C-i ?\A-s escape ?% ?v ?i ?r ?t ?u ?a ?l ?  return return ?! ?\A-s f2])
-
-
-;; ;;   open current directory (split-and-
-;; ;;   open file
-;; ;;   reload file
-;; ;;   grep at the root directory!
-;; ;;   shell
-;; ;;   compile
-;; ;;   next error
-;; ;;   autocomplete
-;; ;;   find file
-;; ;;   file buffer
-;; ;;   buffer list
-;; ;;   query-replace (tags-)
-;; ;;   goto-line
-;; ;;   open file other window
-;; ;;   view buffer other window
-
-
-;; (global-set-key [f1] 'other-window)
-;; (global-set-key [f2] 'rotate-tests)
-;; (global-set-key [f3] 'switch-to-buffer)
-;; (global-set-key [f4] 'find-file)
-;; (global-set-key [S-f4] 'reload-file)
-
-;; (global-set-key [f5] 'scroll-up)
-;; (global-set-key [f6] 'scroll-down)
-;; (global-set-key [f7] 'do-list-buffers)
-;; (global-set-key [f7] 'goto-line)
-;; (global-set-key [f8] 'next-error)
-
-;; (global-set-key [f9] 'query-replace)
-;; (global-set-key [f10] 'grep)
-;; (global-set-key [f11] 'shell)
-;; (global-set-key [f12] 'compile)
-
-;; (global-set-key [f13] 'save-buffer)
-;; (global-set-key [f14] 'save-some-buffers)
-
-;; (electric-pair-mode +1)
-;; (require 'dired-x)
-
-;;(when (fboundp 'winner-mode)  ;; Doesn't work.
-;;  (winner-mode 1))
-
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-exec "pymacs" nil t)
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-autoload "pymacs")
-;; (require 'pymacs)
-;; (pymacs-load "ropemacs" "rope-")
-;;(require 'gnugo)
-;;(setq auto-mode-alist (cons '("\\.csd$" . csound-csd-mode) auto-mode-alist))
-;;(autoload 'csound-csd-mode "csound-csd" "Csound CSD major mode." t)
-
-;; (require 'stef-elisp "stef-elisp/stef-elisp")
-
-;;(require 'zencoding-mode)
-;; (require 'eproject-0.4/eproject)
-
-
-;; ;; Three functions from http://steve.yegge.googlepages.com/my-dot-emacs-file
-
-;; (defun rename-file-and-buffer (new-name)
-;;  "Renames both current buffer and file it's visiting to NEW-NAME."
-;;  (interactive "sNew name: ")
-;;  (let ((name (buffer-name))
-;;        (filename (buffer-file-name)))
-;;  (if (not filename)
-;;      (message "Buffer '%s' is not visiting a file!" name)
-;;  (if (get-buffer new-name)
-;;      (message "A buffer named '%s' already exists!" new-name)
-;;    (progn
-;;      (rename-file name new-name 1)
-;;      (rename-buffer new-name)
-;;      (set-visited-file-name new-name)
-;;      (set-buffer-modified-p nil))))))
-
-
-;; (defun move-buffer-file (dir)
-;;  "Moves both current buffer and file it's visiting to DIR."
-;;  (interactive "DNew directory: ")
-;;  (let* ((name (buffer-name))
-;;         (filename (buffer-file-name))
-;;         (dir
-;;          (if (string-match dir "\\(?:/\\|\\\\)$")
-;;              (substring dir 0 -1) dir))
-;;         (newname (concat dir "/" name)))
-
-;;    (if (not filename)
-;;        (message "Buffer '%s' is not visiting a file!" name)
-;;      (progn (copy-file filename newname 1)
-;;             (delete-file filename)
-;;             (set-visited-file-name newname)
-;;             (set-buffer-modified-p nil) t))))
-
-;; (defun rotate-windows ()
-;;  "If you have 2 windows, it swaps them."
-;;  (interactive)
-;;  (cond
-
-;;   ((= (count-windows) 2)
-;;    (let* ((w1 (first (window-list)))
-;;           (w2 (second (window-list)))
-;;           (b1 (window-buffer w1))
-;;           (b2 (window-buffer w2))
-;;           (s1 (window-start w1))
-;;           (s2 (window-start w2)))
-;;      (set-window-buffer w1 b2)
-;;      (set-window-buffer w2 b1)
-;;      (set-window-start w1 s2)
-;;      (set-window-start w2 s1)))
-
-;;   ((= (count-windows) 3)
-;;    (let* ((w1 (first (window-list)))
-;;           (w2 (second (window-list)))
-;;           (w3 (third (window-list)))
-
-;;           (b1 (window-buffer w1))
-;;           (b2 (window-buffer w2))
-;;           (b3 (window-buffer w3))
-
-;;           (s1 (window-start w1))
-;;           (s2 (window-start w2))
-;;           (s3 (window-start w3))
-;;           )
-;;      (set-window-buffer w1 b3)
-;;      (set-window-buffer w2 b1)
-;;      (set-window-buffer w3 b2)
-
-;;      (set-window-start w1 s3)
-;;      (set-window-start w2 s1)
-;;      (set-window-start w3 s2)
-;;      ))
-
-;;   ((= (count-windows) 4)
-;;    (let* ((w1 (first (window-list)))
-;;           (w2 (second (window-list)))
-;;           (w3 (third (window-list)))
-;;           (w4 (fourth (window-list)))
-
-;;           (b1 (window-buffer w1))
-;;           (b2 (window-buffer w2))
-;;           (b3 (window-buffer w3))
-;;           (b4 (window-buffer w4))
-
-;;           (s1 (window-start w1))
-;;           (s2 (window-start w2))
-;;           (s3 (window-start w3))
-;;           (s4 (window-start w4))
-;;           )
-;;      (set-window-buffer w1 b4)
-;;      (set-window-buffer w2 b1)
-;;      (set-window-buffer w3 b2)
-;;      (set-window-buffer w4 b3)
-
-;;      (set-window-start w1 s4)
-;;      (set-window-start w2 s1)
-;;      (set-window-start w3 s2)
-;;      (set-window-start w4 s3)
-;;      ))))
-
-;; (defun ggm() (git-gutter-mode t) )
-;; (add-hook 'python-mode-hook 'ggm)
-
-;; (defun open-file-at-point()
-;;   ""
-;;   (interactive)
-;;   (if (string-match "include \"\\(.*\\)\".*" (thing-at-point 'line))
-;;       ;; (if (file-readable-p (match-string 1))
-;;           ())));;)
-;; ;;          (find-file (match-string 1))));;)
-
-
+(global-set-key [s-up] 'back-window)
+(global-set-key [s-down] 'other-window)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal))))
+ '(whitespace-empty ((t (:background "white smoke" :foreground "firebrick"))))
+ '(whitespace-line ((t (:background "gray93" :foreground "black"))))
+ '(whitespace-trailing ((t (:background "gray93" :foreground "black" :weight bold)))))
