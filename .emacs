@@ -11,6 +11,7 @@
  '(column-number-mode t)
  '(compile-command "cd /development/rippled && source ~/.bashrc && scons -j7 && build/rippled --unittest && npm test")
  '(cursor-type (quote box) t)
+ '(dirtrack-list (quote ("^[^:]*:\\(.*\\)\\$" 1)))
  '(fill-column 80)
  '(global-mark-ring-max 256)
  '(global-whitespace-mode t)
@@ -29,7 +30,7 @@
  '(py-indent-offset 4)
  '(python-indent 4)
  '(python-indent-offset 4)
- '(shell-cd-regexp "\\(cd\\|f\\)")
+ '(shell-cd-regexp "\\(f\\|cd\\)")
  '(standard-indent 4)
  '(tab-width 4)
  '(template-auto-insert t)
@@ -213,34 +214,6 @@ FILENAME should lack slashes."
        (set-window-buffer (next-window window 0) (window-buffer window))
        (set-window-buffer window next-window-buffer))))
 
-(defun rotate-file-suffix (file)
-  "Returns one rotation through the file"
-  (let* ((patterns
-        '(
-          ("_test\\.cpp" ".pyx")
-          ("_test\\.cpp" ".h")
-          ("\\.h" ".cpp")
-          ("\\.cpp" ".proto")
-          ("\\.proto" "_test.cpp")
-          ("\\.cc" ".h")
-          ("\\.cpp" "_test.cpp")
-          ("\\.cpp" ".pyx")
-          ("\\.pyx" ".h")
-          ("_test\\.py" ".py")
-          ("\\.py" "_test.py")
-          ))
-         (working t))
-  (while (and patterns working)
-    (setq pattern (pop patterns))
-    (if (string-match (car pattern) file)
-        (progn
-          (setq file
-                (replace-regexp-in-string (car pattern)
-                                          (cadr pattern)
-                                          file))
-          (setq working nil)))))
-  file)
-
 (defun mapcar-head (fn-head fn-rest list)
       "Like MAPCAR, but applies a different function to the first element."
       (if list
@@ -290,6 +263,62 @@ FILENAME should lack slashes."
          (txt (buffer-substring beg end))
          (cml (camelscore txt)) )
     (if cml (progn (delete-region beg end) (insert cml))) ))
+
+(defun rotate-file-suffix (file)
+  "Returns one rotation through the file"
+  (let* ((patterns
+        '(
+          ("_test\\.cpp" ".pyx")
+          ("_test\\.cpp" ".h")
+          ("\\.h" ".cpp")
+          ("\\.cpp" ".proto")
+          ("\\.proto" "_test.cpp")
+          ("\\.cc" ".h")
+          ("\\.cpp" "_test.cpp")
+          ("\\.cpp" ".pyx")
+          ("\\.pyx" ".h")
+          ("_test\\.py" ".py")
+          ("\\.py" "_test.py")
+          ))
+         (working t))
+  (while (and patterns working)
+    (setq pattern (pop patterns))
+    (if (string-match (car pattern) file)
+        (progn
+          (setq file
+                (replace-regexp-in-string (car pattern)
+                                          (cadr pattern)
+                                          file))
+          (setq working nil)))))
+  file)
+
+(defun try-file-directories (file)
+  "Tries different possibilities to see if a file exists."
+  (let* ((
+        '(
+          ("_test\\.cpp" ".pyx")
+          ("_test\\.cpp" ".h")
+          ("\\.h" ".cpp")
+          ("\\.cpp" ".proto")
+          ("\\.proto" "_test.cpp")`
+          ("\\.cc" ".h")
+          ("\\.cpp" "_test.cpp")
+          ("\\.cpp" ".pyx")
+          ("\\.pyx" ".h")
+          ("_test\\.py" ".py")
+          ("\\.py" "_test.py")
+          ))
+         (working t))
+  (while (and patterns working)
+    (setq pattern (pop patterns))
+    (if (string-match (car pattern) file)
+        (progn
+          (setq file
+                (replace-regexp-in-string (car pattern)
+                                          (cadr pattern)
+                                          file))
+          (setq working nil)))))
+  file)
 
 
 (defun rotate-tests ()
