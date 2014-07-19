@@ -55,25 +55,25 @@
  (setq whitespace-style '(face empty tabs lines-tail trailing))
  (global-whitespace-mode t)
 
-;; Failed experiment with dirtrack mode.
-;;(add-hook 'shell-mode-hook 'dirtrack-mode)
-;;(setq dirtrack-list '("^.*\\(.*\\)\\$$" 1 nil))
-
-;; (require 'handy-functions)
-
-;; (add-to-list 'load-path "~/.emacs.d/lisp/guess-style")
-;; (autoload 'guess-style-set-variable "guess-style" nil t)
-;; (autoload 'guess-style-guess-variable "guess-style")
-;; (autoload 'guess-style-guess-all "guess-style" nil t)
-;; (add-hook 'python-mode-hook guess-style-guess-tabs-mode)
-;; (add-hook 'python-mode-hook (lambda ()
-;;                               (when indent-tabs-mode
-;;                                 (guess-style-guess-tab-width)))
-
 (setq grep-use-null-device nil)
 
 (setq-default dired-listing-switches "-alhv")
 (setq dired-recursive-copies 'always)
+
+;; (require 'sure-tags)
+(require 'etags-table)
+(setq etags-table-alist
+      (list
+       '("/development/rippled" "/development/rippled/TAGS")
+       '("/development/rippled2" "/development/rippled2/TAGS")
+       '("/development/rippled3" "/development/rippled3/TAGS")
+       '("/development/rippled4" "/development/rippled4/TAGS")
+       '("/development/rippled5" "/development/rippled5/TAGS")
+       '("/development/rippled6" "/development/rippled6/TAGS")
+       '("/development/rippled7" "/development/rippled7/TAGS")
+       '("/development/rippled8" "/development/rippled8/TAGS")
+       '("/development/rippled9" "/development/rippled9/TAGS")
+       ))
 
 ;; (setq dired-omit-files
 ;;       (rx (or
