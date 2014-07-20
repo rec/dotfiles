@@ -65,9 +65,7 @@
           #'(lambda ()
               (dirtrack-mode 1)))
 
-
 ;; (require 'sure-tags)
-(require 'etags-table)
 (setq etags-table-alist
       (list
        '("/development/rippled" "/development/rippled/TAGS")
@@ -80,8 +78,10 @@
        '("/development/rippled8" "/development/rippled8/TAGS")
        '("/development/rippled9" "/development/rippled9/TAGS")
        ))
-(setq split-height-threshold 0)
-(setq compilation-window-height 20)
+(require 'etags-table)
+
+;;(setq split-height-threshold 0)
+;;(setq compilation-window-height 30)
 
 (defun parent-directory (dir)
   (unless (equal "/" dir)
@@ -101,22 +101,23 @@ or nil if not found."
                        ;; The parent of ~ is nil and the parent of / is itself.
                        ;; Thus the terminating condition for not finding the file
                        ;; accounts for both.
-                       ((or (null parent) (equal parent (directory-file-name parent))) nil) ; Not found
+                       ((or (null parent)
+                            (equal parent (directory-file-name parent))) nil) ; Not found
                        (t (find-file-r (directory-file-name parent))))))) ; Continue
     (find-file-r default-directory)))
 
-(defun ffu ()
-     (interactive)
-     (message (find-file-upwards ".git"))
-)
-
-(defun cd-compile()
-  "Run compile in a specific directory.
-If cd-compile-directory is set then compile will be run in that directory,
-otherwise the user will be prompted to enter a directory."
+(defun swirly-compile()
+  "Run compile in the git directory."
   (interactive)
   (let ((default-directory (find-file-upwards ".git")))
     (call-interactively 'compile)))
+
+(defun swirly-grep()
+  "Run grep in the src/ripple directory."
+  (interactive)
+  (let ((default-directory
+          (expand-file-name "src/ripple/" (find-file-upwards ".git"))))
+    (call-interactively 'grep)))
 
 ;; (setq dired-omit-files
 ;;       (rx (or
@@ -337,22 +338,11 @@ FILENAME should lack slashes."
 
 (defun try-file-directories (file)
   "Tries different possibilities to see if a file exists."
-  (let* ((
-        '(
-          ("_test\\.cpp" ".pyx")
-          ("_test\\.cpp" ".h")
-          ("\\.h" ".cpp")
-          ("\\.cpp" ".proto")
-          ("\\.proto" "_test.cpp")`
-          ("\\.cc" ".h")
-          ("\\.cpp" "_test.cpp")
-          ("\\.cpp" ".pyx")
-          ("\\.pyx" ".h")
-          ("_test\\.py" ".py")
-          ("\\.py" "_test.py")
-          ))
-         (working t))
-  (while (and patterns working)
+  (let* (
+         (patterns '("" ".." "../api" "../impl"))
+         (working t)
+         )
+    (while (and patterns working)
     (setq pattern (pop patterns))
     (if (string-match (car pattern) file)
         (progn
@@ -431,12 +421,6 @@ FILENAME should lack slashes."
   (home-dired)
 )
 
-(defun grep-root ()
-  (interactive)
-  (home-dired-two)
-  (grep)
-)
-
 (defun reload-file()
   (interactive)
   (find-alternate-file (buffer-file-name))
@@ -475,16 +459,16 @@ FILENAME should lack slashes."
 (global-set-key [f5] 'find-file)
 (global-set-key [s-f5] 'reload-file)
 
-(global-set-key [f7] 'cd-compile)
+(global-set-key [f7] 'swirly-compile)
 
 (global-set-key [s-f6] 'home-dired)
 (global-set-key [f6] 'default-dired)
 
-(global-set-key [s-f8] 'grep)
+(global-set-key [f8] 'swirly-grep)
 ;;(global-set-key [s-f8] 'grep-root)
 
 (defun to-grep() (interactive) (switch-to-buffer "*grep*"))
-(global-set-key [f8] 'to-grep)
+(global-set-key [s-f8] 'to-grep)
 
 (global-set-key [s-f9] 'kmacro-call-macro)
 (global-set-key [f9] 'enlarge-window)
