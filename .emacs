@@ -12,6 +12,7 @@
  '(compile-command "cd /development/rippled && source ~/.bashrc && scons -j7 && build/rippled --unittest && npm test")
  '(cursor-type (quote box) t)
  '(dirtrack-list (quote ("^[^:]*:\\(.*\\)\\$" 1)))
+ '(etags-table-search-up-depth 10)
  '(fill-column 80)
  '(global-mark-ring-max 256)
  '(global-whitespace-mode t)
@@ -60,6 +61,11 @@
 (setq-default dired-listing-switches "-alhv")
 (setq dired-recursive-copies 'always)
 
+(add-hook 'shell-mode-hook
+          #'(lambda ()
+              (dirtrack-mode 1)))
+
+
 ;; (require 'sure-tags)
 (require 'etags-table)
 (setq etags-table-alist
@@ -74,6 +80,43 @@
        '("/development/rippled8" "/development/rippled8/TAGS")
        '("/development/rippled9" "/development/rippled9/TAGS")
        ))
+(setq split-height-threshold 0)
+(setq compilation-window-height 20)
+
+(defun parent-directory (dir)
+  (unless (equal "/" dir)
+    (file-name-directory (directory-file-name dir))))
+
+(defun find-file-upwards (file-to-find)
+  "Recursively searches each parent directory starting from the default-directory.
+looking for a file with name file-to-find.  Returns the path to it
+or nil if not found."
+  (cl-labels
+      ((find-file-r (path)
+                    (let* ((parent (file-name-directory path))
+                           (possible-file (concat parent file-to-find)))
+                      (cond
+                       ((file-exists-p possible-file)
+                        (parent-directory possible-file)) ; Found
+                       ;; The parent of ~ is nil and the parent of / is itself.
+                       ;; Thus the terminating condition for not finding the file
+                       ;; accounts for both.
+                       ((or (null parent) (equal parent (directory-file-name parent))) nil) ; Not found
+                       (t (find-file-r (directory-file-name parent))))))) ; Continue
+    (find-file-r default-directory)))
+
+(defun ffu ()
+     (interactive)
+     (message (find-file-upwards ".git"))
+)
+
+(defun cd-compile()
+  "Run compile in a specific directory.
+If cd-compile-directory is set then compile will be run in that directory,
+otherwise the user will be prompted to enter a directory."
+  (interactive)
+  (let ((default-directory (find-file-upwards ".git")))
+    (call-interactively 'compile)))
 
 ;; (setq dired-omit-files
 ;;       (rx (or
@@ -432,7 +475,7 @@ FILENAME should lack slashes."
 (global-set-key [f5] 'find-file)
 (global-set-key [s-f5] 'reload-file)
 
-(global-set-key [f7] 'compile)
+(global-set-key [f7] 'cd-compile)
 
 (global-set-key [s-f6] 'home-dired)
 (global-set-key [f6] 'default-dired)
@@ -471,12 +514,17 @@ FILENAME should lack slashes."
 
 (global-set-key [s-up] 'back-window)
 (global-set-key [s-down] 'other-window)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal  :height 76 :width normal :foundry "unknown" :family "DejaVuSans Mono"))))
  '(whitespace-empty ((t (:background "white smoke" :foreground "firebrick"))))
  '(whitespace-line ((t (:background "gray93" :foreground "black"))))
  '(whitespace-trailing ((t (:background "gray93" :foreground "black" :weight bold)))))
+
+;; '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)
+
+;; DejaVu Sans Liberation Mono

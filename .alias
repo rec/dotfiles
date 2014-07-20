@@ -3,6 +3,10 @@
 alias grit=/development/grit/Grit.py
 alias e=emacsclient
 
+function rtags () {
+    find src/ripple -name \*.h -or -name \*.cpp | xargs etags
+}
+
 # next root
 function + () {
   cd `grit + $*`
