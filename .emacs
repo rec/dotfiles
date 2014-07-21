@@ -197,10 +197,10 @@ or nil if not found."
 
 ;;; newer backup code....
 (setq backup-by-copying-when-linked t   ; handle links correctly
-     delete-auto-save-files t          ; leave no "#" files in home directory
-     kept-new-versions 10              ; keep 10 backups plus 2 oldest backups
-     delete-old-versions t             ; delete excess backups silently
-     version-control t)                ; make backup versions unconditionally
+      delete-auto-save-files t          ; leave no "#" files in home directory
+      kept-new-versions 10              ; keep 10 backups plus 2 oldest backups
+      delete-old-versions t             ; delete excess backups silently
+      version-control t)                ; make backup versions unconditionally
 
 (defun normal-backup-enable-predicate (name)
  "Return T so that auto save files are always created, no matter where
@@ -254,9 +254,11 @@ FILENAME should lack slashes."
    "Cycle the windows' buffers. If given a prefix argument, cycle in reverse."
    (interactive "P")
    (dolist (window (butlast (if reverse (reverse (window-list)) (window-list))))
-     (let ((next-window-buffer (window-buffer (next-window window 0))))
+     (let
+       ((next-window-buffer (window-buffer (next-window window 0))))
        (set-window-buffer (next-window window 0) (window-buffer window))
-       (set-window-buffer window next-window-buffer))))
+       (set-window-buffer window next-window-buffer)))
+   )
 
 (defun mapcar-head (fn-head fn-rest list)
       "Like MAPCAR, but applies a different function to the first element."
@@ -338,21 +340,28 @@ FILENAME should lack slashes."
 
 (defun try-file-directories (file)
   "Tries different possibilities to see if a file exists."
-  (let* (
-         (patterns '("" ".." "../api" "../impl"))
-         (working t)
-         )
-    (while (and patterns working)
-    (setq pattern (pop patterns))
-    (if (string-match (car pattern) file)
-        (progn
-          (setq file
-                (replace-regexp-in-string (car pattern)
-                                          (cadr pattern)
-                                          file))
-          (setq working nil)))))
-  file)
+  (let* ((body (file-name-nondirectory file))
+         (directory (file-name-directory file))
 
+         (super (file-name-directory (directory-file-name directory)))
+
+         (result-impl (concat directory (file-name-as-directory "impl") body))
+         (result-super (concat super body))
+         (result-super-api (concat super (file-name-as-directory "api") body))
+         (result-super-impl (concat super (file-name-as-directory "impl") body))
+         )
+    (progn
+      ;; (message (concat "1. " file " -> " result-impl ", "
+      ;;                  result-super ", " result-super-api ", " result-super-impl))
+      (cond
+       ((file-readable-p result-impl) result-impl)
+       ((file-readable-p result-super) result-super)
+       ((file-readable-p result-super-api) result-super-api)
+       ((file-readable-p result-super-impl) result-super-impl)
+       (t file))
+      )
+    )
+  )
 
 (defun rotate-tests ()
   "Rotate between a file and its test file."
@@ -366,8 +375,11 @@ FILENAME should lack slashes."
       (setq new-file (rotate-file-suffix new-file))
       (if (or (string= new-file filename)
               (string= new-file old-file))
-          (progn (setq working2 nil))  ;; We're done!
+          (progn (setq working2 nil))  ;; Didn't find a buffer - we're done!
         (progn
+          (if (not (file-readable-p new-file))
+              (setq new-file (try-file-directories new-file))
+            )
           (if (file-readable-p new-file)
               (progn (find-file new-file) (setq working2 nil))))))))
 
