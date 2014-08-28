@@ -9,7 +9,7 @@
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 4)
  '(column-number-mode t)
- '(compile-command "cd /development/rippled && source ~/.bashrc && scons -j7 && build/rippled --unittest && npm test")
+ '(compile-command "source ~/.bashrc && scons -j7 && build/rippled --unittest && npm test")
  '(cursor-type (quote box) t)
  '(dirtrack-list (quote ("^[^:]*:\\(.*\\)\\$" 1)))
  '(etags-table-search-up-depth 10)
@@ -38,6 +38,10 @@
  '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
  '(tool-bar-mode nil)
  '(visual-line-mode nil t))
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (setq-default line-spacing 3)
 
@@ -78,10 +82,13 @@
        '("/development/rippled8" "/development/rippled8/TAGS")
        '("/development/rippled9" "/development/rippled9/TAGS")
        ))
-(require 'etags-table)
+;; (require 'etags-table)
 
 ;;(setq split-height-threshold 0)
 ;;(setq compilation-window-height 30)
+
+(add-to-list 'default-frame-alist '(height . 90))
+(add-to-list 'default-frame-alist '(width . 90))
 
 (defun parent-directory (dir)
   (unless (equal "/" dir)
@@ -118,6 +125,29 @@ or nil if not found."
   (let ((default-directory
           (expand-file-name "src/ripple/" (find-file-upwards ".git"))))
     (call-interactively 'grep)))
+
+(defun kill-matching-buffers (match)
+  (interactive "sMatching string: ")
+  (if (equal match "")
+      (message "Cancelled.")
+    (let*
+        ((buffers (buffer-list))
+         (delete-count 0)
+         )
+      (while buffers
+        (let*
+            ((buf (pop buffers))
+             (filename (buffer-file-name buf)))
+          (if filename
+              (progn
+                (message (concat match " : " filename))
+                (if (string-match match filename)
+                    (progn
+                      (message (concat match " !! " filename))
+                      (kill-buffer buf)
+                      (setq delete-count (1+ delete-count))
+                      (message buf)
+                      )))))))))
 
 ;; (setq dired-omit-files
 ;;       (rx (or
@@ -456,6 +486,8 @@ FILENAME should lack slashes."
   (find-file)
 )
 
+(global-set-key [s-z] 'undo)
+
 (global-set-key [f1] 'next-error)
 (global-set-key [s-f1] 'goto-line)
 
@@ -473,8 +505,8 @@ FILENAME should lack slashes."
 
 (global-set-key [f7] 'swirly-compile)
 
-(global-set-key [s-f6] 'home-dired)
-(global-set-key [f6] 'default-dired)
+(global-set-key [s-f6] 'git-commit-commit)
+(global-set-key [f6] 'magit-status)
 
 (global-set-key [f8] 'swirly-grep)
 ;;(global-set-key [s-f8] 'grep-root)
@@ -516,7 +548,7 @@ FILENAME should lack slashes."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal  :height 76 :width normal :foundry "unknown" :family "DejaVuSans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 86 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
  '(whitespace-empty ((t (:background "white smoke" :foreground "firebrick"))))
  '(whitespace-line ((t (:background "gray93" :foreground "black"))))
  '(whitespace-trailing ((t (:background "gray93" :foreground "black" :weight bold)))))

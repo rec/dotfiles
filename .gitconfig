@@ -3,3 +3,5 @@
 [user]
 	email = tom@swirly.com
 	name = Tom Ritchford
+[rerere]
+	enabled = true

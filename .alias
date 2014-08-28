@@ -2,6 +2,11 @@
 
 alias grit=/development/grit/Grit.py
 alias e=emacsclient
+alias lt=/development/rippled7/bin/lt
+
+function rmpyc {
+   find . -name \*.pyc | xargs rm
+}
 
 function rtags () {
     find src/ripple -name \*.h -or -name \*.cpp | xargs etags
@@ -17,6 +22,12 @@ function ++ () {
   cd `grit + $*`
 }
 
+function +++ () {
+  cd `grit + $*`
+  cd `grit + $*`
+  cd `grit + $*`
+}
+
 # previous root
 function - () {
   cd `grit - $*`
@@ -25,6 +36,47 @@ function - () {
 function -- () {
   cd `grit - $*`
   cd `grit - $*`
+}
+
+function --- () {
+  cd `grit - $*`
+  cd `grit - $*`
+}
+
+# rotate branches
+
+function b () {
+  git branch
+}
+
+function b+ () {
+  grit rotate
+}
+
+function b++ () {
+  grit rotate
+  grit rotate
+}
+
+function b+++ () {
+  grit rotate
+  grit rotate
+  grit rotate
+}
+
+function b- () {
+  grit rotate -r
+}
+
+function b-- () {
+  grit rotate -r
+  grit rotate -r
+}
+
+function b--- () {
+  grit rotate -r
+  grit rotate -r
+  grit rotate -r
 }
 
 # top of root
@@ -53,7 +105,7 @@ function ga() {
 
 # amend push
 function gap() {
-  grit a p
+  grit a --push
 }
 
 # branches
