@@ -1,0 +1,1404 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Sun Nov 16 18:16:18 2014
+;; Desktop file format version 206
+;; Emacs version 24.3.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name "/development/rippled2/TAGS")
+(setq tags-table-list '("/development/rippled2/TAGS"))
+(setq search-ring '("typenanme" "apend" "output" "set" "ca" "template" "visitlea" "ledger.cpp" "addarray" "Nerw" "operator[]" "filljson" "get" "json" "ripplerpcnew" "filljson"))
+(setq regexp-search-ring '("\\(cd\\|f\\)" "mmode" "utaken"))
+(setq register-alist nil)
+(setq file-name-history '("/development/rippled2/.git/rebase-merge/git-rebase-todo" "/development/rippled2/src/ripple/rpc/impl/JsonWriter.h" "/tmp/git.diff" "/development/rippled2/src/ripple/rpc/impl/JsonObject.h" "/development/rippled2/src/ripple/app/ledger/Ledger.cpp" "/development/rippled2/.git/rebase-merge/git-rebase-todo" "/development/rippled2/src/ripple/json/" "/development/rippled2/src/ripple/rpc/impl/" "/development/rippled2/src/ripple/rpc/impl/JsonWriter.h" "/development/rippled2/.git/COMMIT_EDITMSG" "/development/rippled2/src/ripple/rpc/impl/" "/development/rippled2/src/ripple/rpc/Output.h" "/development/rippled2/src/ripple/rpc/Yield.h" "/development/rippled3/src/ripple/rpc/impl/WriteJson_test.cpp" "/development/rippled3/src/ripple/app/ledger/Ledger.cpp" "/development/rippled2/src/ripple/app/ledger/Ledger.cpp" "/development/rippled3/.git/COMMIT_EDITMSG" "/development/rippled3/src/ripple/rpc/impl/" "/development/rippled3/src/ripple/rpc/impl/JsonWriter.h" "/development/rippled3/src/ripple/rpc/" "/development/rippled3/src/ripple/app/ledger/Ledger.cpp" "/development/rippled3/src/ripple/app/ledger/Ledger.h" "/development/rippled3/src/ripple/rpc/handlers/Ledger.cpp" "/tmp/git.diff" "/development/rippled2/src/ripple/rpc/handlers/" "/development/rippled2/src/ripple/rpc/handlers/AccountTx.cpp" "/development/rippled2/src/ripple/rpc/handlers/" "~/*scratch*" "/development/rippled2/.git/COMMIT_EDITMSG" "~/.env"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonObject.cpp"
+  "JsonObject.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2296
+  '(2770 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/app/ledger/Ledger.cpp"
+  "Ledger.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  37367
+  '(38053 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/app/ledger/Ledger.h"
+  "Ledger.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  10584
+  '(15498 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonWriter.h"
+  "JsonWriter.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1246
+  '(6647 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/unity/app3.cpp"
+  "app3.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1102
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonWriter.cpp"
+  "JsonWriter.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  3888
+  '(6439 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonWriter.test.cpp"
+  "JsonWriter.test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4924
+  '(4960 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonObject.h"
+  "JsonObject.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1728
+  '(1146 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonObject.test.cpp"
+  "JsonObject.test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1045
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/unity/rpcx.cpp"
+  "rpcx.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1410
+  '(4884 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/tmp/git.diff"
+  "git.diff"
+  'diff-mode
+  '(global-whitespace-mode)
+  1772
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/app/ledger/Ledger.h"
+  "Ledger.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  15498
+  '(15499 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/app/ledger/Ledger.cpp"
+  "Ledger.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  37623
+  '(33770 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/WriteJson.cpp"
+  "WriteJson.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2297
+  '(2566 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/WriteJson.h"
+  "WriteJson.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1666
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/WriteJson.test.cpp"
+  "WriteJson.test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1848
+  '(1203 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/TransactionSign.cpp"
+  "TransactionSign.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  11995
+  '(12004 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/Status.test.cpp"
+  "Status.test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4183
+  '(4192 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/Status.cpp"
+  "Status.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1256
+  '(1265 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/LookupLedger.cpp"
+  "LookupLedger.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4890
+  '(4899 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/json/json_value.h"
+  "json_value.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2402
+  '(2888 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "json"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  574
+  '(nil nil)
+  t
+  '("/development/rippled2/src/ripple/json/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/unity/rpcx.h"
+  "rpcx.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "impl"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  529
+  '(nil nil)
+  t
+  '("/development/rippled2/src/ripple/rpc/impl/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/Output.h"
+  "Output.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1044
+  '(1730 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/Yield.h"
+  "Yield.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2199
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/impl/WriteJson_test.cpp"
+  "WriteJson_test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1182
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/WriteJson_test.cpp"
+  "WriteJson_test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1441
+  '(1390 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/TestOutputSuite.h"
+  "TestOutputSuite.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1427
+  '(1752 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/unity/app.cpp"
+  "app.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1408
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/usr/include/c++/4.8/functional"
+  "functional"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  53301
+  '(78306 nil)
+  t
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/tom/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(global-whitespace-mode)
+  12641
+  '(12459 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "strings"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  143
+  '(nil nil)
+  t
+  '("/development/rippled2/src/beast/beast/strings/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/beast/beast/strings/String.h"
+  "String.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  45547
+  '(2224 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/impl/JSONRPCUtil.cpp"
+  "JSONRPCUtil.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  3133
+  '(3897 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/impl/JSONRPCUtil.h"
+  "JSONRPCUtil.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1294
+  '(1294 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/.travis.yml"
+  ".travis.yml"
+  'yaml-mode
+  '(global-whitespace-mode)
+  1746
+  '(429 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/handlers/AccountTxSwitch.cpp"
+  "AccountTxSwitch.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1128
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "rippled3"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  335
+  '(nil nil)
+  t
+  '("/development/rippled3/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/overlay/tests/short_read.test.cpp"
+  "short_read.test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  16805
+  '(16851 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/Session.h"
+  "Session.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  3589
+  '(2638 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/RPCHandler.cpp"
+  "RPCHandler.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4616
+  '(2056 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/RPCHandler.h"
+  "RPCHandler.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1569
+  '(1393 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/basics/StringUtilities.h"
+  "StringUtilities.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1343
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "basics"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  858
+  '(nil nil)
+  t
+  '("/development/rippled2/src/ripple/basics/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "core"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  134
+  '(nil nil)
+  t
+  '("/development/rippled2/src/ripple/core/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/app/websocket/WSConnection.cpp"
+  "WSConnection.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1150
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "rpc"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  403
+  '(nil nil)
+  t
+  '("/development/rippled2/src/ripple/rpc/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/boost_1_57_0/boost/coroutine/posix/protected_stack_allocator.hpp"
+  "protected_stack_allocator.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2308
+  '(2285 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_57_0/boost/coroutine/protected_stack_allocator.hpp"
+  "protected_stack_allocator.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  342
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "boost"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  11776
+  '(11939 nil)
+  t
+  '("/development/boost_1_55_0/boost/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "boost_1_55_0"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  533
+  '(nil nil)
+  t
+  '("/development/boost_1_55_0/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/type_traits/function_traits.hpp"
+  "function_traits.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4711
+  '(4806 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/iterator/transform_iterator.hpp"
+  "transform_iterator.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  603
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/beast/beast/http/headers.h"
+  "headers.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1248
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/beast/beast/http/message.h"
+  "message.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1203
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/Handler.h"
+  "Handler.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1198
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/impl/ServerImpl.h"
+  "ServerImpl.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1175
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/impl/Door.h"
+  "Door.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1122
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/impl/Door.cpp"
+  "Door.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1045
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/coroutine/v2/coroutine.hpp"
+  "coroutine.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1522
+  '(683 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/beast/beast/http/message.h"
+  "message.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  5192
+  '(1778 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/tom/.bashrc"
+  ".bashrc"
+  'sh-mode
+  '(global-whitespace-mode)
+  2125
+  '(2696 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/SConstruct"
+  "SConstruct"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  9494
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "function"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  138
+  '(nil nil)
+  t
+  '("/development/boost_1_55_0/boost/function/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/project-config.jam"
+  "project-config.jam"
+  'fundamental-mode
+  '(global-whitespace-mode)
+  552
+  '(283 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/Context.h"
+  "Context.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1473
+  '(1488 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/tom/.gitconfig"
+  ".gitconfig"
+  'fundamental-mode
+  '(global-whitespace-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/unity/net.cpp"
+  "net.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1487
+  '(1487 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "net"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  399
+  '(nil nil)
+  t
+  '("/development/rippled3/src/ripple/net/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "impl"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  138
+  '(nil nil)
+  t
+  '("/development/rippled3/src/ripple/net/impl/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/unity/net.cpp"
+  "net.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1487
+  '(1487 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/app/main/Application.cpp"
+  "Application.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1398
+  '(1360 t)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/unity/app.cpp"
+  "app.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1814
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/RipplePathFind.cpp"
+  "RipplePathFind.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  10164
+  '(7093 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "ripple"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  326
+  '(nil nil)
+  t
+  '("/development/rippled3/src/ripple/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/Unsubscribe.cpp"
+  "Unsubscribe.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1597
+  '(1556 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/LedgerData.cpp"
+  "LedgerData.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2835
+  '(2757 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/Submit.cpp"
+  "Submit.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2992
+  '(2780 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/TxHistory.cpp"
+  "TxHistory.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1451
+  '(1387 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/AccountTxOld.cpp"
+  "AccountTxOld.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  5667
+  '(5428 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/Subscribe.cpp"
+  "Subscribe.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4262
+  '(4144 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/AccountTx.cpp"
+  "AccountTx.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4576
+  '(4576 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/ServerInfo.cpp"
+  "ServerInfo.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1322
+  '(1229 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled3/src/ripple/rpc/handlers/ServerState.cpp"
+  "ServerState.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1344
+  '(1344 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/smart_ptr/intrusive_ptr.hpp"
+  "intrusive_ptr.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  3325
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "rippled2"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  119
+  '(nil nil)
+  t
+  '("/development/rippled2/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "v2"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  196
+  '(nil nil)
+  t
+  '("/development/boost_1_55_0/boost/coroutine/v2/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "detail"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  148
+  '(nil nil)
+  t
+  '("/development/boost_1_55_0/boost/coroutine/v2/detail/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/JsonWriter_test.cpp"
+  "JsonWriter_test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  4983
+  '(1218 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled/src/ripple/rpc/Output.h"
+  "Output.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1135
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/tom/*scratch*"
+  "*scratch*"
+  'c-mode
+  '(abbrev-mode global-whitespace-mode)
+  1383
+  '(1030 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled/src/ripple/common/UnorderedContainers.h"
+  "UnorderedContainers.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1919
+  '(1849 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled/src/ripple/app/paths/Pathfinder.cpp"
+  "Pathfinder.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  35459
+  '(35826 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/command/Release.py"
+  "Release.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  926
+  '(1062 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/Git.py"
+  "Git.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  2602
+  '(278 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  ".git"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  715
+  '(nil nil)
+  t
+  '("/development/rippled/.git/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/grit/grit/Args.py"
+  "Args.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  1103
+  '(735 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/tom/.emacs.d/.emacs.desktop"
+  ".emacs.desktop"
+  'emacs-lisp-mode
+  '(global-whitespace-mode)
+  2763
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . emacs-mule-unix)))
+
+(desktop-create-buffer 206
+  nil
+  ".emacs.d"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  233
+  '(nil nil)
+  t
+  '("/home/tom/.emacs.d/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "tom"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  109
+  '(nil nil)
+  t
+  '("/home/tom/")
+  nil)
+
+(desktop-create-buffer 206
+  "/home/tom/.alias"
+  ".alias"
+  'sh-mode
+  '(global-whitespace-mode)
+  184
+  '(155 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/command/New.py"
+  "New.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  1580
+  '(1391 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/Project.py"
+  "Project.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  442
+  '(802 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "new"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  43
+  '(nil nil)
+  t
+  '("/development/grit/projects/rippled/new/")
+  nil)
+
+(desktop-create-buffer 206
+  "/usr/include/c++/4.8/bits/basic_string.tcc"
+  "basic_string.tcc"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  24728
+  '(nil nil)
+  t
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/command/Fresh.py"
+  "Fresh.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  449
+  '(413 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "rippled"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  117
+  '(nil nil)
+  t
+  '("/development/rippled/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled/src/ripple/rpc/impl/JsonWriter.h"
+  "JsonWriter.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  5068
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "impl"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  1033
+  '(nil nil)
+  t
+  '("/development/rippled/src/ripple/rpc/impl/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/rpc/impl/Handler.h"
+  "Handler.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1554
+  '(1605 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/command/Clone.py"
+  "Clone.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  566
+  '(566 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/grit/grit/command/Start.py"
+  "Start.py"
+  'python-mode
+  '(global-whitespace-mode git-gutter-mode)
+  1377
+  '(620 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "command"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  1029
+  '(nil nil)
+  t
+  '("/development/grit/grit/command/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/grit/projects/rippled/remotes.json"
+  "remotes.json"
+  'js-mode
+  '(global-whitespace-mode)
+  196
+  '(182 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "rippled"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  381
+  '(nil nil)
+  t
+  '("/development/grit/projects/rippled/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "projects"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  262
+  '(nil nil)
+  t
+  '("/development/grit/projects/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "grit"
+  'dired-mode
+  '(global-whitespace-mode dired-omit-mode)
+  522
+  '(nil nil)
+  t
+  '("/development/grit/")
+  nil)
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/core/SystemParameters.h"
+  "SystemParameters.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  2155
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/server/tests/Server.test.cpp"
+  "Server.test.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  3649
+  '(3658 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/ripple/net/impl/RPCCall.cpp"
+  "RPCCall.cpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  39109
+  '(39118 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/rippled2/src/beast/beast/crypto/base64.h"
+  "base64.h"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  1739
+  '(3970 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . iso-latin-1-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/asio/ssl/error.hpp"
+  "error.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  841
+  '(783 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/asio/error.hpp"
+  "error.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  7733
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/coroutine/v2/detail/pull_coroutine_object.hpp"
+  "pull_coroutine_object.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  26761
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/development/boost_1_55_0/boost/coroutine/detail/trampoline.hpp"
+  "trampoline.hpp"
+  'c++-mode
+  '(abbrev-mode global-whitespace-mode)
+  658
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
