@@ -1,8 +1,21 @@
 #!/bin/bash
 
+alias g=/development/grit/Grit.py
 alias grit=/development/grit/Grit.py
-alias e=emacsclient
-alias lt=/development/rippled7/bin/lt
+
+source /development/grit/for-your-bashrc.sh
+
+# find
+function e() {
+  emacsclient -n `grit find $*`
+}
+
+alias LT=/development/rippled/bin/LT
+alias sa="sudo apt-get -y"
+alias sag="sudo apt-get install -y"
+alias arc='/development/arcanist/bin/arc'
+alias gl='git l'
+alias gb='\gb r'
 
 function rmpyc {
    find . -name \*.pyc | xargs rm
@@ -10,128 +23,4 @@ function rmpyc {
 
 function rtags () {
     find src/ripple -name \*.h -or -name \*.cpp | xargs etags
-}
-
-# next root
-function + () {
-  cd `grit + $*`
-}
-
-function ++ () {
-  cd `grit + $*`
-  cd `grit + $*`
-}
-
-function +++ () {
-  cd `grit + $*`
-  cd `grit + $*`
-  cd `grit + $*`
-}
-
-# previous root
-function - () {
-  cd `grit - $*`
-}
-
-function -- () {
-  cd `grit - $*`
-  cd `grit - $*`
-}
-
-function --- () {
-  cd `grit - $*`
-  cd `grit - $*`
-}
-
-# rotate branches
-
-function b () {
-  git branch
-}
-
-function b+ () {
-  grit rotate
-}
-
-function b++ () {
-  grit rotate
-  grit rotate
-}
-
-function b+++ () {
-  grit rotate
-  grit rotate
-  grit rotate
-}
-
-function b- () {
-  grit rotate -r
-}
-
-function b-- () {
-  grit rotate -r
-  grit rotate -r
-}
-
-function b--- () {
-  grit rotate -r
-  grit rotate -r
-  grit rotate -r
-}
-
-# top of root
-function root () {
-  cd `grit ^ $*`
-}
-
-# find
-function f() {
-  cd `grit f $*`
-}
-
-# open
-function o() {
-  grit o $*
-}
-
-function new() {
-  grit new $*
-}
-
-# amend
-function ga() {
-  grit a $*
-}
-
-# amend push
-function gap() {
-  grit a --push
-}
-
-# branches
-function gb() {
-  grit b $*
-}
-
-# clone
-function gc() {
-  grit c $*
-}
-
-# pushes
-function gp() {
-  grit p $*
-}
-
-# other cd commands.
-function ..() {
-  cd ..
-}
-
-function ...() {
-  cd ../..
-}
-
-function ....() {
-  cd ../../..
 }

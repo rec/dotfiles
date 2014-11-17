@@ -41,7 +41,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (setq-default line-spacing 3)
 
@@ -87,7 +87,7 @@
 ;;(setq split-height-threshold 0)
 ;;(setq compilation-window-height 30)
 
-(add-to-list 'default-frame-alist '(height . 90))
+(add-to-list 'default-frame-alist '(height . 80))
 (add-to-list 'default-frame-alist '(width . 90))
 
 (defun parent-directory (dir)
@@ -344,13 +344,12 @@ FILENAME should lack slashes."
   "Returns one rotation through the file"
   (let* ((patterns
         '(
-          ("_test\\.cpp" ".pyx")
-          ("_test\\.cpp" ".h")
+          ("\\.test\\.cpp" ".h")
           ("\\.h" ".cpp")
           ("\\.cpp" ".proto")
-          ("\\.proto" "_test.cpp")
+          ("\\.proto" ".test.cpp")
           ("\\.cc" ".h")
-          ("\\.cpp" "_test.cpp")
+          ("\\.cpp" ".test.cpp")
           ("\\.cpp" ".pyx")
           ("\\.pyx" ".h")
           ("_test\\.py" ".py")
@@ -505,11 +504,10 @@ FILENAME should lack slashes."
 
 (global-set-key [f7] 'swirly-compile)
 
-(global-set-key [s-f6] 'git-commit-commit)
-(global-set-key [f6] 'magit-status)
+(global-set-key [f6] 'git-commit-commit)
+(global-set-key [s-f6] 'magit-status)
 
 (global-set-key [f8] 'swirly-grep)
-;;(global-set-key [s-f8] 'grep-root)
 
 (defun to-grep() (interactive) (switch-to-buffer "*grep*"))
 (global-set-key [s-f8] 'to-grep)
@@ -548,11 +546,7 @@ FILENAME should lack slashes."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 86 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
  '(whitespace-empty ((t (:background "white smoke" :foreground "firebrick"))))
  '(whitespace-line ((t (:background "gray93" :foreground "black"))))
- '(whitespace-trailing ((t (:background "gray93" :foreground "black" :weight bold)))))
-
-;; '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)
-
-;; DejaVu Sans Liberation Mono
+ '(whitespace-trailing ((t (:background "gray97" :foreground "black" :weight bold)))))
