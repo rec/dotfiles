@@ -1,49 +1,22 @@
-(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
-
-(desktop-save-mode t)
-
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
 (setq-default line-spacing 3)
 
-(require 'coffee-mode)
 (require 'clang-format)
 (require 'dired-x)
 (require 'git-gutter)
 (require 'google-c-style)
 (require 'guess-style)
 (require 'ido)
-(require 'jump-to-next-pos)
-(require 'markdown-mode)
+(require 'protobuf-mode)
 (require 'saveplace)
 (require 'template)
 (require 'uniquify)
 (require 'yaml-mode)
+
 (require 'whitespace)
-(require 'zop-to-char)
-
-(autoload 'codepad-paste-region "codepad" "Paste region to codepad.org." t)
-(autoload 'codepad-paste-buffer "codepad" "Paste buffer to codepad.org." t)
-(autoload 'codepad-fetch-code "codepad" "Fetch code from codepad.org." t)
-
-;; Comment this out to not change whitespace on save.
-(add-hook 'write-file-hooks
-          'delete-trailing-whitespace
-)
-
-(add-hook 'shell-mode-hook
-          #'(lambda ()
-              (dirtrack-mode 1)))
-
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-
-;; http://www.emacswiki.org/emacs/AnsiColor
-
 (setq whitespace-style '(face empty tabs lines-tail trailing))
 (global-whitespace-mode t)
 
@@ -52,6 +25,14 @@
 (setq-default dired-listing-switches "-alhv")
 (setq dired-recursive-copies t)
 (global-auto-revert-mode t)
+
+(add-hook 'shell-mode-hook
+          #'(lambda ()
+              (dirtrack-mode 1)))
+
+(desktop-save-mode t)
+
+(visit-tags-table (concat development-base "TAGS"))
 
 (add-to-list 'default-frame-alist '(height . 80))
 (add-to-list 'default-frame-alist '(width . 90))
@@ -139,6 +120,10 @@ or nil if not found."
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)
             ))
 
+(add-hook 'write-file-hooks
+          'delete-trailing-whitespace
+)
+
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
@@ -152,7 +137,7 @@ or nil if not found."
 (global-font-lock-mode t)
 (column-number-mode t)
 (auto-compression-mode t)
-(desktop-save-mode t)
+
 
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -257,11 +242,11 @@ FILENAME should lack slashes."
       (if list
           (cons (funcall fn-head (car list)) (mapcar fn-rest (cdr list)))))
 
-;; (defun camelize (s)
-;;   "Convert under_score string S to CamelCase string."
-;;   (mapconcat 'identity (mapcar
-;;                         '(lambda (word) (capitalize (downcase word)))
-;;                         (split-string s "_")) ""))
+(defun camelize (s)
+  "Convert under_score string S to CamelCase string."
+  (mapconcat 'identity (mapcar
+                        '(lambda (word) (capitalize (downcase word)))
+                        (split-string s "_")) ""))
 
 (defun camelize-method (s)
   "Convert under_score string S to camelCase string."
@@ -314,10 +299,8 @@ FILENAME should lack slashes."
           ("\\.cpp" ".test.cpp")
           ("\\.cpp" ".pyx")
           ("\\.pyx" ".h")
-          ;;("_test\\.py" ".py")
-          ;;("\\.py" "_test.py")
-          ("test_" "")
-          ("" "test_")
+          ("_test\\.py" ".py")
+          ("\\.py" "_test.py")
           ))
          (working t))
   (while (and patterns working)
@@ -467,8 +450,56 @@ FILENAME should lack slashes."
      "Window '%s' is normal")
    (current-buffer)))
 
+(global-set-key [s-z] 'undo)
+
+(global-set-key [f1] 'next-error)
+(global-set-key [s-f1] 'goto-line)
+
+(global-set-key [f2] 'rotate-tests)
+(global-set-key [s-M-up] 'rotate-tests)
+(global-set-key [s-f2] 'rotate-windows)
+
+(global-set-key [f3] 'do-list-buffers)
+
+(global-set-key [f4] 'switch-to-buffer)
+(global-set-key [s-f4] 'shell)
+
+(global-set-key [f5] 'find-file)
+(global-set-key [s-f5] 'reload-file)
+
+(global-set-key [f7] 'swirly-compile)
+
+;;(global-set-key [f6] 'server-edit)
+;;(global-set-key [f6] 'git-commit-commit)
+(global-set-key [f6] 'magit-status)
+
+(global-set-key [f8] 'swirly-grep)
+
 (defun to-grep() (interactive) (switch-to-buffer "*grep*"))
-(defun to-compile() (interactive) (switch-to-buffer "*compilation*"))
+(global-set-key [s-f8] 'to-grep)
+
+(global-set-key [s-f9] 'kmacro-call-macro)
+(global-set-key [f9] 'enlarge-window)
+
+(global-set-key [f10] 'query-replace)
+(global-set-key [s-f10] 'tags-query-replace)
+
+(global-set-key [s-f11] 'yank-pop)
+(global-set-key [f11] 'yank)
+
+(global-set-key [f12] 'keyboard-quit)
+(global-set-key [s-f12] 'append-next-kill)
+
+(global-set-key [f13] 'delete-other-windows)
+(global-set-key [s-f13] 'to-two)
+
+(global-set-key [f14] 'split-window-vertically)
+(global-set-key [s-f14] 'split-window-horizontally)
+
+(global-set-key [f15] 'exchange-point-and-mark)
+(global-set-key [s-f15] 'balance-windows)
+
+(global-set-key [C-tab] 'clang-format-region)
 
 (defun back-window()
   (interactive)
@@ -477,147 +508,3 @@ FILENAME should lack slashes."
 
 (global-set-key [s-up] 'back-window)
 (global-set-key [s-down] 'other-window)
-
-(setq dev-project  (or (getenv "EMACS_PROJECT") "rippled"))
-
-(setq-default
-   desktop-dirname (expand-file-name (concat "~/.emacs.d/desktop/" dev-project))
-   desktop-path    (list desktop-dirname)
-   save-place-file (concat desktop-dirname "/saved-places")
-   dev-root        (concat "/development/" dev-project)
-   )
-
-(if (not (file-readable-p desktop-dirname))
-    (make-directory desktop-dirname))
-
-(setq-default fringe-color
-      (cond
-       ;; red
-       ((string= dev-project "rippled")
-        '(fringe ((t (:background "#FFA0A0")))))
-       ;; orange
-       ((string= dev-project "rippled2")
-        '(fringe ((t (:background "#FFC590")))))
-       ;; yellow
-       ((string= dev-project "rippled3")
-        '(fringe ((t (:background "#FFFFA0")))))
-       ;; green
-       ((string= dev-project "rippled4")
-        '(fringe ((t (:background "#D0FFD0")))))
-       ;; Blue
-       ((string= dev-project "rippled5")
-        '(fringe ((t (:background "#D8D8FF")))))
-       ;; violet
-       ((string= dev-project "rippled6")
-        '(fringe ((t (:background "#DF8FFF")))))
-       ;; grey
-       ((string= dev-project "grit")
-        '(fringe ((t (:background "#FFF"))))))
-)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(c-basic-offset 4)
- '(column-number-mode t)
- '(compile-command "scons -k -j7 clang.debug && cp build/clang.debug/rippled build/rippled && build/rippled --unittest && npm test")
- '(cursor-type (quote box) t)
- '(desktop-base-file-name "rippled1.desktop")
- '(dirtrack-list (quote ("^[^:]*:\\(.*\\)\\$" 1)))
- '(etags-table-search-up-depth 10)
- '(fill-column 80)
- '(global-mark-ring-max 256)
- '(global-whitespace-mode t)
- '(grep-command "grep --exclude \\*.pyc -nHR * -e ")
- '(gud-gdb-command-name "gdb --annotate=1 -i=mi")
- '(indent-tabs-mode nil)
- '(indicate-buffer-boundaries (quote left))
- '(java-indent 4)
- '(js-indent-level 2)
- '(kill-ring-max 1024)
- '(large-file-warning-threshold nil)
- '(mark-ring-max 256)
- '(ns-antialias-text nil)
- '(ns-tool-bar-display-mode (quote both) t)
- '(ns-tool-bar-size-mode (quote regular) t)
- '(py-indent-offset 4)
- '(python-indent 4)
- '(python-indent-offset 4)
- '(shell-cd-regexp "\\(f\\|cd\\)")
- '(standard-indent 4)
- '(tab-width 4)
- '(template-auto-insert t)
- '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
- '(tool-bar-mode nil)
- '(visual-line-mode nil t))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
- fringe-color
- '(whitespace-empty ((t (:background "white" :foreground "firebrick"))))
- '(whitespace-line ((t (:background "gray93" :foreground "black"))))
- '(whitespace-space ((t (:background "white" :foreground "lightgray"))))
- '(whitespace-tab ((t (:background "white" :foreground "lightgray"))))
- '(whitespace-trailing ((t (:background "gray97" :foreground "black" :weight bold)))))
-
-(setq tags-file (concat dev-root "/TAGS"))
-(if (file-readable-p tags-file)
-    (visit-tags-table tags-file))
-
-;; (tags-query-replace "\"strict\"" "jss::strict" nil)
-
-(defun jss-replace (x)
-  (interactive "sEnter JSS string: ")
-  (tags-query-replace (concat "\"" x "\"") (concat "jss::" x) nil))
-
-(defun jss-find (x)
-  "Run grep for jss."
-  (interactive "sEnter jss string:")
-  (let (
-        (default-directory
-          (expand-file-name "src/ripple/" (find-file-upwards ".git")))
-        (to-find
-          (concat
-           "egrep --exclude \*.pyc -nHR * -e \"\\\"" x "\\\"|jss::" x "\""))
-        )
-    (message to-find)
-    (grep-find to-find)
-    )
-)
-
-;; (defun jss-find ()
-;;   (interactive)
-;;   (beginning-of-line)
-;;   (forward-word 1)
-;;   (message (thing-at-point 'word)))
-
-;;   ;; (let (
-;;   ;;       (the-line (thing-at-point 'line))
-;;   ;;       )
-
-(fset 'jss-f
-   [?\C-a M-right right right right ?\C-  ?\C-s ?  left escape ?w ?\C-a down escape ?x ?j ?s ?s ?- ?f ?i ?n ?d return ?\C-y return])
-
-(load-library "keyboard-shortcuts")
-(defun move-line-down ()
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion
-      (next-line)
-      (transpose-lines 1))
-    (next-line)
-    (move-to-column col)))
-
-(defun move-line-up ()
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion
-      (next-line)
-      (transpose-lines -1))
-    (move-to-column col)))
