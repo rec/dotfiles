@@ -13,6 +13,7 @@
 (require 'coffee-mode)
 (require 'clang-format)
 (require 'dired-x)
+(require 'electric-operator)
 (require 'git-gutter)
 (require 'google-c-style)
 (require 'guess-style)
@@ -134,6 +135,8 @@ or nil if not found."
             (git-gutter-mode t)
             ))
 
+(add-hook 'python-mode-hook #'electric-operator-mode)
+
 (add-hook 'yaml-mode-hook
           (lambda ()
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)
@@ -141,6 +144,8 @@ or nil if not found."
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+(add-hook 'c-mode-common-hook #'electric-operator-mode)
 
 ;; (defun my-python-mode-common-hook ()
 ;;   (setq python-basic-offset 4)

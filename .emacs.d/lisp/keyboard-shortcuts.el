@@ -34,8 +34,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [kp-enter] 'repeat-complex-command)
 
 
-;;;; YES!
-
 (gsk [f1] 'next-error)            (gsk [s-f1] 'goto-line)
 (gsk [f2] 'rotate-tests)
 (gsk [f3] 'shell)
@@ -46,7 +44,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [f8] 'swirly-grep)           (gsk [s-f8] 'to-grep)
 (gsk [f9] 'dabbrev-expand)
 (gsk [f10] 'query-replace)
-;;;
+;;; [f11]
 (gsk [f12] 'kill-line)            (gsk [s-f12] 'kill-ring-save)
 (gsk [f13] 'yank)                 (gsk [s-f13] 'yank-pop)
 
@@ -56,7 +54,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [f15] 'undo)
 (gsk [pause] 'undo)
 
-
 ;; navigation
 
 (gsk [s-z] 'undo)
@@ -64,13 +61,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; TODO:
 ;; switch to compilation buffer.
 ;; (gsk [s-f11] 'append-next-kill)
-(gsk [s-f4] 'switch-to-buffer-other-frame)
+;; (gsk [s-f4] 'switch-to-buffer-other-frame)
 
 
 (gsk [M-z] 'zop-to-char)
-
-;; (provide 'keyboard-shortcuts)
-
-
-(dolist (word  '("fight" "foo" "for" "food!"))
-  (message word))
