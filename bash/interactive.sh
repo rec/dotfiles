@@ -2,8 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-. "$HOME/.env"
-. "$HOME/.alias"
+. "$HOME/dotfiles/bash/environment_variables.sh"
+. "$HOME/dotfiles/bash/aliases.sh"
 
 # If not running interactively, don't do anything
 case $- in

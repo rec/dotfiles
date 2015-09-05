@@ -1,8 +1,0 @@
-/var/log/windowserver.log
-/tmp/#windowserver.log#
-/var/log/system.log
-/tmp/#system.log#
-/var/log/secure.log
-/tmp/#secure.log#
-/var/log/kernel.log
-/tmp/#kernel.log#

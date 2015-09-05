@@ -1,8 +1,0 @@
-;; -*- emacs-lisp -*-
-;; Tramp connection history.  Don't change this file.
-;; You can delete it, forcing Tramp to reapply the checks.
-
-((["ftp" "swirlycom964" "www5.corecommerce.com" nil]
-  ("started" t))
- (["ftp" "ax" "ax.to" nil]
-  ("started" t)))
