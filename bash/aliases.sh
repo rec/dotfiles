@@ -35,6 +35,26 @@ function rtags () {
     find src/ripple -name \*.h -or -name \*.cpp | xargs etags
 }
 
+function add_suffix() {
+    for suffix
+        do
+            find . -name \*.$suffix -print0 | xargs -0 git add
+    done
+}
+
+function maxcom () {
+    add_suffix js maxpat maxhelp txt \
+        && git commit -m "$1" \
+        && git push
+}
+
+function maxcom_old () {
+    find . -name \*.js -or -name \*.maxpat -or -name \*.maxhelp -or -name \*.txt \
+        | xargs git add \
+        && git commit -m "$1" \
+        && git push
+}
+
 function gop() {
     git push -f && sleep 1 && g o c
 }
