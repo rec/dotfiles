@@ -1,14 +1,10 @@
-(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
-
-(desktop-save-mode t)
+(server-start)
 
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
-
-(setq-default line-spacing 3)
 
 (require 'coffee-mode)
 (require 'clang-format)
@@ -30,6 +26,8 @@
 (autoload 'codepad-paste-region "codepad" "Paste region to codepad.org." t)
 (autoload 'codepad-paste-buffer "codepad" "Paste buffer to codepad.org." t)
 (autoload 'codepad-fetch-code "codepad" "Fetch code from codepad.org." t)
+
+(setq-default line-spacing 3)
 
 ;; Comment this out to not change whitespace on save.
 (add-hook 'write-file-hooks
@@ -486,7 +484,7 @@ FILENAME should lack slashes."
 (setq dev-project  (or (getenv "EMACS_PROJECT") "rippled"))
 
 (setq-default
-   desktop-dirname (expand-file-name (concat "~/.emacs.d/desktop/" dev-project))
+   desktop-dirname (expand-file-name (concat "~/dotfiles/elisp/desktop/" dev-project))
    desktop-path    (list desktop-dirname)
    save-place-file (concat desktop-dirname "/saved-places")
    dev-root        (concat "/development/" dev-project)
@@ -520,56 +518,6 @@ FILENAME should lack slashes."
         '(fringe ((t (:background "#FFF"))))))
 )
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(c-basic-offset 4)
- '(column-number-mode t)
- '(compile-command "scons -k -j7 clang.debug && cp build/clang.debug/rippled build/rippled && build/rippled --unittest && npm test")
- '(cursor-type (quote box) t)
- '(desktop-base-file-name "rippled1.desktop")
- '(dirtrack-list (quote ("^[^:]*:\\(.*\\)\\$" 1)))
- '(etags-table-search-up-depth 10)
- '(fill-column 80)
- '(global-mark-ring-max 256)
- '(global-whitespace-mode t)
- '(grep-command "grep --exclude \\*.pyc -nHR * -e ")
- '(gud-gdb-command-name "gdb --annotate=1 -i=mi")
- '(indent-tabs-mode nil)
- '(indicate-buffer-boundaries (quote left))
- '(java-indent 4)
- '(js-indent-level 2)
- '(kill-ring-max 1024)
- '(large-file-warning-threshold nil)
- '(mark-ring-max 256)
- '(ns-antialias-text nil)
- '(ns-tool-bar-display-mode (quote both) t)
- '(ns-tool-bar-size-mode (quote regular) t)
- '(py-indent-offset 4)
- '(python-indent 4)
- '(python-indent-offset 4)
- '(shell-cd-regexp "\\(f\\|cd\\)")
- '(standard-indent 4)
- '(tab-width 4)
- '(template-auto-insert t)
- '(template-subdirectories (quote ("./" "Templates/" "~/.emacs.d/Templates")))
- '(tool-bar-mode nil)
- '(visual-line-mode nil t))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
- fringe-color
- '(whitespace-empty ((t (:background "white" :foreground "firebrick"))))
- '(whitespace-line ((t (:background "gray93" :foreground "black"))))
- '(whitespace-space ((t (:background "white" :foreground "lightgray"))))
- '(whitespace-tab ((t (:background "white" :foreground "lightgray"))))
- '(whitespace-trailing ((t (:background "gray97" :foreground "black" :weight bold)))))
 
 (setq tags-file (concat dev-root "/TAGS"))
 (if (file-readable-p tags-file)
@@ -606,10 +554,8 @@ FILENAME should lack slashes."
 ;;   ;;       (the-line (thing-at-point 'line))
 ;;   ;;       )
 
-(fset 'jss-f
-   [?\C-a M-right right right right ?\C-  ?\C-s ?  left escape ?w ?\C-a down escape ?x ?j ?s ?s ?- ?f ?i ?n ?d return ?\C-y return])
-
 (load-library "keyboard-shortcuts")
+
 (defun move-line-down ()
   (interactive)
   (let ((col (current-column)))
@@ -626,3 +572,5 @@ FILENAME should lack slashes."
       (next-line)
       (transpose-lines -1))
     (move-to-column col)))
+
+(desktop-save-mode t)
