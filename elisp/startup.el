@@ -1,4 +1,4 @@
-(server-start)
+;; (server-start)
 
 (require 'package)
 (add-to-list 'package-archives
