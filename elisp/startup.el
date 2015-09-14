@@ -134,6 +134,7 @@ or nil if not found."
             ))
 
 (add-hook 'python-mode-hook #'electric-operator-mode)
+(add-hook 'javascript-mode-hook #'electric-operator-mode)
 
 (add-hook 'yaml-mode-hook
           (lambda ()

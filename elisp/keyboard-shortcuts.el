@@ -93,10 +93,10 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [f14] 'save-buffer)
 (gsk [Scroll_Lock] 'save-buffer)
 
-(gsk [f14] 'save-buffer)
-(gsk [Scroll_Lock] 'save-buffer)
-(gsk [f15] 'undo)
-(gsk [pause] 'undo)
+(gsk [f14] 'undo)
+(gsk [Scroll_Lock] 'undo)
+(gsk [f15] 'save-buffer)
+(gsk [pause] 'save-buffer)
 
 (if (string-equal system-type "darwin")
     (progn
@@ -112,16 +112,16 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
       (gsk [kp-2] 'other-window)
 
       (gsk [A-f1] 'goto-line)
-      (gsk [A-f3] 'swirly-kill-buffer)
+      (gsk [A-f3] 'switch-to-buffer-other-frame)
       (gsk [A-f4] 'do-list-buffers)
       (gsk [A-f5] 'reload-file)
       (gsk [A-f6] 'magit-status)
       (gsk [A-f7] 'to-compile)
       (gsk [A-f8] 'to-grep)
-      (gsk [A-f12] 'kill-ring-save)
       (gsk [A-f11] 'swirly-run-python)
+      (gsk [A-f12] 'kill-ring-save)
       (gsk [A-f13] 'yank-pop)
-      (gsk [A-f14] 'save-some-buffers)
+      (gsk [A-f15] 'save-some-buffers)
 
       (gsk [A-up] 'back-window)
       (gsk [A-down] 'other-window)
@@ -135,7 +135,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
     (gsk [kp-right] 'jump-to-next-pos))
 
     (gsk [s-f1] 'goto-line)
-    (gsk [s-f3] 'swirly-kill-buffer)
+    (gsk [s-f3] 'switch-to-buffer-other-frame)
     (gsk [s-f4] 'do-list-buffers)
     (gsk [s-f5] 'reload-file)
     (gsk [s-f6] 'magit-status)
@@ -144,8 +144,8 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
     (gsk [s-f11] 'swirly-run-python)
     (gsk [s-f12] 'kill-ring-save)
     (gsk [s-f13] 'yank-pop)
-    (gsk [s-f14] 'save-some-buffers)
-    (gsk [s-Scroll_Lock] 'save-some-buffers)
+    (gsk [s-f15] 'save-some-buffers)
+    (gsk [s-pause] 'save-some-buffers)
 
     (gsk [s-up] 'back-window)
     (gsk [s-down] 'other-window)
@@ -159,5 +159,7 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; switch to compilation buffer.
 ;; (gsk [s-f11] 'append-next-kill)
 ;; (gsk [s-f4] 'switch-to-buffer-other-frame)
+;; merge-all-frames
+;; open in other frame
 
 (gsk [M-z] 'zop-to-char)
