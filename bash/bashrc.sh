@@ -1,5 +1,5 @@
-. "$HOME/dotfiles/bash/environment-variables.sh"
-. "$HOME/dotfiles/bash/aliases.sh"
-. "$HOME/dotfiles/bash/functions.sh"
-. "$HOME/dotfiles/bash/interactive.sh"
-. "/development/grit/for-your-bashrc.sh"
+. /development/dotfiles/bash/environment-variables.sh
+. /development/dotfiles/bash/aliases.sh
+. /development/dotfiles/bash/functions.sh
+. /development/dotfiles/bash/interactive.sh
+. /development/grit/for-your-bashrc.sh
