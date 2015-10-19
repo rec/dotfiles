@@ -9,7 +9,7 @@
 (require 'coffee-mode)
 (require 'clang-format)
 (require 'dired-x)
-(require 'electric-operator)
+;(require 'electric-operator)
 (require 'git-gutter)
 (require 'google-c-style)
 (require 'guess-style)
@@ -23,15 +23,15 @@
 (require 'whitespace)
 (require 'zop-to-char)
 
-(autoload 'codepad-paste-region "codepad" "Paste region to codepad.org." t)
-(autoload 'codepad-paste-buffer "codepad" "Paste buffer to codepad.org." t)
-(autoload 'codepad-fetch-code "codepad" "Fetch code from codepad.org." t)
+;; (autoload 'codepad-paste-region "codepad" "Paste region to codepad.org." t)
+;; (autoload 'codepad-paste-buffer "codepad" "Paste buffer to codepad.org." t)
+;; (autoload 'codepad-fetch-code "codepad" "Fetch code from codepad.org." t)
 
 (setq-default line-spacing 3)
 
 ;; Comment this out to not change whitespace on save.
 (add-hook 'write-file-hooks
-          'delete-trailing-whitespace
+         'delete-trailing-whitespace
 )
 
 (add-hook 'shell-mode-hook
@@ -133,8 +133,8 @@ or nil if not found."
             (git-gutter-mode t)
             ))
 
-(add-hook 'python-mode-hook #'electric-operator-mode)
-(add-hook 'javascript-mode-hook #'electric-operator-mode)
+;; (add-hook 'python-mode-hook #'electric-operator-mode)
+;; (add-hook 'javascript-mode-hook #'electric-operator-mode)
 
 (add-hook 'yaml-mode-hook
           (lambda ()
@@ -144,7 +144,7 @@ or nil if not found."
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
-(add-hook 'c-mode-common-hook #'electric-operator-mode)
+;; (add-hook 'c-mode-common-hook #'electric-operator-mode)
 
 ;; (defun my-python-mode-common-hook ()
 ;;   (setq python-basic-offset 4)
@@ -310,18 +310,18 @@ FILENAME should lack slashes."
   "Returns one rotation through the file"
   (let* ((patterns
         '(
-          ("\\.test\\.cpp" ".h")
+          ("_test\\.cpp" ".h")
           ("\\.h" ".cpp")
-          ("\\.cpp" ".proto")
-          ("\\.proto" ".test.cpp")
-          ("\\.cc" ".h")
-          ("\\.cpp" ".test.cpp")
-          ("\\.cpp" ".pyx")
-          ("\\.pyx" ".h")
+          ("\\.cpp" "_test.cpp")
+          ;;("\\.cpp" ".proto")
+          ;;("\\.proto" ".test.cpp")
+          ;;("\\.cc" ".h")
+          ;;("\\.cpp" ".pyx")
+          ;;("\\.pyx" ".h")
           ;;("_test\\.py" ".py")
           ;;("\\.py" "_test.py")
-          ("test_" "")
-          ("" "test_")
+          ;;("test_" "")
+          ;;("" "test_")
           ))
          (working t))
   (while (and patterns working)

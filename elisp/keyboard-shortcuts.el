@@ -129,7 +129,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
   (progn
     (gsk [home] 'swirly-to-root)
     (gsk [kp-up] 'back-window)
-    (gsk [prior] 'shrink-window)
     (gsk [kp-left] 'jump-to-prev-pos)
     (gsk [kp-begin] 'exchange-point-and-mark)
     (gsk [kp-right] 'jump-to-next-pos))
@@ -156,6 +155,9 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [s-z] 'undo)
 
 ;; TODO:
+;; is this file up to date?
+;; integrate "swirly-find".
+
 ;; switch to compilation buffer.
 ;; (gsk [s-f11] 'append-next-kill)
 ;; (gsk [s-f4] 'switch-to-buffer-other-frame)
