@@ -310,9 +310,21 @@ FILENAME should lack slashes."
   "Returns one rotation through the file"
   (let* ((patterns
         '(
+          ("_test\\.cpp" "_inl.h")
           ("_test\\.cpp" ".h")
+
+          ("_inl\\.h" ".h")
+
           ("\\.h" ".cpp")
+          ("\\.h" "_test.cpp")
+          ("\\.h" "_inl.cpp")
+
           ("\\.cpp" "_test.cpp")
+          ("\\.cpp" "_inl.h")
+          ("\\.cpp" ".h")
+
+          ;; ("\\.cpp" "_inl.cpp")
+          ;; ("_inl\\.cpp" "_test.cpp")
           ;;("\\.cpp" ".proto")
           ;;("\\.proto" ".test.cpp")
           ;;("\\.cc" ".h")
