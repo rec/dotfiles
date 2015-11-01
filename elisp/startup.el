@@ -494,10 +494,10 @@ FILENAME should lack slashes."
 (global-set-key [s-up] 'back-window)
 (global-set-key [s-down] 'other-window)
 
-(setq dev-project  (or (getenv "EMACS_PROJECT") "rippled"))
+(setq dev-project  (or (getenv "EMACS_PROJECT") "tom"))
 
 (setq-default
-   desktop-dirname (expand-file-name (concat "~/dotfiles/elisp/desktop/" dev-project))
+   desktop-dirname (expand-file-name (concat "/development/dotfiles/elisp/desktop/" dev-project))
    desktop-path    (list desktop-dirname)
    save-place-file (concat desktop-dirname "/saved-places")
    dev-root        (concat "/development/" dev-project)
@@ -509,22 +509,22 @@ FILENAME should lack slashes."
 (setq-default fringe-color
       (cond
        ;; red
-       ((string= dev-project "rippled")
+       ((string= dev-project "tom")
         '(fringe ((t (:background "#FFA0A0")))))
        ;; orange
-       ((string= dev-project "rippled2")
+       ((string= dev-project "tom2")
         '(fringe ((t (:background "#FFC590")))))
        ;; yellow
-       ((string= dev-project "rippled3")
+       ((string= dev-project "tom3")
         '(fringe ((t (:background "#FFFFA0")))))
        ;; green
-       ((string= dev-project "rippled4")
+       ((string= dev-project "tom4")
         '(fringe ((t (:background "#D0FFD0")))))
        ;; Blue
-       ((string= dev-project "rippled5")
+       ((string= dev-project "tom5")
         '(fringe ((t (:background "#D8D8FF")))))
        ;; violet
-       ((string= dev-project "rippled6")
+       ((string= dev-project "tom6")
         '(fringe ((t (:background "#DF8FFF")))))
        ;; grey
        ((string= dev-project "grit")
