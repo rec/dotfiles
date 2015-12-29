@@ -72,6 +72,9 @@ xterm*|rxvt*)
     ;;
 esac
 
+# Now we use git branch display!
+export PS1="\u@\h:\$git_branch\$git_dirty\\w\$ "
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"

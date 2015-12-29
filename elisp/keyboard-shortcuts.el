@@ -82,17 +82,15 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [f3] 'switch-to-buffer)
 (gsk [f4] 'do-list-buffers)
 (gsk [f5] 'find-file)
-(gsk [f6] 'git-commit-commit)
+(gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
 (gsk [f7] 'swirly-compile)
 (gsk [f8] 'swirly-grep)
 (gsk [f9] 'swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
-(gsk [f12] 'kill-line)
-(gsk [f13] 'yank)
-(gsk [f14] 'save-buffer)
-(gsk [Scroll_Lock] 'save-buffer)
-
+(gsk [f12] 'rotate-in-two)
+(gsk [f13] 'cycle-windows)
+(gsk [print] 'cycle-windows)
 (gsk [f14] 'undo)
 (gsk [Scroll_Lock] 'undo)
 (gsk [f15] 'save-buffer)
@@ -118,6 +116,8 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
       (gsk [A-f6] 'magit-status)
       (gsk [A-f7] 'to-compile)
       (gsk [A-f8] 'to-grep)
+      ;;f9
+      ;;f10
       (gsk [A-f11] 'swirly-run-python)
       (gsk [A-f12] 'kill-ring-save)
       (gsk [A-f13] 'yank-pop)
@@ -125,6 +125,8 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
       (gsk [A-up] 'back-window)
       (gsk [A-down] 'other-window)
+
+      (gsk [A-kp-divide] 'apply-macro-to-region-lines)
       )
   (progn
     (gsk [home] 'swirly-to-root)
@@ -140,6 +142,8 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
     (gsk [s-f6] 'magit-status)
     (gsk [s-f7] 'to-compile)
     (gsk [s-f8] 'to-grep)
+      ;;f9
+      ;;f10
     (gsk [s-f11] 'swirly-run-python)
     (gsk [s-f12] 'kill-ring-save)
     (gsk [s-f13] 'yank-pop)
@@ -148,8 +152,10 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 
     (gsk [s-up] 'back-window)
     (gsk [s-down] 'other-window)
+    (gsk [s-kp-divide] 'apply-macro-to-region-lines)
     )
 
+;; navigation
 ;; navigation
 
 (gsk [s-z] 'undo)

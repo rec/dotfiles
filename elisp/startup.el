@@ -6,7 +6,7 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
-(require 'coffee-mode)
+;;(require 'coffee-mode)
 (require 'clang-format)
 (require 'dired-x)
 ;(require 'electric-operator)
@@ -23,22 +23,8 @@
 (require 'whitespace)
 (require 'zop-to-char)
 
-;; (autoload 'codepad-paste-region "codepad" "Paste region to codepad.org." t)
-;; (autoload 'codepad-paste-buffer "codepad" "Paste buffer to codepad.org." t)
-;; (autoload 'codepad-fetch-code "codepad" "Fetch code from codepad.org." t)
-
 (setq-default line-spacing 3)
 
-;; Comment this out to not change whitespace on save.
-(add-hook 'write-file-hooks
-         'delete-trailing-whitespace
-)
-
-(add-hook 'shell-mode-hook
-          #'(lambda ()
-              (dirtrack-mode 1)))
-
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 
 ;; http://www.emacswiki.org/emacs/AnsiColor
@@ -52,17 +38,17 @@
 (setq dired-recursive-copies t)
 (global-auto-revert-mode t)
 
-(add-to-list 'default-frame-alist '(height . 80))
-(add-to-list 'default-frame-alist '(width . 90))
+(add-to-list 'default-frame-alist '(height . 55))
+(add-to-list 'default-frame-alist '(width . 85))
 
 (defun parent-directory (dir)
   (unless (equal "/" dir)
     (file-name-directory (directory-file-name dir))))
 
-(defun find-file-upwards (file-to-find)
-  "Recursively searches each parent directory starting from the default-directory.
-looking for a file with name file-to-find.  Returns the path to it
-or nil if not found."
+(defun find-file-upwards-base (file-to-find)
+  "Recursively searches each parent directory starting from the
+   default-directory. looking for a file with name file-to-find.
+   Returns the path to it or nil if not found."
   (cl-labels
       ((find-file-r (path)
                     (let* ((parent (file-name-directory path))
@@ -77,6 +63,9 @@ or nil if not found."
                             (equal parent (directory-file-name parent))) nil) ; Not found
                        (t (find-file-r (directory-file-name parent))))))) ; Continue
     (find-file-r default-directory)))
+
+(defun find-file-upwards (file-to-find)
+  (or (find-file-upwards-base file-to-find) default-directory))
 
 (defun swirly-compile()
   "Run compile in the git directory."
@@ -122,36 +111,6 @@ or nil if not found."
 ;;            (seq ".pyo" eol)              ;; compiled python files
 ;;            (seq bol "CVS" eol)           ;; CVS dirs
 ;; )))
-
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (dired-omit-mode t)
-            ))
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (git-gutter-mode t)
-            ))
-
-;; (add-hook 'python-mode-hook #'electric-operator-mode)
-;; (add-hook 'javascript-mode-hook #'electric-operator-mode)
-
-(add-hook 'yaml-mode-hook
-          (lambda ()
-            (define-key yaml-mode-map "\C-m" 'newline-and-indent)
-            ))
-
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-;; (add-hook 'c-mode-common-hook #'electric-operator-mode)
-
-;; (defun my-python-mode-common-hook ()
-;;   (setq python-basic-offset 4)
-;; ;;  (define-key python-mode-map "\C-m" 'newline-and-indent)
-;; )
-
-;; (add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
 
 (global-font-lock-mode t)
 (column-number-mode t)
@@ -256,84 +215,37 @@ FILENAME should lack slashes."
        (set-window-buffer window next-window-buffer)))
    )
 
-(defun mapcar-head (fn-head fn-rest list)
-      "Like MAPCAR, but applies a different function to the first element."
-      (if list
-          (cons (funcall fn-head (car list)) (mapcar fn-rest (cdr list)))))
-
-;; (defun camelize (s)
-;;   "Convert under_score string S to CamelCase string."
-;;   (mapconcat 'identity (mapcar
-;;                         '(lambda (word) (capitalize (downcase word)))
-;;                         (split-string s "_")) ""))
-
-(defun camelize-method (s)
-  "Convert under_score string S to camelCase string."
-  (mapconcat 'identity (mapcar-head
-                        '(lambda (word) (downcase word))
-                        '(lambda (word) (capitalize (downcase word)))
-                        (split-string s "_")) ""))
-
-(defun split-name (s)
-  (split-string
-   (let ((case-fold-search nil))
-     (downcase
-      (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" s)))
-   "[^A-Za-z0-9]+"))
-
-(defun camelcase   (s) (mapconcat 'capitalize (split-name s) ""))
-(defun underscore  (s) (mapconcat 'upcase     (split-name s) "_"))
-;; (defun underscored (s) (mapconcat 'downcase   (split-name s) "_"))
-;; (defun dasherize   (s) (mapconcat 'downcase   (split-name s) "-"))
-;; (defun colonize    (s) (mapconcat 'capitalize (split-name s) "::"))
-(defun locamel     (s)
-  (mapconcat 'identity
-             (mapcar-head 'downcase 'capitalize (split-name s))
-             ""))
-
-(defun camelscore (s)
-  (cond ;; ((string-match-p "\\(?:[a-z]+_\\)+[a-z]+" s)	(dasherize  s))
-        ((string-match-p "\\(?:[A-Z]+_\\)+[A-Z]+" s)	(locamel  s))
-        ((string-match-p "\\(?:[A-Z][a-z]+\\)+$"  s)	(underscore  s)) ;; (locamel   s))
-        (t						(camelcase s)) ))
-
-(defun camelscore-word-at-point ()
-  (interactive)
-  (let* ((case-fold-search nil)
-         (beg (and (skip-chars-backward "[:alnum:]_") (point)))
-         (end (and (skip-chars-forward  "[:alnum:]_") (point)))
-         (txt (buffer-substring beg end))
-         (cml (camelscore txt)) )
-    (if cml (progn (delete-region beg end) (insert cml))) ))
-
 (defun rotate-file-suffix (file)
   "Returns one rotation through the file"
   (let* ((patterns
         '(
-          ("_test\\.cpp" "_inl.h")
-          ("_test\\.cpp" ".h")
+          ("_test\\.cpp" ".h")  ;; last choice
 
-          ("_inl\\.h" ".h")
-
-          ("\\.h" ".cpp")
-          ("\\.h" "_test.cpp")
-          ("\\.h" "_inl.cpp")
-
-          ("\\.cpp" "_test.cpp")
-          ("\\.cpp" "_inl.h")
+          ("\\.cpp" "_test.cpp")  ;; second last
           ("\\.cpp" ".h")
 
-          ;; ("\\.cpp" "_inl.cpp")
-          ;; ("_inl\\.cpp" "_test.cpp")
-          ;;("\\.cpp" ".proto")
-          ;;("\\.proto" ".test.cpp")
-          ;;("\\.cc" ".h")
-          ;;("\\.cpp" ".pyx")
-          ;;("\\.pyx" ".h")
-          ;;("_test\\.py" ".py")
-          ;;("\\.py" "_test.py")
-          ;;("test_" "")
-          ;;("" "test_")
+          ("_inl\\.h" ".cpp")
+          ("_inl\\.h" "_test.cpp")
+          ("_inl\\.h" ".h")
+
+          ("\\.h" "_inl.h")
+          ("\\.h" ".cpp")
+          ("\\.h" "_test.cpp")
+
+
+
+          ;; ("_test\\.cpp" "_inl.h")
+          ;; ("_test\\.cpp" ".h")
+
+          ;; ("_inl\\.h" ".h")
+
+          ;; ("\\.h" ".cpp")
+          ;; ("\\.h" "_test.cpp")
+          ;; ("\\.h" "_inl.cpp")
+
+          ;; ("\\.cpp" "_test.cpp")
+          ;; ("\\.cpp" "_inl.h")
+          ;; ("\\.cpp" ".h")
           ))
          (working t))
   (while (and patterns working)
@@ -494,7 +406,7 @@ FILENAME should lack slashes."
 (global-set-key [s-up] 'back-window)
 (global-set-key [s-down] 'other-window)
 
-(setq dev-project  (or (getenv "EMACS_PROJECT") "tom"))
+(setq dev-project  (or (getenv "EMACS_PROJECT") "fbme"))
 
 (setq-default
    desktop-dirname (expand-file-name (concat "/development/dotfiles/elisp/desktop/" dev-project))
@@ -509,22 +421,22 @@ FILENAME should lack slashes."
 (setq-default fringe-color
       (cond
        ;; red
-       ((string= dev-project "tom")
-        '(fringe ((t (:background "#FFA0A0")))))
+       ((string= dev-project "fbme")
+        '(fringe ((t (:background "#FFFFFF")))))
        ;; orange
-       ((string= dev-project "tom2")
+       ((string= dev-project "fbme2")
         '(fringe ((t (:background "#FFC590")))))
        ;; yellow
-       ((string= dev-project "tom3")
+       ((string= dev-project "fbme3")
         '(fringe ((t (:background "#FFFFA0")))))
        ;; green
-       ((string= dev-project "tom4")
+       ((string= dev-project "fbme4")
         '(fringe ((t (:background "#D0FFD0")))))
        ;; Blue
-       ((string= dev-project "tom5")
+       ((string= dev-project "fbme5")
         '(fringe ((t (:background "#D8D8FF")))))
        ;; violet
-       ((string= dev-project "tom6")
+       ((string= dev-project "fbme6")
         '(fringe ((t (:background "#DF8FFF")))))
        ;; grey
        ((string= dev-project "grit")
@@ -537,37 +449,6 @@ FILENAME should lack slashes."
     (visit-tags-table tags-file))
 
 ;; (tags-query-replace "\"strict\"" "jss::strict" nil)
-
-(defun jss-replace (x)
-  (interactive "sEnter JSS string: ")
-  (tags-query-replace (concat "\"" x "\"") (concat "jss::" x) nil))
-
-(defun jss-find (x)
-  "Run grep for jss."
-  (interactive "sEnter jss string:")
-  (let (
-        (default-directory
-          (expand-file-name "src/ripple/" (find-file-upwards ".git")))
-        (to-find
-          (concat
-           "egrep --exclude \*.pyc -nHR * -e \"\\\"" x "\\\"|jss::" x "\""))
-        )
-    (message to-find)
-    (grep-find to-find)
-    )
-)
-
-;; (defun jss-find ()
-;;   (interactive)
-;;   (beginning-of-line)
-;;   (forward-word 1)
-;;   (message (thing-at-point 'word)))
-
-;;   ;; (let (
-;;   ;;       (the-line (thing-at-point 'line))
-;;   ;;       )
-
-(load-library "keyboard-shortcuts")
 
 (defun move-line-down ()
   (interactive)
@@ -585,5 +466,9 @@ FILENAME should lack slashes."
       (next-line)
       (transpose-lines -1))
     (move-to-column col)))
+
+
+(load-library "keyboard-shortcuts")
+(load-library "hooks")
 
 (desktop-save-mode t)

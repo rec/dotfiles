@@ -3,4 +3,7 @@ export DYLD_LIBRARY_PATH=/development/boost_1_58_0/stage/lib
 export EDITOR=emacsclient
 export GIT_USER=rec
 export SCONSFLAGS=-j7
-export PATH=$PATH:~/bin
+export PATH=$PATH\
+:~/bin\
+:/development/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/\
+:/development/pretty-bash
