@@ -59,13 +59,15 @@ function penv() {
 }
 
 function gnew() {
-    git checkout -b $1 && git push --set-upstream tom $1
+    git checkout -b $1 && git push --set-upstream origin $1
 }
 
 function gdelete() {
     for i in "$@"
     do
-        git checkout master && git branch -D $i && git push --delete tom $i
+        git checkout master
+        git branch -D $i
+        git push --delete origin $i
     done
 }
 
