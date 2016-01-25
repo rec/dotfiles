@@ -21,6 +21,7 @@ function gnew() {
 }
 
 # Back up the current branch.
+# DOES NOT WORK!
 function gback() {
     BRANCH=`git name-rev --name-only HEAD`
     BACKUP=b-$BRANCH
