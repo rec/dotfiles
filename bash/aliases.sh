@@ -4,8 +4,8 @@ alias g=/development/grit/Grit.py
 alias grit=/development/grit/Grit.py
 
 alias gb='git branch'
+alias gc='git checkout'
 alias gdiff="git diff > /tmp/git.diff"
-alias gfu='git fetch upstream develop'
 alias gl='git l'
 alias gpo='git push -f && sleep 1 && g o c'
 alias gr='git rebase -i ripple/master --autosquash'
