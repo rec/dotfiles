@@ -21,9 +21,8 @@ function gnew() {
 }
 
 # Back up the current branch.
-# DOES NOT WORK!
 function gback() {
-    BRANCH=`git name-rev --name-only HEAD`
+    BRANCH=`git symbolic-ref --short HEAD`
     BACKUP=b-$BRANCH
     gdelete-f $BACKUP
     git checkout $BRANCH
