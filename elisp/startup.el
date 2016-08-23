@@ -6,16 +6,17 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
-;;(require 'coffee-mode)
+
 (require 'clang-format)
+(require 'cython-mode)
 (require 'dired-x)
-;(require 'electric-operator)
 (require 'git-gutter)
 (require 'google-c-style)
 (require 'guess-style)
 (require 'ido)
 (require 'jump-to-next-pos)
 (require 'markdown-mode)
+(require 'python-mode)
 (require 'saveplace)
 (require 'template)
 (require 'uniquify)
@@ -73,12 +74,15 @@
   (let ((default-directory (find-file-upwards ".git")))
     (call-interactively 'compile)))
 
+(defun to-grep() (interactive) (switch-to-buffer "*grep*"))
+
 (defun swirly-grep()
   "Run grep in the src/ripple directory."
   (interactive)
-  (let ((default-directory
-          (expand-file-name "src/ripple/" (find-file-upwards ".git"))))
-    (call-interactively 'grep)))
+  (let ()
+    (switch-to-buffer "*grep*")
+    (call-interactively 'grep)
+    ))
 
 (defun kill-matching-buffers (match)
   (interactive "sMatching string: ")
@@ -122,7 +126,6 @@
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 (add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
-(add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 
 (template-initialize)
@@ -221,15 +224,15 @@ FILENAME should lack slashes."
         '(
           ("_test\\.cpp" ".h")  ;; last choice
 
-          ("\\.cpp" "_test.cpp")  ;; second last
-          ("\\.cpp" ".h")
+          ("\\.pyx" "_test.cpp")  ;; second last
+          ("\\.pyx" ".h")
 
-          ("_inl\\.h" ".cpp")
+          ("_inl\\.h" ".pyx")
           ("_inl\\.h" "_test.cpp")
           ("_inl\\.h" ".h")
 
           ("\\.h" "_inl.h")
-          ("\\.h" ".cpp")
+          ("\\.h" ".pyx")
           ("\\.h" "_test.cpp")
 
 
@@ -395,7 +398,6 @@ FILENAME should lack slashes."
      "Window '%s' is normal")
    (current-buffer)))
 
-(defun to-grep() (interactive) (switch-to-buffer "*grep*"))
 (defun to-compile() (interactive) (switch-to-buffer "*compilation*"))
 
 (defun back-window()
@@ -406,47 +408,47 @@ FILENAME should lack slashes."
 (global-set-key [s-up] 'back-window)
 (global-set-key [s-down] 'other-window)
 
-(setq dev-project  (or (getenv "EMACS_PROJECT") "fbme"))
+;; (setq dev-project  (or (getenv "EMACS_PROJECT") "fbme"))
 
-(setq-default
-   desktop-dirname (expand-file-name (concat "/development/dotfiles/elisp/desktop/" dev-project))
-   desktop-path    (list desktop-dirname)
-   save-place-file (concat desktop-dirname "/saved-places")
-   dev-root        (concat "/development/" dev-project)
-   )
+;; (setq-default
+;;    desktop-dirname (expand-file-name (concat "/development/dotfiles/elisp/desktop/" dev-project))
+;;    desktop-path    (list desktop-dirname)
+;;    save-place-file (concat desktop-dirname "/saved-places")
+;;    dev-root        (concat "/development/" dev-project)
+;;    )
 
-(if (not (file-readable-p desktop-dirname))
-    (make-directory desktop-dirname))
+;; (if (not (file-readable-p desktop-dirname))
+;;     (make-directory desktop-dirname))
 
-(setq-default fringe-color
-      (cond
-       ;; red
-       ((string= dev-project "fbme")
-        '(fringe ((t (:background "#FFFFFF")))))
-       ;; orange
-       ((string= dev-project "fbme2")
-        '(fringe ((t (:background "#FFC590")))))
-       ;; yellow
-       ((string= dev-project "fbme3")
-        '(fringe ((t (:background "#FFFFA0")))))
-       ;; green
-       ((string= dev-project "fbme4")
-        '(fringe ((t (:background "#D0FFD0")))))
-       ;; Blue
-       ((string= dev-project "fbme5")
-        '(fringe ((t (:background "#D8D8FF")))))
-       ;; violet
-       ((string= dev-project "fbme6")
-        '(fringe ((t (:background "#DF8FFF")))))
-       ;; grey
-       ((string= dev-project "grit")
-        '(fringe ((t (:background "#FFF"))))))
-)
+;; (setq-default fringe-color
+;;       (cond
+;;        ;; red
+;;        ((string= dev-project "fbme")
+;;         '(fringe ((t (:background "#FFFFFF")))))
+;;        ;; orange
+;;        ((string= dev-project "fbme2")
+;;         '(fringe ((t (:background "#FFC590")))))
+;;        ;; yellow
+;;        ((string= dev-project "fbme3")
+;;         '(fringe ((t (:background "#FFFFA0")))))
+;;        ;; green
+;;        ((string= dev-project "fbme4")
+;;         '(fringe ((t (:background "#D0FFD0")))))
+;;        ;; Blue
+;;        ((string= dev-project "fbme5")
+;;         '(fringe ((t (:background "#D8D8FF")))))
+;;        ;; violet
+;;        ((string= dev-project "fbme6")
+;;         '(fringe ((t (:background "#DF8FFF")))))
+;;        ;; grey
+;;        ((string= dev-project "grit")
+;;         '(fringe ((t (:background "#FFF"))))))
+;; )
 
 
-(setq tags-file (concat dev-root "/TAGS"))
-(if (file-readable-p tags-file)
-    (visit-tags-table tags-file))
+;; (setq tags-file (concat dev-root "/TAGS"))
+;; (if (file-readable-p tags-file)
+;;     (visit-tags-table tags-file))
 
 ;; (tags-query-replace "\"strict\"" "jss::strict" nil)
 
@@ -472,3 +474,17 @@ FILENAME should lack slashes."
 (load-library "hooks")
 
 (desktop-save-mode t)
+
+(defun my-c++-mode-hook ()
+    (define-key c++-mode-map ")" 'self-insert-command)
+    (define-key c++-mode-map "(" 'self-insert-command)
+    (define-key c++-mode-map "[" 'self-insert-command)
+    (define-key c++-mode-map "]" 'self-insert-command)
+    (define-key c++-mode-map "{" 'self-insert-command)
+    (define-key c++-mode-map "}" 'self-insert-command)
+    (define-key c++-mode-map ":" 'self-insert-command)
+    (define-key c++-mode-map ";" 'self-insert-command)
+    (define-key c++-mode-map "," 'self-insert-command)
+    )
+
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)

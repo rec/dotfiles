@@ -4,7 +4,7 @@
 
 # Create a new virtualenv.
 function nenv() {
-    virtualenv /development/env/$1 && penv $1
+    virtualenv /development/env/$1 -p python3 && penv $1
 }
 
 # Activate a virtualenv.

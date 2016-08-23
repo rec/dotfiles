@@ -20,6 +20,13 @@ function gnew() {
     git checkout -b $1 && git push --set-upstream origin $1
 }
 
+# Commit everything, then revert to the previous commit.
+# Think of it as a safer reset.
+
+function greset() {
+    git commit -am "reset" && git reset --hard HEAD^
+}
+
 # Back up the current branch.
 function gback() {
     BRANCH=`git symbolic-ref --short HEAD`
@@ -84,3 +91,12 @@ function gmerge() {
         git push && \
         gdelete $1
 }
+
+# Move develop to master.
+# ONLY for the most basic projects with one main user.
+function gpmaster() {
+    git checkout master && \
+        git merge --ff-only develop && \
+        git push && \
+        git checkout develop
+    }
