@@ -9,9 +9,12 @@
 (add-hook 'python-mode-hook (lambda () (git-gutter-mode t)))
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook (lambda () (setq 'c-basic-offset 4)))
+
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 (add-hook 'c-mode-common-hook (lambda () (git-gutter-mode t)))
 
-;; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
 
 ;; (add-hook 'python-mode-hook #'electric-operator-mode)
 ;; (add-hook 'javascript-mode-hook #'electric-operator-mode)

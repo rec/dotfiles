@@ -2,27 +2,25 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
-
-(require 'clang-format)
+;; (require 'clang-format)
 (require 'cython-mode)
-(require 'dired-x)
+;; (require 'dired-x)
 (require 'git-gutter)
 (require 'google-c-style)
 (require 'guess-style)
-(require 'ido)
-(require 'jump-to-next-pos)
+;; (require 'ido)
+;; (require 'jump-to-next-pos)
 (require 'markdown-mode)
-(require 'python-mode)
+;; (require 'python-mode)
 (require 'saveplace)
-(require 'template)
+;; (require 'template)
 (require 'uniquify)
 (require 'yaml-mode)
-(require 'whitespace)
-(require 'zop-to-char)
+;; (require 'whitespace)
+;; (require 'zop-to-char)
 
 (setq-default line-spacing 3)
 
@@ -128,7 +126,7 @@
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
 (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 
-(template-initialize)
+;; (template-initialize)
 (blink-cursor-mode nil)
 
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
@@ -235,8 +233,6 @@ FILENAME should lack slashes."
           ("\\.h" ".pyx")
           ("\\.h" "_test.cpp")
 
-
-
           ;; ("_test\\.cpp" "_inl.h")
           ;; ("_test\\.cpp" ".h")
 
@@ -261,6 +257,7 @@ FILENAME should lack slashes."
                                           file))
           (setq working nil)))))
   file)
+
 
 (defun try-file-directories (file)
   "Tries different possibilities to see if a file exists."
@@ -487,4 +484,4 @@ FILENAME should lack slashes."
     (define-key c++-mode-map "," 'self-insert-command)
     )
 
-(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
