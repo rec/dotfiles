@@ -218,6 +218,7 @@ FILENAME should lack slashes."
 
 (defun rotate-file-suffix (file)
   "Returns one rotation through the file"
+  ;;; .cpp _inl, .pyx, _test, .h,
   (let* ((patterns
         '(
           ("_test\\.cpp" ".h")  ;; last choice
@@ -471,17 +472,3 @@ FILENAME should lack slashes."
 (load-library "hooks")
 
 (desktop-save-mode t)
-
-(defun my-c++-mode-hook ()
-    (define-key c++-mode-map ")" 'self-insert-command)
-    (define-key c++-mode-map "(" 'self-insert-command)
-    (define-key c++-mode-map "[" 'self-insert-command)
-    (define-key c++-mode-map "]" 'self-insert-command)
-    (define-key c++-mode-map "{" 'self-insert-command)
-    (define-key c++-mode-map "}" 'self-insert-command)
-    (define-key c++-mode-map ":" 'self-insert-command)
-    (define-key c++-mode-map ";" 'self-insert-command)
-    (define-key c++-mode-map "," 'self-insert-command)
-    )
-
-;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)

@@ -8,12 +8,35 @@
 
 (add-hook 'python-mode-hook (lambda () (git-gutter-mode t)))
 
+(setq-default c-basic-offset 4)
+(defun my-c-mode-common-hook ()
+ ;; (c-set-offset 'substatement-open 0)
+ (c-set-offset 'innamespace 0)
+
+ (setq c++-tab-always-indent t)
+ (setq c-basic-offset 4)
+ (setq c-indent-level 4)
+ (git-gutter-mode t)
+ )
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook (lambda () (setq 'c-basic-offset 4)))
-
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-(add-hook 'c-mode-common-hook (lambda () (git-gutter-mode t)))
 
+;; not used.
+(defun my-c++-mode-hook ()
+    (define-key c++-mode-map ")" 'self-insert-command)
+    (define-key c++-mode-map "(" 'self-insert-command)
+    (define-key c++-mode-map "[" 'self-insert-command)
+    (define-key c++-mode-map "]" 'self-insert-command)
+    (define-key c++-mode-map "{" 'self-insert-command)
+    (define-key c++-mode-map "}" 'self-insert-command)
+    (define-key c++-mode-map ":" 'self-insert-command)
+    (define-key c++-mode-map ";" 'self-insert-command)
+    (define-key c++-mode-map "," 'self-insert-command)
+    )
+
+;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 
 ;; (add-hook 'python-mode-hook #'electric-operator-mode)
