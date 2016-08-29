@@ -1,0 +1,43 @@
+;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
+;; list contains regexp=>directory mappings; filenames matching a regexp are
+;; backed up in the corresponding directory. Emacs will mkdir it if necessary.)
+(defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
+
+(add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
+(add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+;; http://www.emacswiki.org/emacs/AnsiColor
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+(add-to-list 'default-frame-alist '(height . 55))
+(add-to-list 'default-frame-alist '(width . 85))
+
+(auto-compression-mode t)
+(blink-cursor-mode nil)
+(column-number-mode t)
+(desktop-save-mode t)
+(global-auto-revert-mode t)
+(global-font-lock-mode t)
+(global-whitespace-mode t)
+
+(put 'dired-find-alternate-file 'disabled nil)
+
+(setq
+ backup-by-copying-when-linked t   ; handle links correctly
+ backup-by-copying-when-mismatch t
+ backup-directory-alist (list (cons "." backup-dir))
+ delete-auto-save-files t          ; leave no "#" files in home directory
+ delete-old-versions t             ; delete excess backups silently
+ dired-recursive-copies t
+ grep-use-null-device nil
+ kept-new-versions 10              ; keep 10 backups plus 2 oldest backups
+ uniquify-buffer-name-style 'post-forward-angle-brackets
+ version-control t                 ; make backup versions unconditionally
+ whitespace-style '(face empty tabs lines-tail trailing)
+ zoom-font-frame-local-flag nil
+)
+
+(setq-default dired-listing-switches "-alhv")
+(setq-default line-spacing 3)
