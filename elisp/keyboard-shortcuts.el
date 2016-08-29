@@ -67,6 +67,8 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
   (interactive)
   (kill-buffer))
 
+(global-set-key [s-up] 'back-window)
+(global-set-key [s-down] 'other-window)
 
 ;; Clear can't be used.
 (gsk [kp-equal] 'balance-windows)

@@ -1,29 +1,8 @@
 ;; (server-start)
 
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
-
-;; (require 'clang-format)
-(require 'cython-mode)
-;; (require 'dired-x)
-(require 'git-gutter)
-(require 'google-c-style)
-(require 'guess-style)
-;; (require 'ido)
-;; (require 'jump-to-next-pos)
-(require 'markdown-mode)
-;; (require 'python-mode)
-(require 'saveplace)
-;; (require 'template)
-(require 'uniquify)
-(require 'yaml-mode)
-;; (require 'whitespace)
-;; (require 'zop-to-char)
+(load-library "required-packages")
 
 (setq-default line-spacing 3)
-
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 
 ;; http://www.emacswiki.org/emacs/AnsiColor
@@ -104,15 +83,6 @@
                       (setq delete-count (1+ delete-count))
                       (message buf)
                       )))))))))
-
-;; (setq dired-omit-files
-;;       (rx (or
-;;            (seq bol (? ".") "#")         ;; emacs autosave files
-;;            (seq "~" eol)                 ;; backup-files
-;;            (seq ".pyc" eol)              ;; compiled python files
-;;            (seq ".pyo" eol)              ;; compiled python files
-;;            (seq bol "CVS" eol)           ;; CVS dirs
-;; )))
 
 (global-font-lock-mode t)
 (column-number-mode t)
@@ -299,53 +269,6 @@ FILENAME should lack slashes."
   (other-window -1)
 )
 
-(global-set-key [s-up] 'back-window)
-(global-set-key [s-down] 'other-window)
-
-;; (setq dev-project  (or (getenv "EMACS_PROJECT") "fbme"))
-
-;; (setq-default
-;;    desktop-dirname (expand-file-name (concat "/development/dotfiles/elisp/desktop/" dev-project))
-;;    desktop-path    (list desktop-dirname)
-;;    save-place-file (concat desktop-dirname "/saved-places")
-;;    dev-root        (concat "/development/" dev-project)
-;;    )
-
-;; (if (not (file-readable-p desktop-dirname))
-;;     (make-directory desktop-dirname))
-
-;; (setq-default fringe-color
-;;       (cond
-;;        ;; red
-;;        ((string= dev-project "fbme")
-;;         '(fringe ((t (:background "#FFFFFF")))))
-;;        ;; orange
-;;        ((string= dev-project "fbme2")
-;;         '(fringe ((t (:background "#FFC590")))))
-;;        ;; yellow
-;;        ((string= dev-project "fbme3")
-;;         '(fringe ((t (:background "#FFFFA0")))))
-;;        ;; green
-;;        ((string= dev-project "fbme4")
-;;         '(fringe ((t (:background "#D0FFD0")))))
-;;        ;; Blue
-;;        ((string= dev-project "fbme5")
-;;         '(fringe ((t (:background "#D8D8FF")))))
-;;        ;; violet
-;;        ((string= dev-project "fbme6")
-;;         '(fringe ((t (:background "#DF8FFF")))))
-;;        ;; grey
-;;        ((string= dev-project "grit")
-;;         '(fringe ((t (:background "#FFF"))))))
-;; )
-
-
-;; (setq tags-file (concat dev-root "/TAGS"))
-;; (if (file-readable-p tags-file)
-;;     (visit-tags-table tags-file))
-
-;; (tags-query-replace "\"strict\"" "jss::strict" nil)
-
 (defun move-line-down ()
   (interactive)
   (let ((col (current-column)))
@@ -363,9 +286,6 @@ FILENAME should lack slashes."
       (transpose-lines -1))
     (move-to-column col)))
 
-
 (load-library "rotate-files")
 (load-library "keyboard-shortcuts")
 (load-library "hooks")
-
-(desktop-save-mode t)
