@@ -33,6 +33,7 @@
  dired-recursive-copies t
  grep-use-null-device nil
  kept-new-versions 10              ; keep 10 backups plus 2 oldest backups
+ swirly-default-prefix ""
  uniquify-buffer-name-style 'post-forward-angle-brackets
  version-control t                 ; make backup versions unconditionally
  whitespace-style '(face empty tabs lines-tail trailing)

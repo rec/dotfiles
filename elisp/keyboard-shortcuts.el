@@ -1,83 +1,7 @@
 (defalias 'gsk 'global-set-key)
 
-(defun shrink-window()
-  (interactive)
-  (enlarge-window -1))
-
-(defun trim-string (string)
-  "Remove white spaces in beginning and ending of STRING.
-White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
-  (replace-regexp-in-string
-   "\\`[ \t\n]*" ""
-   (replace-regexp-in-string "[ \t\n]*\\'" "" string))
-  )
-
-(defun run-shell(x) (trim-string (shell-command-to-string x)))
-
-(defun swirly-to-root()
-  (interactive)
-  (dired (run-shell "/development/grit/Root.py"))
-)
-
-(setq default-prefix "")
-
-(defun swirly-find-file-body(direction)
-  (let ((file (run-shell
-               (concat "/development/grit/Grit.py efind "
-                       default-prefix
-                       " "
-                       (buffer-file-name)
-                       " "
-                       direction))))
-    (if (string-equal file "")
-        (error "Pattern not found")
-      (if (file-exists-p file)
-          (find-file file)
-        (error "File not found")))))
-
-
-(defun swirly-find-file(prefix)
-  (interactive (list (read-string "Find by prefix: ")) )
-  (setq default-prefix prefix)
-  (swirly-find-file-body "+")
-)
-
-(defun swirly-find-file-next()
-  (interactive)
-  (swirly-find-file-body "+")
-)
-
-(defun swirly-find-file-prev()
-  (interactive)
-  (swirly-find-file-body "-")
-)
-
-(defun swirly-run-python()
-  (interactive)
-  (let ((buf (get-buffer "*Python*")))
-    (if (eq nil buf)
-        (run-python "/usr/bin/python -i" nil t)
-      (switch-to-buffer "*Python*"))))
-
-(defun swirly-dired()
-  (interactive)
-  (dired "." nil))
-
-(defun swirly-kill-buffer()
-  (interactive)
-  (kill-buffer))
-
-(global-set-key [s-up] 'back-window)
-(global-set-key [s-down] 'other-window)
-
-;; Clear can't be used.
-(gsk [kp-equal] 'balance-windows)
-(gsk [kp-divide] 'kmacro-call-macro)
-
-(gsk [kp-multiply] 'keyboard-escape-quit)
-(gsk [kp-subtract] 'delete-window)
-(gsk [kp-add] 'split-window-vertically)
-(gsk [kp-enter] 'repeat-complex-command)
+(gsk [M-z] 'zop-to-char)
+(gsk [Scroll_Lock] 'undo)
 
 (gsk [f1] 'next-error)
 (gsk [f2] 'rotate-tests)
@@ -92,11 +16,22 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 (gsk [f11] 'shell)
 (gsk [f12] 'rotate-in-two)
 (gsk [f13] 'cycle-windows)
-(gsk [print] 'cycle-windows)
 (gsk [f14] 'undo)
-(gsk [Scroll_Lock] 'undo)
 (gsk [f15] 'save-buffer)
+
+(gsk [kp-add] 'split-window-vertically)
+(gsk [kp-divide] 'kmacro-call-macro)
+(gsk [kp-enter] 'repeat-complex-command)
+(gsk [kp-equal] 'balance-windows)
+(gsk [kp-multiply] 'keyboard-escape-quit)
+(gsk [kp-subtract] 'delete-window)
+
 (gsk [pause] 'save-buffer)
+(gsk [print] 'cycle-windows)
+
+(gsk [s-down] 'other-window)
+(gsk [s-up] 'back-window)
+(gsk [s-z] 'undo)
 
 (if (string-equal system-type "darwin")
     (progn
@@ -160,7 +95,6 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; navigation
 ;; navigation
 
-(gsk [s-z] 'undo)
 
 ;; TODO:
 ;; is this file up to date?
@@ -171,5 +105,3 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
 ;; (gsk [s-f4] 'switch-to-buffer-other-frame)
 ;; merge-all-frames
 ;; open in other frame
-
-(gsk [M-z] 'zop-to-char)
