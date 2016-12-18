@@ -72,8 +72,13 @@ xterm*|rxvt*)
     ;;
 esac
 
+export PS1_ORIGINAL="$PS1"
+export PS1_GIT="(\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))"
+
+export PS1="$PS1_GIT $PS1_ORIGINAL"
+
 # Now we use git branch display!
-export PS1="\u@\h:\$git_branch\$git_dirty\\w\$ "
+# export PS1="\u@\h:\$git_branch\$git_dirty\\w\$ "
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

@@ -276,3 +276,9 @@ FILENAME should lack slashes."
 (defun swirly-kill-buffer()
   (interactive)
   (kill-buffer))
+
+(defun swirly-get-file-name()
+  (interactive)
+  (kill-new (buffer-file-name))
+  (message (buffer-file-name))
+  )

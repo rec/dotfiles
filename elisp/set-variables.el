@@ -3,6 +3,13 @@
 ;; backed up in the corresponding directory. Emacs will mkdir it if necessary.)
 (defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/"))
 
+(eval-after-load "markdown-mode"
+  '(progn
+    (define-key markdown-mode-map (kbd "M-<left>") nil)
+    (define-key markdown-mode-map (kbd "M-<right>") nil)
+    (define-key markdown-mode-map (kbd "M-S-<right>") nil)
+    (define-key markdown-mode-map (kbd "M-S-<left>") nil)))
+
 (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))

@@ -14,7 +14,7 @@
 (gsk [f9] 'swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
-(gsk [f12] 'rotate-in-two)
+(gsk [f12] 'swirly-get-file-name)
 (gsk [f13] 'cycle-windows)
 (gsk [f14] 'undo)
 (gsk [f15] 'save-buffer)

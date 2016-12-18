@@ -4,6 +4,8 @@
 # Many of these are "slightly dangerous" so use with care.
 #
 
+export BASE_BRANCH=dev
+
 # Commit everything with a message.
 function gcom() {
     git commit -am "$*"
@@ -53,14 +55,14 @@ function gcap() {
 # Check out a fresh copy of master under a new name and push it to your origin
 # directory.
 function gfresh() {
-    git checkout master && git pull && gnew $1
+    git checkout $BASE_BRANCH && git pull && gnew $1
 }
 
 # Delete branches that have been merged to master.
 function gdelete() {
     for i in $@
     do
-        git checkout master
+        git checkout $BASE_BRANCH
         git branch -d $i && git push --delete origin $i
     done
 }
@@ -69,7 +71,7 @@ function gdelete() {
 function gdelete-f() {
     for i in $@
     do
-        git checkout master
+        git checkout $BASE_BRANCH
         git branch -D $i
         git push --delete origin $i
     done
@@ -84,9 +86,9 @@ function gmove() {
         git push --set-upstream origin $2
 }
 
-# Merge a branch onto master.
+# Merge a branch onto $BASE_BRANCH.
 function gmerge() {
-    git checkout master && \
+    git checkout $BASE_BRANCH && \
         git merge --ff-only $1 && \
         git push && \
         gdelete $1
@@ -99,4 +101,4 @@ function gpmaster() {
         git merge --ff-only develop && \
         git push && \
         git checkout develop
-    }
+}
