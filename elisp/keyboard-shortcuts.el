@@ -55,6 +55,8 @@
       (gsk [A-f8] 'to-grep)
       ;;f9
       ;;f10
+      (gsk [4194411] 'kill-this-buffer)
+
       (gsk [A-f11] 'swirly-run-python)
       (gsk [A-f12] 'kill-ring-save)
       (gsk [A-f13] 'yank-pop)
