@@ -79,7 +79,7 @@ function gdelete-f() {
 function gmove() {
     git checkout $1 && \
         git pull && \
-        git branch -m $2 && \
+        git branch -m $1 $2 && \
         git push origin :$1 && \
         git push --set-upstream origin $2
 }
@@ -99,4 +99,12 @@ function gpmaster() {
         git merge --ff-only develop && \
         git push && \
         git checkout develop
+}
+
+function gri() {
+    git rebase -i HEAD~$1
+}
+
+function gr() {
+    gri 10
 }
