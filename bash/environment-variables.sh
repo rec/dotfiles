@@ -8,4 +8,5 @@ export PATH=\
 /usr/local/bin:\
 /development/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/:\
 /development/pretty-bash:\
+$HOME/.npm-packages/bin:\
 $PATH

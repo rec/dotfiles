@@ -58,47 +58,46 @@ function gfresh() {
 
 # Delete branches that have been merged to master.
 function gdelete() {
+    BRANCH=`git symbolic-ref --short HEAD`
     for i in $@
     do
         git checkout `/development/dotfiles/python/base_branch`
         git branch -d $i && git push --delete origin $i
     done
+    git checkout $BRANCH
 }
 
 # Delete branches that might not have been merged to master.
 function gdelete-f() {
+    BRANCH=`git symbolic-ref --short HEAD`
     for i in $@
     do
         git checkout `/development/dotfiles/python/base_branch`
         git branch -D $i
         git push --delete origin $i
     done
+    git checkout $BRANCH
 }
 
 # Move an existing branch to a new name.
 function gmove() {
+    BRANCH=`git symbolic-ref --short HEAD`
     git checkout $1 && \
         git pull && \
         git branch -m $1 $2 && \
         git push origin :$1 && \
         git push --set-upstream origin $2
+    git checkout $BRANCH
 }
 
 # Merge a branch onto `/development/dotfiles/python/base_branch`.
 function gmerge() {
+    BRANCH=`git symbolic-ref --short HEAD`
     git checkout `/development/dotfiles/python/base_branch` && \
         git merge --ff-only $1 && \
         git push && \
         gdelete $1
-}
-
-# Move develop to master.
-# ONLY for the most basic projects with one main user.
-function gpmaster() {
-    git checkout master && \
-        git merge --ff-only develop && \
-        git push && \
-        git checkout develop
+    git checkout $BRANCH
 }
 
 function gri() {

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-alias g=/development/grit/Grit.py
-alias grit=/development/grit/Grit.py
+# alias g=/development/grit/Grit.py
+# alias grit=/development/grit/Grit.py
 
 alias gb='git branch'
 alias gc='git checkout'
