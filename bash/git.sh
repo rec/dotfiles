@@ -56,7 +56,7 @@ function gcap() {
 }
 
 function gfresh-f() {
-    BASE=`/development/dotfiles/python/unused_branch.py`
+    BASE=`/development/dotfiles/python/base_branch.py`
 
     git checkout -b $1 && \
         git fetch upstream && \
