@@ -56,7 +56,7 @@ function gcap() {
 }
 
 function gfresh-f() {
-    BASE=`/development/dotfiles/python/base_branch.py`
+    BASE=`/development/dotfiles/python/unused_branch.py`
 
     git checkout -b $1 && \
         git fetch upstream && \
@@ -80,7 +80,7 @@ function gdelete() {
 
     for i in $@
     do
-        git checkout `/development/dotfiles/python/base_branch.py` && \
+        git checkout `/development/dotfiles/python/unused_branch.py $@` && \
             git branch -d $i && \
             git push --delete origin $i
     done
@@ -94,7 +94,7 @@ function gdelete-f() {
 
     for i in $@
     do
-        git checkout `/development/dotfiles/python/base_branch.py` && \
+        git checkout `/development/dotfiles/python/unused_branch.py $@` && \
             git branch -D $i && \
             git push --delete origin $i
     done

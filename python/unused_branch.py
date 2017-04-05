@@ -2,6 +2,7 @@
 
 import os, subprocess, sys
 
+
 def get_usused_branch(branches):
     def get():
         subout = subprocess.check_output(('git', 'branch'))
