@@ -24,7 +24,6 @@
 (auto-compression-mode t)
 (blink-cursor-mode nil)
 (column-number-mode t)
-(desktop-save-mode t)
 (global-auto-revert-mode t)
 (global-font-lock-mode t)
 (global-whitespace-mode t)

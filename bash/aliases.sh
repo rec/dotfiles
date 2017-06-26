@@ -1,23 +1,31 @@
 #!/bin/bash
 
-# alias g=/development/grit/Grit.py
-# alias grit=/development/grit/Grit.py
+alias bp='PYTHONPATH=/development/BiblioPixelAnimations /development/BiblioPixel/main.py'
+
+alias g='python2.7 /development/grit/Grit.py'
+alias grit='python2.7 /development/grit/Grit.py'
+
+alias go='grit open'
+alias goc='grit open c'
+alias gop='grit open pull'
 
 alias gb='git branch'
 alias gc='git checkout'
+alias gcp='git cherry-pick'
+alias gl='git l'
+alias gs='git status'
+
 alias gdiff="git diff > /tmp/git.diff"
 alias gfix='git commit -a --fixup'
-alias gl='git l'
 alias gpo='git push -f && sleep 1 && g o c'
-alias gs='git status'
 alias gsh='git show > /tmp/git.diff'
 
-alias rmpyc='find . -name \*.html | xargs rm'g
-alias rtags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
+alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
+alias pytags="find . -name \*.py | xargs etags"
+alias rmpyc='find . -name \*.pyc | xargs rm'
 
-alias sa="sudo apt-get -y"
-alias sag="sudo apt-get install -y"
+alias s1='sleep 1'
 alias sb='source ~/.bashrc'
-alias sc='sleep 1 && g o c'
+alias sc='s1 && goc'
 
 #alias format='clang-format -i -style="{BasedOnStyle: google, IndentWidth: 4}'

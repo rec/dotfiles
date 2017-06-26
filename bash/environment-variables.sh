@@ -3,10 +3,15 @@ export DYLD_LIBRARY_PATH=/development/boost_1_58_0/stage/lib
 export EDITOR=emacsclient
 export GIT_USER=rec
 export SCONSFLAGS=-j7
+
 export PATH=\
-~/bin:\
+/Applications/Aquamacs.app/Contents/MacOS/bin/:\
+/usr/local/git/bin:\
+/Users/tom/bin:\
+/Library/Frameworks/Python.framework/Versions/3.4/bin:\
+/usr/bin:\
+/bin:\
+/usr/sbin:\
+/sbin:\
 /usr/local/bin:\
-/development/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/:\
-/development/pretty-bash:\
-$HOME/.npm-packages/bin:\
-$PATH
+/opt/X11/bin

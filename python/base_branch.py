@@ -3,9 +3,7 @@
 import os
 
 
-NAMES = dict(
-    BiblioPixel='dev',
-    )
+NAMES = dict()
 
 
 def get_branch():

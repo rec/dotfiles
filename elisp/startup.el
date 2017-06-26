@@ -6,3 +6,5 @@
 (load-library "rotate-files")
 (load-library "keyboard-shortcuts")
 (load-library "hooks")
+
+;; (desktop-save-mode t)
