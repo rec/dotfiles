@@ -23,30 +23,22 @@ function qenv() {
 
 # Create a new virtualenv.
 function new-env() {
-    echo "one"
     [[ -z $1 ]] && \
         echo "ERROR: new-env needs an argument" && \
         return -1
-    echo "two"
     qenv
-    echo "three"
 
 
     if [ "$2" == "" ]; then
-        echo "four"
         PYTHON=python3.4
     else
-        echo "five"
         PYTHON=$2
     fi
 
 
-    echo "six $PYTHON"
     virtualenv /development/env/$1 -p $PYTHON && \
         penv $1 && \
         pip install --upgrade pip
-    echo "five"
-
 }
 
 function list-env() {
@@ -54,10 +46,10 @@ function list-env() {
 }
 
 function delete-env() {
-    qenv
     [[ -z $1 ]] && \
         echo "ERROR: delete-env needs an argument" && \
         return -1
+    qenv
     for i in $@
     do
         rm -R /development/env/$i/

@@ -15,6 +15,11 @@ function gcomp() {
         git push
 }
 
+function gcomp-f() {
+    git commit -am "$*" && \
+        git push -f
+}
+
 # Check out a copy of the current branch under a new name and push it to your
 # origin directory.
 function gnew() {
@@ -26,8 +31,12 @@ function gnew() {
 # Think of it as a safer reset.
 
 function greset() {
-    git commit -am "reset" && \
-        git reset --hard HEAD^
+    if [[ -z $1 ]] ; then
+        NAME=HEAD
+    else
+        NAME=$1
+    fi
+    git reset --hard $NAME
 }
 
 # Back up the current branch.
@@ -95,8 +104,8 @@ function gdelete-f() {
     for i in $@
     do
         git checkout `/development/dotfiles/python/unused_branch.py $@` && \
-            git branch -D $i && \
-            git push --delete origin $i
+            ( git branch -D $i ;  \
+              git push --delete origin $i )
     done
 
     git checkout $BRANCH
@@ -121,4 +130,32 @@ function gri() {
 
 function gr() {
     gri 10
+}
+
+function gfix() {
+    git commit -a --fixup $1 && git push
+}
+
+function gmaf() {
+    if git diff-index --quiet HEAD -- ; then
+        git commit -a --amend -m "$*" && git push -f
+    else
+        echo "ERROR: Changes in your workspace would be overwritten."
+     fi
+}
+
+function gbase-f() {
+    BASE=`/development/dotfiles/python/base_branch.py`
+
+    git fetch upstream && \
+        git rebase upstream/$BASE
+}
+
+
+function gbase() {
+    if git diff-index --quiet HEAD -- ; then
+        gbase-f
+    else
+        echo "ERROR: Changes in your workspace would be overwritten."
+     fi
 }

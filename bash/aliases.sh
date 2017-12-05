@@ -1,7 +1,5 @@
 #!/bin/bash
 
-alias bp='PYTHONPATH=/development/BiblioPixelAnimations /development/BiblioPixel/main.py'
-
 alias g='python2.7 /development/grit/Grit.py'
 alias grit='python2.7 /development/grit/Grit.py'
 
@@ -16,7 +14,6 @@ alias gl='git l'
 alias gs='git status'
 
 alias gdiff="git diff > /tmp/git.diff"
-alias gfix='git commit -a --fixup'
 alias gpo='git push -f && sleep 1 && g o c'
 alias gsh='git show > /tmp/git.diff'
 
@@ -29,3 +26,4 @@ alias sb='source ~/.bashrc'
 alias sc='s1 && goc'
 
 #alias format='clang-format -i -style="{BasedOnStyle: google, IndentWidth: 4}'
+eval "$(thefuck --alias)"

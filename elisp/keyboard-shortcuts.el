@@ -31,6 +31,8 @@
 
 (gsk [s-down] 'other-window)
 (gsk [s-up] 'back-window)
+(gsk [A-M-down] 'other-window)
+(gsk [A-M-up] 'back-window)
 (gsk [s-z] 'undo)
 
 (if (string-equal system-type "darwin")
@@ -58,9 +60,10 @@
       (gsk [4194411] 'kill-this-buffer)
 
       (gsk [A-f11] 'swirly-run-python)
-      (gsk [A-f12] 'kill-ring-save)
+      (gsk [A-f12] 'dabbrev-expand)
       (gsk [A-f13] 'yank-pop)
-      (gsk [A-f15] 'save-some-buffers)
+      ;; (gsk [A-f14] 'save-some-buffers)
+      ;; (gsk [A-f15] 'kill-ring-save)
 
       (gsk [A-up] 'back-window)
       (gsk [A-down] 'other-window)
