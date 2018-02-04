@@ -2,6 +2,19 @@
 # Python virtualenv tools.
 #
 
+function denv() {
+    if [ "$1" == "" ]; then
+        default_env=`/development/dotfiles/python/default_env.py`
+        if [ "$default_env" == "" ]; then
+           return 0
+        fi
+    else
+        /development/dotfiles/python/default_env.py $1
+        default_env=$1
+    fi
+    penv $default_env
+}
+
 # Activate a virtualenv.
 function penv() {
     [[ -z $1 ]] && \
@@ -34,7 +47,6 @@ function new-env() {
     else
         PYTHON=$2
     fi
-
 
     virtualenv /development/env/$1 -p $PYTHON && \
         penv $1 && \
