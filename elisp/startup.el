@@ -7,4 +7,5 @@
 (load-library "keyboard-shortcuts")
 (load-library "hooks")
 
-;; (desktop-save-mode t)
+;; CAUSES PROGRAM TO DIE ON STARTUP!
+(desktop-save-mode t)

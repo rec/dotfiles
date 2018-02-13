@@ -124,12 +124,13 @@ function gmove() {
     git checkout $BRANCH
 }
 
-function gri() {
-    git rebase -i HEAD~$1
-}
-
 function gr() {
-    gri 10
+    if [ -z "$1" ] ; then
+       commits=10
+    else
+        commits="$1"
+    fi
+    git rebase -i HEAD~$commits
 }
 
 function gfix() {
@@ -151,11 +152,22 @@ function gbase-f() {
         git rebase upstream/$BASE
 }
 
-
 function gbase() {
     if git diff-index --quiet HEAD -- ; then
         gbase-f
     else
         echo "ERROR: Changes in your workspace would be overwritten."
      fi
+}
+
+function gversion() {
+    gfresh release
+    gl -100 | sed -n '1,/v3./ p'
+    echo
+    /development/BiblioPixel/scripts/new_version
+    gop
+}
+
+function gexplode() {
+    git reset --soft HEAD~ && grit explode -y
 }

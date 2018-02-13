@@ -26,5 +26,5 @@ alias sb='source ~/.bashrc'
 alias sc='s1 && goc'
 alias ssp='ssh -l pi chopin.ax.to'
 
-#alias format='clang-format -i -style="{BasedOnStyle: google, IndentWidth: 4}'
-eval "$(thefuck --alias)"
+# alias format='clang-format -i -style="{BasedOnStyle: google, IndentWidth: 4}'
+# eval "$(thefuck --alias)"
