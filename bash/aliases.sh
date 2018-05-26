@@ -7,16 +7,6 @@ alias go='grit open'
 alias goc='grit open c'
 alias gop='grit open pull'
 
-alias gb='git branch'
-alias gc='git checkout'
-alias gcp='git cherry-pick'
-alias gl='git l'
-alias gs='git status'
-
-alias gdiff="git diff > /tmp/git.diff"
-alias gpo='git push -f && sleep 1 && g o c'
-alias gsh='git show > /tmp/git.diff'
-
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 alias pytags="find . -name \*.py | xargs etags"
 alias rmpyc='find . -name \*.pyc | xargs rm'

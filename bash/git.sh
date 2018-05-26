@@ -1,3 +1,18 @@
+# Git aliases
+
+alias gb='git branch'
+alias gc='git checkout'
+alias gl='git l'
+alias gs='git status'
+
+alias gcp='git cherry-pick'
+alias gpf='git push -f'
+alias gsh='git show > /tmp/git.diff'
+
+alias gdiff='git diff > /tmp/git.diff'
+
+alias greb='git fetch upstream && git rebase upstream/dev'
+
 #
 # Git functions.
 #
@@ -60,17 +75,25 @@ function gamend() {
 # and force push. gcap is "git commit, amend, push"
 # Slightly dangerous, don't use this on master.
 function gcap() {
-    git commit --amend -a --no-edit && \
-        git push -f
+    if [[ -z $1 ]] ; then
+        git commit --amend -a --no-edit && \
+            git push -f
+    else
+        echo "ERROR: gcap doesn't take any commands"
+    fi
 }
 
 function gfresh-f() {
-    BASE=`/development/dotfiles/python/base_branch.py`
+    if [[ -z $1 ]] ; then
+        echo "ERROR: gfresh needs an argument"
+    else
+        BASE=`/development/dotfiles/python/base_branch.py`
 
-    git checkout -b $1 && \
-        git fetch upstream && \
-        git reset --hard upstream/$BASE && \
-        git push --set-upstream origin $1
+        git checkout -b $1 && \
+            git fetch upstream && \
+            git reset --hard upstream/$BASE && \
+            git push --set-upstream origin $1
+    fi
 }
 
 # Check out a fresh copy of master under a new name and push it to your origin
@@ -80,7 +103,7 @@ function gfresh() {
         gfresh-f "$1"
     else
         echo "ERROR: Changes in your workspace would be overwritten."
-     fi
+    fi
 }
 
 # Delete branches that have been merged to master.
@@ -126,7 +149,7 @@ function gmove() {
 
 function gr() {
     if [ -z "$1" ] ; then
-       commits=10
+       commits=16
     else
         commits="$1"
     fi

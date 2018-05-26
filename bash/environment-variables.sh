@@ -5,6 +5,8 @@ export GIT_USER=rec
 export SCONSFLAGS=-j7
 
 export PATH=\
+/usr/local/opt/openssl/bin:\
+/usr/local/bin:\
 /Applications/Aquamacs.app/Contents/MacOS/bin/:\
 /usr/local/git/bin:\
 /Users/tom/bin:\
@@ -13,5 +15,5 @@ export PATH=\
 /bin:\
 /usr/sbin:\
 /sbin:\
-/usr/local/bin:\
-/opt/X11/bin
+/opt/X11/bin:\
+/opt/local/bin
