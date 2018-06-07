@@ -1,59 +1,34 @@
 (defun existing-file (filename)
   (if (file-exists-p filename) filename))
 
-(defun rotate-through-files-old (filename)
-  "Rotate through the suffixes we understand."
-  (-if-let* ((suffixes '(".cpp" "_inl.h" ".pyx" "_test.cpp" ".h"))
-             (len (length suffixes))
-             (index (--find-index (s-ends-with? it filename) suffixes))
-             (suffix (nth index suffixes))
-             (rotated (-rotate (- (+ 1 index)) suffixes))
-             (root (s-chop-suffix suffix filename)))
-      (--some (existing-file (s-concat root it)) rotated)))
-
-;; Toggle between:
-;; /development/XXX/test/a/b/some_test.py and
-;; /development/XXX/a/b/some.py and
-;; If it's a test, it's easy.
-
 (defun rotate-through-files (filename)
-  "Rotate between test and files in .python."
-  (if (string-match-p "_test.py" filename)
-      (replace-regexp-in-string "_test" ""
-       (replace-regexp-in-string "/test/" "/" filename))
-    (replace-regexp-in-string
-     "\.py$"
-     "_test.py"
-     (replace-regexp-in-string
-      "/development/.*?/"
-      (lambda(s) (concat s "test/"))
-      filename))
-    ))
-
-(defun rotate-through-files-3 (filename)
-  "Rotate between test and files in .python."
-  (if (string-match-p "_test.py" filename)
-      (replace-regexp-in-string "_test" ""
-       (replace-regexp-in-string "/test/" "/" filename))
-    (replace-regexp-in-string
-       "/development/.*?/"
-       (lambda(s) (concat s "test/"))
-       filename)
-    ))
-
-(defun rotate-through-files-4 (filename)
-  "Rotate between test and files in .python."
-  (if (string-match-p "_test.py" filename)
-      (replace-regexp-in-string "_test" ""
-       (replace-regexp-in-string "/test/" "/" filename))
-     (replace-regexp-in-string ".py" "_test.py" filename)
-     ))
+  (execvp "/development/dotfiles/python/rotate_file.py" filename))
 
 (defun rotate-tests ()
   "Rotate between a file and its test file."
   (interactive)
   (-if-let* ((filename (buffer-file-name))
+             (x1 (message filename))
              (rotated (rotate-through-files filename))
-             (existing (existing-file rotated))
-             (ff (not (find-file rotated))))
+             (x2 (message rotated))
+             (x4 (not (find-file rotated)))
+             (x5 (message ff))
+             )
       nil))
+
+
+(defun execvp (&rest args)
+  "Simulate C's execvp() function.
+   Quote each argument seperately, join with spaces and
+   call shell-command-to-string to run in a shell.
+
+   From https://www.emacswiki.org/emacs/ExecuteExternalCommand
+   "
+
+  (let ((cmd (mapconcat 'shell-quote-argument args " ")))
+    (shell-command-to-string cmd)))
+
+;; (message (shell-command-to-string "ls"))
+;; (message (execvp "ls"))
+;; (message (execvp "ls" "-l"))
+(message (rotate-through-files "/development/arthash/python/test/arthash/detect_spam_test.py"))

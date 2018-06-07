@@ -33,7 +33,7 @@
 (defun to-grep() (interactive) (switch-to-buffer "*grep*"))
 
 (defun swirly-grep()
-  "Run grep in the src/ripple directory."
+  "Run grep in the *grep* buffer."
   (interactive)
   (let ()
     (switch-to-buffer "*grep*")

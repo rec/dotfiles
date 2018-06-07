@@ -6,7 +6,7 @@ alias gl='git l'
 alias gs='git status'
 
 alias gcp='git cherry-pick'
-alias gpf='git push -f'
+alias gpf='git push --force-with-lease'
 alias gsh='git show > /tmp/git.diff'
 
 alias gdiff='git diff > /tmp/git.diff'
@@ -32,7 +32,7 @@ function gcomp() {
 
 function gcomp-f() {
     git commit -am "$*" && \
-        git push -f
+        git push --force-with-lease
 }
 
 # Check out a copy of the current branch under a new name and push it to your
@@ -77,7 +77,7 @@ function gamend() {
 function gcap() {
     if [[ -z $1 ]] ; then
         git commit --amend -a --no-edit && \
-            git push -f
+            git push --force-with-lease
     else
         echo "ERROR: gcap doesn't take any commands"
     fi
@@ -162,7 +162,7 @@ function gfix() {
 
 function gmaf() {
     if git diff-index --quiet HEAD -- ; then
-        git commit -a --amend -m "$*" && git push -f
+        git commit -a --amend -m "$*" && git push --force-with-lease
     else
         echo "ERROR: Changes in your workspace would be overwritten."
      fi

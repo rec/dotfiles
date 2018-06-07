@@ -5,5 +5,5 @@
 (load-library "keyboard-shortcuts")
 (load-library "hooks")
 
-;; (desktop-save-mode t)
+(desktop-save-mode t)
 (server-start)
