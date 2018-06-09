@@ -8,11 +8,8 @@
   "Rotate between a file and its test file."
   (interactive)
   (-if-let* ((filename (buffer-file-name))
-             (x1 (message filename))
              (rotated (rotate-through-files filename))
-             (x2 (message rotated))
-             (x4 (not (find-file rotated)))
-             (x5 (message ff))
+             (x (not (find-file rotated)))
              )
       nil))
 
@@ -27,8 +24,3 @@
 
   (let ((cmd (mapconcat 'shell-quote-argument args " ")))
     (shell-command-to-string cmd)))
-
-;; (message (shell-command-to-string "ls"))
-;; (message (execvp "ls"))
-;; (message (execvp "ls" "-l"))
-(message (rotate-through-files "/development/arthash/python/test/arthash/detect_spam_test.py"))
