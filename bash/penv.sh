@@ -43,7 +43,7 @@ function new-env() {
 
 
     if [ "$2" == "" ]; then
-        PYTHON=python3.4
+        PYTHON=python3.6
     else
         PYTHON=$2
     fi
@@ -51,6 +51,24 @@ function new-env() {
     virtualenv /development/env/$1 -p $PYTHON && \
         penv $1 && \
         pip install --upgrade pip
+}
+
+# Create a new virtualenv.
+function new-env-old-pip() {
+    [[ -z $1 ]] && \
+        echo "ERROR: new-env needs an argument" && \
+        return -1
+    qenv
+
+
+    if [ "$2" == "" ]; then
+        PYTHON=python3.4
+    else
+        PYTHON=$2
+    fi
+
+    virtualenv /development/env/$1 -p $PYTHON && \
+        penv $1
 }
 
 function list-env() {

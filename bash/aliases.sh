@@ -14,7 +14,8 @@ alias rmpyc='find . -name \*.pyc | xargs rm'
 alias s1='sleep 1'
 alias sb='source ~/.bashrc'
 alias sc='s1 && goc'
-alias ssp='ssh -l pi chopin.ax.to'
+alias ssp='ssh -l pi $CHOPIN'
+
+alias kill_simpixel='sudo lsof -t -i tcp:1337 | xargs kill -9'
 
 # alias format='clang-format -i -style="{BasedOnStyle: google, IndentWidth: 4}'
-# eval "$(thefuck --alias)"

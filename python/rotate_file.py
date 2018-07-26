@@ -48,5 +48,6 @@ def rotate(filename):
         return rotate_py(filename)
     return filename
 
+
 if __name__ == '__main__':
     print(rotate(*sys.argv[1:]), end='')

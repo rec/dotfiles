@@ -15,19 +15,24 @@
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
 (gsk [f12] 'swirly-get-file-name)
-(gsk [f13] 'cycle-windows)
+
+(gsk [f13] 'dabbrev-expand)
+(gsk [print] 'dabbrev-expand)
+
 (gsk [f14] 'undo)
+
 (gsk [f15] 'save-buffer)
+(gsk [pause] 'save-buffer)
+
+;; (gsk [f13] 'cycle-windows) where to put this?
+;; (gsk [kp-equal] 'balance-windows)  ;; Doesn't work!
 
 (gsk [kp-add] 'split-window-vertically)
 (gsk [kp-divide] 'kmacro-call-macro)
 (gsk [kp-enter] 'repeat-complex-command)
-(gsk [kp-equal] 'balance-windows)
 (gsk [kp-multiply] 'keyboard-escape-quit)
 (gsk [kp-subtract] 'delete-window)
 
-(gsk [pause] 'save-buffer)
-(gsk [print] 'cycle-windows)
 
 (gsk [s-down] 'other-window)
 (gsk [s-up] 'back-window)

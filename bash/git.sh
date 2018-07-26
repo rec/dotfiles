@@ -6,12 +6,14 @@ alias gl='git l'
 alias gs='git status'
 
 alias gcp='git cherry-pick'
+alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gsh='git show > /tmp/git.diff'
 
 alias gdiff='git diff > /tmp/git.diff'
 
 alias greb='git fetch upstream && git rebase upstream/dev'
+alias gdam='gc master && git merge dev && git push && gc dev'
 
 #
 # Git functions.

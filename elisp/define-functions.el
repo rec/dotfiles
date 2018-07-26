@@ -282,3 +282,11 @@ FILENAME should lack slashes."
   (kill-new (buffer-file-name))
   (message (buffer-file-name))
   )
+
+(defun tetris()
+  (interactive)
+  (message "no!")
+  )
+
+(fset 'to-yaml
+   [?\A-a ?\C-x ?\C-i left left left left escape ?% ?\{ return return ?! escape ?< escape ?% ?\" return return ?! escape ?< escape ?% ?@ return ?$ return ?! escape ?< escape ?% ?, return return ?! escape ?< escape ?% ?\} return return ?! escape ?< ?\C-k])
