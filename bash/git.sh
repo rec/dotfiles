@@ -13,7 +13,8 @@ alias gbr='git symbolic-ref --short HEAD'
 alias gc='git checkout'
 alias gcb='git checkout -b'
 
-alias gl='git l'
+alias glo='git l'
+alias gl='git l upstream/dev..'
 alias gs='git status'
 
 alias gcp='git cherry-pick'
@@ -27,6 +28,8 @@ alias gdiff='git diff > /tmp/git.diff'
 
 alias greb='git fetch upstream && git rebase upstream/dev'
 alias gdam='gc master && git merge dev && git push && gc dev'
+
+alias gia='git infer -a'
 
 # Amend the previous change to include all the changes you have currently.
 # Slightly dangerous, don't use this on master.
@@ -168,7 +171,7 @@ function gmove() {
 
 function gr() {
     if [ -z "$1" ] ; then
-        commits=8
+        commits=12
     else
         commits="$1"
     fi
@@ -218,7 +221,7 @@ function _glist() {
     branch=`gbr`
 
     for i in $@ ; do
-        gc $i 1> /dev/null && gl -4 && echo
+        gc $i 1> /dev/null && gl -8 && echo
     done
 
     gc $branch
@@ -231,7 +234,7 @@ function glist() {
     else
         branches=`gb | sed -e 's/*//' | xargs echo`
         echo "branches=$branches"
-        glist $branches
+        _glist $branches
     fi
 }
 

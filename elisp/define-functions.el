@@ -24,12 +24,6 @@
 (defun find-file-upwards (file-to-find)
   (or (find-file-upwards-base file-to-find) default-directory))
 
-(defun swirly-compile()
-  "Run compile in the git directory."
-  (interactive)
-  (let ((default-directory (find-file-upwards ".git")))
-    (call-interactively 'compile)))
-
 (defun to-grep() (interactive) (switch-to-buffer "*grep*"))
 
 (defun swirly-grep()
@@ -298,3 +292,27 @@ FILENAME should lack slashes."
 
 (fset 'to-yaml
    [?\A-a ?\C-x ?\C-i left left left left escape ?% ?\{ return return ?! escape ?< escape ?% ?\" return return ?! escape ?< escape ?% ?@ return ?$ return ?! escape ?< escape ?% ?, return return ?! escape ?< escape ?% ?\} return return ?! escape ?< ?\C-k])
+
+(defun swirly-kill-compilation()
+  (interactive)
+  (with-current-buffer "*compilation*"
+   (kill-compilation))
+  )
+
+(defun swirly-compile-internal(recompile-p)
+  "Run compile in the git directory."
+  (save-some-buffers t)
+  (let ((default-directory (find-file-upwards ".git")))
+    (if (eq recompile-p 1)
+        (recompile)
+      (call-interactively 'compile))))
+
+(defun swirly-compile()
+  "Run compile in the git directory."
+  (interactive)
+  (swirly-compile-internal 0))
+
+(defun swirly-recompile()
+  "Run compile in the git directory."
+  (interactive)
+  (swirly-compile-internal 1))

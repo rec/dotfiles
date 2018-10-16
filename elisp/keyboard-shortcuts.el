@@ -9,7 +9,12 @@
 (gsk [f4] 'do-list-buffers)
 (gsk [f5] 'find-file)
 (gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
-(gsk [f7] 'swirly-compile)
+
+(gsk [f7] 'swirly-recompile)
+(gsk [M-f7] 'swirly-compile)
+(gsk [C-f7] 'swirly-kill-compilation)
+
+
 (gsk [f8] 'swirly-grep)
 (gsk [f9] 'swirly-dired)
 (gsk [f10] 'query-replace)
