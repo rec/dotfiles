@@ -69,3 +69,24 @@ find_git_dirty() {
     git_dirty=''
   fi
 }
+
+#rmpyc() {
+#   find . -name \*.pyc | xargs rm
+#}
+
+rtags () {
+    find src/ripple -name \*.h -or -name \*.cpp | xargs etags
+}
+
+add_suffix() {
+    for suffix
+    do
+        find . -name \*.$suffix -print0 | xargs -0 git add
+    done
+}
+
+maxcom () {
+    add_suffix js maxpat maxhelp txt \
+        && git commit -m "$1" \
+        && git push
+}

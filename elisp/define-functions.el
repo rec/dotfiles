@@ -316,3 +316,8 @@ FILENAME should lack slashes."
   "Run compile in the git directory."
   (interactive)
   (swirly-compile-internal 1))
+
+(defun swirly-save-all()
+  (interactive)
+  (save-some-buffers t)
+)

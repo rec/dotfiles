@@ -13,8 +13,11 @@ alias gbr='git symbolic-ref --short HEAD'
 alias gc='git checkout'
 alias gcb='git checkout -b'
 
+alias gi='git infer -a && git push'
+
 alias glo='git l'
 alias gl='git l upstream/dev..'
+alias gri='git rebase -i upstream/dev'
 alias gs='git status'
 
 alias gcp='git cherry-pick'
@@ -142,6 +145,7 @@ function gdelete-f() {
     done
 
     gc $branch
+    return 0
 }
 
 # Move an existing branch to a new name.
@@ -247,6 +251,7 @@ function gupdate() {
             if [[ -z "$?" ]] ; then
                 return 1
             fi
+            sleep 0.5
         done
         gc $branch
     else

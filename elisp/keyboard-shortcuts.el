@@ -19,15 +19,14 @@
 (gsk [f9] 'swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
-(gsk [f12] 'swirly-get-file-name)
+(gsk [f12] 'dabbrev-expand)
 
-(gsk [f13] 'dabbrev-expand)
-(gsk [print] 'dabbrev-expand)
+(gsk [f13] 'swirly-get-file-name)
+(gsk [print] 'swirly-get-file-name)
 
-(gsk [f14] 'undo)
-
-(gsk [f15] 'save-buffer)
-(gsk [pause] 'save-buffer)
+(gsk [f14] 'save-buffer)
+(gsk [f15] 'undo)
+(gsk [pause] 'undo)
 
 ;; (gsk [f13] 'cycle-windows) where to put this?
 ;; (gsk [kp-equal] 'balance-windows)  ;; Doesn't work!
@@ -72,8 +71,8 @@
       (gsk [A-f11] 'swirly-run-python)
       (gsk [A-f12] 'dabbrev-expand)
       (gsk [A-f13] 'yank-pop)
-      ;; (gsk [A-f14] 'save-some-buffers)
-      ;; (gsk [A-f15] 'kill-ring-save)
+      (gsk [A-f14] 'swirly-save-all)
+      (gsk [A-f15] 'redo)
 
       (gsk [A-up] 'back-window)
       (gsk [A-down] 'other-window)
@@ -99,8 +98,8 @@
     (gsk [s-f11] 'swirly-run-python)
     (gsk [s-f12] 'kill-ring-save)
     (gsk [s-f13] 'yank-pop)
-    (gsk [s-f15] 'save-some-buffers)
-    (gsk [s-pause] 'save-some-buffers)
+    (gsk [s-f14] 'swirly-save-all)
+    (gsk [s-pause] 'redo)
 
     (gsk [s-up] 'back-window)
     (gsk [s-down] 'other-window)
