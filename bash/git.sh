@@ -258,3 +258,14 @@ function gupdate() {
         greb && gpf
     fi
 }
+
+# See https://www.reddit.com/r/git/comments/ah1euu
+
+gsnip() {
+    python - <<EOF
+import os
+
+for i in reversed(sorted(map(int, "$@".split()))):
+    os.system("git rebase HEAD~%d --onto HEAD~%d" % (i, i + 1))
+EOF
+}
