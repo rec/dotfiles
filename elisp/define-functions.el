@@ -160,7 +160,7 @@ FILENAME should lack slashes."
 
 (defun home-dired ()
   (interactive)
-  (dired "/Users/tom/Documents/development/rec/src/rec")
+  (dired "/Users/tom/Documents/code/rec/src/rec")
 )
 
 (defun home-dired-two ()
@@ -235,7 +235,7 @@ FILENAME should lack slashes."
 
 (defun swirly-find-file-body(direction)
   (let ((file (run-shell
-               (concat "/development/grit/Grit.py efind "
+               (concat "/code/grit/Grit.py efind "
                        swirly-default-prefix
                        " "
                        (buffer-file-name)

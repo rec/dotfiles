@@ -2,7 +2,7 @@
   (if (file-exists-p filename) filename))
 
 (defun rotate-through-files (filename)
-  (execvp "/development/dotfiles/python/rotate_file.py" filename))
+  (execvp "/code/dotfiles/python/rotate_file.py" filename))
 
 (defun rotate-tests ()
   "Rotate between a file and its test file."

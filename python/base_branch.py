@@ -13,7 +13,7 @@ def get_branch():
     try:
         while not parts[0]:
             parts.pop(0)
-        if parts[0] == 'development':
+        if parts[0] == 'code':
             return NAMES[parts[1]]
     except:
         pass

@@ -51,7 +51,8 @@ new-env() {
     mkdir -p `penv-root` && \
         virtualenv `penv-root`/$1 -p $PYTHON && \
         penv $1 && \
-        pip install --upgrade pip
+        pip install --upgrade pip && \
+        pip install --upgrade wheel
 }
 
 list-env() {
@@ -68,6 +69,22 @@ delete-env() {
     for i in $@
     do
         rm -R `penv-root`/$i/
+    done
+}
+
+archive-env() {
+    # Archive virtualenvs
+    [[ -z $1 ]] && \
+        echo "ERROR: archive-env needs an argument" && \
+        return -1
+    qenv
+    for i in $@
+    do
+        penv $i
+        DIR=`penv-root`/.archive/$i
+        mkdir -p $DIR
+        pip freeze > $DIR/requirements.txt
+        python --version freeze > $DIR/version.txt
     done
 }
 
@@ -101,12 +118,12 @@ penv-root() {
 old_denv() {
     # Start up the default environment
     if [ "$1" == "" ]; then
-        default_env=`/development/dotfiles/python/default_env.py`
+        default_env=`/code/dotfiles/python/default_env.py`
         if [ "$default_env" == "" ]; then
            return 0
         fi
     else
-        /development/dotfiles/python/default_env.py $1
+        /code/dotfiles/python/default_env.py $1
         default_env=$1
     fi
     penv $default_env

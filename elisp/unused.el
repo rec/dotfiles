@@ -10,10 +10,10 @@
 ;; (setq dev-project  (or (getenv "EMACS_PROJECT") "fbme"))
 
 ;; (setq-default
-;;    desktop-dirname (expand-file-name (concat "/development/dotfiles/elisp/desktop/" dev-project))
+;;    desktop-dirname (expand-file-name (concat "/code/dotfiles/elisp/desktop/" dev-project))
 ;;    desktop-path    (list desktop-dirname)
 ;;    save-place-file (concat desktop-dirname "/saved-places")
-;;    dev-root        (concat "/development/" dev-project)
+;;    dev-root        (concat "/code/" dev-project)
 ;;    )
 
 ;; (if (not (file-readable-p desktop-dirname))

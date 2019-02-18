@@ -8,8 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-. "/development/dotfiles/bash/environment-variables.sh"
-. "/development/dotfiles/bash/aliases.sh"
+. "/code/dotfiles/bash/environment-variables.sh"
+. "/code/dotfiles/bash/aliases.sh"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

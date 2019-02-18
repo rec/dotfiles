@@ -1,7 +1,7 @@
 # Git aliases
 
-alias g='python2.7 /development/grit/Grit.py'
-alias grit='python2.7 /development/grit/Grit.py'
+alias g='python2.7 /code/grit/Grit.py'
+alias grit='python2.7 /code/grit/Grit.py'
 
 alias go='grit open'
 alias goc='grit open c'
@@ -81,7 +81,7 @@ function gback() {
     branch=`git symbolic-ref --short HEAD`
     back=b-$branch
 
-    gdelete-f $back && gc $branch && gnew $back && gc $branch
+    gdelete $back && gc $branch && gcopy $back && gc $branch
 }
 
 # Amend the previous commit to include all the changes you have currently,
@@ -102,7 +102,7 @@ function gfresh-f() {
         echo "ERROR: gfresh needs an argument"
         return 1
     fi
-    base=`/development/dotfiles/python/base_branch.py`
+    base=`/code/dotfiles/python/base_branch.py`
 
     git checkout -b $1 && \
         git fetch upstream && \
@@ -122,11 +122,11 @@ function gfresh() {
 }
 
 function gunused() {
-    gc `/development/dotfiles/python/unused_branch.py $@`
+    gc `/code/dotfiles/python/unused_branch.py $@`
 }
 
 # Delete branches that have been merged to master.
-function gdelete() {
+function gdelete-safe() {
     branch=`gbr`
 
     for i in $@ ; do
@@ -137,7 +137,7 @@ function gdelete() {
 }
 
 # Delete branches that might not have been merged to master.
-function gdelete-f() {
+function gdelete() {
     branch=`gbr`
 
     for i in $@ ; do
@@ -195,7 +195,7 @@ function gmaf() {
 }
 
 function gbase-f() {
-    BASE=`/development/dotfiles/python/base_branch.py`
+    BASE=`/code/dotfiles/python/base_branch.py`
 
     git fetch upstream && git rebase upstream/$BASE
 }
@@ -212,7 +212,7 @@ function gversion() {
     gfresh release
     gl -100 | sed -n '1,/v3./ p'
     echo
-    /development/BiblioPixel/scripts/new_version
+    /code/BiblioPixel/scripts/new_version
     gop
 }
 

@@ -1,4 +1,4 @@
-. /development/dotfiles/bash/cd.sh
-. /development/dotfiles/bash/experimental.sh
-. /development/dotfiles/bash/git.sh
-. /development/dotfiles/bash/penv.sh
+. /code/dotfiles/bash/cd.sh
+. /code/dotfiles/bash/experimental.sh
+. /code/dotfiles/bash/git.sh
+. /code/dotfiles/bash/penv.sh
