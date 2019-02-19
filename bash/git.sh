@@ -1,11 +1,7 @@
 # Git aliases
 
-alias g='python2.7 /code/grit/Grit.py'
-alias grit='python2.7 /code/grit/Grit.py'
-
-alias go='grit open'
-alias goc='grit open c'
-alias gop='grit open pull'
+alias g=git
+alias go='g open'
 
 alias gb='git branch'
 alias gbr='git symbolic-ref --short HEAD'
@@ -29,6 +25,7 @@ alias gps='git push --set-upstream origin'
 alias gsh='git show > /tmp/git.diff'
 alias gdiff='git diff > /tmp/git.diff'
 
+alias grs='g reset --soft HEAD~'
 alias greb='git fetch upstream && git rebase upstream/dev'
 alias gdam='gc master && git merge dev && git push && gc dev'
 
@@ -217,7 +214,7 @@ function gversion() {
 }
 
 function gexplode() {
-    git reset --soft HEAD~ && grit explode -vy
+    grs && git split
 }
 
 # List branches
