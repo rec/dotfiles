@@ -11,10 +11,13 @@ alias gcb='git checkout -b'
 
 alias gi='git infer -a && git push'
 
-alias glo='git l'
-alias gl='git l upstream/dev..'
+# alias gl='git l upstream/dev..'
+alias glm='git l master..'
+alias gl='git l'
+
 alias gri='git rebase -i upstream/dev'
-alias gs='git status'
+alias gs='git st'
+alias gst='git st'
 
 alias gcp='git cherry-pick'
 

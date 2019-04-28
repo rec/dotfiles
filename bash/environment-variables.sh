@@ -1,9 +1,8 @@
 export EDITOR=emacsclient
 export GIT_USER=rec
 export CHOPIN=192.168.178.108
-export PYTHONSTARTUP=/Users/tom/bin/python_startup.py
 export PENV_ROOT=/code/env
-export PENV_PYTHON=python3.7
+export PENV_PYTHON=python3.6
 export WORKON_HOME=/code/env
 
 PATH=\

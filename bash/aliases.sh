@@ -10,6 +10,7 @@ alias s1='sleep 1'
 alias sb='source ~/.bashrc'
 alias sc='s1 && goc'
 alias ssp='ssh -l pi $CHOPIN'
+alias ppy='python3.5 setup.py sdist && python3.5 setup.py sdist upload'
 
 alias kill_simpixel='sudo lsof -t -i tcp:1337 | xargs kill -9'
 
