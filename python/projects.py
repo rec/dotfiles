@@ -90,7 +90,10 @@ def main(command='go', *args):
         raise ValueError('Do not understand command %s' % command)
 
     projects = Projects()
-    print(getattr(projects, command)(*args) or projects.project)
+    try:
+        print(getattr(projects, command)(*args) or projects.project)
+    except:
+        print(os.getcwd())
 
 
 if __name__ == '__main__':
