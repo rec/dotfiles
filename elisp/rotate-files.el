@@ -13,10 +13,9 @@
              )
       nil))
 
-
 (defun execvp (&rest args)
   "Simulate C's execvp() function.
-   Quote each argument seperately, join with spaces and
+   Quote each argument separately, join with spaces and
    call shell-command-to-string to run in a shell.
 
    From https://www.emacswiki.org/emacs/ExecuteExternalCommand
@@ -24,3 +23,9 @@
 
   (let ((cmd (mapconcat 'shell-quote-argument args " ")))
     (shell-command-to-string cmd)))
+
+(defun split-to-unit-test()
+  (interactive)
+  (to-two)
+  (rotate-tests)
+)

@@ -129,6 +129,11 @@ FILENAME should lack slashes."
        (set-window-buffer window next-window-buffer)))
    )
 
+(defun reverse-cycle-windows()
+  (interactive)
+  (cycle-windows '1)
+)
+
 (defun to-two()
   (interactive)
   (delete-other-windows)

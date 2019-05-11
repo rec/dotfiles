@@ -34,6 +34,10 @@ alias gdam='gc master && git merge dev && git push && gc dev'
 
 alias gia='git infer -a'
 
+alias grev='greset HEAD~ && gcopy'
+alias gclean=\
+'gdelete one two three four five six seven eight nine ten eleven twelve'
+
 # Amend the previous change to include all the changes you have currently.
 # Slightly dangerous, don't use this on master.
 alias gcam='git commit --amend -a --no-edit'

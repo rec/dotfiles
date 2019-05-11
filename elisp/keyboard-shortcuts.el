@@ -37,6 +37,12 @@
 (gsk [kp-multiply] 'keyboard-escape-quit)
 (gsk [kp-subtract] 'delete-window)
 
+(gsk [C-kp-add] 'split-to-unit-test)
+(gsk [C-kp-multiply] 'cycle-windows)
+(gsk [C-kp-multiply] 'cycle-windows)
+;; (gsk [c-plus] 'split-to-unit-test)
+;; (gsk [c-+] 'split-to-unit-test)
+;; (gsk [67108907] 'split-to-unit-test)
 
 (gsk [s-down] 'other-window)
 (gsk [s-up] 'back-window)
