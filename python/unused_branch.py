@@ -17,7 +17,6 @@ def get_usused_branch(branches):
     return unused and unused[0]
 
 
-
 if __name__ == '__main__':
     branch = get_usused_branch(sys.argv[1:])
     if not branch:

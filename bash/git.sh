@@ -35,8 +35,8 @@ alias gdam='gc master && git merge dev && git push && gc dev'
 alias gia='git infer -a'
 
 alias grev='greset HEAD~ && gcopy'
-alias gclean=\
-'gdelete one two three four five six seven eight nine ten eleven twelve'
+alias gclean='gdelete one two three four five six'
+alias gclean2='gdelete seven eight nine ten eleven twelve'
 
 # Amend the previous change to include all the changes you have currently.
 # Slightly dangerous, don't use this on master.
@@ -66,6 +66,14 @@ function gcomp-f() {
 function gcopy() {
     gcb $1 && gps $1
 }
+
+function gbs() {
+    for i in $@ ; do
+        gcb $i && greset HEAD~ && gps $i
+    done
+}
+
+alias gbss='gbs one two three four five six'
 
 function gnew() {
     echo "ERROR: Use gcopy"

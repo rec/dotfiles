@@ -3,6 +3,7 @@ import os, sys
 
 DEFAULT_FILE = os.path.expanduser('~/.default_env')
 
+
 def default_env(name=None):
     if name is None:
         try:

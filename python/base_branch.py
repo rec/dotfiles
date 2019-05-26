@@ -3,9 +3,7 @@
 import os
 
 
-NAMES = {
-    'BiblioPixel': 'dev',
-}
+NAMES = {'BiblioPixel': 'dev'}
 
 
 def get_branch():

@@ -1,3 +1,5 @@
+(define-key (current-global-map) "\C-c!" 'shell-here)
+
 (defalias 'gsk 'global-set-key)
 
 (gsk [M-z] 'zop-to-char)

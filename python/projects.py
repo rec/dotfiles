@@ -53,8 +53,9 @@ class Projects:
         self._write()
 
     def push(self, project=None, step=0):
-        project = os.path.abspath(os.path.expanduser(os.path.expandvars(
-            project or os.getcwd())))
+        project = os.path.abspath(
+            os.path.expanduser(os.path.expandvars(project or os.getcwd()))
+        )
         if project in self.projects:
             raise ValueError('Cannot insert the same project twice')
 
