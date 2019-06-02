@@ -14,3 +14,4 @@ alias ssp='ssh -l pi $CHOPIN'
 alias ppy='python3.5 setup.py sdist && python3.5 setup.py sdist upload'
 
 alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
+alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'

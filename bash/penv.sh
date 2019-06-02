@@ -55,6 +55,19 @@ new-env() {
         pip install --upgrade wheel
 }
 
+install-requirements() {
+    for i in *requirements.txt; do
+        [ -f "$i" ] || break
+        echo "-> Installing from $i"
+        pip install -r $i
+    done
+}
+
+new-penv() {
+    new-env $1 $2
+    install-requirements
+}
+
 list-env() {
     # List the virtual environments
     ls -1 `penv-root`

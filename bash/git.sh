@@ -36,7 +36,7 @@ alias gia='git infer -a'
 
 alias grev='greset HEAD~ && gcopy'
 alias gclean='gdelete one two three four five six'
-alias gclean2='gdelete seven eight nine ten eleven twelve'
+alias gclean2='gdelete seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
 # Amend the previous change to include all the changes you have currently.
 # Slightly dangerous, don't use this on master.
@@ -74,6 +74,7 @@ function gbs() {
 }
 
 alias gbss='gbs one two three four five six'
+alias gbsss='gbss seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
 function gnew() {
     echo "ERROR: Use gcopy"
@@ -175,7 +176,6 @@ function gmove() {
         from=$branch
         to=$1
     fi
-
 
     git checkout $from && \
         git pull && \

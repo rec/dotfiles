@@ -24,7 +24,9 @@ Keep a stack of current projects - directories, essentially.
 
 """
 
-import os, json, sys
+import os
+import json
+import sys
 
 CONFIG_FILE = os.path.expanduser('~/.projects.yml')
 COMMANDS = 'clear', 'goto', 'rotate', 'push', 'pop', 'undo', 'list'

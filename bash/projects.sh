@@ -1,21 +1,10 @@
-p() {
-    cd `/code/dotfiles/python/projects.py $@`
-}
+source /code/pppp/pppp.sh
 
-alias pc='p c'
-alias pg='p g'
-alias pl='p l'
-alias pp='p p'
-alias ppo='p po'
-alias pr='p r'
-alias pu='p u'
-
-p2() {
-    python - $@ <<EOF
-
-import sys
-
-print('here!', sys.argv)
-
-EOF
-}
+alias p=pppp
+alias pc='pppp c'
+alias pg='pppp g'
+alias pl='pppp l'
+alias pp='pppp pu'
+alias ppo='pppp po'
+alias pr='pppp r'
+alias pu='pppp u'
