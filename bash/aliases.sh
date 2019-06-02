@@ -12,3 +12,5 @@ alias sb='source ~/.bashrc'
 alias sc='s1 && goc'
 alias ssp='ssh -l pi $CHOPIN'
 alias ppy='python3.5 setup.py sdist && python3.5 setup.py sdist upload'
+
+alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
