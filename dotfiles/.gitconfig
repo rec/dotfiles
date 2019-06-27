@@ -1,0 +1,53 @@
+[alias]
+    a = commit -a  --no-edit
+    aliases = config --get-regexp alias
+    l =  !git --no-pager log --oneline -15
+    lg = !git --no-pager log -15 --decorate
+	ll = log --oneline -10
+    fixup = "!f() { \
+             TARGET=$(git rev-parse "$1"); \
+             git commit --fixup=$TARGET ${@:2}; \
+             EDITOR=true git rebase -i --autostash --autosquash $TARGET^; \
+             }; f"
+	git = !exec git
+    ; https://blog.filippo.io/git-fixup-amending-an-older-commit/
+
+[core]
+	excludesfile = /Users/tom/.config/.gitignore_global
+	pager =
+	autocrlf = input
+
+[diff]
+	indentHeuristic = true
+
+[fetch]
+    prune=true
+
+[init]
+	templatedir = ~/.git-templates
+
+[log]
+	decorate = auto
+
+[merge]
+	rebase = true
+
+[pull]
+	rebase = true
+
+[push]
+	default = simple
+
+[rebase]
+	autosquash = true
+	autostash = true
+
+[rerere]
+	enabled = true
+
+[user]
+	email = tom@swirly.com
+	name = Tom Ritchford
+
+[submodule]
+	fetchJobs = 4

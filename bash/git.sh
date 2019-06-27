@@ -48,26 +48,26 @@ alias gcam='git commit --amend -a --no-edit'
 # Many of these are "slightly dangerous" so use with care.
 #
 
-function gcom() {
+gcom() {
     git commit -am "$*"
 }
 
 # Commit everything with a message and push it.
-function gcomp() {
+gcomp() {
     gcom $* && gp
 }
 
-function gcomp-f() {
+gcomp-f() {
     gcom $* && gpf
 }
 
 # Check out a copy of the current branch under a new name and push it to your
 # origin directory.
-function gcopy() {
+gcopy() {
     gcb $1 && gps $1
 }
 
-function gbs() {
+gbs() {
     for i in $@ ; do
         gcb $i && greset HEAD~ && gps $i
     done
@@ -76,11 +76,11 @@ function gbs() {
 alias gbss='gbs one two three four five six'
 alias gbsss='gbss seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
-function gnew() {
+gnew() {
     echo "ERROR: Use gcopy"
 }
 
-function greset() {
+greset() {
     if [ $1 ] ; then
         NAME=$1
     else
@@ -90,7 +90,7 @@ function greset() {
 }
 
 # Back up the current branch.
-function gback() {
+gback() {
     branch=`git symbolic-ref --short HEAD`
     back=b-$branch
 
@@ -100,7 +100,7 @@ function gback() {
 # Amend the previous commit to include all the changes you have currently,
 # and force push. gcap is "git commit, amend, push"
 # Slightly dangerous, don't use this on master.
-function gcap() {
+gcap() {
     if [[ $1 ]] ; then
         echo "ERROR: gcap doesn't take any commands"
         return 1
@@ -110,7 +110,7 @@ function gcap() {
 
 # Check out a fresh copy of master under a new name and push it to your origin
 # directory.
-function gfresh-f() {
+gfresh-f() {
     if [[ -z $1 ]] ; then
         echo "ERROR: gfresh needs an argument"
         return 1
@@ -125,7 +125,7 @@ function gfresh-f() {
 
 # Check out a fresh copy of master under a new name and push it to your origin
 # directory.  Fail if there are changes in the workspace.
-function gfresh() {
+gfresh() {
     if git diff-index --quiet HEAD -- ; then
         gfresh-f "$1"
     else
@@ -134,12 +134,12 @@ function gfresh() {
     fi
 }
 
-function gunused() {
+gunused() {
     gc `/code/dotfiles/python/unused_branch.py $@`
 }
 
 # Delete branches that have been merged to master.
-function gdelete-safe() {
+gdelete-safe() {
     branch=`gbr`
 
     for i in $@ ; do
@@ -150,7 +150,7 @@ function gdelete-safe() {
 }
 
 # Delete branches that might not have been merged to master.
-function gdelete() {
+gdelete() {
     branch=`gbr`
 
     for i in $@ ; do
@@ -162,7 +162,7 @@ function gdelete() {
 }
 
 # Move an existing branch to a new name.
-function gmove() {
+gmove() {
     if [[ -z "$1" ]] ; then
         echo "Usage: gmove [from] to"
         return 1
@@ -185,7 +185,7 @@ function gmove() {
         git checkout $branch
 }
 
-function gr() {
+gr() {
     if [ -z "$1" ] ; then
         commits=12
     else
@@ -194,11 +194,11 @@ function gr() {
     git rebase -i HEAD~$commits
 }
 
-function gfix() {
+gfix() {
     git commit -a --fixup $1 && git push
 }
 
-function gmaf() {
+gmaf() {
     if git diff-index --quiet HEAD -- ; then
         git commit -a --amend -m "$*" && git push --force-with-lease
     else
@@ -206,13 +206,13 @@ function gmaf() {
      fi
 }
 
-function gbase-f() {
+gbase-f() {
     BASE=`/code/dotfiles/python/base_branch.py`
 
     git fetch upstream && git rebase upstream/$BASE
 }
 
-function gbase() {
+gbase() {
     if git diff-index --quiet HEAD -- ; then
         gbase-f
     else
@@ -220,7 +220,7 @@ function gbase() {
      fi
 }
 
-function gversion() {
+gversion() {
     gfresh release
     gl -100 | sed -n '1,/v3./ p'
     echo
@@ -228,12 +228,12 @@ function gversion() {
     gop
 }
 
-function gexplode() {
+gexplode() {
     grs && git split
 }
 
 # List branches
-function _glist() {
+_glist() {
     branch=`gbr`
 
     for i in $@ ; do
@@ -244,7 +244,7 @@ function _glist() {
 }
 
 # List branches
-function glist() {
+glist() {
     if [[ $1 ]] ; then
         _glist $@
     else
@@ -254,7 +254,7 @@ function glist() {
     fi
 }
 
-function gupdate() {
+gupdate() {
     if [[ "$1" ]] ; then
         branch=`gbr`
         for i in $@ ; do

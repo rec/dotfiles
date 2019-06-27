@@ -55,17 +55,17 @@ new-env() {
         pip install --upgrade wheel
 }
 
-install-requirements() {
+reqs() {
     for i in *requirements.txt; do
         [ -f "$i" ] || break
         echo "-> Installing from $i"
-        pip install -r $i
+        pip install -Ur $i
     done
 }
 
 new-penv() {
     new-env $1 $2
-    install-requirements
+    reqs
 }
 
 list-env() {

@@ -3,6 +3,7 @@
 . /code/dotfiles/bash/functions.sh
 . /code/dotfiles/bash/interactive.sh
 
-# TODO: this destroys the changes that were made to PATH up until now.
-# How is that happening?
+# Prevent the activate script from killing $PATH
+_OLD_VIRTUAL_PATH=
+
 denv

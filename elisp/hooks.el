@@ -58,3 +58,5 @@
 ;; (add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
 ;;(add-hook 'c-mode-common-hook 'electric-pair-mode)
 ;;(add-hook 'python-mode-hook 'electric-pair-mode)
+
+;; (add-hook 'python-mode-hook 'blacken-mode)
