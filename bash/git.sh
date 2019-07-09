@@ -9,9 +9,9 @@ alias gbr='git symbolic-ref --short HEAD'
 alias gc='git checkout'
 alias gcb='git checkout -b'
 
+alias gi='git infer -a'
 alias gi='git infer -a && git push'
 
-# alias gl='git l upstream/dev..'
 alias glm='git l master..'
 alias gl='git l'
 
@@ -32,9 +32,6 @@ alias grs='g reset --soft HEAD~'
 alias greb='git fetch upstream && git rebase upstream/dev'
 alias gdam='gc master && git merge dev && git push && gc dev'
 
-alias gia='git infer -a'
-
-alias grev='greset HEAD~ && gcopy'
 alias gclean='gdelete one two three four five six'
 alias gclean2='gdelete seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
@@ -54,22 +51,22 @@ gcom() {
 
 # Commit everything with a message and push it.
 gcomp() {
-    gcom $* && gp
+    gcom $* && git push
 }
 
 gcomp-f() {
-    gcom $* && gpf
+    gcom $* && git push --force-with-lease
 }
 
 # Check out a copy of the current branch under a new name and push it to your
 # origin directory.
 gcopy() {
-    gcb $1 && gps $1
+    git checkout -b $1 && git push --set-upstream origin $1
 }
 
 gbs() {
     for i in $@ ; do
-        gcb $i && greset HEAD~ && gps $i
+        git checkout -b $i && greset HEAD~ && git push --set-upstream origin $i
     done
 }
 
@@ -105,7 +102,7 @@ gcap() {
         echo "ERROR: gcap doesn't take any commands"
         return 1
     fi
-    gcam && gpf
+    gcam && git push --force-with-lease
 }
 
 # Check out a fresh copy of master under a new name and push it to your origin
@@ -140,10 +137,10 @@ gunused() {
 
 # Delete branches that have been merged to master.
 gdelete-safe() {
-    branch=`gbr`
+    branch=`git symbolic-ref --short HEAD`
 
     for i in $@ ; do
-        gunused $@ && gb -d $i && gp --delete origin $i
+        gunused $@ && git branch -d $i && git push --delete origin $i
     done
 
     gc $branch
@@ -151,10 +148,10 @@ gdelete-safe() {
 
 # Delete branches that might not have been merged to master.
 gdelete() {
-    branch=`gbr`
+    branch=`git symbolic-ref --short HEAD`
 
     for i in $@ ; do
-        gunused $@ && ( gb -D $i ; gp --delete origin $i )
+        gunused $@ && ( git branch -D $i ; git push --delete origin $i )
     done
 
     gc $branch
@@ -168,7 +165,7 @@ gmove() {
         return 1
     fi
 
-    branch=`gbr`
+    branch=`git symbolic-ref --short HEAD`
     if [[ "$2" ]] ; then
         from=$1
         to=$2
@@ -222,22 +219,22 @@ gbase() {
 
 gversion() {
     gfresh release
-    gl -100 | sed -n '1,/v3./ p'
+    git l -100 | sed -n '1,/v3./ p'
     echo
     /code/BiblioPixel/scripts/new_version
     gop
 }
 
 gexplode() {
-    grs && git split
+    g reset --soft HEAD~ && git split
 }
 
 # List branches
 _glist() {
-    branch=`gbr`
+    branch=`git symbolic-ref --short HEAD`
 
     for i in $@ ; do
-        gc $i 1> /dev/null && gl -8 && echo
+        gc $i 1> /dev/null && git l -8 && echo
     done
 
     gc $branch
@@ -248,7 +245,7 @@ glist() {
     if [[ $1 ]] ; then
         _glist $@
     else
-        branches=`gb | sed -e 's/*//' | xargs echo`
+        branches=`git branch | sed -e 's/*//' | xargs echo`
         echo "branches=$branches"
         _glist $branches
     fi
@@ -256,10 +253,13 @@ glist() {
 
 gupdate() {
     if [[ "$1" ]] ; then
-        branch=`gbr`
+        branch=`git symbolic-ref --short HEAD`
         for i in $@ ; do
             echo "gupdating: $i"
-            gc "$i" && greb && gpf
+            gc "$i" && \
+                git fetch upstream && \
+                git rebase upstream/dev && \
+                git push --force-with-lease
             if [[ -z "$?" ]] ; then
                 return 1
             fi
@@ -267,17 +267,8 @@ gupdate() {
         done
         gc $branch
     else
-        greb && gpf
+        git fetch upstream && \
+            git rebase upstream/dev && \
+            git push --force-with-lease
     fi
-}
-
-# See https://www.reddit.com/r/git/comments/ah1euu
-
-gsnip() {
-    python - <<EOF
-import os
-
-for i in reversed(sorted(map(int, "$@".split()))):
-    os.system("git rebase HEAD~%d --onto HEAD~%d" % (i, i + 1))
-EOF
 }

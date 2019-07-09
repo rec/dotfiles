@@ -22,9 +22,7 @@
 
 # Activate a virtualenv.
 penv() {
-    [[ -z $1 ]] && \
-        echo "ERROR: penv needs an argument" && \
-        return -1
+    [[ -z $1 ]] && echo "ERROR: penv needs an argument" && return -1
     source `penv-root`/$1/bin/activate
     export PS1="[$1] $PS1_GIT $PS1_ORIGINAL"
     export VIRTUALENV=$1
@@ -33,7 +31,6 @@ penv() {
 # Quit a virtualenv
 qenv() {
     [[ -z $VIRTUALENV ]] && return 0
-
     deactivate
     export PS1="$PS1_GIT $PS1_ORIGINAL"
     export VIRTUALENV=
