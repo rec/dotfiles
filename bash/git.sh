@@ -217,18 +217,6 @@ gbase() {
      fi
 }
 
-gversion() {
-    gfresh release
-    git l -100 | sed -n '1,/v3./ p'
-    echo
-    /code/BiblioPixel/scripts/new_version
-    gop
-}
-
-gexplode() {
-    g reset --soft HEAD~ && git split
-}
-
 # List branches
 _glist() {
     branch=`git symbolic-ref --short HEAD`

@@ -3,7 +3,8 @@ export GIT_USER=rec
 export CHOPIN=192.168.178.108
 export PENV_ROOT=/code/env
 export PENV_PYTHON=python3.6
-# export WORKON_HOME=/code/env
+export SQLALCHEMY_TRACK_MODIFICATIONS=False
+export FLASK_APP=/code/microblog/microblog.py
 
 PATH=\
 /usr/local/opt/openssl/bin:\
@@ -17,6 +18,8 @@ PATH=\
 /sbin:\
 /opt/X11/bin:\
 /opt/local/bin:\
+/code/git-open:\
+/code/git-recent:\
 /code/gitz
 
 export PATH

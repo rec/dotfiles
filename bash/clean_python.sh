@@ -2,6 +2,7 @@
 
 PWD=`pwd`
 NAME=`basename $PWD`
+BIN=/code/env/clean/bin
 
 source ~/.bashrc
 
@@ -10,13 +11,5 @@ penv $NAME
 
 set -Eeuxo pipefail
 
-if [ $@ ] ; then
-    NAME=$@
-else
-    NAME="$NAME test"
-fi
-
-# find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S
-# mypy $NAME
-flake8 $NAME test
-pytest test
+$BIN/black -l 79 -S
+$BIN/autoflake -ir .

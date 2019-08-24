@@ -13,9 +13,10 @@
     ; https://blog.filippo.io/git-fixup-amending-an-older-commit/
 
 [core]
-	excludesfile = /Users/tom/.config/.gitignore_global
-	pager =
 	autocrlf = input
+	excludesfile = /Users/tom/.config/.gitignore_global
+	hooksPath = /code/dotfiles/git-hooks
+	pager =
 
 [diff]
 	indentHeuristic = true
