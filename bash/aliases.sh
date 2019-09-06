@@ -6,6 +6,7 @@ alias pytags="find . -name \*.py | xargs etags"
 alias rmpyc='find . -name \*.pyc | xargs rm'
 alias ob='open /code/BiblioPixel/html/index.html'
 alias om='open /code/swirly/max/nanolaser/delay-laser.maxpat'
+alias git-tags='find . -name \*.py -or -name git-\* | xargs etags > TAGS'
 
 alias s1='sleep 1'
 alias sb='source ~/.bashrc'

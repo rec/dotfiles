@@ -105,32 +105,6 @@ gcap() {
     gcam && git push --force-with-lease
 }
 
-# Check out a fresh copy of master under a new name and push it to your origin
-# directory.
-gfresh-f() {
-    if [[ -z $1 ]] ; then
-        echo "ERROR: gfresh needs an argument"
-        return 1
-    fi
-    base=`/code/dotfiles/python/base_branch.py`
-
-    git checkout -b $1 && \
-        git fetch upstream && \
-        git reset --hard upstream/$base && \
-        git push --set-upstream origin $1
-}
-
-# Check out a fresh copy of master under a new name and push it to your origin
-# directory.  Fail if there are changes in the workspace.
-gfresh() {
-    if git diff-index --quiet HEAD -- ; then
-        gfresh-f "$1"
-    else
-        echo "ERROR: Changes in your workspace would be overwritten."
-        return 1
-    fi
-}
-
 gunused() {
     gc `/code/dotfiles/python/unused_branch.py $@`
 }
