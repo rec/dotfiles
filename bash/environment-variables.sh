@@ -20,6 +20,7 @@ PATH=\
 /opt/local/bin:\
 /code/git-open:\
 /code/git-recent:\
-/code/gitz
+/code/gitz:\
+/Applications/X32mac
 
 export PATH

@@ -29,6 +29,7 @@
 
 [log]
 	decorate = auto
+    no-pager = true
 
 [merge]
 	rebase = true

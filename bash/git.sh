@@ -9,6 +9,8 @@ alias gbr='git symbolic-ref --short HEAD'
 alias gc='git checkout'
 alias gcb='git checkout -b'
 
+alias gfix='git commit -a --fixup'
+
 alias gi='git infer -a'
 alias gi='git infer -a && git push'
 
@@ -35,9 +37,7 @@ alias gdam='gc master && git merge dev && git push && gc dev'
 alias gclean='gdelete one two three four five six'
 alias gclean2='gdelete seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
-# Amend the previous change to include all the changes you have currently.
-# Slightly dangerous, don't use this on master.
-alias gcam='git commit --amend -a --no-edit'
+alias gcam='git commit -a --amend --no-edit'
 
 #
 # Git functions.
@@ -163,10 +163,6 @@ gr() {
         commits="$1"
     fi
     git rebase -i HEAD~$commits
-}
-
-gfix() {
-    git commit -a --fixup $1 && git push
 }
 
 gmaf() {
