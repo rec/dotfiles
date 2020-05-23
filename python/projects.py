@@ -24,8 +24,8 @@ Keep a stack of current projects - directories, essentially.
 
 """
 
-import os
 import json
+import os
 import sys
 
 CONFIG_FILE = os.path.expanduser('~/.projects.yml')

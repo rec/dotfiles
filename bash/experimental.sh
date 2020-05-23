@@ -103,3 +103,15 @@ maxcom () {
         && git commit -m "$1" \
         && git push
 }
+
+d2() {
+    echo D2
+}
+
+gd() {
+    if git diff-index --quiet HEAD -- ; then
+        echo unchanged
+    else
+        echo git changes
+    fi
+}

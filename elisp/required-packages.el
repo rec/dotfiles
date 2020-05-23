@@ -8,6 +8,7 @@
 (require 'cython-mode)
 (require 'dash)
 (require 'dash-functional)
+(require 'dired-x)
 (require 'git-gutter)
 (require 'google-c-style)
 (require 'guess-style)
@@ -16,4 +17,3 @@
 (require 'saveplace)
 (require 'uniquify)
 (require 'yaml-mode)
-;; (require 'live-py-mode)

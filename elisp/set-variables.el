@@ -31,20 +31,24 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 (setq
- backup-by-copying-when-linked t   ; handle links correctly
- backup-by-copying-when-mismatch t
- backup-directory-alist (list (cons "." backup-dir))
- delete-auto-save-files t          ; leave no "#" files in home directory
- delete-old-versions t             ; delete excess backups silently
- dired-recursive-copies t
- grep-use-null-device nil
- kept-new-versions 10              ; keep 10 backups plus 2 oldest backups
- swirly-default-prefix ""
- uniquify-buffer-name-style 'post-forward-angle-brackets
- version-control t                 ; make backup versions unconditionally
- whitespace-style '(face empty tabs lines-tail trailing)
- zoom-font-frame-local-flag nil
+  backup-by-copying-when-linked t   ; handle links correctly
+  backup-by-copying-when-mismatch t
+  backup-directory-alist (list (cons "." backup-dir))
+  delete-auto-save-files t          ; leave no "#" files in home directory
+  delete-old-versions t             ; delete excess backups silently
+  dired-recursive-copies t
+  grep-use-null-device nil
+  kept-new-versions 10              ; keep 10 backups plus 2 oldest backups
+  swirly-default-prefix ""
+  uniquify-buffer-name-style 'post-forward-angle-brackets
+  version-control t                 ; make backup versions unconditionally
+  whitespace-style '(face empty tabs lines-tail trailing)
+  zoom-font-frame-local-flag nil
+  dired-omit-files (concat dired-omit-files "\\|^.DS_Store$\\|.pyc$")
 )
 
-(setq-default dired-listing-switches "-alhv")
-(setq-default line-spacing 3)
+(setq-default
+ dired-listing-switches "-alhv"
+ line-spacing 3
+ dired-omit-files-p t
+)

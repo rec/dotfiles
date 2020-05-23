@@ -273,7 +273,7 @@ FILENAME should lack slashes."
   (interactive)
   (let ((buf (get-buffer "*Python*")))
     (if (eq nil buf)
-        (run-python "/usr/bin/python -i" nil t)
+        (run-python "python3.6 -i" nil t)
       (switch-to-buffer "*Python*"))))
 
 (defun swirly-dired()

@@ -22,6 +22,7 @@ alias gs='git st'
 alias gst='git st'
 
 alias gcp='git cherry-pick'
+alias gnew='git new'
 
 alias gp='git push'
 alias gpf='git push --force-with-lease'
@@ -37,7 +38,7 @@ alias gdam='gc master && git merge dev && git push && gc dev'
 alias gclean='gdelete one two three four five six'
 alias gclean2='gdelete seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
-alias gcam='git commit -a --amend --no-edit'
+alias gcam='git commit --amend --no-edit'
 
 #
 # Git functions.
@@ -73,10 +74,6 @@ gbs() {
 alias gbss='gbs one two three four five six'
 alias gbsss='gbss seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
-gnew() {
-    echo "ERROR: Use gcopy"
-}
-
 greset() {
     if [ $1 ] ; then
         NAME=$1
@@ -102,7 +99,7 @@ gcap() {
         echo "ERROR: gcap doesn't take any commands"
         return 1
     fi
-    gcam && git push --force-with-lease
+    gcam -a && git push --force-with-lease
 }
 
 gunused() {
