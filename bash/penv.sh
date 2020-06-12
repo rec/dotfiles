@@ -48,8 +48,13 @@ new-env() {
     mkdir -p `penv-root` && \
         virtualenv `penv-root`/$1 -p $PYTHON && \
         penv $1 && \
+        pip install --upgrade setuptools && \
         pip install --upgrade pip && \
         pip install --upgrade wheel
+}
+
+nenv() {
+    new-env $1 $2 && reqs
 }
 
 reqs() {

@@ -14,4 +14,6 @@ set -Eeuxo pipefail
 # /Users/tom/.virtualenvs/util/bin/simp -x
 
 flake8
-pytest $@
+coverage run -m pytest $@
+coverage html
+open htmlcov

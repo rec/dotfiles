@@ -2,6 +2,10 @@
 # Experimental
 #
 
+c() {
+    cd /code/$1
+}
+
 record() {
     /code/env/gitz/bin/termtosvg record /code/gitz/cast/git-$1.cast
 }
