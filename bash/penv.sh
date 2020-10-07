@@ -65,9 +65,10 @@ reqs() {
     done
 }
 
-new-penv() {
-    new-env $1 $2
-    reqs
+newp() {
+    [[ -z $1 ]] && echo "ERROR: new-penv needs an argument" && return -1
+    delete-env $1
+    new-env $1 $2 && reqs
 }
 
 list-env() {
@@ -126,38 +127,4 @@ denv() {
 
 penv-root() {
     echo ${PENV_ROOT:-~/.virtualenvs}
-}
-
-# Code below is probably only useful to me.
-
-old_denv() {
-    # Start up the default environment
-    if [ "$1" == "" ]; then
-        default_env=`/code/dotfiles/python/default_env.py`
-        if [ "$default_env" == "" ]; then
-           return 0
-        fi
-    else
-        /code/dotfiles/python/default_env.py $1
-        default_env=$1
-    fi
-    penv $default_env
-}
-
-# Create a new virtualenv (historical purposes)
-new-env-old-pip() {
-    [[ -z $1 ]] && \
-        echo "ERROR: new-env needs an argument" && \
-        return -1
-    qenv
-
-
-    if [ "$2" == "" ]; then
-        PYTHON=python3.4
-    else
-        PYTHON=$2
-    fi
-
-    virtualenv `penv-root`/$1 -p $PYTHON && \
-        penv $1
 }

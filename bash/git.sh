@@ -1,13 +1,13 @@
 # Git aliases
 
 alias g=git
-alias go='g open'
+alias go='g go'
 
 alias gb='git branch'
 alias gbr='git symbolic-ref --short HEAD'
 
 alias gc='git checkout'
-alias gcb='git checkout -b'
+alias gco='git commit'
 
 alias gfix='git commit -a --fixup'
 
@@ -18,6 +18,7 @@ alias glm='git l master..'
 alias gl='git l'
 
 alias gri='git rebase -i upstream/dev'
+alias grc='git rebase --continue'
 alias gs='git st'
 alias gst='git st'
 
@@ -35,10 +36,10 @@ alias grs='g reset --soft HEAD~'
 alias greb='git fetch upstream && git rebase upstream/dev'
 alias gdam='gc master && git merge dev && git push && gc dev'
 
-alias gclean='gdelete one two three four five six'
-alias gclean2='gdelete seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
 
+alias gca='git commit --amend'
 alias gcam='git commit --amend --no-edit'
+alias gcama='git commit --amend --no-edit -a'
 
 #
 # Git functions.

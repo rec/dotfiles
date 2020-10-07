@@ -10,6 +10,7 @@
              EDITOR=true git rebase -i --autostash --autosquash $TARGET^; \
              }; f"
 	git = !exec git
+	list = log --oneline -8
     ; https://blog.filippo.io/git-fixup-amending-an-older-commit/
 
 [core]
@@ -26,6 +27,7 @@
 
 [init]
 	templatedir = ~/.git-templates
+	defaultBranch = main
 
 [log]
 	decorate = auto

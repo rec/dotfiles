@@ -10,8 +10,9 @@ penv $NAME
 
 set -Eeuxo pipefail
 
-/Users/tom/.virtualenvs/util/bin/black -l 79 -S .
-# /Users/tom/.virtualenvs/util/bin/simp -x
+# GRRR!
+# /Users/tom/.virtualenvs/util/bin/black -l 79 -S .
+/Users/tom/.virtualenvs/util/bin/simp -x
 
-flake8
+flake8 *.py
 pytest $@

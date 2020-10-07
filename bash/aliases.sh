@@ -24,6 +24,7 @@ alias ssp='ssh -l pi $CHOPIN'
 alias ppy='\
 rm -Rf build dist &&\
 /Users/tom/.virtualenvs/util/bin/python setup.py sdist bdist_wheel &&\
+ /Users/tom/.virtualenvs/util/bin/twine check dist/* &&\
  /Users/tom/.virtualenvs/util/bin/twine upload dist/* &&\
  rm -Rf dist\
 '

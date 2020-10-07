@@ -10,10 +10,10 @@ penv $NAME
 
 set -Eeuxo pipefail
 
-/Users/tom/.virtualenvs/util/bin/black -l 79 -S .
+# Users/tom/.virtualenvs/util/bin/black -l 79 -S .
 # /Users/tom/.virtualenvs/util/bin/simp -x
 
-flake8
+# flake8
 coverage run -m pytest $@
 coverage html
-open htmlcov
+# open htmlcov
