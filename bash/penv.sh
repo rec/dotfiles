@@ -46,7 +46,7 @@ new-env() {
     PYTHON=${2:-${PENV_PYTHON:-python3}}
 
     mkdir -p `penv-root` && \
-        virtualenv `penv-root`/$1 -p $PYTHON && \
+        python3.9 -m virtualenv `penv-root`/$1 -p $PYTHON && \
         penv $1 && \
         pip install --upgrade setuptools && \
         pip install --upgrade pip && \

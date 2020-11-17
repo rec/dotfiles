@@ -1,7 +1,6 @@
 export EDITOR=emacsclient
 export GIT_USER=rec
 export CHOPIN=192.168.178.108
-# export PENV_ROOT=/code/env
 export PENV_ROOT=~/.virtualenvs
 export PENV_PYTHON=python3.6
 export SQLALCHEMY_TRACK_MODIFICATIONS=False
@@ -9,6 +8,7 @@ export FLASK_APP=/code/microblog/microblog.py
 export LDFLAGS="-L/usr/local/opt/qt/lib"
 export CPPFLAGS="-I/usr/local/opt/qt/include"
 export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
+export PYTHONSTARTUP=~/bin/python_startup.py
 
 PATH=\
 /usr/local/opt/openssl/bin:\
