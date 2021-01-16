@@ -16,12 +16,11 @@
 (gsk [M-f7] 'swirly-compile)
 (gsk [C-f7] 'swirly-kill-compilation)
 
-
 (gsk [f8] 'swirly-grep)
 (gsk [f9] 'swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
-(gsk [f12] 'dabbrev-expand)
+(gsk [f12] 'speedbar)
 
 (gsk [f13] 'swirly-get-file-name)
 (gsk [print] 'swirly-get-file-name)

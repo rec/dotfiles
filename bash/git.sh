@@ -4,12 +4,8 @@ alias g=git
 alias go='g go'
 
 alias gb='git branch'
+alias gc='git switch'
 alias gbr='git symbolic-ref --short HEAD'
-
-alias gc='git checkout'
-alias gco='git commit'
-
-alias gfix='git commit -a --fixup'
 
 alias gi='git infer -a'
 alias gi='git infer -a && git push'
@@ -36,16 +32,15 @@ alias grs='g reset --soft HEAD~'
 alias greb='git fetch upstream && git rebase upstream/dev'
 alias gdam='gc master && git merge dev && git push && gc dev'
 
-
+# alias gc='git commit'
+alias gfix='git commit -a --fixup'
 alias gca='git commit --amend'
 alias gcam='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
 
-#
-# Git functions.
-#
-# Many of these are "slightly dangerous" so use with care.
-#
+gcop() {
+    git commit $* && git push
+}
 
 gcom() {
     git commit -am "$*"

@@ -15,5 +15,7 @@
 (require 'markdown-mode)
 (require 's)
 (require 'saveplace)
+(require 'template)
+;; (template-initialize)
 (require 'uniquify)
 (require 'yaml-mode)

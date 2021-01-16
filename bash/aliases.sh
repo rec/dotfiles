@@ -32,4 +32,4 @@ rm -Rf build dist &&\
 alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
 alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 alias black='/Users/tom/.virtualenvs/util/bin/black -l 79 -S'
-alias tp=/code/dotfiles/bash/test_python.sh
+# alias tp=/code/dotfiles/bash/test_python.sh

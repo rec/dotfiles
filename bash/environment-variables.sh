@@ -5,12 +5,13 @@ export PENV_ROOT=~/.virtualenvs
 export PENV_PYTHON=python3.6
 export SQLALCHEMY_TRACK_MODIFICATIONS=False
 export FLASK_APP=/code/microblog/microblog.py
-export LDFLAGS="-L/usr/local/opt/qt/lib"
-export CPPFLAGS="-I/usr/local/opt/qt/include"
+# export LDFLAGS="-L/usr/local/opt/qt/lib"
+# export CPPFLAGS="-I/usr/local/opt/qt/include"
 export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
 export PYTHONSTARTUP=~/bin/python_startup.py
 
 PATH=\
+/code_external/depot_tools:\
 /usr/local/opt/openssl/bin:\
 /usr/local/bin:\
 /usr/local/sbin:\
@@ -27,7 +28,8 @@ PATH=\
 /code/gitz:\
 /Applications/X32mac:\
 /Users/tom/.virtualenvs/util/bin:\
-/code/dotfiles/bash/:\
-/usr/local/opt/qt/bin
+/code/dotfiles/bash/
+
+# /usr/local/opt/qt/bin
 
 export PATH
