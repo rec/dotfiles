@@ -2,6 +2,14 @@
 # Experimental
 #
 
+openpy() {
+    if [[ -z "$1" ]] ; then
+        echo "Usage: openpy <module>"
+        return 1
+    fi
+    $EDITOR -n `python -c "import $1; print($1.__file__)"`
+}
+
 c() {
     cd /code/$1
 }
@@ -118,4 +126,15 @@ gd() {
     else
         echo git changes
     fi
+}
+
+rgoog() {
+    BASE="$1"
+    NEW="${BASE//mpd/mss}"
+
+    for SUFFIX in .h .cc _unittest.cc ; do
+        FILE="$NEW$SUFFIX"
+        cp "$BASE$SUFFIX" "$FILE"
+        git add "$FILE"
+    done
 }

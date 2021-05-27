@@ -52,6 +52,8 @@
 [user]
 	email = tom@swirly.com
 	name = Tom Ritchford
+	signingkey = C735717D9338269C
 
 [submodule]
 	fetchJobs = 4
+	recurse = true

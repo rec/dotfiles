@@ -14,8 +14,8 @@
  (c-set-offset 'innamespace 0)
 
  (setq c++-tab-always-indent t)
- (setq c-basic-offset 4)
- (setq c-indent-level 4)
+ (setq c-basic-offset 2)
+ (setq c-indent-level 2)
  (git-gutter-mode t)
  )
 

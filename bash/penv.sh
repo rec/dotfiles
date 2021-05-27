@@ -46,7 +46,7 @@ new-env() {
     PYTHON=${2:-${PENV_PYTHON:-python3}}
 
     mkdir -p `penv-root` && \
-        python3.9 -m virtualenv `penv-root`/$1 -p $PYTHON && \
+        python3.8 -m virtualenv `penv-root`/$1 -p $PYTHON && \
         penv $1 && \
         pip install --upgrade setuptools && \
         pip install --upgrade pip && \
@@ -58,7 +58,7 @@ nenv() {
 }
 
 reqs() {
-    for i in *requirements.txt; do
+    for i in requirements.txt *_requirements.txt; do
         [ -f "$i" ] || break
         echo "-> Installing from $i"
         pip install -Ur $i

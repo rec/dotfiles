@@ -11,6 +11,7 @@ export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
 export PYTHONSTARTUP=~/bin/python_startup.py
 
 PATH=\
+/Applications/Postgres.app/Contents/Versions/13/bin:\
 /code_external/depot_tools:\
 /usr/local/opt/openssl/bin:\
 /usr/local/bin:\

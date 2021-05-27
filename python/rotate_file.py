@@ -48,13 +48,16 @@ def rotate(filename):
         return next((n for n in names if exists(n)), filename)
 
     def rotate_h():
-        return existing(base + '.cc', base + '_unittest.cc')
+        if base.endswith('_inl'):
+            b = base[:-4]
+            return existing(b + '.cc', b + '_unittest.cc', b + '.h')
+        return existing(base + '_inl.h', base + '.cc', base + '_unittest.cc')
 
     def rotate_cc():
         if base.endswith('_unittest'):
             b = base[:-len('_unittest')]
             return existing(b + '.h', b + '.cc')
-        return existing(base + '_unittest.cc', base + '.h')
+        return existing(base + '_unittest.cc', base + '.h', base + '_inl.h')
 
     base, suffix = os.path.splitext(filename)
     if suffix == '.py':

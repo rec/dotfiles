@@ -1,8 +1,11 @@
 #!/bin/bash
 
-alias d=docker
-alias dc=docker-compose
-alias dcup='docker-compose up --abort-on-container-exit'
+alias engora='PYTHONPATH=/code/engora-search /code/engora-search/scripts/engora'
+
+
+# alias d=docker
+# alias dc=docker-compose
+# alias dcup='docker-compose up --abort-on-container-exit'
 
 
 alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
@@ -33,3 +36,6 @@ alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuha
 alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 alias black='/Users/tom/.virtualenvs/util/bin/black -l 79 -S'
 # alias tp=/code/dotfiles/bash/test_python.sh
+
+alias ffprobe='ffprobe -hide_banner'
+alias ffpmeg='ffpmeg -hide_banner'

@@ -3,6 +3,12 @@
 alias g=git
 alias go='g go'
 
+# alias gc='git commit'
+alias gfix='git commit -a --fixup'
+alias gca='git commit --amend'
+alias gcam='git commit --amend --no-edit'
+alias gcama='git commit --amend --no-edit -a'
+
 alias gb='git branch'
 alias gc='git switch'
 alias gbr='git symbolic-ref --short HEAD'
@@ -24,6 +30,9 @@ alias gnew='git new'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gps='git push --set-upstream origin'
+alias gpa='git push all `git branch --show-current`'
+alias gpu='git push upstream `git branch --show-current`'
+alias gpuf='git push upstream --force-with-lease `git branch --show-current`'
 
 alias gsh='git show > /tmp/git.diff'
 alias gdiff='git diff > /tmp/git.diff'
@@ -31,12 +40,6 @@ alias gdiff='git diff > /tmp/git.diff'
 alias grs='g reset --soft HEAD~'
 alias greb='git fetch upstream && git rebase upstream/dev'
 alias gdam='gc master && git merge dev && git push && gc dev'
-
-# alias gc='git commit'
-alias gfix='git commit -a --fixup'
-alias gca='git commit --amend'
-alias gcam='git commit --amend --no-edit'
-alias gcama='git commit --amend --no-edit -a'
 
 gcop() {
     git commit $* && git push
