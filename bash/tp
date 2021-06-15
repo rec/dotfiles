@@ -9,9 +9,8 @@ echo "penv $NAME"
 penv $NAME
 
 set -Eeuxo pipefail
-
-/Users/tom/.virtualenvs/util/bin/black -l 79 -S .
-flake8
-/Users/tom/.virtualenvs/util/bin/simp
-
 pytest $@
+
+# /Users/tom/.virtualenvs/util/bin/black -l 79 -S .
+flake8
+# /Users/tom/.virtualenvs/util/bin/simp

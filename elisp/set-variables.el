@@ -45,6 +45,8 @@
   whitespace-style '(face empty tabs lines-tail trailing)
   zoom-font-frame-local-flag nil
   dired-omit-files (concat dired-omit-files "\\|^.DS_Store$\\|.pyc$")
+  shell-file-name "bash"
+  shell-command-switch "-ic"
 )
 
 (setq-default

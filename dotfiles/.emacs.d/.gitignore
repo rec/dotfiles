@@ -1,0 +1,10 @@
+session*
+SessionDesktop.el
+
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+auto-save-list/
+junk/
+desktops/
+lisp/step-elisp

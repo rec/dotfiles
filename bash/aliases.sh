@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias engora='PYTHONPATH=/code/engora-search /code/engora-search/scripts/engora'
-
+alias pop='popd; pushd .'
 
 # alias d=docker
 # alias dc=docker-compose
