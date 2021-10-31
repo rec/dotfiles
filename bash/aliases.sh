@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias engora='PYTHONPATH=/code/engora-search /code/engora-search/scripts/engora'
+# alias engora='PYTHONPATH=/code/engora-search /code/engora-search/scripts/engora'
 alias pop='popd; pushd .'
 
 # alias d=docker
@@ -8,6 +8,7 @@ alias pop='popd; pushd .'
 # alias dcup='docker-compose up --abort-on-container-exit'
 
 
+# alias e=engora
 alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 alias pytags="find . -name \*.py | xargs etags"
@@ -15,7 +16,9 @@ alias rmpyc='find . -name \*.pyc | xargs rm'
 alias ob='open /code/BiblioPixel/html/index.html'
 alias om='open /code/swirly/max/nanolaser/delay-laser.maxpat'
 alias git-tags='find . -name \*.py -or -name git-\* | xargs etags > TAGS'
-alias hg='history | grep'
+alias hg='history | grep'a
+
+alias py='python -c'
 
 alias simp='/code/simp/simp'
 

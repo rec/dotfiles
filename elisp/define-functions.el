@@ -34,14 +34,6 @@
     (call-interactively 'grep)
     ))
 
-(defun bp-grep()
-  "Run grep in the *grep* buffer."
-  (interactive)
-  (let ()
-    (switch-to-buffer "*grep*")
-    (call-interactively 'grep "grep --exclude \*.pyc -nHR bibliopixel test -e ")
-    ))
-
 (defun kill-matching-buffers (match)
   (interactive "sMatching string: ")
   (if (equal match "")

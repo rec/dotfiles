@@ -19,6 +19,8 @@ alias gi='git infer -a && git push'
 alias glm='git l master..'
 alias gl='git l'
 
+alias gf='git for-each - git log --oneline --decorate -4'
+
 alias gri='git rebase -i upstream/dev'
 alias grc='git rebase --continue'
 alias gs='git st'

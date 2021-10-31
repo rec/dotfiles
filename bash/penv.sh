@@ -19,6 +19,9 @@
 #   Store the current default virtualenv
 #   Default ~/.default_penv
 
+penv-root() {
+    echo ${PENV_ROOT:-~/.virtualenvs}
+}
 
 # Activate a virtualenv.
 penv() {
@@ -123,8 +126,4 @@ denv() {
         penv "$1" && \
             echo "$1" > $DENV
     fi
-}
-
-penv-root() {
-    echo ${PENV_ROOT:-~/.virtualenvs}
 }

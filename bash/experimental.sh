@@ -2,6 +2,10 @@
 # Experimental
 #
 
+e() {
+    $EDITOR -n $@
+}
+
 openpy() {
     if [[ -z "$1" ]] ; then
         echo "Usage: openpy <module>"
