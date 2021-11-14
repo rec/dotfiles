@@ -8,6 +8,9 @@ alias pop='popd; pushd .'
 # alias dcup='docker-compose up --abort-on-container-exit'
 
 
+alias bp-kill=/code/BiblioPixel/scripts/to_install/bp-kill
+alias bk=/code/BiblioPixel/scripts/to_install/bp-kill
+
 # alias e=engora
 alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
