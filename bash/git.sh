@@ -1,47 +1,52 @@
 # Git aliases
 
-alias g=git
-alias go='g go'
 
 # alias gc='git commit'
-alias gfix='git commit -a --fixup'
+alias g=git
+
+alias garc='git add . && git rebase --continue'
+
+alias gb='git branch'
+alias gbr='git symbolic-ref --short HEAD'
+
+alias gc='git switch'
 alias gca='git commit --amend'
 alias gcam='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
+alias gcp='git cherry-pick'
 
-alias gb='git branch'
-alias gc='git switch'
-alias gbr='git symbolic-ref --short HEAD'
-
-alias gi='git infer -a'
-alias gi='git infer -a && git push'
-
-alias glm='git l master..'
-alias gl='git l'
+alias gdiff='git diff > /tmp/git.diff'
 
 alias gf='git for-each - git log --oneline --decorate -4'
+alias gfix='git commit -a --fixup'
 
-alias gri='git rebase -i upstream/dev'
-alias grc='git rebase --continue'
-alias gs='git st'
-alias gst='git st'
+alias gi='git infer -a && git push'
 
-alias gcp='git cherry-pick'
+alias gl='git l'
+alias glm='git l master..'
+
 alias gnew='git new'
+
+alias go='g go'
+alias goc='g go c'
+alias gop='g go p'
 
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gps='git push --set-upstream origin'
-alias gpa='git push all `git branch --show-current`'
 alias gpu='git push upstream `git branch --show-current`'
 alias gpuf='git push upstream --force-with-lease `git branch --show-current`'
+alias gpum='git pull upstream main'
 
-alias gsh='git show > /tmp/git.diff'
-alias gdiff='git diff > /tmp/git.diff'
-
+alias gr='git rot'
+alias grc='git rebase --continue'
+alias gri='git rebase -i upstream/dev'
 alias grs='g reset --soft HEAD~'
-alias greb='git fetch upstream && git rebase upstream/dev'
-alias gdam='gc master && git merge dev && git push && gc dev'
+
+alias gs='git st'
+alias gsh='git show > /tmp/git.diff'
+alias gsp='git split'
+alias gsp='git split && gp'
 
 gcop() {
     git commit $* && git push
@@ -56,7 +61,7 @@ gcomp() {
     gcom $* && git push
 }
 
-gcomp-f() {
+gcompf() {
     gcom $* && git push --force-with-lease
 }
 
@@ -154,9 +159,9 @@ gmove() {
         git checkout $branch
 }
 
-gr() {
+gre() {
     if [ -z "$1" ] ; then
-        commits=12
+        commits=16
     else
         commits="$1"
     fi

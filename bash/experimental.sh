@@ -142,3 +142,17 @@ rgoog() {
         git add "$FILE"
     done
 }
+
+imp() {
+    python -c \
+           "\
+import engora.log, sys, typer; \
+s = set(sys.modules); \
+import $1; \
+s = set(sys.modules) - s; \
+s and print(*sorted(s), sep='\\n')"
+}
+
+wimp() {
+    imp $1 | wc
+}

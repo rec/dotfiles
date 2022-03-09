@@ -2,7 +2,7 @@ export EDITOR=emacsclient
 export GIT_USER=rec
 export CHOPIN=192.168.178.108
 export PENV_ROOT=~/.virtualenvs
-export PENV_PYTHON=python3.6
+export PENV_PYTHON=python3.8
 export SQLALCHEMY_TRACK_MODIFICATIONS=False
 # export FLASK_APP=/code/microblog/microblog.py
 # export LDFLAGS="-L/usr/local/opt/qt/lib"
@@ -29,7 +29,8 @@ PATH=\
 /code/gitz:\
 /Applications/X32mac:\
 /Users/tom/.virtualenvs/util/bin:\
-/code/dotfiles/bash/
+/code/dotfiles/bash/:\
+/code/engora-search/scripts
 
 # /usr/local/opt/qt/bin
 

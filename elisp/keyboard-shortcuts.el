@@ -2,6 +2,9 @@
 
 (defalias 'gsk 'global-set-key)
 
+(fset 'newfile
+   [escape ?4 ?\M-x ?f ?i ?l ?e ?- ?f ?i ?l ?e])
+
 (gsk [M-z] 'zop-to-char)
 (gsk [Scroll_Lock] 'undo)
 
@@ -70,8 +73,8 @@
       (gsk [A-f5] 'reload-file)
       (gsk [A-f6] 'magit-status)
       (gsk [A-f7] 'to-compile)
-      (gsk [A-f8] 'to-grep)
-      ;;f9
+      (gsk [A-f8] 'grep)
+      (gsk [A-f9] 'magit-file-rename)
       ;;f10
       (gsk [4194411] 'kill-this-buffer)
 
@@ -99,8 +102,8 @@
     (gsk [s-f5] 'reload-file)
     (gsk [s-f6] 'magit-status)
     (gsk [s-f7] 'to-compile)
-    (gsk [s-f8] 'to-grep)
-      ;;f9
+    (gsk [s-f8] 'grep)
+    (gsk [s-f9] 'magit-file-rename)
       ;;f10
     (gsk [s-f11] 'swirly-run-python)
     (gsk [s-f12] 'kill-ring-save)

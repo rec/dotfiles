@@ -19,7 +19,7 @@ alias rmpyc='find . -name \*.pyc | xargs rm'
 alias ob='open /code/BiblioPixel/html/index.html'
 alias om='open /code/swirly/max/nanolaser/delay-laser.maxpat'
 alias git-tags='find . -name \*.py -or -name git-\* | xargs etags > TAGS'
-alias hg='history | grep'a
+alias hg='history | grep'
 
 alias py='python -c'
 
@@ -45,3 +45,6 @@ alias black='/Users/tom/.virtualenvs/util/bin/black -l 79 -S'
 
 alias ffprobe='ffprobe -hide_banner'
 alias ffpmeg='ffpmeg -hide_banner'
+
+alias cra='ssh vultacrawl.duckdns.org'
+alias sea='ssh search.engora.tech'

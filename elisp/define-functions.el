@@ -110,6 +110,10 @@ FILENAME should lack slashes."
                          nil
                          (null current-prefix-arg)))))
 
+(defun find-new-file (f)
+  (interactive)
+  (find-file f)
+)
 
 (defun cycle-windows (&optional reverse)
    "Cycle the windows' buffers. If given a prefix argument, cycle in reverse."
