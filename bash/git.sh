@@ -16,6 +16,7 @@ alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
 
 alias gdiff='git diff > /tmp/git.diff'
+alias gdu='g delete . && g update'
 
 alias gf='git for-each - git log --oneline --decorate -4'
 alias gfix='git commit -a --fixup'
@@ -28,6 +29,7 @@ alias glm='git l master..'
 alias gnew='git new'
 
 alias go='g go'
+alias gob='g go b'
 alias goc='g go c'
 alias gop='g go p'
 
