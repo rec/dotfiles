@@ -5,15 +5,66 @@
 (fset 'newfile
    [escape ?4 ?\M-x ?f ?i ?l ?e ?- ?f ?i ?l ?e])
 
+(defun swirly-save-all()
+  (interactive)
+  (save-some-buffers t)
+)
+
+(defun to-grep()
+  (interactive)
+  (switch-to-buffer "*grep*")
+)
+
+(defun swirly-grep()
+  "Run grep in the *grep* buffer."
+  (interactive)
+  (let ()
+    (switch-to-buffer "*grep*")
+    (call-interactively 'grep)
+    ))
+
+(defun to-compile()
+  (interactive)
+  (switch-to-buffer "*compilation*")
+)
+
+(defun back-window()
+  (interactive)
+  (other-window -1)
+  )
+
+(define-key key-translation-map (kbd "<kp-multiply>") "\C-g")
+(define-key key-translation-map (kbd "<kp-1>") "\C-s")
+(define-key key-translation-map (kbd "<kp-3>") "\C-r")
+;; (gsk (kbd "<clear>") 'dabbrev-expand)
+;;(define-key key-translation-map (kbd "<clear>") "\M-/")
+
+;;(gsk [clear] 'dabbrev-expand)
+
+;; from http://xahlee.info/emacs/emacs/emacs_isearch_by_arrow_keys.html
+;; (progn
+;;   ;; set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
+;;   ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
+;;   (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
+
+;;   ;; (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
+;;   ;; (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
+
+;;   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
+;;   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer)
+;;   )
+
+
 (gsk [M-z] 'zop-to-char)
 (gsk [Scroll_Lock] 'undo)
 
 (gsk [f1] 'next-error)
-(gsk [f2] 'rotate-tests)
+(gsk [f2] 'kmacro-call-macro)
 (gsk [f3] 'switch-to-buffer)
 (gsk [f4] 'do-list-buffers)
 (gsk [f5] 'find-file)
-(gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
+(gsk [f6] 'swirly-get-file-name)
+;; (gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
 
 (gsk [f7] 'swirly-recompile)
 (gsk [M-f7] 'swirly-compile)
@@ -25,28 +76,27 @@
 (gsk [f11] 'shell)
 (gsk [f12] 'speedbar)
 
-(gsk [f13] 'swirly-get-file-name)
-(gsk [print] 'swirly-get-file-name)
+(gsk [print] 'raise-next-frame)
+(gsk [f13] 'raise-next-frame)
 
 (gsk [f14] 'save-buffer)
+
 (gsk [f15] 'undo)
 (gsk [pause] 'undo)
 
 ;; (gsk [f13] 'cycle-windows) where to put this?
-;; (gsk [kp-equal] 'balance-windows)  ;; Doesn't work!
+(gsk [kp-equal] 'balance-windows)
 
 (gsk [kp-add] 'split-window-vertically)
-(gsk [kp-divide] 'kmacro-call-macro)
+(gsk [kp-divide] 'dabbrev-expand)
 (gsk [kp-enter] 'repeat-complex-command)
-(gsk [kp-multiply] 'keyboard-escape-quit)
+(gsk [kp-multiply] 'keyboard-quit)
 (gsk [kp-subtract] 'delete-window)
+(gsk [kp-decimal] 'aquamacs-kill-word)
+;; (gsk [kp-decimal] 'aquamacs-move-end-of-line)
 
 (gsk [C-kp-add] 'split-to-unit-test)
 (gsk [C-kp-multiply] 'cycle-windows)
-(gsk [C-kp-multiply] 'cycle-windows)
-;; (gsk [c-plus] 'split-to-unit-test)
-;; (gsk [c-+] 'split-to-unit-test)
-;; (gsk [67108907] 'split-to-unit-test)
 
 (gsk [s-down] 'other-window)
 (gsk [s-up] 'back-window)
@@ -56,16 +106,24 @@
 
 (if (string-equal system-type "darwin")
     (progn
-      (gsk [kp-7] 'swirly-to-root)
+      (gsk [kp-7] 'cua-paste)
       (gsk [kp-8] 'back-window)
-      (gsk [kp-9] 'shrink-window)
+      (gsk [kp-9] 'cua-paste-pop)
 
-      (gsk [kp-4] 'jump-to-prev-pos)
-      (gsk [kp-5] 'exchange-point-and-mark)
-      (gsk [kp-6] 'jump-to-next-pos)
+      (gsk [kp-4] 'raise-next-frame)
+      (gsk [kp-5] 'kill-region)
+      (gsk [kp-6] 'raise-previous-frame)
 
-      (gsk [kp-3] 'enlarge-window)
+      (gsk [kp-1] 'isearch-forward)
       (gsk [kp-2] 'other-window)
+      (gsk [kp-3] 'isearch-backward)
+
+      (gsk [kp-0] 'kill-line)
+      ;; (gsk [kp-0] 'aquamacs-move-beginning-of-line)
+
+      ;; A- means "Mac command key"
+      (gsk [A-left] 'previous-tab-or-buffer)
+      (gsk [A-right] 'next-tab-or-buffer)
 
       (gsk [A-f1] 'goto-line)
       (gsk [A-f3] 'switch-to-buffer-other-frame)
@@ -89,7 +147,8 @@
 
       (gsk [A-kp-divide] 'apply-macro-to-region-lines)
       )
-  (progn
+
+  (progn ;; this is totally old...
     (gsk [home] 'swirly-to-root)
     (gsk [kp-up] 'back-window)
     (gsk [kp-left] 'jump-to-prev-pos)

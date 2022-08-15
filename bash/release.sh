@@ -1,4 +1,4 @@
-pyr() {(
+pyr-old() {(
     set -e
     rm -Rf build dist
 
@@ -13,7 +13,7 @@ pyr() {(
     go n
 )}
 
-pyr3.7() {(
+pyr() {(
     set -e
     rm -Rf build dist
 

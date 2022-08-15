@@ -13,7 +13,14 @@ alias bk=/code/BiblioPixel/scripts/to_install/bp-kill
 
 # alias e=engora
 alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
+
+alias cde='cd /code/engora-search'
+
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
+
+alias eng='direnv exec ~/synthetic/code/engora-search'
+alias engora='direnv exec ~/synthetic/code/engora-search engora'
+
 alias pytags="find . -name \*.py | xargs etags"
 alias rmpyc='find . -name \*.pyc | xargs rm'
 alias ob='open /code/BiblioPixel/html/index.html'

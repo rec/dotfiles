@@ -24,16 +24,6 @@
 (defun find-file-upwards (file-to-find)
   (or (find-file-upwards-base file-to-find) default-directory))
 
-(defun to-grep() (interactive) (switch-to-buffer "*grep*"))
-
-(defun swirly-grep()
-  "Run grep in the *grep* buffer."
-  (interactive)
-  (let ()
-    (switch-to-buffer "*grep*")
-    (call-interactively 'grep)
-    ))
-
 (defun kill-matching-buffers (match)
   (interactive "sMatching string: ")
   (if (equal match "")
@@ -206,13 +196,6 @@ FILENAME should lack slashes."
      "Window '%s' is normal")
    (current-buffer)))
 
-(defun to-compile() (interactive) (switch-to-buffer "*compilation*"))
-
-(defun back-window()
-  (interactive)
-  (other-window -1)
-)
-
 (defun move-line-down ()
   (interactive)
   (let ((col (current-column)))
@@ -317,8 +300,3 @@ FILENAME should lack slashes."
   "Run compile in the git directory."
   (interactive)
   (swirly-compile-internal 1))
-
-(defun swirly-save-all()
-  (interactive)
-  (save-some-buffers t)
-)

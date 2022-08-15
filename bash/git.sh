@@ -11,6 +11,7 @@ alias gbr='git symbolic-ref --short HEAD'
 
 alias gc='git switch'
 alias gca='git commit --amend'
+alias gcaa='git commit --amend -a'
 alias gcam='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
@@ -41,14 +42,19 @@ alias gpuf='git push upstream --force-with-lease `git branch --show-current`'
 alias gpum='git pull upstream main'
 
 alias gr='git rot'
+alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase -i upstream/dev'
+alias grm='g reset --soft main'
 alias grs='g reset --soft HEAD~'
 
 alias gs='git st'
 alias gsh='git show > /tmp/git.diff'
 alias gsp='git split'
 alias gsp='git split && gp'
+
+alias gu='git update'
+alias gw='git switch'
 
 gcop() {
     git commit $* && git push
@@ -114,53 +120,6 @@ gunused() {
     gc `/code/dotfiles/python/unused_branch.py $@`
 }
 
-# Delete branches that have been merged to master.
-gdelete-safe() {
-    branch=`git symbolic-ref --short HEAD`
-
-    for i in $@ ; do
-        gunused $@ && git branch -d $i && git push --delete origin $i
-    done
-
-    gc $branch
-}
-
-# Delete branches that might not have been merged to master.
-gdelete() {
-    branch=`git symbolic-ref --short HEAD`
-
-    for i in $@ ; do
-        gunused $@ && ( git branch -D $i ; git push --delete origin $i )
-    done
-
-    gc $branch
-    return 0
-}
-
-# Move an existing branch to a new name.
-gmove() {
-    if [[ -z "$1" ]] ; then
-        echo "Usage: gmove [from] to"
-        return 1
-    fi
-
-    branch=`git symbolic-ref --short HEAD`
-    if [[ "$2" ]] ; then
-        from=$1
-        to=$2
-    else
-        from=$branch
-        to=$1
-    fi
-
-    git checkout $from && \
-        git pull && \
-        git branch -m $from $to && \
-        git push origin :$from && \
-        git push --set-upstream origin $to && \
-        git checkout $branch
-}
-
 gre() {
     if [ -z "$1" ] ; then
         commits=16
@@ -168,6 +127,21 @@ gre() {
         commits="$1"
     fi
     git rebase -i HEAD~$commits
+}
+
+grec() {
+    git \
+        -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE="%cD" git commit --amend --no-edit' \
+        rebase -i $@
+}
+
+gren() {
+    if [ -z "$1" ] ; then
+        commits=16
+    else
+        commits="$1"
+    fi
+    grec HEAD~$commits
 }
 
 gmaf() {
@@ -211,27 +185,5 @@ glist() {
         branches=`git branch | sed -e 's/*//' | xargs echo`
         echo "branches=$branches"
         _glist $branches
-    fi
-}
-
-gupdate() {
-    if [[ "$1" ]] ; then
-        branch=`git symbolic-ref --short HEAD`
-        for i in $@ ; do
-            echo "gupdating: $i"
-            gc "$i" && \
-                git fetch upstream && \
-                git rebase upstream/dev && \
-                git push --force-with-lease
-            if [[ -z "$?" ]] ; then
-                return 1
-            fi
-            sleep 0.5
-        done
-        gc $branch
-    else
-        git fetch upstream && \
-            git rebase upstream/dev && \
-            git push --force-with-lease
     fi
 }

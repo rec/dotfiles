@@ -1,5 +1,5 @@
 [alias]
-    a = commit -a  --no-edit
+    a = commit -a --amend --no-edit
     aliases = config --get-regexp alias
     l =  !git --no-pager log --oneline -15
     lg = !git --no-pager log --oneline -5 --decorate
@@ -11,7 +11,8 @@
              }; f"
 	git = !exec git
 	list = log --oneline -8
-    ; https://blog.filippo.io/git-fixup-amending-an-older-commit/
+    ; https://blog.filippo.io/git-fixup-amending-an-older-commit/\
+    xe = -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE="%cD" git commit --amend --no-edit' rebase -i
 
 [core]
 	autocrlf = input
