@@ -1,8 +1,6 @@
 DF=/code/dotfiles/dotfiles
-ln -s \
-   $(DF)/.bash_profile \
-   $(DF)/.bashrc \
-   $(DF)/.emacs \
-   $(DF)/.emacs.d \
-   $(DF)/.gitconfig \
-~/
+ln -s /code/dotfiles/dotfiles/.bash_profile ~/.bash_profile
+ln -s /code/dotfiles/dotfiles/.bashrc ~/.bashrc
+ln -s /code/dotfiles/dotfiles/.emacs ~/.emacs
+ln -s /code/dotfiles/dotfiles/.emacs.d ~/.emacs.d
+ln -s /code/dotfiles/dotfiles/.gitconfig ~/.gitconfig
