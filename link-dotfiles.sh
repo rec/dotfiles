@@ -1,7 +1,8 @@
+DF= $(pwd)/dotfiles
 ln -s \
-   $(pwd)/.bash_profile \
-   $(pwd)/.bashrc \
-   $(pwd)/.emacs \
-   $(pwd)/.emacs.d \
-   $(pwd)/.gitconfig \
+   $(DF)/.bash_profile \
+   $(DF)/.bashrc \
+   $(DF)/.emacs \
+   $(DF)/.emacs.d \
+   $(DF)/.gitconfig \
 ~/
