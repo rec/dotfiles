@@ -6,6 +6,7 @@ export CODE_ROOT=/code
 . $CODE_ROOT/dotfiles/bash/aliases.sh
 . $CODE_ROOT/dotfiles/bash/functions.sh
 . $CODE_ROOT/dotfiles/bash/interactive.sh
+. ~/.secrets.sh
 . $CODE_ROOT/pppp/pppp.sh
 
 # . /usr/local/opt/autoenv/activate.sh
