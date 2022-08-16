@@ -1,4 +1,4 @@
-DF= $(pwd)/dotfiles
+DF=/code/dotfiles/dotfiles
 ln -s \
    $(DF)/.bash_profile \
    $(DF)/.bashrc \
