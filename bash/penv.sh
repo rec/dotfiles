@@ -48,9 +48,14 @@ new-env() {
 
     PYTHON=${2:-${PENV_PYTHON:-python3}}
 
+    echo $PYTHON
+    echo "python3.8 -m virtualenv `penv-root`/$1 -p $PYTHON"
     mkdir -p `penv-root` && \
+        echo one && \
         python3.8 -m virtualenv `penv-root`/$1 -p $PYTHON && \
+        echo two && \
         penv $1 && \
+        echo three && \
         pip install --upgrade setuptools && \
         pip install --upgrade pip && \
         pip install --upgrade wheel

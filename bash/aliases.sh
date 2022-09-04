@@ -18,8 +18,10 @@ alias cde='cd /code/engora-search'
 
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
-alias eng='direnv exec ~/synthetic/code/engora-search'
-alias engora='direnv exec ~/synthetic/code/engora-search engora'
+alias d='direnv exec .'
+
+# alias eng='direnv exec ~/synthetic/code/engora-search'
+# alias engora='direnv exec ~/synthetic/code/engora-search engora'
 
 alias pytags="find . -name \*.py | xargs etags"
 alias rmpyc='find . -name \*.pyc | xargs rm'
@@ -55,3 +57,4 @@ alias ffpmeg='ffpmeg -hide_banner'
 
 alias cra='ssh vultacrawl.duckdns.org'
 alias sea='ssh search.engora.tech'
+alias web='ssh vultaweb.duckdns.org'

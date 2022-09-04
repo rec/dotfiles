@@ -73,21 +73,6 @@ gcompf() {
     gcom $* && git push --force-with-lease
 }
 
-# Check out a copy of the current branch under a new name and push it to your
-# origin directory.
-gcopy() {
-    git checkout -b $1 && git push --set-upstream origin $1
-}
-
-gbs() {
-    for i in $@ ; do
-        git checkout -b $i && greset HEAD~ && git push --set-upstream origin $i
-    done
-}
-
-alias gbss='gbs one two three four five six'
-alias gbsss='gbss seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen'
-
 greset() {
     if [ $1 ] ; then
         NAME=$1
@@ -118,6 +103,21 @@ gcap() {
 
 gunused() {
     gc `/code/dotfiles/python/unused_branch.py $@`
+}
+
+branch-to-tag() {
+    if [[ $1 ]]; then
+        branch=$1
+    else
+        branch=$(git symbolic-ref -q --short HEAD)
+    fi
+
+    tag=branch-$branch
+    msg="$branch to tag $tag"
+    git tag $tag $branch && \
+        git push --tag && \
+        git delete $branch && \
+        echo "Renamed $msg and pushed"
 }
 
 gre() {

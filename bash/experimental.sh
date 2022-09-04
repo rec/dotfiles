@@ -2,16 +2,16 @@
 # Experimental
 #
 
-de() {
-    if [[ -z "$1" ]] | [[ -z "$2" ]] ; then
-        echo "Usage: de <module> [command ...]: calls direnv exec"
-        return 1
-    fi
-    module=$1
-    shift
-    echo "direnv exec /code/$module $@"
-    direnv exec ~/synthetic/code/$module $@
-}
+# de() {
+#     if [[ -z "$1" ]] | [[ -z "$2" ]] ; then
+#         echo "Usage: de <module> [command ...]: calls direnv exec"
+#         return 1
+#     fi
+#     module=$1
+#     shift
+#     echo "direnv exec /code/$module $@"
+#     direnv exec ~/synthetic/code/$module $@
+# }
 
 e() {
     $EDITOR -n $@
