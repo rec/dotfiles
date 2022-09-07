@@ -4,6 +4,9 @@ export DIRENV_LOG_FORMAT=
 
 export EDITOR=emacsclient
 
+export HISTFILESIZE=100000000
+export HISTSIZE=100000
+
 export LANG=en_US.UTF-8
 
 export VIRTUALENV_CONFIG_FILE=/code/dotfiles/virtualenv.ini
