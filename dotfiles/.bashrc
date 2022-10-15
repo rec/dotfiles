@@ -1,12 +1,10 @@
-# echo 'BEGIN: .bashrc'
-
-export CODE_ROOT=/code
-
 SECRETS=~/.secrets.sh
 
 if [ -f $SECRETS ]; then
     . $SECRETS
 fi
+
+export CODE_ROOT=/code
 
 . $CODE_ROOT/dotfiles/bash/aliases.sh
 . $CODE_ROOT/dotfiles/bash/environment-variables.sh

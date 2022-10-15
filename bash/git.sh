@@ -105,14 +105,26 @@ gunused() {
     gc `/code/dotfiles/python/unused_branch.py $@`
 }
 
+gwhoops() {
+    git infer -a && \
+        git new -u $1 && \
+        git checkout main && \
+        git reset --hard HEAD~ \
+        && git checkout $1
+}
+
 branch-to-tag() {
     if [[ $1 ]]; then
         branch=$1
     else
         branch=$(git symbolic-ref -q --short HEAD)
     fi
+    if [[ $2 ]]; then
+        tag=$2
+    else
+        tag=$branch
+    fi
 
-    tag=branch-$branch
     msg="$branch to tag $tag"
     git tag $tag $branch && \
         git push --tag && \

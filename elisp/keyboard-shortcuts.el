@@ -71,7 +71,7 @@
 (gsk [C-f7] 'swirly-kill-compilation)
 
 (gsk [f8] 'swirly-grep)
-(gsk [f9] 'swirly-dired)
+(gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
 (gsk [f12] 'speedbar)

@@ -20,8 +20,7 @@ alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs eta
 
 alias d='direnv exec .'
 
-# alias eng='direnv exec ~/synthetic/code/engora-search'
-# alias engora='direnv exec ~/synthetic/code/engora-search engora'
+alias l='exa -lF --git'
 
 alias pytags="find . -name \*.py | xargs etags"
 alias rmpyc='find . -name \*.pyc | xargs rm'
