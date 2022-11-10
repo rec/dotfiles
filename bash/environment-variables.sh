@@ -25,8 +25,8 @@ export PS1="\[\033[32m\]\$(parse_git_branch)\[\033[00m\]\u@\h:\w$ "
 PV=/Library/Frameworks/Python.framework/Versions
 
 export PATH=\
-/Users/tom/.local/bin:\
-/Users/tom/bin:\
+~/.local/bin:\
+~/bin:\
 /code/gitz:\
 /code/dotfiles/bash/:\
 /code/engora-search/scripts:\
