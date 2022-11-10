@@ -283,6 +283,11 @@ FILENAME should lack slashes."
    (kill-compilation))
   )
 
+(defun swirly-top()
+  (interactive)
+  (let ((default-directory (find-file-upwards ".git")))
+    (swirly-dired)))
+
 (defun swirly-compile-internal(recompile-p)
   "Run compile in the git directory."
   (save-some-buffers t)

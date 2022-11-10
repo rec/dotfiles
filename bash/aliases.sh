@@ -18,7 +18,7 @@ alias cde='cd /code/engora-search'
 
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
-alias d='direnv exec .'
+alias d='TERM=dumb direnv exec . time'
 
 alias l='exa -lF --git'
 
