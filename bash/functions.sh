@@ -3,4 +3,3 @@
 . /code/dotfiles/bash/git.sh
 . /code/dotfiles/bash/penv.sh
 . /code/dotfiles/bash/projects.sh
-. /code/dotfiles/bash/release.sh

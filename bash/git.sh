@@ -191,3 +191,13 @@ glist() {
         _glist $branches
     fi
 }
+
+gversion() {
+    if [ -z $1 ] ; then
+        echo 'ERROR: gversion needs arguments for `poetry version`'
+        return 1
+    fi
+    VERSION=$(poetry version $@ | awk 'NF{ print $NF }')
+    git commit pyproject.toml -m "Update version to v$VERSION" \
+        && git push
+}

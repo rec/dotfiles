@@ -54,3 +54,7 @@
  line-spacing 3
  dired-omit-files-p t
 )
+
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+(defvaralias 'js-indent-level 'tab-width)

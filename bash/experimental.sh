@@ -13,6 +13,10 @@
 #     direnv exec ~/synthetic/code/$module $@
 # }
 
+pro() {
+    cd $(engora project $@)
+}
+
 e() {
     $EDITOR -n $@
 }

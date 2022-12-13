@@ -19,6 +19,7 @@ alias cde='cd /code/engora-search'
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
 alias d='TERM=dumb direnv exec . time'
+alias doks='PYTHONPATH=/code/doks /code/doks/.direnv/python-3.7.9/bin/python -m doks -a'
 
 alias l='exa -lF --git'
 
@@ -37,14 +38,8 @@ alias s1='sleep 1'
 alias sb='source ~/.bashrc'
 alias sc='s1 && goc'
 alias ssp='ssh -l pi $CHOPIN'
-# alias ppy='python3.5 setup.py sdist && python3.5 setup.py sdist upload'
-alias ppy='\
-rm -Rf build dist &&\
-/Users/tom/.virtualenvs/util/bin/python setup.py sdist bdist_wheel &&\
- /Users/tom/.virtualenvs/util/bin/twine check dist/* &&\
- /Users/tom/.virtualenvs/util/bin/twine upload dist/* &&\
- rm -Rf dist\
-'
+
+alias ts='date "+%Y%m%d_%H%M%S"'
 
 alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
 alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'

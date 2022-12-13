@@ -110,9 +110,9 @@
       (gsk [kp-8] 'back-window)
       (gsk [kp-9] 'cua-paste-pop)
 
-      (gsk [kp-4] 'raise-next-frame)
+      (gsk [kp-4] 'move-beginning-of-line)  ;; raise-next-frame)
       (gsk [kp-5] 'kill-region)
-      (gsk [kp-6] 'raise-previous-frame)
+      (gsk [kp-6] 'move-end-of-line)  ;; raise-previous-frame)
 
       (gsk [kp-1] 'isearch-forward)
       (gsk [kp-2] 'other-window)
