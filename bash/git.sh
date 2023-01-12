@@ -1,6 +1,5 @@
 # Git aliases
 
-
 # alias gc='git commit'
 alias g=git
 
@@ -12,7 +11,8 @@ alias gbr='git symbolic-ref --short HEAD'
 alias gc='git switch'
 alias gca='git commit --amend'
 alias gcaa='git commit --amend -a'
-alias gcam='git commit --amend --no-edit'
+alias gcam='git commit --amend -m'
+alias gcan='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
 
@@ -98,7 +98,7 @@ gcap() {
         echo "ERROR: gcap doesn't take any commands"
         return 1
     fi
-    gcam -a && git push --force-with-lease
+    gcama && git push --force-with-lease
 }
 
 gunused() {
@@ -114,14 +114,21 @@ branch-to-tag() {
     if [[ $2 ]]; then
         tag=$2
     else
-        tag=$branch
+        tag=branch-$branch
     fi
 
     msg="$branch to tag $tag"
-    git tag $tag branch-$branch && \
+    git tag $tag $branch && \
         git push --tag && \
         git delete $branch && \
         echo "Renamed $msg and pushed"
+}
+
+branches-to-tags() {
+    for var in "$@"
+    do
+        branch-to-tag "$var"
+    done
 }
 
 gre() {

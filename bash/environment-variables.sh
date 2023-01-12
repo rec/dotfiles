@@ -1,5 +1,7 @@
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+export CHOPIN=192.168.178.108
+
 export DIRENV_LOG_FORMAT=
 
 export EDITOR=emacsclient

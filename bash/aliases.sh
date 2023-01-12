@@ -15,10 +15,11 @@ alias bk=/code/BiblioPixel/scripts/to_install/bp-kill
 alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 
 alias cde='cd /code/engora-search'
+alias cdr='cd $(engora project resource)'
 
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
-alias d='TERM=dumb direnv exec . time'
+alias d='TERM=dumb direnv exec . time arch -arm64'
 alias doks='PYTHONPATH=/code/doks /code/doks/.direnv/python-3.7.9/bin/python -m doks -a'
 
 alias l='exa -lF --git'
@@ -52,3 +53,5 @@ alias ffpmeg='ffpmeg -hide_banner'
 alias cra='ssh vultacrawl.duckdns.org'
 alias sea='ssh search.engora.tech'
 alias web='ssh vultaweb.duckdns.org'
+
+alias ppb='poetry publish --build'
