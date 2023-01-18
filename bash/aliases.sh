@@ -15,7 +15,7 @@ alias bk=/code/BiblioPixel/scripts/to_install/bp-kill
 alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 
 alias cde='cd /code/engora-search'
-alias cdr='cd $(engora project resource)'
+alias cdr='cd /code/engora-search && cd $(engora project resource)'
 
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
