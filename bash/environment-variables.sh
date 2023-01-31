@@ -12,6 +12,8 @@ export HISTSIZE=100000
 
 export LANG=en_US.UTF-8
 
+export PYTHONSTARTUP=~/bin/python_startup.py
+
 export VIRTUALENV_CONFIG_FILE=/code/dotfiles/virtualenv.ini
 
 if [ ! -z "$INSIDE_EMACS" ]; then
@@ -59,5 +61,3 @@ export PATH=$PATH:\
 /bin:\
 /usr/sbin:\
 /sbin
-
-# export PYTHONSTARTUP=~/bin/python_startup.py

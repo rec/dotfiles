@@ -1,0 +1,31 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Wed Jan 18 21:15:27 2023
+;; Desktop file format version 208
+;; Emacs version 28.2
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (25544 21343 504991 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (tool-bar-lines . 0) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (font . "tty") (height . 73) (width . 107) (modeline . t) (unsplittable) (menu-bar-lines . 1) (tab-bar-lines . 0) (frameset--id . "966B-B33B-9B8D-332D") (frameset--mini t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 107) (pixel-height . 72) (total-width . 107) (total-height . 72) (normal-height . 1.0) (normal-width . 1.0) (buffer "*shell*" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 73326) (start . 69870)) (prev-buffers ("git.diff" 1 1327) ("*shell*" 69071 73326) ("*scratch*" 1 146))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("/tmp/git.diff" "/Users/tom/synthetic/code/engora-search/.git/COMMIT_EDITMSG"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/tmp/git.diff"
+  "git.diff"
+  'diff-mode
+  '(global-auto-revert-mode global-whitespace-mode)
+  1327
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 25544 21322 151313 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+

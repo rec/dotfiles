@@ -56,6 +56,10 @@ alias gsp='git split && gp'
 alias gu='git update'
 alias gw='git switch'
 
+gcamp() {
+    gcam "$*" && git push --force-with-lease
+}
+
 gcop() {
     git commit $* && git push
 }
