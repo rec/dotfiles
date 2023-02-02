@@ -1,54 +1,36 @@
-# alias engora='PYTHONPATH=/code/engora-search /code/engora-search/scripts/engora'
-alias pop='popd; pushd .'
-
-# alias d=docker
-# alias dc=docker-compose
-# alias dcup='docker-compose up --abort-on-container-exit'
-
-
-alias bp-kill=/code/BiblioPixel/scripts/to_install/bp-kill
-alias bk=/code/BiblioPixel/scripts/to_install/bp-kill
-
-# alias e=engora
-alias black='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
+alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
+alias black='/Users/tom/.virtualenvs/util/bin/black -l 79 -S'
 
 alias cde='cd /code/multi'
-
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
+alias cra='ssh vultacrawl.duckdns.org'
 
 alias d='TERM=dumb direnv exec . time arch -arm64'
-alias doks='PYTHONPATH=/code/doks /code/doks/.direnv/python-3.7.9/bin/python -m doks -a'
+
+alias ffpmeg='ffpmeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+
+alias gtags='find . -name \*.py -or -name git-\* | xargs etags > TAGS'
+
+alias hg='history | grep'
 
 alias l='exa -lF --git'
 
-alias pytags="find . -name \*.py | xargs etags"
-alias rmpyc='find . -name \*.pyc | xargs rm'
-alias ob='open /code/BiblioPixel/html/index.html'
-alias om='open /code/swirly/max/nanolaser/delay-laser.maxpat'
-alias git-tags='find . -name \*.py -or -name git-\* | xargs etags > TAGS'
-alias hg='history | grep'
+alias mkdocs='/code/multi/.direnv/python-3.11.1/bin/mkdocs'
 
+alias pop='popd; pushd .'
+alias ppb='poetry publish --build'
 alias py='python -c'
+alias pytags="find . -name \*.py | xargs etags"
 
-alias simp='/code/simp/simp'
+alias rmpyc='find . -name \*.pyc | xargs rm'
+alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
 
 alias s1='sleep 1'
 alias sb='source ~/.bashrc'
-alias sc='s1 && goc'
+alias sea='ssh search.engora.tech'
 alias ssp='ssh -l pi $CHOPIN'
 
 alias ts='date "+%Y%m%d_%H%M%S"'
 
-alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
-alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
-alias black='/Users/tom/.virtualenvs/util/bin/black -l 79 -S'
-# alias tp=/code/dotfiles/bash/test_python.sh
-
-alias ffprobe='ffprobe -hide_banner'
-alias ffpmeg='ffpmeg -hide_banner'
-
-alias cra='ssh vultacrawl.duckdns.org'
-alias sea='ssh search.engora.tech'
 alias web='ssh vultaweb.duckdns.org'
-
-alias ppb='poetry publish --build'

@@ -1,7 +1,10 @@
 # Git aliases
 
 # alias gc='git commit'
-alias g=git
+# alias g=git
+g () {
+    if [[ $# -gt 0 ]]; then git "$@"; else git st; fi
+}
 
 alias garc='git add . && git rebase --continue'
 
