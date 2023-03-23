@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Jan 18 21:15:27 2023
+;; Created Sat Feb 18 17:47:34 2023
 ;; Desktop file format version 208
 ;; Emacs version 28.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (25544 21343 504991 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (tool-bar-lines . 0) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (font . "tty") (height . 73) (width . 107) (modeline . t) (unsplittable) (menu-bar-lines . 1) (tab-bar-lines . 0) (frameset--id . "966B-B33B-9B8D-332D") (frameset--mini t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 107) (pixel-height . 72) (total-width . 107) (total-height . 72) (normal-height . 1.0) (normal-width . 1.0) (buffer "*shell*" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 73326) (start . 69870)) (prev-buffers ("git.diff" 1 1327) ("*shell*" 69071 73326) ("*scratch*" 1 146))))])
+(setq desktop-saved-frameset [frameset 1 (25585 294 275439 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Menlo-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (fullscreen) (display-type . color) (background-mode . light) (cursor-color . "black") (scroll-bar-foreground . "black") (environment) (modeline . t) (unsplittable) (tab-bar-lines . 0) (frameset--id . "966B-B33B-9B8D-332D") (frameset--mini t . t) (display . "bolt.local") (last-focus-update) (height . 127) (width . 95) (left . 543) (top . 408) (icon-name) (visibility . t) (explicit-name) (tool-bar-position . top)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 7) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 56) (min-pixel-width . 70) (min-pixel-height-ignore . 28) (min-pixel-width-ignore . 49) (min-pixel-height-safe . 14) (min-pixel-width-safe . 14)) leaf (pixel-width . 696) (pixel-height . 1764) (total-width . 99) (total-height . 126) (normal-height . 1.0) (normal-width . 1.0) (buffer "karabiner.json" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 3 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 2) (start . 1)) (prev-buffers ("*scratch*" 1 146))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,14 +18,14 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/tmp/git.diff"
-  "git.diff"
-  'diff-mode
+  "/Users/tom/.config/karabiner/karabiner.json"
+  "karabiner.json"
+  'js-mode
   '(global-auto-revert-mode global-whitespace-mode)
-  1327
-  '(nil nil)
+  2
+  '(704 nil)
   nil
   nil
-  '((buffer-display-time 25544 21322 151313 0) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 2) (buffer-display-time 25585 163 853232 0) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 

@@ -2,6 +2,7 @@ alias bbb='find . -name \*.py | xargs /code/env/black/bin/black -l 79 -S'
 alias black='/Users/tom/.virtualenvs/util/bin/black -l 79 -S'
 
 alias cde='cd /code/multi'
+alias cdr='cd /code/rec.github.io'
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 alias cra='ssh vultacrawl.duckdns.org'
 
@@ -16,6 +17,8 @@ alias hg='history | grep'
 
 alias l='exa -lF --git'
 
+alias mult='cde && d python -m multi'
+alias multi='cde && d python -m multi'
 alias mkdocs='/code/multi/.direnv/python-3.11.1/bin/mkdocs'
 
 alias pop='popd; pushd .'

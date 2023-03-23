@@ -67,8 +67,8 @@
 ;; (gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
 
 (gsk [f7] 'swirly-recompile)
-(gsk [M-f7] 'swirly-compile)
-(gsk [C-f7] 'swirly-kill-compilation)
+(gsk [C-f7] 'swirly-compile)
+(gsk [M-f7] 'swirly-kill-compilation)
 
 (gsk [f8] 'swirly-grep)
 (gsk [f9] 'dabbrev-expand)  ;; swirly-dired)

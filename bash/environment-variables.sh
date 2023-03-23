@@ -4,6 +4,8 @@ export CHOPIN=192.168.178.108
 
 export DIRENV_LOG_FORMAT=
 
+export DYLD_LIBRARY_PATH=/opt/homebrew/lib
+
 export EDITOR=emacsclient
 export ENGORA_COLORIZE=false
 
@@ -39,7 +41,9 @@ $PV/3.6/bin:\
 $PV/3.7/bin:\
 $PV/3.8/bin:\
 $PV/3.9/bin:\
-$PV/3.10/bin
+$PV/3.10/bin:\
+$PV/3.11/bin:\
+/opt/homebrew/opt/ruby/bin
 
 if [[ "$(/bin/hostname)" == "bantam.local" ]]; then
 

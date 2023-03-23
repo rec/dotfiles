@@ -2,19 +2,17 @@
 # Experimental
 #
 
-# de() {
-#     if [[ -z "$1" ]] | [[ -z "$2" ]] ; then
-#         echo "Usage: de <module> [command ...]: calls direnv exec"
-#         return 1
-#     fi
-#     module=$1
-#     shift
-#     echo "direnv exec /code/$module $@"
-#     direnv exec ~/synthetic/code/$module $@
-# }
+poa() {
+    if [ "$#" == 1 ]; then
+        msg="Add $@ dependency"
+    else
+        files=$(echo "$@" | sed "s/ /, /g")
+        msg="Add dependencies $files"
+    fi
 
-pro() {
-    cd $(engora project $@)
+    poetry add $@ &&\
+         git commit pyproject.toml poetry.lock -m "$msg" &&\
+         git push
 }
 
 e() {
