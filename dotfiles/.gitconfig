@@ -16,7 +16,7 @@
 
 [core]
 	autocrlf = input
-	excludesfile = /Users/tom/.config/.gitignore_global
+	excludesfile = /Users/tom/.gitignore
 	hooksPath = /code/dotfiles/git-hooks
 	pager =
 

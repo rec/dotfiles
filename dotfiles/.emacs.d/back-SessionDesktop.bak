@@ -1,0 +1,609 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Wed Aug  2 17:12:23 2023
+;; Desktop file format version 208
+;; Emacs version 25.3.50.1
+(setq revive:frame-configuration-to-restore
+  '(progn ))
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (25802 29271 938644 0) (desktop . "208") "tom@bolt.local" nil nil ((((font-backend mac-ct) (fontsize . 0) (font . "-*-Menlo-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "white") (line-spacing) (left-fringe . 6) (right-fringe . 15) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 0) (alpha) (fullscreen) (display-type . color) (background-mode . light) (cursor-color . "Red") (visibility) (environment) (mouse-color . "black") (fringe) (modeline . t) (frameset--id . "66A1-A2F1-F1DD-9BAE") (frameset--mini t . t) (minibuffer . t) (unsplittable) (right-divider-width . 0) (bottom-divider-width . 0) (icon-name) (display . "bolt.local") (explicit-name) (tool-bar-position . top) (height . 65) (width . 118) (left . 269) (top . 38)) ((min-height . 4) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 56) (min-pixel-width . 70) (min-pixel-height-ignore . 43) (min-pixel-width-ignore . 50) (min-pixel-height-safe . 14) (min-pixel-width-safe . 14)) leaf (pixel-width . 862) (pixel-height . 896) (total-width . 123) (total-height . 64) (normal-height . 1.0) (normal-width . 1.0) (buffer "README.md<clsprop>" (selected . t) (hscroll . 0) (fringes 6 15 nil) (margins nil) (scroll-bars nil 3 t nil 0 nil) (vscroll . 0) (dedicated) (point . 652) (start . 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name "/code/superduperdb-stealth/TAGS")
+(setq tags-table-list '("/code/superduperdb-stealth/TAGS"))
+(setq search-ring '("basemodel" "das" "port" "to_w" "error" "distributed=" "max_" "watcher.py" "listener" "watcher" "listener" "999" "kwargs" "verbose" "test" ".models"))
+(setq regexp-search-ring '("find(" "first" "delete" "__name" "lightning" "view" "get arou" "fla" "m " "print" "ename" "em" ".title" "bl" "_expand"))
+(setq register-alist (list (list 313465889 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) '(48 . "(BaseModel)")))
+(setq file-name-history '("/code/clsprop/README.md" "/code/dotfiles/bash/clear_poetry" "/code/clsprop/clsprop.py" "/code/dotfiles/templates/py_insert.py" "/code/recs/README.md" "/code/recs/.gitignore" "/code/dotfiles/bash/git.sh" "~/synthetic/code/dotfiles/dotfiles/.gitconfig" "/code/dotfiles/bash/environment-variables.sh" "~/bin/python_startup.py" "/code/dotfiles/bash/functions.sh" "/code/recs/test.sh" "~/Library/Application Support/Aquamacs Emacs/scratch buffer" "/code/litoid/litoid/util/has_thread.py" "/code/recs/tasks.md" "/code/recs/rec_unlimited.py" "/code/recs/recs/threads.py" "/code/recs/recs/file_writer.py" "/code/recs/recs/block.py" "/code/recs/recs/device.py" "/code/recs/recs/__init__.py" "/tmp/rename.sh" "/tmp/txt.txt" "/code/dtyper/.envrc" "/code/superduperdb/.git/config" "/code/dotfiles/bash/aliases.sh" "/tmp/git.diff" "/code/superduperdb/.github/pull_request_template.md" "/code/superduperdb/.github/config.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE/bug_report.yml" "/code/superduperdb/requirements/requirements.in" "/code/superduperdb/superduperdb/base/config.py" "/code/superduperdb/test/unittest/base/test_config.py" "/code/superduperdb/superduperdb/base/jsonable.py" "/code/superduperdb/test/integration/test_cdc.py" "/code/superduperdb/superduperdb/db/mongodb/cdc.py" "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/dataclasses.py" "/code/superduperdb/test/unittest/misc/cache/test_uri_cache.py" "~/synthetic/" "/code/superduperdb/.github/ISSUE_TEMPLATE/doc_improvement.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE/config.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE" "/code/superduperdb/.github/ISSUE_TEMPLATE/feature_request.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE/" "/code/superduperdb/.github/ISSUE_TEMPLATE/doc_improvement.yaml" "/code/superduperdb/.github/ISSUE_TEMPLATE/doc_improvement.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE/feature_request.yaml" "/code/superduperdb/.github/ISSUE_TEMPLATE/" "/code/superduperdb/.github/ISSUE_TEMPLATE/feature_request.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE" "/code/superduperdb/.github/ISSUE_TEMPLATE/bug_report.yaml" "/code/superduperdb/.github/ISSUE_TEMPLATE/config.yaml" "/code/superduperdb/.github/" "/code/superduperdb/.github/ISSUE_TEMPLATE/" "/code/superduperdb/.github/ISSUE_TEMPLATE/bug_report_old.yml" "/code/superduperdb/.github/ISSUE_TEMPLATE/" "/code/scikit-learn/.github/ISSUE_TEMPLATE/" "/code/scikit-learn/.github/" "/code/scikit-learn/.git/" "/code/superduperdb/.github/" "/code/superduperdb/.git/config" "/code/superduperdb/" "/code/" "/code/superduperdb-stealth/superduperdb/db/mongodb/cdc.py" "/code/superduperdb-stealth/test/integration/test_cdc.py" "/code/superduperdb-stealth/superduperdb/db/base/cdc.py" "/code/superduperdb-stealth/superduperdb/cli/serve.py" "/code/superduperdb-stealth/superduperdb/container/task_workflow.py" "/code/superduperdb-stealth/superduperdb/ext/torch/model.py" "/code/superduperdb-stealth/TAGS" "/code/superduperdb-stealth/superduperdb/db/mongodb/query.py" "/code/superduperdb-stealth/superduperdb/db/query_dataset.py" "/code/superduperdb-stealth/superduperdb/" "/code/dtyper/.direnv/" "/code/superduperdb-stealth/superduperdb/container/component.py" "/code/superduperdb-stealth/test/unittest/db/mongodb/test_database.py" "/code/superduperdb-stealth/superduperdb/db/base/db.py" "/code/superduperdb-stealth/superduperdb/container/vector_index.py" "/code/superduperdb-stealth/test/integration/test_dask.py" "/code/superduperdb-stealth/superduperdb/db/base/metadata.py" "/code/superduperdb-stealth/superduperdb/container/job.py" "/code/superduperdb-stealth/superduperdb/container/model.py" "/code/superduperdb-stealth/superduperdb/container/listener.py" "/code/superduperdb-stealth/.github/PULL_REQUEST_TEMPLATE.md" "/code/superduperdb-stealth/" "/code/superduperdb-stealth/.github" "/code/superduperdb-stealth/.github/pull_request_template.md" "/code/superduperdb-stealth/.github/config.yml" "/code/superduperdb-stealth/.github/" "/code/superduperdb-stealth/test/unittest/conftest.py" "/code/superduperdb-stealth/superduperdb/cli/docs.py" "/code/superduperdb-stealth/test/unittest/model/test_openai.py" "/code/superduperdb-stealth/TAGS" "/code/superduperdb-stealth/test/unittest/db/mongodb/test_query_dataset.py" "/code/superduperdb-stealth/test/unittest/db/mongodb/test_queries.py" "/code/superduperdb-stealth/superduperdb/ext/openai/model.py" "/code/superduperdb-stealth/superduperdb/server/server.py" "/code/superduperdb-stealth/superduperdb/server/client.py" "/code/superduperdb-stealth/superduperdb/container/tasks.py" "/code/superduperdb-stealth/superduperdb/container/serializable.py" "/code/superduperdb-stealth/superduperdb/container/encoder.py" "/code/superduperdb-stealth/superduperdb/container/dataset.py" "/code/superduperdb-stealth/superduperdb/container/metric.py" "/code/superduperdb-stealth/superduperdb/container/watcher.py" "/code/superduperdb-stealth/superduperdb/db/mongodb/metadata.py" "/code/superduperdb-stealth/test/unittest/component/test_serialization.py" "/code/superduperdb-stealth/TAGS" "/code/superduperdb-stealth/TAGS" "/tmp" "/code/superduperdb-stealth/" "/code/superduperdb-stealth" "/code/superduperdb-stealth/superduperdb/db/base/build.py" "/code/superduperdb-stealth/superduperdb/" "/code/superduperdb-stealth" "/code/superduperdb-stealth/" "/code/superduperdb-stealth/superduperdb/misc/run.py" "/code/superduperdb-stealth/superduperdb/base/config.py" "/code/superduperdb-stealth/test/unittest/cli/test_cli.py" "/code/superduperdb-stealth/superduperdb/" "/code/superduperdb-stealth/superduperdb/misc/" "/code/superduperdb-stealth/superduperdb/__main__.py" "/code/superduperdb-stealth/test/unittest/cli/test_cli_info.py" "/code/superduperdb-stealth/test/unittest/cli"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/code/superduperdb/test/unittest/misc/cache/test_uri_cache.py"
+  "test_uri_cache.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  521
+  '(521 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "superduperdb"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/synthetic/code/superduperdb/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "code"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  3109
+  '(nil nil)
+  t
+  '("/Users/tom/synthetic/code/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "synthetic"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  124
+  '(nil nil)
+  t
+  '("/Users/tom/synthetic/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/dataclasses.py"
+  "dataclasses.py"
+  'python-mode
+  '(outline-minor-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  17876
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/superduperdb/db/mongodb/cdc.py"
+  "cdc.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1668
+  '(1669 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1644 1604 1532 1 1713))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/test/integration/test_cdc.py"
+  "test_cdc.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  5791
+  '(6358 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (6340 6358 6202 6202 6422 6358 6358))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/superduperdb/base/jsonable.py"
+  "jsonable.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  606
+  '(249 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (64 695 624 1161 423 1280))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/test/unittest/base/test_config.py"
+  "test_config.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  2992
+  '(2760 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (962 962 1833 1833 1833 1563 806 806 806 806 1563 1316 611 611 1390 1423 1423 1423 1 1 1 2495 961 1331 593 223 48 48 48 48 48 48 1315 784 784 784 360 592 961 1451 1432))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/superduperdb/base/config.py"
+  "config.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  4633
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 2922 433 253 4633 4633 4632 4633))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/requirements/requirements.in"
+  "requirements.in"
+  'fundamental-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  278
+  '(431 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (398))))
+
+(desktop-create-buffer 208
+  nil
+  "ISSUE_TEMPLATE"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  206
+  '(1 nil)
+  t
+  '("/code/superduperdb/.github/ISSUE_TEMPLATE/")
+  nil
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/.github/ISSUE_TEMPLATE/bug_report.yml"
+  "bug_report.yml"
+  'yaml-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  979
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  ".github"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  130
+  '(nil nil)
+  t
+  '("/code/superduperdb/.github/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/.github/config.yml"
+  "config.yml"
+  'yaml-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/.github/pull_request_template.md"
+  "pull_request_template.md"
+  'markdown-mode
+  '(auto-fill-mode smart-spacing-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1137
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/tmp/git.diff"
+  "git.diff"
+  'diff-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  496
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 2094 1 1))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/bash/aliases.sh"
+  "aliases.sh"
+  'sh-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  108
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (876 1 1 1 110 76 1094 1060 1060 1032 1 876 421 421 420 386 375 324 321 1 76 76 718 76 76 1032 627 627 1 1 627 324 627 1032 673 627 602 1 1267 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1267 1032 1012 745 625 658 658 420 421 421 876))))
+
+(desktop-create-buffer 208
+  "/code/superduperdb/.git/config"
+  "config"
+  'conf-unix-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  617
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "code"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  110
+  '(nil nil)
+  t
+  '("/code/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "superduperdb"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  350
+  '(nil nil)
+  t
+  '("/code/superduperdb/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  ".git"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  366
+  '(nil nil)
+  t
+  '("/code/superduperdb/.git/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/dtyper/.envrc"
+  ".envrc"
+  'fundamental-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  24
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/tmp/txt.txt"
+  "txt.txt"
+  'text-mode
+  '(auto-fill-mode visual-line-mode smart-spacing-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  22151
+  '(16119 nil)
+  t
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (6053 1 1 22151 1 15867 16119 22151))))
+
+(desktop-create-buffer 208
+  "/tmp/rename.sh"
+  "rename.sh"
+  'sh-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1090
+  '(746 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (221 979 221 221 546 546 989 1126 848 773 933 884 933 933 1125 1383 1383 1286 1275 1012 499 395 1238 1090))))
+
+(desktop-create-buffer 208
+  nil
+  "abbrev"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  288
+  '(nil nil)
+  t
+  '("/code/abbrev/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/recs/recs/device.py"
+  "device.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  988
+  '(891 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (891 891 21 21 541 689 657 351 507 988))))
+
+(desktop-create-buffer 208
+  "/code/recs/recs/block.py"
+  "block.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1381
+  '(1433 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1382 1380 1305 1380 1192 1205 1192 1234 1267 1192 1192 1192 1192 58 458 458 58 58 58 1 1 58 58 1 1 1190 1 1 1103 1189 1190))))
+
+(desktop-create-buffer 208
+  "/code/recs/recs/file_writer.py"
+  "file_writer.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1011
+  '(938 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (976 683 938 683 715))))
+
+(desktop-create-buffer 208
+  "/code/recs/recs/threads.py"
+  "threads.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode smerge-mode)
+  2797
+  '(2744 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1053 1073 1073 1173 1249 2358 2443 2383 1015 1072 1429 1399 1405 1405 1370 1053 1053 722 2722 1032 1053 1014 1014 2721 632 470 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1341 2873 1428 1404))))
+
+(desktop-create-buffer 208
+  nil
+  "recs"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  356
+  '(1 nil)
+  t
+  '("/code/recs/recs/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/recs/rec_unlimited.py"
+  "rec_unlimited.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1849
+  '(2675 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (2361 2364 2299 2299 2237))))
+
+(desktop-create-buffer 208
+  nil
+  "recs"
+  'dired-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  932
+  '(nil nil)
+  t
+  '("/code/recs/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/recs/tasks.md"
+  "tasks.md"
+  'markdown-mode
+  '(auto-fill-mode visual-line-mode smart-spacing-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  79
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/litoid/litoid/util/has_thread.py"
+  "has_thread.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1
+  '(917 t)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/code/recs/test.sh"
+  "test.sh"
+  'sh-mode
+  '(global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  65
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (23))))
+
+(desktop-create-buffer 208
+  "/code/recs/recs/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  2
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 57 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 57 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 57 1 57 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/bash/functions.sh"
+  "functions.sh"
+  'sh-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  69
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/bin/python_startup.py"
+  "python_startup.py"
+  'python-mode
+  '(outline-minor-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  199
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/bash/environment-variables.sh"
+  "environment-variables.sh"
+  'sh-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  427
+  '(334 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (334 334 102 1263 932 279 145 861 334))))
+
+(desktop-create-buffer 208
+  "/Users/tom/synthetic/code/dotfiles/dotfiles/.gitconfig"
+  ".gitconfig"
+  'conf-windows-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1
+  '(1031 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/bash/git.sh"
+  "git.sh"
+  'sh-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  3149
+  '(3016 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 1 4402 2027 3016))))
+
+(desktop-create-buffer 208
+  "/code/recs/.gitignore"
+  ".gitignore"
+  'fundamental-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1220
+  '(1204 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring (41))))
+
+(desktop-create-buffer 208
+  "/code/recs/README.md"
+  "README.md"
+  'markdown-mode
+  '(auto-fill-mode smart-spacing-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  54
+  '(54 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (54))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/templates/py_insert.py"
+  "py_insert.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  45
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 45))))
+
+(desktop-create-buffer 208
+  "/Users/tom/Library/Application Support/Aquamacs Emacs/scratch buffer"
+  "*scratch*"
+  'text-mode
+  '(auto-fill-mode smart-spacing-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  1
+  '(90217 t)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines))
+  '((mark-ring (90217 1 90216 1 90216 90216))))
+
+(desktop-create-buffer 208
+  "/code/clsprop/clsprop.py"
+  "clsprop.py"
+  'python-mode
+  '(git-gutter-mode outline-minor-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  427
+  '(163 nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (747 1 1 1039 483 534 587 239 5 747 747 789 811 1 1 1025 1025 810 573 427))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/bash/clear_poetry"
+  "clear_poetry"
+  'sh-mode
+  '(auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  46
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/clsprop/README.md"
+  "README.md"
+  'markdown-mode
+  '(auto-fill-mode smart-spacing-mode auto-revert-mode global-auto-revert-mode global-whitespace-mode dired-omit-mode)
+  652
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix) (truncate-lines))
+  '((mark-ring (1 1 1))))
+

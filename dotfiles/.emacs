@@ -8,7 +8,7 @@
 ;; ~/Library/Preferences/Aquamacs Emacs/Preferences
 ;; _____________________________________________________________________________
 
-(package-initialize)
+;; (package-initialize)
 
 (setq load-path (cons (expand-file-name "/code/dotfiles/elisp") load-path))
 (setq load-path

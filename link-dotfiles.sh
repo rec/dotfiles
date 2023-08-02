@@ -5,3 +5,4 @@ ln -s /code/dotfiles/dotfiles/.bashrc ~/.bashrc
 ln -s /code/dotfiles/dotfiles/.emacs ~/.emacs
 ln -s /code/dotfiles/dotfiles/.emacs.d ~/.emacs.d
 ln -s /code/dotfiles/dotfiles/.gitconfig ~/.gitconfig
+ln -s /code/dotfiles/dotfiles/.gitignore ~/.gitignore

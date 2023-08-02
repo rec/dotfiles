@@ -42,7 +42,7 @@ alias gpf='git push --force-with-lease'
 alias gps='git push --set-upstream origin'
 alias gpu='git push upstream `git branch --show-current`'
 alias gpuf='git push upstream --force-with-lease `git branch --show-current`'
-alias gpum='git pull upstream main'
+alias gpum='git pull upstream main && git st'
 
 alias gr='git rot'
 alias gra='git rebase --abort'

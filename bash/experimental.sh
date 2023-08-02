@@ -2,6 +2,11 @@
 # Experimental
 #
 
+tp() {
+    time python -c "$@"
+}
+
+
 poa() {
     if [ "$#" == 1 ]; then
         msg="Add $@ dependency"

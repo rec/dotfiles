@@ -2,30 +2,42 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Feb 18 17:47:34 2023
+;; Created Wed Aug  2 18:09:27 2023
 ;; Desktop file format version 208
 ;; Emacs version 28.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (25585 294 275439 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Menlo-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (fullscreen) (display-type . color) (background-mode . light) (cursor-color . "black") (scroll-bar-foreground . "black") (environment) (modeline . t) (unsplittable) (tab-bar-lines . 0) (frameset--id . "966B-B33B-9B8D-332D") (frameset--mini t . t) (display . "bolt.local") (last-focus-update) (height . 127) (width . 95) (left . 543) (top . 408) (icon-name) (visibility . t) (explicit-name) (tool-bar-position . top)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 7) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 56) (min-pixel-width . 70) (min-pixel-height-ignore . 28) (min-pixel-width-ignore . 49) (min-pixel-height-safe . 14) (min-pixel-width-safe . 14)) leaf (pixel-width . 696) (pixel-height . 1764) (total-width . 99) (total-height . 126) (normal-height . 1.0) (normal-width . 1.0) (buffer "karabiner.json" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 3 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 2) (start . 1)) (prev-buffers ("*scratch*" 1 146))))])
+(setq desktop-saved-frameset [frameset 1 (25802 32695 849950 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (tool-bar-lines . 0) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (font . "tty") (height . 58) (width . 130) (modeline . t) (unsplittable) (menu-bar-lines . 1) (tab-bar-lines . 0) (frameset--id . "5D37-281F-3D07-7635") (frameset--mini t)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 130) (pixel-height . 57) (total-width . 130) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 130) (pixel-height . 28) (total-width . 130) (total-height . 28) (normal-height . 0.5) (normal-width . 1.0) (buffer "config" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 491) (start . 1)) (prev-buffers ("karabiner.json" 1 74))) (leaf (last . t) (pixel-width . 130) (pixel-height . 29) (total-width . 130) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "*Warnings*" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 121) (start . 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("/tmp/git.diff" "/Users/tom/synthetic/code/engora-search/.git/COMMIT_EDITMSG"))
+(setq file-name-history '("/code/superduperdb/.git/config" "/tmp/git.diff" "/Users/tom/synthetic/code/engora-search/.git/COMMIT_EDITMSG"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/code/superduperdb/.git/config"
+  "config"
+  'conf-unix-mode
+  '(global-auto-revert-mode global-whitespace-mode)
+  491
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 25802 32693 911155 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
 (desktop-create-buffer 208
   "/Users/tom/.config/karabiner/karabiner.json"
   "karabiner.json"
   'js-mode
   '(global-auto-revert-mode global-whitespace-mode)
-  2
+  74
   '(704 nil)
   nil
   nil
-  '((tab-width . 2) (buffer-display-time 25585 163 853232 0) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 2) (buffer-display-time 25802 31826 900530 0) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
