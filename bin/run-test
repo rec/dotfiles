@@ -4,7 +4,7 @@ set -eux
 
 project=$(basename $(pwd))
 
-mypy $project
-ruff check --fix $project test*.py test/*.py
+mypy $project.py
+ruff check --fix $project.py test*
 coverage run $(which pytest)
 coverage html
