@@ -2,10 +2,24 @@
 # Experimental
 #
 
-tp() {
-    time python -c "$@"
+flac2mp3() {
+    find . \
+         -type f \
+         -name '*.flac' \
+         -print \
+         -exec sh -c \
+         'i="{}"; ffmpeg -i "$i" -y -v 0 -vcodec copy -acodec alac "${i%.flac}".m4a && rm -f "$i"' \;
 }
 
+
+pyv() {
+    if [[ -z "$1" ]] ; then
+        echo "Usage: pver <version number>"
+        return 1
+    fi
+    echo "layout python python$1" > .envrc
+    direnv allow
+}
 
 poa() {
     if [ "$#" == 1 ]; then
@@ -173,4 +187,25 @@ s and print(*sorted(s), sep='\\n')"
 
 wimp() {
     imp $1 | wc
+}
+
+ffm() {
+    if [ -z "$2" ] ; then
+        echo "USAGE: ffm <infile> <outfile> [bandwidth in k]"
+        return 1
+    fi
+    if [ $3 ] ; then
+        bps=$3k
+    else
+        bps=6400k
+    fi
+    ffmpeg -i "$1" -c:v h264_videotoolbox -b:v $bps "$2"
+}
+
+branch-to-tag() {
+    if [[ $1 ]]; then
+        branch=$1
+    else
+        branch=$(git symbolic-ref -q --short HEAD)
+    fi
 }

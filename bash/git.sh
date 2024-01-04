@@ -30,12 +30,17 @@ alias gi='git infer -a && git push'
 alias gl='git l'
 alias glm='git l master..'
 
+alias gmr='gr main && g merge working && gp && gr working'
+
 alias gnew='git new'
 
 alias go='g go'
 alias gob='g go b'
 alias goc='g go c'
+alias goi='g go i'
+alias gom='g go m 1'
 alias gop='g go p'
+alias got='g go t'
 
 alias gp='git push'
 alias gpf='git push --force-with-lease'
@@ -51,9 +56,8 @@ alias gri='git rebase -i upstream/dev'
 alias grm='g reset --soft main'
 alias grs='g reset --soft HEAD~'
 
-alias gs='git st'
+alias gs='gl; echo; g st'
 alias gsh='git show > /tmp/git.diff'
-alias gsp='git split'
 alias gsp='git split && gp'
 
 alias gu='git update'
@@ -215,7 +219,20 @@ gversion() {
         echo 'ERROR: gversion needs arguments for `poetry version`'
         return 1
     fi
-    VERSION=$(poetry version $@ | awk 'NF{ print $NF }')
-    git commit pyproject.toml -m "Update version to v$VERSION" \
+    VERSION=v$(poetry version $@ | awk 'NF{ print $NF }')
+    git commit pyproject.toml -m "Update version to $VERSION" \
         && git push
+}
+
+gpy() {
+    VERSION=v$(poetry version | awk 'NF{ print $NF }')
+
+    gh release create $VERSION --generate-notes \
+        && git push --tag --force-with-lease \
+        && git pull --tag \
+        && poetry publish --build
+}
+
+gver() {
+    gversion $1 && gpy
 }

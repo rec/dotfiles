@@ -37,6 +37,7 @@ export PATH=\
 ~/bin:\
 /code/gitz:\
 /code/dotfiles/bash/:\
+/code/dotfiles/bin/:\
 /code/engora-search/scripts:\
 $PV/2.7/bin:\
 $PV/3.6/bin:\

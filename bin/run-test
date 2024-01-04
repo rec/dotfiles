@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -eux
+
+project=$(basename $(pwd))
+
+mypy $project
+ruff check --fix $project test*.py test/*.py
+coverage run $(which pytest)
+coverage html
