@@ -2,9 +2,11 @@
 
 set -eux
 
+NO_COLOR=1
 project=$(basename $(pwd))
 
 mypy $project
-ruff check --fix $project test*
+ruff check --select I --fix $project test*
+ruff format
 coverage run $(which pytest)
 coverage html

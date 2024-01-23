@@ -14,7 +14,7 @@ export HISTSIZE=100000
 
 export LANG=en_US.UTF-8
 
-export PYTHONSTARTUP=~/bin/python_startup.py
+export PYTHONSTARTUP=/code/dotfiles/bin/python_startup.py
 
 export TEST_SUPERDUPERDB_COMMITS=false
 

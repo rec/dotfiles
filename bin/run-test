@@ -2,6 +2,7 @@
 
 set -eux
 
+NO_COLOR=1
 project=$(basename $(pwd))
 
 mypy $project.py
