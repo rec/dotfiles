@@ -36,9 +36,7 @@ export PATH=\
 ~/.local/bin:\
 ~/bin:\
 /code/gitz:\
-/code/dotfiles/bash/:\
 /code/dotfiles/bin/:\
-/code/engora-search/scripts:\
 $PV/2.7/bin:\
 $PV/3.6/bin:\
 $PV/3.7/bin:\
@@ -46,25 +44,13 @@ $PV/3.8/bin:\
 $PV/3.9/bin:\
 $PV/3.10/bin:\
 $PV/3.11/bin:\
-/opt/homebrew/opt/ruby/bin
-
-if [[ "$(/bin/hostname)" == "bantam.local" ]]; then
-
-    export PATH=$PATH:\
-/Applications/Postgres.app/Contents/Versions/13/bin:\
-/usr/local/opt/openssl/bin:\
-/usr/local/bin
-
-elif [[ "$(/bin/hostname)" == "bolt.local" ]]; then
-    export PATH=$PATH:\
 /opt/homebrew/bin:\
 /opt/homebrew/opt/postgresql@13/bin:\
-/usr/local/bin
-
-fi
-
-export PATH=$PATH:\
+/opt/homebrew/opt/ruby/bin:\
+/usr/local/bin:\
 /usr/bin:\
 /bin:\
 /usr/sbin:\
 /sbin
+
+# /usr/local/texlive/2023basic/bin/universal-darwin

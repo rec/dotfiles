@@ -55,10 +55,12 @@ Windows, use forward slashes like: c:/foo/bar/baz ")
 ;;; buffer etc.
 
 (defvar dc-auto-insert-alist
-  '(("\\.tex$"         . "tex-insert.tex")
+  '(
+    ("\\.tex$"         . "tex-insert.tex")
     ("\\.c$"           . "c-insert.c")
     ("\\.h$"           . "h-insert.h")
-    ("\\.py$"           . "py_insert.py")
+    ("\\.py$"          . "py-insert.py")
+    ("\\.cpp$"          . "cpp-insert.cpp")
     ("[I]?[Mm]akefile" . "makefile-insert")
     ("\\.scm$"         (dc-fill-initial-content-of-file))
     ("\\.el$"          (dc-fill-initial-content-of-file))

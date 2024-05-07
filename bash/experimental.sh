@@ -2,6 +2,11 @@
 # Experimental
 #
 
+path() {
+    echo $PATH | \
+        python3 -c 'import sys; print(*sys.stdin.read().strip().split(":"), sep="\n")'
+}
+
 flac2mp3() {
     find . \
          -type f \
@@ -208,4 +213,28 @@ branch-to-tag() {
     else
         branch=$(git symbolic-ref -q --short HEAD)
     fi
+}
+
+# find . -type f -name '*.flac' -print -exec sh -c 'i="{}";
+
+flac-to-m4a() {
+    find .\
+         -type f\
+         -name '*.flac'\
+         -print\
+         -exec sh -c '\
+             i="{}"; \
+             ffmpeg -i "$i" -y -v 0 -vcodec copy -acodec alac  "${i%.flac}".m4a && \
+             rm -f "$i"' \;
+}
+
+m4a-to-mp3() {
+    find .\
+         -type f\
+         -name '*.m4a'\
+         -print\
+         -exec sh -c '\
+             i="{}"; \
+             ffmpeg -i "$i" -q:a 8 "${i%.m4a}".mp3 && \
+             rm -f "$i"' \;
 }

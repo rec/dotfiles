@@ -30,7 +30,7 @@ alias pi='pip install --upgrade pip && python3 -m pip install -e .[dev]'
 alias pop='popd; pushd .'
 alias ppb='poetry publish --build'
 alias py='arch -arm64 python'
-alias pytags="find x -name \*.py | xargs etags"
+alias pytags="find . -name \*.py | xargs etags"
 
 alias recs='/code/recs/.direnv/python-3.10/bin/python -m recs'
 alias rmpyc='find . -name \*.pyc | xargs rm'
