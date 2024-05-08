@@ -12,6 +12,7 @@ alias d86='TERM=dumb direnv exec . time arch -x86_64'
 alias da='direnv allow'
 alias dboard='/code/multi/.direnv/python-3.11/bin/python -m multi dashboard --push'
 alias dashboard='/code/multi/.direnv/python-3.11/bin/python -m multi dashboard --push'
+alias dev='ssh -p 2223 rec@eu.quansight.dev'
 
 alias ffpmeg='ffpmeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
@@ -37,8 +38,7 @@ alias rmpyc='find . -name \*.pyc | xargs rm'
 alias rs='rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos'
 
 alias s1='sleep 1'
-alias sb='source ~/.bashrc'
-alias sea='ssh search.engora.tech'
+alias sb='source ~/.bash_profile'
 alias ssp='ssh -l pi $CHOPIN'
 
 alias ts='date "+%Y%m%d_%H%M%S"'

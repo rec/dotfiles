@@ -37,20 +37,15 @@ export PATH=\
 ~/bin:\
 /code/gitz:\
 /code/dotfiles/bin/:\
-$PV/2.7/bin:\
-$PV/3.6/bin:\
-$PV/3.7/bin:\
-$PV/3.8/bin:\
-$PV/3.9/bin:\
-$PV/3.10/bin:\
-$PV/3.11/bin:\
+/usr/local/bin:\
 /opt/homebrew/bin:\
 /opt/homebrew/opt/postgresql@13/bin:\
 /opt/homebrew/opt/ruby/bin:\
-/usr/local/bin:\
 /usr/bin:\
 /bin:\
 /usr/sbin:\
 /sbin
+
+export DEV=rec:2223@eu.quansight.dev
 
 # /usr/local/texlive/2023basic/bin/universal-darwin
