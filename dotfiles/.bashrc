@@ -4,12 +4,19 @@ if [ -f $SECRETS ]; then
     . $SECRETS
 fi
 
-export CODE_ROOT=/code
+IFS=. read -ra host <<< $(hostname)
 
-. $CODE_ROOT/dotfiles/bash/aliases.sh
-. $CODE_ROOT/dotfiles/bash/environment-variables.sh
-. $CODE_ROOT/dotfiles/bash/functions.sh
-. $CODE_ROOT/dotfiles/bash/interactive.sh
-# . $CODE_ROOT/pppp/pppp.sh
+if [[ $host == "qgpu3" ]]; then
+    export CODE_ROOT=~/git
+else
+    export CODE_ROOT=/code
+fi
 
-eval "$(direnv hook bash)"
+bash_root=$CODE_ROOT/dotfiles/bash
+
+. $bash_root/init-$host.sh
+
+. $bash_root/aliases.sh
+. $bash_root/environment-variables.sh
+. $bash_root/functions.sh
+. $bash_root/interactive.sh
