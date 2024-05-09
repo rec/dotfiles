@@ -7,7 +7,6 @@ export DIRENV_LOG_FORMAT=
 export DYLD_LIBRARY_PATH=/opt/homebrew/lib
 
 export EDITOR=emacsclient
-export ENGORA_COLORIZE=false
 
 export HISTFILESIZE=100000000
 export HISTSIZE=100000
@@ -29,9 +28,6 @@ parse_git_branch() {
 }
 
 export PS1="\[\033[32m\]\$(parse_git_branch)\[\033[00m\]\u@\h:\w$ "
-
-PV=/Library/Frameworks/Python.framework/Versions
-
 export PATH=\
 ~/.local/bin:\
 ~/bin:\
