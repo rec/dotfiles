@@ -10,6 +10,21 @@
 
 (package-initialize)
 
-(setq load-path (cons (expand-file-name "/code/dotfiles/elisp") load-path))
-(setq load-path (cons (expand-file-name "/code/dotfiles/elisp/libraries") load-path))
+(if (string-equal system-type "darwin")
+    (setq code-root "/code")
+    (setq code-root (expand-file-name "~/git"))
+    )
+
+(setq elisp-path (concat code-root "/dotfiles/elisp"))
+(message elisp-path)
+
+;;(setq load-path (cons (concat code-root "/dotfiles/elisp") load-path))
+;;(setq load-path (cons (concat code-root "/dotfiles/elisp/libraries") load-path))
+
+;;(setq load-path (cons (expand-file-name "/code/dotfiles/elisp") load-path))
+;;(setq load-path (cons (expand-file-name "/code/dotfiles/elisp/libraries") load-path))
+
+(setq load-path (cons elisp-path load-path))
+(setq load-path (cons "/code/dotfiles/elisp/libraries" load-path))
+
 (load-library "startup")

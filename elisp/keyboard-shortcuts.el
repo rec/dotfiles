@@ -1,7 +1,5 @@
 (define-key (current-global-map) "\C-c!" 'shell-here)
 
-(defalias 'gsk 'global-set-key)
-
 (fset 'newfile
    [escape ?4 ?\M-x ?f ?i ?l ?e ?- ?f ?i ?l ?e])
 
@@ -36,6 +34,9 @@
 (define-key key-translation-map (kbd "<kp-multiply>") "\C-g")
 (define-key key-translation-map (kbd "<kp-1>") "\C-s")
 (define-key key-translation-map (kbd "<kp-3>") "\C-r")
+
+(defalias 'gsk 'global-set-key)
+
 ;; (gsk (kbd "<clear>") 'dabbrev-expand)
 ;;(define-key key-translation-map (kbd "<clear>") "\M-/")
 
