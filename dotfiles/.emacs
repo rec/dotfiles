@@ -16,15 +16,8 @@
     )
 
 (setq elisp-path (concat code-root "/dotfiles/elisp"))
-(message elisp-path)
-
-;;(setq load-path (cons (concat code-root "/dotfiles/elisp") load-path))
-;;(setq load-path (cons (concat code-root "/dotfiles/elisp/libraries") load-path))
-
-;;(setq load-path (cons (expand-file-name "/code/dotfiles/elisp") load-path))
-;;(setq load-path (cons (expand-file-name "/code/dotfiles/elisp/libraries") load-path))
-
+(setq elisp-library-path (concat elisp-path "/libraries"))
 (setq load-path (cons elisp-path load-path))
-(setq load-path (cons "/code/dotfiles/elisp/libraries" load-path))
+(setq load-path (cons elisp-library-path load-path))
 
 (load-library "startup")
