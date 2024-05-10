@@ -1,4 +1,4 @@
-(package-install 'cython-mode)
+;; (package-install 'cython-mode)
 (package-install 'dash)
 (package-install 'dash-functional)
 (package-install 'git-gutter)

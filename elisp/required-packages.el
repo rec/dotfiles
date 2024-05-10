@@ -5,7 +5,7 @@
 
 (package-initialize)
 
-(require 'cython-mode)
+;; (require 'cython-mode)
 (require 'dash)
 (require 'dash-functional)
 (require 'defaultcontent)
