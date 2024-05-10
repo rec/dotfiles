@@ -64,7 +64,7 @@ alias gu='git update'
 alias gw='git switch'
 
 cg() {
-    cd /code/$1
+    cd $CODE_ROOT/$1
 }
 
 gcamp() {
@@ -117,7 +117,7 @@ gcap() {
 }
 
 gunused() {
-    gc `/code/dotfiles/python/unused_branch.py $@`
+    gc `$CODE_ROOT/dotfiles/python/unused_branch.py $@`
 }
 
 branch-to-tag() {
@@ -179,7 +179,7 @@ gmaf() {
 }
 
 gbase-f() {
-    BASE=`/code/dotfiles/python/base_branch.py`
+    BASE=`$CODE_ROOT/dotfiles/python/base_branch.py`
 
     git fetch upstream && git rebase upstream/$BASE
 }

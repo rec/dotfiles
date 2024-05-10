@@ -1,3 +1,3 @@
-. /code/dotfiles/bash/cd.sh
-. /code/dotfiles/bash/experimental.sh
-. /code/dotfiles/bash/git.sh
+. $CODE_ROOT/dotfiles/bash/cd.sh
+. $CODE_ROOT/dotfiles/bash/experimental.sh
+. $CODE_ROOT/dotfiles/bash/git.sh

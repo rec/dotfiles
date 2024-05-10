@@ -7,7 +7,7 @@ export EDITOR=emacsclient
 export HISTFILESIZE=100000000
 export HISTSIZE=100000
 export LANG=en_US.UTF-8
-export PYTHONSTARTUP=/code/dotfiles/bin/python_startup.py
+export PYTHONSTARTUP=$CODE_ROOT/dotfiles/bin/python_startup.py
 
 if [ ! -z "$INSIDE_EMACS" ]; then
     export TERM=emacs
