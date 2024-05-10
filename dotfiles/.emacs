@@ -1,5 +1,4 @@
 (setq elisp-path (expand-file-name "~/git/dotfiles/elisp"))
-
 (setq elisp-library-path (concat elisp-path "/libraries"))
 (setq load-path (cons elisp-path load-path))
 (setq load-path (cons elisp-library-path load-path))
@@ -44,4 +43,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(whitespace-empty ((t (:background "white smoke" :foreground "firebrick"))))
+ '(whitespace-line ((t (:background "gray93" :foreground "black"))))
+ '(whitespace-tab ((t (:background "White" :foreground "lightgray"))))
+ '(whitespace-trailing ((t (:background "gray97" :foreground "black" :weight bold))))
+ '(diff-mode-default ((t (:inherit autoface-default :height 120 :family "Menlo"))) t)
 )
