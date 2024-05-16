@@ -8,7 +8,7 @@ IFS=. read -ra hosts <<< $(hostname)
 host=$hosts
 
 if [[ $host == "qgpu3" ]]; then
-    export CODE_ROOT=~/git
+    export CODE_ROOT=~/code
 else
     export CODE_ROOT=/code
 fi

@@ -3,15 +3,14 @@
 source=${1:-/code}
 target=${2:-~}
 
-set -euo pipefail
 
 # Omit .bash_profile
-for file in .bash_completion .bashrc .emacs .emacs.d .gitconfig; do
-    s=~"$source/dotfiles/dotfiles/$file"
-    t="$target/$file"
+for file in .bash_completion .bashrc .bash_profile .emacs .emacs.d .gitconfig; do
+    s=~$source/dotfiles/dotfiles/$file
+    t=$target/$file
 
-    if [ -f "$t" ]; then
-        echo mv "$t" "$t".bak
+    if [ -f $t ]; then
+        mv $t $t.bak
     fi
-    echo ln -s "$s" "$t"
+    ln -s $s $t
 done
