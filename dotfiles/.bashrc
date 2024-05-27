@@ -1,7 +1,7 @@
 SECRETS=~/.secrets.sh
 
 if [ -f $SECRETS ]; then
-    . $SECRETS
+    source $SECRETS
 fi
 
 IFS=. read -ra hosts <<< $(hostname)
@@ -36,4 +36,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-conda activate pytorch-dev
+# conda activate pytorch-dev

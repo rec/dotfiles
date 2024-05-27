@@ -1,4 +1,4 @@
-(setq elisp-path (expand-file-name "~/git/dotfiles/elisp"))
+(setq elisp-path (expand-file-name "~/code/dotfiles/elisp"))
 
 (setq elisp-library-path (concat elisp-path "/libraries"))
 (setq load-path (cons elisp-path load-path))

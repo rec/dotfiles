@@ -4,6 +4,7 @@ alias cds="cd $CODE_ROOT/recs"
 alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
 alias cdr="cd $CODE_ROOT/recs"
+alias cdt="cd ~/git/pytorch"
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 alias cra="ssh vultacrawl.duckdns.org"
 
@@ -23,6 +24,7 @@ alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 alias hg="history | grep"
 
 alias l="exa -lF --git"
+alias lb='lintrunner -m $(git symbolic-ref -q --short HEAD)'
 
 alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
 alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"

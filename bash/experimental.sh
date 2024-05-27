@@ -2,6 +2,25 @@
 # Experimental
 #
 
+export GIT_API_ROOT=https://api.github.com/repos/pytorch/pytorch
+
+_git_api() {
+    curl \
+        -L \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer $GIT_TOKEN" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        $GIT_API_ROOT/$1\?per_page=100
+}
+
+load-log() {
+    if [[ -z "$1" ]] ; then
+        echo "Usage: load-log <JOB ID>"
+        return 1
+    fi
+    _git_api actions/jobs/$1/logs
+}
+
 path() {
     echo $PATH | \
         python3 -c 'import sys; print(*sys.stdin.read().strip().split(":"), sep="\n")'
