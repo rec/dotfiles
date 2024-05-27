@@ -21,12 +21,9 @@
 (add-to-list 'default-frame-alist '(height . 55))
 (add-to-list 'default-frame-alist '(width . 85))
 
-(auto-compression-mode t)
-(blink-cursor-mode nil)
-(column-number-mode t)
-(global-auto-revert-mode t)
-(global-font-lock-mode t)
-(global-whitespace-mode t)
+;; (global-auto-revert-mode t)
+;; (global-font-lock-mode t)
+;; (global-whitespace-mode t)
 
 (put 'dired-find-alternate-file 'disabled nil)
 
