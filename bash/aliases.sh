@@ -1,12 +1,13 @@
 alias bbb="find . -name \*.py | xargs $CODE_ROOT/env/black/bin/black -l 79 -S"
+alias build='cd ~/git/torch-build && ./torch-build.sh && ./pytorch-build.sh'
 
+alias ca='conda activate pytorch-dev'
 alias cds="cd $CODE_ROOT/recs"
 alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
 alias cdr="cd $CODE_ROOT/recs"
 alias cdt="cd ~/git/pytorch"
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
-alias cra="ssh vultacrawl.duckdns.org"
 
 alias d="TERM=dumb direnv exec . time arch -arm64"
 alias d86="TERM=dumb direnv exec . time arch -x86_64"
@@ -15,10 +16,13 @@ alias dboard="$CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi dashboard
 alias dashboard="$CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi dashboard --push"
 alias dev="ssh -p 2223 rec@eu.quansight.dev"
 
+alias errors='~/code/ghlogs/commands.sh > ~/git/pytorch/commands.sh && chmod +x ~/git/pytorch/commands.sh'
+
 alias ffpmeg="ffpmeg -hide_banner"
 alias ffprobe="ffprobe -hide_banner"
 alias fm="python3.11 $CODE_ROOT/test/python/ffmpeg.py"
 
+alias ghs='ghstack submit -u'
 alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 
 alias hg="history | grep"
