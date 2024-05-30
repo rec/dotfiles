@@ -1,8 +1,24 @@
-(setq elisp-path (expand-file-name "~/code/dotfiles/elisp"))
+;; ____________________________________________________________________________
+;; Aquamacs custom-file warning:
+;; Warning: After loading this .emacs file, Aquamacs will also load
+;; customizations from `custom-file' (customizations.el). Any settings there
+;; will override those made here.
+;; Consider moving your startup settings to the Preferences.el file, which
+;; is loaded after `custom-file':
+;; ~/Library/Preferences/Aquamacs Emacs/Preferences
+;; _____________________________________________________________________________
 
-(setq elisp-library-path (concat elisp-path "/libraries"))
-(setq load-path (cons elisp-path load-path))
-(setq load-path (cons elisp-library-path load-path))
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+;; (setq elisp-path (expand-file-name "~/code/dotfiles/elisp"))
+
+;; (setq elisp-library-path (concat elisp-path "/libraries"))
+;; (setq load-path (cons elisp-path load-path))
+;; (setq load-path (cons elisp-library-path load-path))
 
 (if (string-equal system-type "darwin")
     (setq code-root "/code")
@@ -10,6 +26,8 @@
     )
 
 (setq elisp-path (concat code-root "/dotfiles/elisp"))
+(setq melpa-path (concat code-root "/dotfiles/elisp"))
+(setq elisp-library-path (concat elisp-path "/libraries"))
 (setq elisp-library-path (concat elisp-path "/libraries"))
 (setq load-path (cons elisp-path load-path))
 (setq load-path (cons elisp-library-path load-path))
