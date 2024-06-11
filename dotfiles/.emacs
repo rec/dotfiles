@@ -28,7 +28,6 @@
 (setq elisp-path (concat code-root "/dotfiles/elisp"))
 (setq melpa-path (concat code-root "/dotfiles/elisp"))
 (setq elisp-library-path (concat elisp-path "/libraries"))
-(setq elisp-library-path (concat elisp-path "/libraries"))
 (setq load-path (cons elisp-path load-path))
 (setq load-path (cons elisp-library-path load-path))
 
