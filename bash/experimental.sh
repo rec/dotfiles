@@ -2,6 +2,32 @@
 # Experimental
 #
 
+switch() {
+    rm -f ~/src
+    export PYTORCH_BUILD_SUFFIX=$1
+    ln -s ~/git${PYTORCH_BUILD_SUFFIX} ~/src
+    ca
+ }
+
+cdt() {
+    cd ~/src/pytorch
+}
+
+errors() {
+    error_file=~/git${PYTORCH_BUILD_SUFFIX}/pytorch/commands.sh \
+        && echo -e "#/bin/bash\n\nset -x\n" > $error_file \
+        && python ~/code/ghlogs/failed_test_commands.py $@ >> $error_file \
+        && chmod +x $error_file
+}
+
+build() {
+    cd ~/git/torch-build \
+        && ./torch-build.sh \
+        && cdt \
+        && echo "$(parse_git_branch)$(git rev-parse HEAD) $(pwd -P)" >> ~/compilations.txt
+}
+
+
 export GIT_API_ROOT=https://api.github.com/repos/pytorch/pytorch
 
 _git_api() {
