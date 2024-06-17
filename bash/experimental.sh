@@ -22,7 +22,7 @@ errors() {
 
 build() {
     cd ~/git/torch-build \
-        && ./torch-build.sh \
+        && ./pytorch-build.sh \
         && cdt \
         && echo "$(parse_git_branch)$(git rev-parse HEAD) $(pwd -P)" >> ~/compilations.txt
 }
