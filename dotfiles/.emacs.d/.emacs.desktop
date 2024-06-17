@@ -1,0 +1,259 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Jun 17 13:25:02 2024
+;; Desktop file format version 208
+;; Emacs version 29.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (26224 7438 323423 0) (desktop . "208") "tom@bolt.home" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font . "-*-Monaco-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "mac:textColor") (background-color . "mac:textBackgroundColor") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (alpha) (alpha-background) (scroll-bar-foreground) (scroll-bar-background) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (menu-bar-lines . 1) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (skip-taskbar) (z-group) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (last-focus-update) (frameset--id . "1273-7760-FEB6-9462") (frameset--mini t) (height . 49) (width . 85) (modeline . t) (unsplittable) (left . 285) (top . 38) (icon-name) (display . "Mac") (explicit-name) (tool-bar-position . top)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 711) (pixel-height . 816) (total-width . 88) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (buffer "add-decompositions.diff" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 11170) (start . 10202))) (((minibuffer . t) (undecorated) (override-redirect) (font . "-*-Monaco-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "mac:textColor") (background-color . "mac:textBackgroundColor") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (alpha) (alpha-background) (scroll-bar-foreground) (scroll-bar-background) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (menu-bar-lines . 1) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (last-focus-update . t) (frameset--id . "BFF4-B0C3-6EB1-FFF9") (frameset--mini t) (height . 49) (width . 133) (modeline . t) (unsplittable) (left . 48) (top . 71) (icon-name) (display . "Mac") (explicit-name) (tool-bar-position . top)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 1095) (pixel-height . 816) (total-width . 137) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (buffer "*build*" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("common_methods_invocations.py" 933439 935486) ("core.py" 94614 95610))) (((minibuffer . t) (undecorated) (override-redirect) (font . "-*-Monaco-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "mac:textColor") (background-color . "mac:textBackgroundColor") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (alpha) (alpha-background) (scroll-bar-foreground) (scroll-bar-background) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (menu-bar-lines . 0) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (last-focus-update) (frameset--id . "5F06-5147-88A7-E9E3") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (display . "Mac") (explicit-name) (tool-bar-position . top) (height . 52) (width . 144) (left . 252) (top . 38)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 1183) (pixel-height . 875) (total-width . 148) (total-height . 51) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1183) (pixel-height . 433) (total-width . 148) (total-height . 25) (normal-height . 0.5) (normal-width . 1.0) (buffer "*python*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 60259) (start . 59790)) (prev-buffers ("*python*" 59790 60259) ("decomposition.py" 1 124))) (leaf (last . t) (pixel-width . 1183) (pixel-height . 442) (total-width . 148) (total-height . 26) (normal-height . 0.5) (normal-width . 1.0) (buffer "*python*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 60832) (start . 60031)))) (((minibuffer . t) (undecorated) (override-redirect) (font . "-*-Monaco-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "mac:textColor") (background-color . "mac:textBackgroundColor") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (alpha) (alpha-background) (scroll-bar-foreground) (scroll-bar-background) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (menu-bar-lines . 0) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (environment) (last-focus-update) (frameset--id . "00EB-B545-4CED-71BC") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "Mac") (explicit-name) (tool-bar-position . top) (height . 53) (width . 144) (left . 399) (top . 38)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 1183) (pixel-height . 899) (total-width . 148) (total-height . 53) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1183) (pixel-height . 455) (total-width . 148) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "commands.sh" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 592) (start . 1)) (prev-buffers ("*grep*" 1762 2576) ("*build*" 1 77523) ("test_ops.py<functorch>" 46839 47278) ("common_methods_invocations.py" 580976 580977) ("*python*" 59812 60832))) (leaf (last . t) (pixel-width . 1183) (pixel-height . 444) (total-width . 148) (total-height . 26) (normal-height . 0.5) (normal-width . 1.0) (buffer "*python*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 60832) (start . 60031)) (prev-buffers ("*build*" 1 77523) ("commands.sh" 1 592) ("common_methods_invocations.py" 582636 583025)))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '(#("unbind_copy" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("gradgrad" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("'alias_copy" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("as_strided" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("'expand_as" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("OK" 0 2 (isearch-case-fold-search nil isearch-regexp-function nil)) #("alias_copy" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("alia" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("unbind" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("FAILED" 0 6 (isearch-case-fold-search nil isearch-regexp-function nil)) #("_refs.per" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("fail" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("__refs" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("unbind(" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("ok" 0 2 (isearch-case-fold-search t isearch-regexp-function nil)) #("compreh" 0 7 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/pytorch-build.sh" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/bash/experimental.sh" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_decomp/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_inductor/decomposition.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/" "/code/pytorch/model.py" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch" "/code/dotfiles" "/code/dotfiles/dotfiles/.emacs" "~/synthetic/code/dotfiles" "/code/dotfiles/dotfiles" "/code/dotfiles" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/link-into-emacs.d/lisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_ops.py" "/code/dotfiles/bash/experimental.sh" "/bin/sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_inductor/lowering.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_vmap_registrations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/test_mps.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/distributed/_tensor/test_dtensor_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "~/Library/Preferences/Aquamacs Emacs/" "/code/dotfiles/elisp/keyboard-shortcuts.el" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/code/dotfiles/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_vmap_registrations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/torch-build" "/scp:rec@eu.quansight.dev#2223:~/git/torch-build/pytorch-dev.yaml" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/tom/Library/Preferences/Aquamacs Emacs/customizations.el"
+  "customizations.el"
+  'emacs-lisp-mode
+  '(font-lock-mode eldoc-mode)
+  6124
+  '(5673 nil)
+  nil
+  nil
+  '((buffer-display-time 26220 26284 982731 0) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring (5673 4897 4897 5856))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/dotfiles/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(eldoc-mode font-lock-mode)
+  1461
+  '(1461 nil)
+  nil
+  nil
+  '((buffer-display-time 26220 17583 232358 357000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1461 3424 3424 3424 3424 3424 3424 3424 3424 1461 1461 1461 1461 3424 3424 3424))))
+
+(desktop-create-buffer 208
+  "/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/output_code.py"
+  "output_code.py"
+  'python-mode
+  '(git-gutter-mode eldoc-mode font-lock-mode)
+  53723
+  '(44313 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26219 5458 883531 66000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (37816 44313))))
+
+(desktop-create-buffer 208
+  nil
+  "model__0_forward_1.0"
+  'dired-mode
+  '(font-lock-mode)
+  598
+  '(nil nil)
+  t
+  '("/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/")
+  '((buffer-display-time 26219 1253 209320 66000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/pytorch/model.py"
+  "model.py"
+  'python-mode
+  '(git-gutter-mode eldoc-mode font-lock-mode)
+  518
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26219 1228 591621 66000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/output_code.py"
+  "output_code.py"
+  'python-mode
+  '(git-gutter-mode eldoc-mode font-lock-mode)
+  1289
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26219 1100 936188 66000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (2433 2433))))
+
+(desktop-create-buffer 208
+  nil
+  "model__0_inference_0.0"
+  'dired-mode
+  '(font-lock-mode)
+  600
+  '(nil nil)
+  t
+  '("/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/")
+  '((buffer-display-time 26219 921 674 66000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "pytorch"
+  'dired-mode
+  '(font-lock-mode)
+  170
+  '(nil nil)
+  t
+  '("/code/pytorch/")
+  '((buffer-display-time 26219 694 564370 66000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Applications/Emacs.app/Contents/Resources/lisp/font-lock.el.gz"
+  "font-lock.el.gz"
+  'emacs-lisp-mode
+  '(eldoc-mode font-lock-mode)
+  88112
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 26218 60943 832775 66000) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/synthetic/code/dotfiles/elisp/startup.el"
+  "startup.el"
+  'emacs-lisp-mode
+  '(eldoc-mode font-lock-mode)
+  242
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 26218 59516 376247 863000) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "dotfiles"
+  'dired-mode
+  '(font-lock-mode)
+  226
+  '(1 nil)
+  t
+  '("/code/dotfiles/")
+  '((buffer-display-time 26218 59476 217314 863000))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/synthetic/code/dotfiles/elisp/required-packages.el"
+  "required-packages.el"
+  'emacs-lisp-mode
+  '(auto-revert-mode font-lock-mode eldoc-mode)
+  494
+  '(21 nil)
+  nil
+  nil
+  '((buffer-display-time 26220 23843 358310 0) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring (21 426))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/elisp/set-variables.el"
+  "set-variables.el"
+  'emacs-lisp-mode
+  '(eldoc-mode font-lock-mode)
+  1173
+  '(2065 nil)
+  nil
+  nil
+  '((buffer-display-time 26218 59192 125913 986000) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  nil
+  "elisp"
+  'dired-mode
+  '(font-lock-mode)
+  997
+  '(nil nil)
+  t
+  '("/code/dotfiles/elisp/")
+  '((buffer-display-time 26218 59188 238442 986000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "dotfiles"
+  'dired-mode
+  '(font-lock-mode)
+  126
+  '(nil nil)
+  t
+  '("/code/dotfiles/dotfiles/")
+  '((buffer-display-time 26218 59182 328988 986000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/bash/experimental.sh"
+  "experimental.sh"
+  'sh-mode
+  '(auto-revert-mode font-lock-mode sh-electric-here-document-mode)
+  5226
+  '(5215 nil)
+  nil
+  nil
+  '((buffer-display-time 26218 45193 418048 561000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (889))))
+
+(desktop-create-buffer 208
+  "/code/dotfiles/elisp/keyboard-shortcuts.el"
+  "keyboard-shortcuts.el"
+  'emacs-lisp-mode
+  '(auto-revert-mode font-lock-mode eldoc-mode)
+  205
+  '(5210 nil)
+  nil
+  nil
+  '((buffer-display-time 26218 41161 421369 561000) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring (3906 4133 4133 4096 3087 3087 1 4247 4096 4096 4063 4063 4023 3639 2896 2896 2895 2863 4277 205))))
+
+(desktop-create-buffer 208
+  nil
+  "Aquamacs Emacs"
+  'dired-mode
+  '(font-lock-mode)
+  587
+  '(nil nil)
+  t
+  '("/Users/tom/Library/Preferences/Aquamacs Emacs/")
+  '((buffer-display-time 26217 36676 440915 561000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/code/pytorch/test.py"
+  "test.py"
+  'python-mode
+  '(font-lock-mode eldoc-mode git-gutter-mode)
+  16
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26220 22866 712025 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (229 14 204 1 229 229 229 229 229 228 229))))
+
+(desktop-create-buffer 208
+  nil
+  "dotfiles"
+  'dired-mode
+  '(font-lock-mode)
+  762
+  '(762 nil)
+  t
+  '("/Users/tom/synthetic/code/dotfiles/")
+  '((buffer-display-time 26220 22866 717520 0))
+  '((mark-ring nil)))
+

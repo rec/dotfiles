@@ -6,5 +6,4 @@
 (load-library "hooks")
 ;; (load-library "git-timemachine")
 
-(desktop-save-mode t)
 (server-start)

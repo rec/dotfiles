@@ -1,0 +1,68 @@
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/code/pytorch/test.py" . 16)
+ ("/Users/tom/Library/Preferences/Aquamacs Emacs/"
+  (dired-filename . "/Users/tom/Library/Preferences/Aquamacs Emacs/customizations.3.1.el"))
+ ("/code/dotfiles/elisp/keyboard-shortcuts.el" . 205)
+ ("/code/dotfiles/bash/experimental.sh" . 5226)
+ ("/code/dotfiles/dotfiles/"
+  (dired-filename . "/code/dotfiles/dotfiles/.."))
+ ("/code/dotfiles/elisp/"
+  (dired-filename . "/code/dotfiles/elisp/set-variables.el"))
+ ("/code/dotfiles/elisp/set-variables.el" . 1173)
+ ("/Users/tom/synthetic/code/dotfiles/elisp/required-packages.el" . 426)
+ ("/Users/tom/synthetic/code/dotfiles/"
+  (dired-filename . "/Users/tom/synthetic/code/dotfiles/.gitignore"))
+ ("/code/dotfiles/"
+  (dired-filename . "/code/dotfiles/.git"))
+ ("/Users/tom/synthetic/code/dotfiles/elisp/startup.el" . 242)
+ ("/Applications/Emacs.app/Contents/Resources/lisp/font-lock.el.gz" . 88112)
+ ("/code/pytorch/"
+  (dired-filename . "/code/pytorch/.DS_Store"))
+ ("/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/"
+  (dired-filename . "/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/output_code.py"))
+ ("/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/output_code.py" . 1289)
+ ("/code/pytorch/model.py" . 518)
+ ("/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/"
+  (dired-filename . "/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/output_code.py"))
+ ("/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/output_code.py" . 53723)
+ ("/code/dotfiles/dotfiles/.emacs" . 1461)
+ ("/Users/tom/Library/Preferences/Aquamacs Emacs/customizations.el" . 6124)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" . 1721)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/" . 755)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/opinfo/refs.py" . 1089)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/.bazelignore"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/test/test_mps.py" . 1674)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/test/test_ops.py" . 2771)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/opinfo/definitions/special.py" . 3507)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/opinfo/core.py" . 95956)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/commands.sh" . 156)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/aten/src/ATen/native/native_functions.yaml" . 550537)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" . 935049)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torchgen/packaged/ATen/native/native_functions.yaml" . 550996)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" . 11614)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_refs/__init__.py" . 4207)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/aten/src/ATen/native/ts_native_functions.yaml" . 2358)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/.bazelignore"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/."))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/pytorch-dev.yaml" . 1212)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/torch-clone.sh" . 561)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git_as_strided/pytorch/test/functorch/test_vmap_registrations.py" . 632)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git_as_strided/pytorch/test/functorch/test_vmap.py" . 567)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/test/distributed/_tensor/test_dtensor_ops.py" . 3740)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/test/functorch/test_vmap_registrations.py" . 89)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/test/functorch/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/test/functorch/attn_ft.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/lowering.py" . 3432)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/test/functorch/test_ops.py" . 47236)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/common_methods_invocations.py" . 1134144)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/opinfo/refs.py" . 4076)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/install-packages.el" . 215)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/hooks.el" . 578)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/."))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/link-into-emacs.d/lisp/git-gutter.el" . 16570)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/link-into-emacs.d/lisp/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/link-into-emacs.d/lisp/duplicator.el")))

@@ -1,9 +1,7 @@
 (require 'package)
 
-(add-to-list
- 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
 
 ;; (require 'cython-mode)
 (require 'dash)

@@ -107,9 +107,9 @@
 
 (if (string-equal system-type "darwin")
     (progn
-      (gsk [kp-7] 'cua-paste)
+      (gsk [kp-7] 'yank)
       (gsk [kp-8] 'back-window)
-      (gsk [kp-9] 'cua-paste-pop)
+      (gsk [kp-9] 'yank-pop)
 
       (gsk [kp-4] 'move-beginning-of-line)  ;; raise-next-frame)
       (gsk [kp-5] 'kill-region)
@@ -147,6 +147,10 @@
       (gsk [A-down] 'other-window)
 
       (gsk [A-kp-divide] 'apply-macro-to-region-lines)
+      (gsk [home] 'beginning-of-buffer)
+      (gsk [end] 'end-of-buffer)
+      (gsk [M-a] 'mark-whole-buffer)
+      (gsk [S-a] 'mark-whole-buffer)
       )
 
   (progn ;; this is totally old...

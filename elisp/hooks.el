@@ -16,7 +16,7 @@
  (setq c++-tab-always-indent t)
  (setq c-basic-offset 4)
  (setq c-indent-level 4)
- (git-gutter-mode t)
+;; (git-gutter-mode t)
  )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
