@@ -49,7 +49,7 @@
  '(global-mark-ring-max 256)
  '(global-whitespace-mode t)
  '(grep-command
-   "egrep -nHIR * --include \\*.py --include \\*.h --include \\*.cpp --include \\*.yaml -e ")
+   "egrep -nHIR * --include \\*.py --include \\*.h --include \\*.cpp --include \\*.yaml --exclude-dir=build -e ")
  '(grep-find-command
    '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +" . 85))
  '(grep-find-template
@@ -63,6 +63,7 @@
  '(indicate-buffer-boundaries 'left)
  '(kill-ring-max 1024)
  '(large-file-warning-threshold nil)
+ '(magit-auto-revert-mode nil)
  '(mark-ring-max 256)
  '(package-selected-packages
    '(saveplace git-gutter git-gutter+ yaml-mode template shell-here s realgud python-mode pylint protobuf-mode markdown-mode magit-filenotify live-preview google-c-style golden-ratio-scroll-screen electric-operator dash-functional dash-at-point cython-mode counsel blacken))
@@ -87,6 +88,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Monaco" :foundry "nil" :slant normal :weight medium :height 130 :width normal))))
  '(custom-variable-tag ((t (:foreground "light blue3" :weight bold))))
  '(diff-added ((t (:inherit diff-changed :extend t :background "#bbffbb"))))
  '(diff-file-header ((t (:extend t :background "grey80" :weight bold))))

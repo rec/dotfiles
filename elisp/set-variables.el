@@ -26,8 +26,9 @@
 ;; (global-whitespace-mode t)
 
 (put 'dired-find-alternate-file 'disabled nil)
-
 (setq
+  auto-revert-use-notify nil
+  auto-revert-interval 20
   backup-by-copying-when-linked t   ; handle links correctly
   backup-by-copying-when-mismatch t
   backup-directory-alist (list (cons "." backup-dir))
