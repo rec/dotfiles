@@ -9,3 +9,5 @@ junk/
 desktops/
 lisp/step-elisp
 url/
+.emacs.desktop
+places
