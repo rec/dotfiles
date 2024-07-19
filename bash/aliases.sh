@@ -1,6 +1,6 @@
 alias bbb="find . -name \*.py | xargs $CODE_ROOT/env/black/bin/black -l 79 -S"
 
-alias ca='conda activate pytorch-dev$PYTORCH_BUILD_SUFFIX'
+alias ca='conda activate pytorch-dev'
 alias cds="cd $CODE_ROOT/recs"
 alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
@@ -19,6 +19,7 @@ alias ffprobe="ffprobe -hide_banner"
 alias fm="python3.11 $CODE_ROOT/test/python/ffmpeg.py"
 
 alias ghs='ghstack submit -u'
+alias gahs='gcama && ghs'
 alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 
 alias hg="history | grep"

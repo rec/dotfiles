@@ -2,19 +2,12 @@
 # Experimental
 #
 
-switch() {
-    rm -f ~/src
-    export PYTORCH_BUILD_SUFFIX=$1
-    ln -s ~/git${PYTORCH_BUILD_SUFFIX} ~/src
-    ca
- }
-
 cdt() {
-    cd ~/src/pytorch
+    cd ~/git/pytorch
 }
 
 errors() {
-    error_file=~/git${PYTORCH_BUILD_SUFFIX}/pytorch/commands.sh \
+    error_file=~/git${PYTORCH_BUILD_SUFFIX}/pytorch/errors.sh \
         && echo -e "#/bin/bash\n\nset -x\n" > $error_file \
         && python ~/code/ghlogs/failed_test_commands.py $@ >> $error_file \
         && chmod +x $error_file
@@ -185,10 +178,6 @@ find_git_dirty() {
   fi
 }
 
-#rmpyc() {
-#   find . -name \*.pyc | xargs rm
-#}
-
 add_suffix() {
     for suffix
     do
@@ -196,17 +185,7 @@ add_suffix() {
     done
 }
 
-maxcom () {
-    add_suffix js maxpat maxhelp txt \
-        && git commit -m "$1" \
-        && git push
-}
-
-d2() {
-    echo D2
-}
-
-gd() {
+gdd() {
     if git diff-index --quiet HEAD -- ; then
         echo unchanged
     else

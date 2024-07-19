@@ -219,27 +219,3 @@
  ("/Users/tom/Library/Preferences/Aquamacs Emacs/customizations.el" . 6124)
  ("/Users/tom/synthetic/code/dotfiles/" . 762)
  ("/code/dotfiles/bash/experimental.sh" . 5226)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/opinfo/refs.py" . 1089)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/"
-  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/.bazelignore"))
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/opinfo/definitions/special.py" . 3507)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/opinfo/core.py" . 95956)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/commands.sh" . 156)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" . 935049)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/"
-  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/."))
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/torch-clone.sh" . 561)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git_as_strided/pytorch/test/functorch/test_vmap_registrations.py" . 632)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git_as_strided/pytorch/test/functorch/test_vmap.py" . 567)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/test/distributed/_tensor/test_dtensor_ops.py" . 3740)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/test/functorch/test_vmap_registrations.py" . 89)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/test/functorch/"
-  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/test/functorch/attn_ft.py"))
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/testing/_internal/opinfo/refs.py" . 4076)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/install-packages.el" . 215)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/hooks.el" . 578)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/"
-  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/."))
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/link-into-emacs.d/lisp/git-gutter.el" . 16570)
- ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/link-into-emacs.d/lisp/"
-  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/link-into-emacs.d/lisp/duplicator.el")))

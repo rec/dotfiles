@@ -18,6 +18,13 @@ alias gcam='git commit --amend -m'
 alias gcan='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
+alias strict='g fetch upstream viable/strict &&  g rebase upstream/viable/strict'
+
+gd() {
+    out=/tmp/rec/$(git symbolic-ref --short HEAD).diff
+    g diff HEAD~ > $out
+    echo "Written to $out"
+}
 
 alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
@@ -145,6 +152,7 @@ branches-to-tags() {
         branch-to-tag "$var"
     done
 }
+
 
 gre() {
     if [ -z "$1" ] ; then
