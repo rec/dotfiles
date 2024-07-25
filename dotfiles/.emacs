@@ -22,7 +22,7 @@
 
 (if (string-equal system-type "darwin")
     (setq code-root "/code")
-    (setq code-root (expand-file-name "~/git"))
+    (setq code-root (expand-file-name "~/code"))
     )
 
 (setq elisp-path (concat code-root "/dotfiles/elisp"))
