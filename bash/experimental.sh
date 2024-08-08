@@ -3,7 +3,20 @@
 #
 
 cdt() {
-    cd ~/git/pytorch
+    cd ~/git${PYTORCH_BUILD_SUFFIX}/pytorch
+}
+
+ca() {
+    conda activate pytorch-dev${PYTORCH_BUILD_SUFFIX}
+}
+
+c() {
+    if [ -z $1 ] || [[ $1 = -* ]]; then
+       export PYTORCH_BUILD_SUFFIX=$1
+    else
+        export PYTORCH_BUILD_SUFFIX=-$1
+    fi
+    cdt && ca
 }
 
 errors() {
@@ -87,10 +100,6 @@ openpy() {
         return 1
     fi
     $EDITOR -n `python -c "import $1; print($1.__file__)"`
-}
-
-c() {
-    cd $CODE_ROOT/$1
 }
 
 record() {

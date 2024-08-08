@@ -2,31 +2,55 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Jul 25 14:43:29 2024
+;; Created Thu Aug  8 09:23:47 2024
 ;; Desktop file format version 208
 ;; Emacs version 27.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26274 25745 372104 536000) (desktop . "208") "rec@qgpu3" nil nil ((((minibuffer . t) (tty-type . "screen") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (cursor-color . "white") (tool-bar-lines . 0) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (font . "tty") (height . 38) (width . 94) (modeline . t) (unsplittable) (menu-bar-lines . 1) (tab-bar-lines . 0) (frameset--id . "2848-E971-7098-000C") (frameset--mini t)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 94) (pixel-height . 37) (total-width . 94) (total-height . 37) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 94) (pixel-height . 18) (total-width . 94) (total-height . 18) (normal-height . 0.5) (normal-width . 1.0) (buffer "*gud-pdb*" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 14783) (start . 13414)) (prev-buffers ("test_functions.py" 12274 12582) ("*gud-pdb*" 1 14783) ("symbolic_convert.py" 28026 28318) ("pytorch" 1 313) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 94) (pixel-height . 19) (total-width . 94) (total-height . 19) (normal-height . 0.5) (normal-width . 1.0) (buffer "symbolic_convert.py" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 28502) (start . 28189)) (prev-buffers ("symbolic_convert.py" 28189 28502) ("testing.py" 6673 7047) ("eval_frame.py" 17082 17349) ("test_functions.py" 12446 12675)))))])
+(setq desktop-saved-frameset [frameset 1 (26292 36515 96273 525000) (desktop . "208") "rec@qgpu3" nil nil ((((minibuffer . t) (tty-type . "screen") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (cursor-color . "white") (tool-bar-lines . 0) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (font . "tty") (height . 52) (width . 102) (modeline . t) (unsplittable) (menu-bar-lines . 1) (tab-bar-lines . 0) (frameset--id . "F083-2277-50EC-63F8") (frameset--mini t)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 102) (pixel-height . 51) (total-width . 102) (total-height . 51) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 102) (pixel-height . 25) (total-width . 102) (total-height . 25) (normal-height . 0.4803921568627451) (normal-width . 1.0) (buffer "*gud-pdb*" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 183580) (start . 182549)) (prev-buffers ("user_defined.py" 3260 3805) ("*gud-pdb*" 143911 183580))) (leaf (last . t) (pixel-width . 102) (pixel-height . 26) (total-width . 102) (total-height . 26) (normal-height . 0.5196078431372549) (normal-width . 1.0) (buffer "user_defined.py" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 4478) (start . 4039)) (prev-buffers ("test_simple_torch_function.py" 1 1) ("user_defined.py" 3435 3805) ("pdb.py" 37896 38396)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '(#("test_dict_keys" 0 14 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_out(" 0 9 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_grad(" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("break" 0 5 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_grad" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("unbind_copy" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("gradgrad" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("'alias_copy" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("as_strided" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("'expand_as" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("OK" 0 2 (isearch-case-fold-search nil isearch-regexp-function nil)) #("alias_copy" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("alia" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("unbind" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("FAILED" 0 6 (isearch-case-fold-search nil isearch-regexp-function nil)) #("_refs.per" 0 9 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq search-ring '(#("bpdb" 0 4 (isearch-regexp-function nil isearch-case-fold-search t)) #("Method" 0 6 (isearch-regexp-function nil isearch-case-fold-search nil)) #("var_get" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("skipfunc" 0 8 (isearch-regexp-function nil isearch-case-fold-search t)) #("lookup_inner" 0 12 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_dict_keys" 0 14 (isearch-case-fold-search t isearch-regexp-function nil)) #("test_out(" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("test_grad(" 0 10 (isearch-regexp-function nil isearch-case-fold-search t)) #("break" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("test_grad" 0 9 (isearch-regexp-function nil isearch-case-fold-search t)) #("unbind_copy" 0 11 (isearch-regexp-function nil isearch-case-fold-search t)) #("gradgrad" 0 8 (isearch-regexp-function nil isearch-case-fold-search t)) #("'alias_copy" 0 11 (isearch-regexp-function nil isearch-case-fold-search t)) #("as_strided" 0 10 (isearch-regexp-function nil isearch-case-fold-search t)) #("'expand_as" 0 10 (isearch-regexp-function nil isearch-case-fold-search t)) #("OK" 0 2 (isearch-regexp-function nil isearch-case-fold-search nil))))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_prims/context.py" "~/git/pytorch" "~/.ssh/config" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/pytorch-build.sh" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/bash/experimental.sh" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_decomp/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_inductor/decomposition.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/" "/code/pytorch/model.py" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch" "/code/dotfiles" "/code/dotfiles/dotfiles/.emacs" "~/synthetic/code/dotfiles" "/code/dotfiles/dotfiles" "/code/dotfiles" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/link-into-emacs.d/lisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_ops.py" "/code/dotfiles/bash/experimental.sh" "/bin/sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_inductor/lowering.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_vmap_registrations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/test_mps.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/distributed/_tensor/test_dtensor_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "~/Library/Preferences/Aquamacs Emacs/" "/code/dotfiles/elisp/keyboard-shortcuts.el" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/code/dotfiles/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_vmap_registrations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/torch-build" "/scp:rec@eu.quansight.dev#2223:~/git/torch-build/pytorch-dev.yaml" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/"))
+(setq file-name-history '("~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch/torch/overrides.py" "~/git/pytorch/torch/_dynamo/variables/user_defined.py" "~/git-clean/pytorch/torch/_dynamo/variables/builtin.py" "~/git-clean/pytorch/" "~/git/pytorch/" "~/git/pytorch/torch/_dynamo/variables/builtin.py" "~/git/pytorch/torch/_dynamo/convert_frame.py" "~/git/pytorch/torch/_dynamo/trace_rules.py" "~/git/pytorch/torch/_dynamo/variables/builtin.py" "/home/rec/.conda/envs/pytorch-dev/lib/python3.8/types.py" "~/git/pytorch/torch/_dynamo/variables/base.py" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch/torch/_dynamo/bytecode_transformation.py" "~/git/pytorch/torch/_dynamo/variables/functions.py" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_prims/context.py" "~/git/pytorch" "~/.ssh/config" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/pytorch-build.sh" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/bash/experimental.sh" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_decomp/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_inductor/decomposition.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/" "/code/pytorch/model.py" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch" "/code/dotfiles" "/code/dotfiles/dotfiles/.emacs" "~/synthetic/code/dotfiles" "/code/dotfiles/dotfiles" "/code/dotfiles" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/link-into-emacs.d/lisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_ops.py" "/code/dotfiles/bash/experimental.sh" "/bin/sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_inductor/lowering.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_vmap_registrations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/test_mps.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/distributed/_tensor/test_dtensor_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "~/Library/Preferences/Aquamacs Emacs/" "/code/dotfiles/elisp/keyboard-shortcuts.el" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/code/dotfiles/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/rec/git/pytorch/test/dynamo/test_functions.py"
-  "test_functions.py"
+  "/home/rec/git/pytorch/torch/_dynamo/variables/user_defined.py"
+  "user_defined.py"
   'python-mode
   '(eldoc-mode git-gutter-mode global-whitespace-mode)
-  12675
-  '(77 nil)
+  4478
+  '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26274 16181 596557 966000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26292 36441 539286 654000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/code/test/python/test_simple_torch_function.py"
+  "test_simple_torch_function.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26292 36438 819304 878000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/git/pytorch/torch/_dynamo/variables/torch_function.py"
+  "torch_function.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  4358
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26289 2681 268770 2000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -34,46 +58,106 @@
   "symbolic_convert.py"
   'python-mode
   '(eldoc-mode git-gutter-mode global-whitespace-mode)
-  28502
+  32691
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26274 25743 617328 769000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26289 5050 822032 984000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  nil
-  "pytorch"
-  'dired-mode
-  '(global-whitespace-mode)
-  313
-  '(nil nil)
-  t
-  '("/home/rec/git/pytorch/")
-  '((buffer-display-time 26273 10595 345829 172000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/home/rec/git/pytorch/torch/_dynamo/testing.py"
-  "testing.py"
+  "/home/rec/git/pytorch/torch/overrides.py"
+  "overrides.py"
   'python-mode
   '(eldoc-mode git-gutter-mode global-whitespace-mode)
-  7047
-  '(nil nil)
+  12663
+  '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26274 16300 638149 789000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26288 55990 878978 597000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/home/rec/git/pytorch/torch/_dynamo/eval_frame.py"
-  "eval_frame.py"
+  "/home/rec/.conda/envs/pytorch-dev/lib/python3.8/inspect.py"
+  "inspect.py"
   'python-mode
   '(eldoc-mode git-gutter-mode global-whitespace-mode)
-  17349
+  116508
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26274 16292 935588 570000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26288 55926 233209 663000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/.conda/envs/pytorch-dev/lib/python3.8/pdb.py"
+  "pdb.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  38396
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26292 36384 231823 181000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/git/pytorch/torch/_dynamo/variables/builtin.py"
+  "builtin.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  65093
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26288 58495 285686 283000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/git/pytorch/torch/_dynamo/variables/torch.py"
+  "torch.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  30822
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26289 901 846518 96000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/git/pytorch/torch/_dynamo/variables/lazy.py"
+  "lazy.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  2833
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26289 2628 655102 782000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/git/pytorch/torch/_dynamo/variables/base.py"
+  "base.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  3444
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26289 2535 662022 639000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/rec/git/pytorch/torch/_dynamo/variables/lists.py"
+  "lists.py"
+  'python-mode
+  '(eldoc-mode git-gutter-mode global-whitespace-mode)
+  1797
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26289 2662 897888 67000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 

@@ -1,11 +1,12 @@
 alias bbb="find . -name \*.py | xargs $CODE_ROOT/env/black/bin/black -l 79 -S"
+alias bui='pip uninstall -y torch && python setup.py develop'
 
-alias ca='conda activate pytorch-dev'
 alias cds="cd $CODE_ROOT/recs"
 alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
 alias cdr="cd $CODE_ROOT/recs"
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
+alias clean-torch='python setup.py clean && git clean -xdf aten build third_party torch && git submodule foreach "git clean -xdf" && git submodule update --init --recursive'
 
 alias d="TERM=dumb direnv exec . time arch -arm64"
 alias d86="TERM=dumb direnv exec . time arch -x86_64"
@@ -26,6 +27,7 @@ alias hg="history | grep"
 
 alias l="exa -lF --git"
 alias lb='lintrunner -m $(git symbolic-ref -q --short HEAD)'
+alias lsd='ls -d ~/git*'
 
 alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
 alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"
@@ -45,3 +47,4 @@ alias sb="source ~/.bash_profile"
 alias ssp="ssh -l pi $CHOPIN"
 
 alias ts='date "+%Y%m%d_%H%M%S"'
+alias tm='tmux new-session -A -s'
