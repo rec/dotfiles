@@ -7,7 +7,8 @@ rl() {
     stderr=$$.stderr.txt
     $@ 1>$stdout 2>$stderr \
         && rm $stdout $stderr \
-        || echo "Failed, see $stdout, $stderr"
+        || echo "Failed, see $stdout, $stderr" \
+        && return 1
 }
 
 
