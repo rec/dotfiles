@@ -32,6 +32,7 @@
 (setq load-path (cons elisp-library-path load-path))
 
 (load-library "startup")
+(xterm-mouse-mode +1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -41,8 +42,6 @@
  '(compilation-always-kill t)
  '(compile-command "NO_COLOR=1 d run-tests")
  '(cursor-type 'box)
- '(desktop-save t)
- '(desktop-save-mode t)
  '(etags-table-search-up-depth 10)
  '(explicit-shell-file-name "/bin/bash")
  '(fill-column 88)

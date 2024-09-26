@@ -6,6 +6,13 @@ g () {
     if [[ $# -gt 0 ]]; then git "$@"; else git st; fi
 }
 
+torch-clean() {
+    python setup.py clean && \
+        git clean -xdf aten build third_party torch && \
+        git submodule foreach "git clean -xdf" && \
+        git submodule update --init --recursive
+}
+
 alias garc='git add . && git rebase --continue'
 
 alias gb='git branch'
@@ -18,7 +25,13 @@ alias gcam='git commit --amend -m'
 alias gcan='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
-alias strict='g fetch upstream viable/strict &&  g rebase upstream/viable/strict'
+
+strict() {
+    g fetch upstream viable/strict \
+        && g rebase upstream/viable/strict \
+        && git submodule update --init --recursive \
+        && lintrunner init
+}
 
 gd() {
     out=/tmp/rec/$(git symbolic-ref --short HEAD).diff
@@ -61,7 +74,7 @@ alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase -i upstream/dev'
 alias grm='g reset --soft main'
-alias grs='g reset --soft HEAD~'
+alias grs='g restore --source=HEAD~ --'
 
 alias gs='gl; echo; g st'
 alias gsh='git show > /tmp/git.diff'

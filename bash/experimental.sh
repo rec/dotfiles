@@ -2,6 +2,15 @@
 # Experimental
 #
 
+rl() {
+    stdout=$$.stdout.txt
+    stderr=$$.stderr.txt
+    $@ 1>$stdout 2>$stderr \
+        && rm $stdout $stderr \
+        || echo "Failed, see $stdout, $stderr"
+}
+
+
 cdt() {
     cd ~/git${PYTORCH_BUILD_SUFFIX}/pytorch
 }
@@ -12,11 +21,27 @@ ca() {
 
 c() {
     if [ -z $1 ] || [[ $1 = -* ]]; then
-       export PYTORCH_BUILD_SUFFIX=$1
+        export PYTORCH_BUILD_SUFFIX=$1
     else
         export PYTORCH_BUILD_SUFFIX=-$1
     fi
     cdt && ca
+}
+
+t() {
+    if [ -z $1 ]; then
+        tmux list-sessions
+    else
+        tmux attach -t $@
+    fi
+}
+
+tn() {
+    if [ -z $1 ]; then
+        tmux list-sessions
+    else
+        tmux new-session -A -s $@
+    fi
 }
 
 errors() {
