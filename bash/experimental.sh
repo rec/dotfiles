@@ -3,14 +3,29 @@
 #
 
 rl() {
-    stdout=$$.stdout.txt
-    stderr=$$.stderr.txt
-    $@ 1>$stdout 2>$stderr \
-        && rm $stdout $stderr \
-        || echo "Failed, see $stdout, $stderr" \
-        && return 1
-}
+    tmp=/tmp/$USER
+    procid=$$
+    stdout=$tmp/$procid.stdout.txt
+    stderr=$tmp/$procid.stderr.txt
 
+    if ! mkdir -p tmp ; then
+        echo "Unable to mkdir -p $tmp"
+        return 1
+    fi
+
+    cr="
+"
+    header="\$ $@$cr$cr"
+    echo $header > $stdout
+    echo $header > $stderr
+
+    if $@ >> $stdout 2>> $stderr ; then
+        rm $stdout $stderr
+    else
+        echo "Failed, see $stdout, $stderr"
+        return 1
+    fi
+}
 
 cdt() {
     cd ~/git${PYTORCH_BUILD_SUFFIX}/pytorch

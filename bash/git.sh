@@ -16,6 +16,7 @@ torch-clean() {
 alias garc='git add . && git rebase --continue'
 
 alias gb='git branch'
+alias gbo='rl g fetch origin && gb -r | grep " origin/"'
 alias gbr='git symbolic-ref --short HEAD'
 
 alias gc='git switch'
@@ -27,10 +28,10 @@ alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
 
 strict() {
-    g fetch upstream viable/strict \
-        && g rebase upstream/viable/strict \
-        && git submodule update --init --recursive \
-        && lintrunner init
+    rl git fetch upstream viable/strict \
+        && rl git rebase upstream/viable/strict \
+        && rl git submodule update --init --recursive \
+        && rl lintrunner init
 }
 
 gd() {
@@ -52,7 +53,10 @@ alias glm='git l master..'
 
 alias gmr='gr main && g merge working && gp && gr working'
 
-alias gnew='git new'
+gnew() {
+    g switch -c $1 \
+        && git push --set-upstream origin $1
+}
 
 alias go='g go'
 alias gob='g go b'
@@ -82,6 +86,15 @@ alias gsp='git split && gp'
 
 alias gu='git update'
 alias gw='git switch'
+
+ghc() {
+    if [[ $1 == https* ]] ; then
+        arg=$1
+    else
+        arg=https://github.com/pytorch/pytorch/pull/$s
+    fi
+    ghstack checkout $arg
+}
 
 cg() {
     cd $CODE_ROOT/$1

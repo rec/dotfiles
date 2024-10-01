@@ -21,8 +21,6 @@ alias ffprobe="ffprobe -hide_banner"
 alias fm="python3.11 $CODE_ROOT/test/python/ffmpeg.py"
 
 # alias ghs='ghstack submit -u'
-alias ghc='ghstack checkout'
-alias gahs='gcama && ghs'
 alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 
 alias hg="history | grep"
