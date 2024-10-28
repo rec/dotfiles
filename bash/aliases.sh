@@ -20,13 +20,12 @@ alias ffpmeg="ffpmeg -hide_banner"
 alias ffprobe="ffprobe -hide_banner"
 alias fm="python3.11 $CODE_ROOT/test/python/ffmpeg.py"
 
-# alias ghs='ghstack submit -u'
 alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 
-alias hg="history | grep"
+alias hg="history 250 | grep"
 
 alias l="exa -lF --git"
-alias lr='lintrunner -a 2>/dev/null'
+alias lr='rl lintrunner init && lintrunner -a'
 alias lsd='ls -d ~/git*'
 
 alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"

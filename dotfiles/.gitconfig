@@ -1,7 +1,7 @@
 [alias]
     a = commit -a --amend --no-edit
     aliases = config --get-regexp alias
-    l =  !git --no-pager log --oneline -5
+    l =  !git --no-pager log --oneline -7
 	ll = log --oneline -10
     fixup = "!f() { \
              TARGET=$(git rev-parse "$1"); \
@@ -15,7 +15,7 @@
 
 [core]
 	autocrlf = input
-	excludesfile = /Users/tom/.gitignore
+	excludesfile = ~/.gitignore
 	hooksPath = /code/dotfiles/git-hooks
 	pager =
 

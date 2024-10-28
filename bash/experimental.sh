@@ -5,6 +5,30 @@
 rl() {
     tmp=/tmp/$USER
     procid=$$
+    out=$tmp/$procid.out.txt
+
+    if ! mkdir -p tmp ; then
+        echo "Unable to mkdir -p $tmp"
+        return 1
+    fi
+
+    cr="
+"
+    echo "\$ $@$cr$cr" > $out
+
+    if $@ >> $out 2>&1 ; then
+        rm -f $out
+        return 0
+    else
+        cat $out
+        rm -f $out
+        return 1
+    fi
+}
+
+rl2() {
+    tmp=/tmp/$USER
+    procid=$$
     stdout=$tmp/$procid.stdout.txt
     stderr=$tmp/$procid.stderr.txt
 
@@ -22,7 +46,7 @@ rl() {
     if $@ >> $stdout 2>> $stderr ; then
         rm $stdout $stderr
     else
-        echo "Failed, see $stdout, $stderr"
+        echo "*** Failed, see $stdout, $stderr"
         return 1
     fi
 }
@@ -135,12 +159,16 @@ e() {
     $EDITOR -n $@
 }
 
+filepy() {
+    python -c "import $1; print($1.__file__)"
+}
+
 openpy() {
     if [[ -z "$1" ]] ; then
         echo "Usage: openpy <module>"
         return 1
     fi
-    $EDITOR -n `python -c "import $1; print($1.__file__)"`
+    $EDITOR -n $(filepy $1)
 }
 
 record() {

@@ -18,6 +18,7 @@ alias garc='git add . && git rebase --continue'
 alias gb='git branch'
 alias gbo='rl g fetch origin && gb -r | grep " origin/"'
 alias gbr='git symbolic-ref --short HEAD'
+# alias ghs='ghstack submit -u'
 
 alias gc='git switch'
 alias gca='git commit --amend'
@@ -27,12 +28,16 @@ alias gcan='git commit --amend --no-edit'
 alias gcama='git commit --amend --no-edit -a'
 alias gcp='git cherry-pick'
 
+alias gcon='git st | grep -w UU'
+
 strict() {
     rl git fetch upstream viable/strict \
         && rl git rebase upstream/viable/strict \
-        && rl git submodule update --init --recursive \
-        && rl lintrunner init
+        && rl git submodule update --init --recursive
 }
+
+
+
 
 gd() {
     out=/tmp/rec/$(git symbolic-ref --short HEAD).diff
@@ -43,8 +48,8 @@ gd() {
 alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
-alias gf='git for-each - git log --oneline --decorate -4'
-alias gfix='git commit -a --fixup'
+# alias gf='git for-each - git log --oneline --decorate -4'
+alias gf='git commit --fixup'
 
 alias gi='git infer -a && git push'
 
@@ -93,7 +98,7 @@ ghc() {
     else
         arg=https://github.com/pytorch/pytorch/pull/$s
     fi
-    ghstack checkout $arg
+    rl ghstack checkout $arg
 }
 
 cg() {
