@@ -12,41 +12,12 @@ rl() {
         return 1
     fi
 
-    cr="
-"
-    echo "\$ $@$cr$cr" > $out
-
     if $@ >> $out 2>&1 ; then
         rm -f $out
         return 0
     else
         cat $out
         rm -f $out
-        return 1
-    fi
-}
-
-rl2() {
-    tmp=/tmp/$USER
-    procid=$$
-    stdout=$tmp/$procid.stdout.txt
-    stderr=$tmp/$procid.stderr.txt
-
-    if ! mkdir -p tmp ; then
-        echo "Unable to mkdir -p $tmp"
-        return 1
-    fi
-
-    cr="
-"
-    header="\$ $@$cr$cr"
-    echo $header > $stdout
-    echo $header > $stderr
-
-    if $@ >> $stdout 2>> $stderr ; then
-        rm $stdout $stderr
-    else
-        echo "*** Failed, see $stdout, $stderr"
         return 1
     fi
 }
