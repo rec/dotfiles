@@ -13,9 +13,12 @@
 (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.(inl|proto)\\'"   . c-mode))
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.grep\\'" . grep-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+
 ;; http://www.emacswiki.org/emacs/AnsiColor
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 (add-to-list 'default-frame-alist '(height . 55))

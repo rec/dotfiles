@@ -2,6 +2,7 @@
 # Experimental
 #
 
+
 rl() {
     tmp=/tmp/$USER
     procid=$$
@@ -13,11 +14,9 @@ rl() {
     fi
 
     if $@ >> $out 2>&1 ; then
-        rm -f $out
         return 0
     else
         cat $out
-        rm -f $out
         return 1
     fi
 }

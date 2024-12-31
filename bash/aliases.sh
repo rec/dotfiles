@@ -25,7 +25,7 @@ alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 alias hg="history 250 | grep"
 
 alias l="exa -lF --git"
-alias lr='rl lintrunner init && lintrunner -a'
+alias lr='rl lintrunner init && lintrunner -a | python ~/code/test/python/fix_lint.py | tee lint.grep'
 alias lsd='ls -d ~/git*'
 
 alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"

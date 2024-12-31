@@ -6,6 +6,18 @@ g () {
     if [[ $# -gt 0 ]]; then git "$@"; else git st; fi
 }
 
+strict() {
+    rl git fetch upstream viable/strict \
+        && rl git rebase upstream/viable/strict \
+        && rl git submodule update --init --recursive
+}
+
+mstrict() {
+    rl git fetch upstream main \
+        && rl git rebase upstream/main \
+        && rl git submodule update --init --recursive
+}
+
 torch-clean() {
     python setup.py clean && \
         git clean -xdf aten build third_party torch && \
@@ -16,7 +28,7 @@ torch-clean() {
 alias garc='git add . && git rebase --continue'
 
 alias gb='git branch'
-alias gbo='rl g fetch origin && gb -r | grep " origin/"'
+alias gbo='gb -r | grep " origin/"'
 alias gbr='git symbolic-ref --short HEAD'
 # alias ghs='ghstack submit -u'
 
@@ -30,15 +42,6 @@ alias gcp='git cherry-pick'
 
 alias gcon='git st | grep -w UU'
 
-strict() {
-    rl git fetch upstream viable/strict \
-        && rl git rebase upstream/viable/strict \
-        && rl git submodule update --init --recursive
-}
-
-
-
-
 gd() {
     out=/tmp/rec/$(git symbolic-ref --short HEAD).diff
     g diff HEAD~ > $out
@@ -48,8 +51,8 @@ gd() {
 alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
-# alias gf='git for-each - git log --oneline --decorate -4'
-alias gf='git commit --fixup'
+alias gfx='git commit --fixup'
+alias gf='rl git fetch'
 
 alias gi='git infer -a && git push'
 
@@ -99,6 +102,10 @@ ghc() {
         arg=https://github.com/pytorch/pytorch/pull/$s
     fi
     rl ghstack checkout $arg
+}
+
+ghcs() {
+    ghc $* && strict
 }
 
 cg() {
