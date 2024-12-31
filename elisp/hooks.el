@@ -5,7 +5,7 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; (add-hook 'dired-mode-hook (lambda () (dired-omit-mode t)))
-;;(add-hook 'python-mode-hook (lambda () (git-gutter-mode t)))
+;; (add-hook 'python-mode-hook (lambda () (git-gutter-mode t)))
 
 (setq-default c-basic-offset 4)
 (defun my-c-mode-common-hook ()

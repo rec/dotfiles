@@ -5,8 +5,9 @@ set -eux
 NO_COLOR=1
 project=$(basename $(pwd))
 
-mypy $project
+# coverage run $(which pytest)
+# coverage html
 ruff check --select I --fix $project test*
 ruff format
-coverage run $(which pytest)
-coverage html
+mypy $project
+pytest

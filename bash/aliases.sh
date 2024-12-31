@@ -3,6 +3,7 @@ alias bui='pip uninstall -y torch && python setup.py develop'
 
 alias ctest='pushd ~/code/test && git add . && gi ; popd'
 
+# alias ca='conda activate pytorch-dev$PYTORCH_BUILD_SUFFIX'
 alias cds="cd $CODE_ROOT/recs"
 alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"

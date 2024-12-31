@@ -40,6 +40,7 @@
 
 [push]
 	default = simple
+    autoSetupRemote = True
 
 [rebase]
 	autosquash = true
