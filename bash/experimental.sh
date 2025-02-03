@@ -2,6 +2,24 @@
 # Experimental
 #
 
+all() {
+    pushd ~/git/pytorch
+    echo; pwd; echo
+    $@
+
+    cd ~/git-constant/pytorch
+    echo; pwd; echo
+    $@
+
+    cd ~/git-decomp/pytorch
+    echo; pwd; echo
+    $@
+
+    cd ~/git-unused/pytorch
+    echo; pwd; echo
+    $@
+}
+
 
 rl() {
     tmp=/tmp/$USER
