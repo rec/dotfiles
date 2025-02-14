@@ -3,21 +3,26 @@
 #
 
 all() {
-    pushd ~/git/pytorch
+    cmd=${@:-g l -1}
+    pushd .
+
+    cd ~/git/pytorch
     echo; pwd; echo
-    $@
+    $cmd
 
     cd ~/git-constant/pytorch
     echo; pwd; echo
-    $@
+    $cmd
 
     cd ~/git-decomp/pytorch
     echo; pwd; echo
-    $@
+    $cmd
 
     cd ~/git-unused/pytorch
     echo; pwd; echo
-    $@
+    $cmd
+
+    popd
 }
 
 
@@ -32,6 +37,25 @@ rl() {
     fi
 
     if $@ >> $out 2>&1 ; then
+        return 0
+    else
+        cat $out
+        return 1
+    fi
+}
+
+rlt() {
+    tmp=/tmp/$USER
+    procid=$$
+    out=$tmp/$procid.out.txt
+
+    if ! mkdir -p tmp ; then
+        echo "Unable to mkdir -p $tmp"
+        return 1
+    fi
+
+    if $@ >> $out 2>&1 ; then
+        tail -n 12 $out
         return 0
     else
         cat $out
