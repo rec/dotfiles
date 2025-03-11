@@ -1,5 +1,10 @@
-;;; -*- coding: utf-8 -*-
-(("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/functools.py" . 38337)
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/home/rec/code/test/python/pull_manager.py" . 1751)
+ ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/argparse.py" . 66797)
+ ("/home/rec/git-unused/pytorch/torch/_dynamo/codegen.py" . 1502)
+ ("/home/rec/git-unused/pytorch/torch/_dynamo/variables/torch_function.py" . 6027)
+ ("/home/rec/git-unused/pytorch/test/test_binary_ufuncs.py" . 51)
+ ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/functools.py" . 38337)
  ("/home/rec/git/pytorch/tools/linter/adapters/_linter.py" . 6798)
  ("/home/rec/git/pytorch/tools/linter/adapters/docstring_linter.py" . 2408)
  ("/home/rec/git/pytorch/tools/test/test_docstring_linter.py" . 736)

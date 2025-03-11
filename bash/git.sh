@@ -93,6 +93,9 @@ alias gsh='git show > /tmp/git.diff'
 alias gsp='git split && gp'
 
 alias gu='git update'
+
+alias gv='git revert --no-edit'
+
 alias gw='git switch'
 
 ghc() {

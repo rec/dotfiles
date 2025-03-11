@@ -2,6 +2,36 @@
 # Experimental
 #
 
+all() {
+    cmd=${@:-g l -1}
+    pushd . > /dev/null
+
+    echo
+    cd ~/git/pytorch
+    echo "$(pwd):"
+    $cmd
+
+    echo
+    cd ~/git-clean/pytorch
+    echo "$(pwd):"
+    $cmd
+
+    echo
+    cd ~/git-constant/pytorch
+    echo "$(pwd):"
+    $cmd
+
+    echo
+    cd ~/git-decomp/pytorch
+    echo "$(pwd):"
+    $cmd
+
+    echo
+    cd ~/git-unused/pytorch
+    echo "$(pwd):"
+    $cmd
+    popd > /dev/null
+}
 
 rl() {
     tmp=/tmp/$USER
