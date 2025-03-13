@@ -90,6 +90,7 @@ alias grs='g restore --source=HEAD~ --'
 
 alias gs='gl; echo; g st'
 alias gsh='git show > /tmp/git.diff'
+alias gsn='git show --name-only'
 alias gsp='git split && gp'
 
 alias gu='git update'
