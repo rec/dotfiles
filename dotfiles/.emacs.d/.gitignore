@@ -11,3 +11,4 @@ lisp/step-elisp
 url/
 .emacs.desktop
 places
+eln-cache/
