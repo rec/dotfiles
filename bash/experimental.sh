@@ -2,34 +2,21 @@
 # Experimental
 #
 
+xxx() {
+    for f in ~/git*/pytorch; do
+        echo $f
+    done
+}
+
 all() {
     cmd=${@:-g l -1}
-    pushd . > /dev/null
+    pushd ~ > /dev/null
 
-    echo
-    cd ~/git/pytorch
-    echo "$(pwd):"
-    $cmd
-
-    echo
-    cd ~/git-clean/pytorch
-    echo "$(pwd):"
-    $cmd
-
-    echo
-    cd ~/git-constant/pytorch
-    echo "$(pwd):"
-    $cmd
-
-    echo
-    cd ~/git-decomp/pytorch
-    echo "$(pwd):"
-    $cmd
-
-    echo
-    cd ~/git-unused/pytorch
-    echo "$(pwd):"
-    $cmd
+    for p in git*/pytorch; do
+        echo; echo ~/$(dirname $p)
+        cd $p
+        $cmd
+    done
     popd > /dev/null
 }
 
