@@ -16,6 +16,7 @@ all() {
         echo; echo ~/$(dirname $p)
         cd $p
         $cmd
+        cd
     done
     popd > /dev/null
 }
