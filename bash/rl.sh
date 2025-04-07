@@ -1,5 +1,8 @@
 # rl: Run a bash command, only print output if it fails
 #
+# Example: `rl build` prints nothing if the build succeeds, but the whole
+# log if it fails
+#
 # The bash function `rl` runs its arguments, but redirects both
 # stdout and stderr to a temporary output file, `/tmp/$USER/$$.out.txt`,
 # where `$$` is a bash expression for the current process ID.
