@@ -308,3 +308,6 @@ FILENAME should lack slashes."
   "Run compile in the git directory."
   (interactive)
   (swirly-compile-internal 1))
+
+(defalias 'type-ignore
+   (kmacro "C-x o C-e C-SPC C-r [ <escape> w C-x o C-e SPC SPC # SPC t y p e : SPC i g n o r e C-y"))

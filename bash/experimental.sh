@@ -2,10 +2,17 @@
 # Experimental
 #
 
-xxx() {
-    for f in ~/git*/pytorch; do
-        echo $f
-    done
+wt() {
+    pushd ~/code/test/ && \
+        gi
+    popd
+}
+
+wat() {
+    pushd ~/code/test/ && \
+        git add . && \
+        gi
+    popd
 }
 
 all() {
@@ -19,24 +26,6 @@ all() {
         cd
     done
     popd > /dev/null
-}
-
-rl() {
-    tmp=/tmp/$USER
-    procid=$$
-    out=$tmp/$procid.out.txt
-
-    if ! mkdir -p tmp ; then
-        echo "Unable to mkdir -p $tmp"
-        return 1
-    fi
-
-    if $@ >> $out 2>&1 ; then
-        return 0
-    else
-        cat $out
-        return 1
-    fi
 }
 
 cdt() {

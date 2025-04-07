@@ -23,6 +23,7 @@ bash_file=${bash_file}
 . $bash_root/aliases.sh
 . $bash_root/environment-variables.sh
 . $bash_root/functions.sh
+. $bash_root/rl.sh
 . $bash_root/interactive.sh
 
 # >>> conda initialize >>>
@@ -39,4 +40,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-

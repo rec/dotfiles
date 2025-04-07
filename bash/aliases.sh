@@ -1,3 +1,5 @@
+alias read_aliases="source ~/code/dotfiles/bash/aliases.sh"
+
 alias bbb="find . -name \*.py | xargs $CODE_ROOT/env/black/bin/black -l 79 -S"
 alias bui='pip uninstall -y torch && python setup.py develop'
 
@@ -33,6 +35,7 @@ alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
 alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"
 
 alias pi="pip install --upgrade pip && python3 -m pip install -e .[dev]"
+alias pm='python ~/code/pullman/pullman.py'
 alias pop="popd; pushd ."
 alias ppb="poetry publish --build"
 alias py="arch -arm64 python"

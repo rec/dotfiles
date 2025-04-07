@@ -1,8 +1,10 @@
 # Git aliases
 
+alias psp="~/code/split_patch/split_patch.py"
+
 # alias gc='git commit'
 # alias g=git
-g () {
+g() {
     if [[ $# -gt 0 ]]; then git "$@"; else git st; fi
 }
 
@@ -28,6 +30,10 @@ torch-clean() {
 alias garc='git add . && git rebase --continue'
 
 alias gb='git branch'
+alias gbi='git bisect'
+alias gbis='git bisect start HEAD'
+alias gbiru='git bisect run'
+alias gbir='git bisect reset'
 alias gbo='gb -r | grep " origin/"'
 alias gbr='git symbolic-ref --short HEAD'
 # alias ghs='ghstack submit -u'
