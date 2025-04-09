@@ -7,12 +7,7 @@ fi
 IFS=. read -ra hosts <<< $(hostname)
 host=$hosts
 
-if [[ $host == "qgpu3" ]]; then
-    export CODE_ROOT=~/code
-else
-    export CODE_ROOT=/code
-    host=bolt
-fi
+export CODE_ROOT=~/code
 
 bash_root=$CODE_ROOT/dotfiles/bash
 bash_file=$bash_root/init-${host}.sh

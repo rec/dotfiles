@@ -84,7 +84,7 @@ _git_api() {
         -H "Accept: application/vnd.github+json" \
         -H "Authorization: Bearer $GIT_TOKEN" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        $GIT_API_ROOT/$1\?per_page=100
+        $GIT_API_ROOT/$1?per_page=2
 }
 
 load-log() {
