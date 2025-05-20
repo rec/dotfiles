@@ -10,5 +10,5 @@ desktops/
 lisp/step-elisp
 url/
 .emacs.desktop
-places
+places/
 eln-cache/

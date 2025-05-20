@@ -61,13 +61,6 @@ tn() {
     fi
 }
 
-errors() {
-    error_file=~/git${PYTORCH_BUILD_SUFFIX}/pytorch/errors.sh \
-        && echo -e "#/bin/bash\n\nset -x\n" > $error_file \
-        && python ~/code/ghlogs/failed_test_commands.py $@ >> $error_file \
-        && chmod +x $error_file
-}
-
 build() {
     cd ~/git/torch-build \
         && ./pytorch-build.sh \
@@ -201,14 +194,6 @@ function do_echo() {
     echo \""$@\""
 }
 
-function bformat() {
-    python -c 'import shlex, sys; print " \\\n  ".join(shlex.split(" ".join(sys.argv[1:])))' $@
-}
-
-function bsort() {
-    python -c 'import shlex, sys; print " \\\n  ".join(sorted(shlex.split(" ".join(sys.argv[1:]))))' $@
-}
-
 
 # based on https://github.com/jimeh/git-aware-prompt
 find_git_branch() {
@@ -248,30 +233,6 @@ gdd() {
     fi
 }
 
-rgoog() {
-    BASE="$1"
-    NEW="${BASE//mpd/mss}"
-
-    for SUFFIX in .h .cc _unittest.cc ; do
-        FILE="$NEW$SUFFIX"
-        cp "$BASE$SUFFIX" "$FILE"
-        git add "$FILE"
-    done
-}
-
-imp() {
-    python -c \
-           "\
-import engora.log, sys, typer; \
-s = set(sys.modules); \
-import $1; \
-s = set(sys.modules) - s; \
-s and print(*sorted(s), sep='\\n')"
-}
-
-wimp() {
-    imp $1 | wc
-}
 
 ffm() {
     if [ -z "$2" ] ; then
