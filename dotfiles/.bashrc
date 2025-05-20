@@ -9,11 +9,13 @@ set -- $hosts
 host=$1
 
 export CODE_ROOT=~/code
-
 bash_root=$CODE_ROOT/dotfiles/bash
-bash_file=$bash_root/init-${host}.sh
 
-. $bash_file
+if [[ "$host" == "bolt" ]]; then
+    . $bash_root/init-bolt.sh
+else
+    . $bash_root/init-qgpu3.sh
+fi
 
 . $bash_root/aliases.sh
 . $bash_root/environment-variables.sh
