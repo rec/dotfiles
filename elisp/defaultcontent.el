@@ -42,7 +42,7 @@
 
 ;;; Indicate where you store the default content of files.
 
-(defvar dc-auto-insert-directory "/code/dotfiles/templates"
+(defvar dc-auto-insert-directory "~/code/dotfiles/templates"
   "*Directory from which template files are taken. On
 Windows, use forward slashes like: c:/foo/bar/baz ")
 

@@ -16,7 +16,7 @@
 [core]
 	autocrlf = input
 	excludesfile = ~/.gitignore
-	hooksPath = /code/dotfiles/git-hooks
+	hooksPath = ~/code/dotfiles/git-hooks
 	pager =
 
 [diff]

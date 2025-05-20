@@ -1,113 +1,568 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/rec/git-decomp/pytorch/torch/_functorch/_aot_autograd/subclass_utils.py" . 15915)
- ("/home/rec/git-decomp/pytorch/test/functorch/test_aotdispatch.py" . 237)
- ("/home/rec/git-decomp/pytorch/torch/_functorch/_aot_autograd/traced_function_transforms.py" . 38914)
- ("/home/rec/code/test/python/pull_manager.py" . 1751)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/argparse.py" . 66797)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/functools.py" . 38337)
- ("/home/rec/git/pytorch/tools/linter/adapters/_linter.py" . 6798)
- ("/home/rec/git/pytorch/tools/linter/adapters/docstring_linter.py" . 2408)
- ("/home/rec/git/pytorch/tools/test/test_docstring_linter.py" . 736)
- ("/home/rec/.conda/envs/pytorch-dev-constant/lib/python3.9/functools.py" . 38337)
- ("/home/rec/git-constant/pytorch/tools/linter/adapters/_linter.py" . 7243)
- ("/home/rec/git-constant/pytorch/tools/test/test_docstring_linter.py" . 23)
- ("/home/rec/git-constant/pytorch/tools/test/test_set_linter.py" . 968)
- ("/home/rec/code/test/python/fix_lint.py" . 1069)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/contextlib.py" . 3920)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/unittest/main.py" . 2092)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/abc.py" . 3256)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/pathlib.py" . 25353)
- ("/home/rec/git-constant/pytorch/torch/_inductor/metrics.py" . 2734)
- ("/home/rec/git-decomp/pytorch/torch/_decomp/__init__.py" . 10716)
- ("/home/rec/git-decomp/pytorch/test/test_decomp.py" . 47178)
- ("/home/rec/git/pytorch/torch/_inductor/codecache.py" . 26282)
- ("/home/rec/git/pytorch/torch/_inductor/codegen/triton.py" . 104684)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/base.py" . 7584)
- ("/home/rec/git/pytorch/test/dynamo/test_python_autograd.py" . 32)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/lists.py" . 2406)
- ("/home/rec/git/pytorch/torch/_dynamo/external_utils.py" . 700)
- ("/home/rec/git/pytorch/torch/_dynamo/eval_frame.py" . 15629)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/unittest/case.py" . 19464)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/unittest/suite.py" . 3843)
- ("/home/rec/.conda/envs/pytorch-dev/lib/python3.9/unittest/runner.py" . 6281)
- ("/home/rec/git/pytorch/torch/testing/_internal/common_utils.py" . 117720)
- ("/home/rec/git/pytorch/torch/_dynamo/bytecode_transformation.py" . 48636)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/builtin.py" . 36185)
- ("/home/rec/git/pytorch/torch/_dynamo/codegen.py" . 5339)
- ("/home/rec/git/pytorch/torch/_dynamo/symbolic_convert.py" . 110719)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/constant.py" . 3704)
- ("/home/rec/git/pytorch/torch/_utils_internal.py" . 2799)
- ("/home/rec/git/pytorch/torch/_dynamo/utils.py" . 3999)
- ("/home/rec/git/pytorch/torch/_dynamo/convert_frame.py" . 41433)
- ("/home/rec/git/pytorch/test/test_torch.py" . 451318)
- ("/home/rec/git-decomp/pytorch/torch/_dynamo/variables/torch_function.py" . 17305)
- ("/home/rec/git/pytorch/test/dynamo/test_misc.py" . 32)
- ("/home/rec/git/pytorch/test/dynamo/test_unspec.py" . 32)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/misc.py" . 5721)
- ("/home/rec/code/dotfiles/"
-  (dired-filename . "/home/rec/code/dotfiles/bash"))
- ("/home/rec/code/dotfiles/bash/"
-  (dired-filename . "/home/rec/code/dotfiles/bash/init-qgpu3.sh"))
- ("/home/rec/git-decomp/pytorch/torch/testing/_internal/opinfo/core.py" . 48365)
- ("/home/rec/git-decomp/pytorch/"
-  (dired-filename . "/home/rec/git-decomp/pytorch/.bazelignore"))
- ("/home/rec/git-decomp/pytorch/test/test_ops.py" . 41474)
- ("/home/rec/git-decomp/pytorch/torch/testing/_internal/common_utils.py" . 123331)
- ("/home/rec/git-decomp/pytorch/torch/testing/_internal/common_device_type.py" . 22303)
- ("/home/rec/git-decomp/pytorch/torch/testing/_internal/common_cuda.py" . 9134)
- ("/home/rec/git-decomp/pytorch/test/functorch/common_utils.py" . 18943)
- ("/home/rec/git-decomp/pytorch/torch/_functorch/vmap.py" . 11689)
- ("/home/rec/git-decomp/pytorch/torch/_functorch/apis.py" . 9018)
- ("/home/rec/git-decomp/pytorch/torch/_functorch/deprecated.py" . 2297)
- ("/home/rec/git-decomp/pytorch/test/test_proxy_tensor.py" . 38)
- ("/home/rec/git-decomp/pytorch/test/functorch/test_vmap.py" . 144115)
- ("/home/rec/git-decomp/pytorch/torch/utils/_pytree.py" . 30064)
- ("/home/rec/git-decomp/pytorch/torch/_subclasses/fake_tensor.py" . 47312)
- ("/home/rec/git-decomp/pytorch/torch/utils/_stats.py" . 784)
- ("/home/rec/git-decomp/pytorch/torch/_library/simple_registry.py" . 2534)
- ("/home/rec/git-decomp/pytorch/torch/_ops.py" . 28639)
- ("/home/rec/git-decomp/pytorch/torch/_prims/context.py" . 5093)
- ("/home/rec/git-decomp/pytorch/test/functorch/test_ops.py" . 40453)
- ("/home/rec/git-decomp/pytorch/torch/_prims_common/wrappers.py" . 9480)
- ("/home/rec/git-decomp/pytorch/torch/fx/experimental/proxy_tensor.py" . 12161)
- ("/home/rec/git/pytorch/"
-  (dired-filename . "/home/rec/git/pytorch/.bazelversion"))
- ("/home/rec/git/pytorch/torch/_dynamo/variables/tensor.py" . 6637)
- ("/home/rec/git-decomp/pytorch/c10/util/Exception.cpp" . 2848)
- ("/home/rec/git-decomp/pytorch/aten/src/ATen/core/boxing/KernelFunction_impl.h" . 2014)
- ("/home/rec/git-decomp/pytorch/aten/src/ATen/core/boxing/impl/make_boxed_from_unboxed_functor.h" . 24523)
- ("/home/rec/git-decomp/pytorch/aten/src/ATen/core/boxing/impl/WrapFunctionIntoFunctor.h" . 506)
- ("/home/rec/.conda/envs/pytorch-dev-decomp/x86_64-conda-linux-gnu/include/c++/12.3.0/bits/move.h" . 2309)
- ("/home/rec/git-decomp/pytorch/aten/src/ATen/core/dispatch/Dispatcher.h" . 28872)
- ("/home/rec/git-decomp/pytorch/build/aten/src/ATen/Operators_4.cpp" . 652607)
- ("/home/rec/git-decomp/pytorch/torch/include/ATen/ops/unbind_copy.h" . 859)
- ("/home/rec/code/test/cpp/cpp_test.cpp" . 269)
- ("/home/rec/git-decomp/pytorch/torch/csrc/autograd/generated/VariableType_0.cpp" . 934870)
- ("/home/rec/git-decomp/pytorch/aten/src/ATen/ExpandUtils.cpp" . 1363)
- ("/home/rec/git-decomp/pytorch/aten/src/ATen/core/TensorBase.h" . 11268)
- ("/home/rec/git/pytorch/torch/_dynamo/bytecode_analysis.py" . 3673)
- ("/home/rec/git/pytorch/torch/_strobelight/compile_time_profiler.py" . 5293)
- ("/home/rec/git/pytorch/torch/utils/_config_module.py" . 5342)
- ("/home/rec/git/pytorch/torch/_dynamo/repro/after_dynamo.py" . 5354)
- ("/home/rec/git/pytorch/torch/_dynamo/backends/registry.py" . 2016)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/dicts.py" . 5947)
- ("/home/rec/git/pytorch/torch/_dynamo/logging.py" . 1581)
- ("/home/rec/git/pytorch/test/dynamo/test_functions.py" . 12675)
- ("/home/rec/git/pytorch/torch/_dynamo/exc.py" . 6687)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/functions.py" . 21326)
- ("/home/rec/git/pytorch/torch/_dynamo/variables/builder.py" . 113379)
- ("/home/rec/git/pytorch/torch/_dynamo/trace_rules.py" . 135286)
- ("/home/rec/git/pytorch/torch/package/package_importer.py" . 28696)
- ("/home/rec/code/dotfiles/dotfiles/.emacs" . 1157)
- ("/home/rec/git/pytorch/torch/_guards.py" . 17707)
- ("/home/rec/git/pytorch/torch/_dynamo/__init__.py" . 2514)
- ("/home/rec/git/pytorch/test/dynamo/test_dynamic_shapes.py" . 32)
- ("/home/rec/git/pytorch/torch/_dynamo/testing.py" . 7047)
- ("/home/rec/git/pytorch/torch/testing/_internal/opinfo/core.py" . 47682)
- ("/home/rec/git/pytorch/torch/_ops.py" . 43627)
- ("/home/rec/git/pytorch/torch/_refs/__init__.py" . 135704)
- ("/home/rec/.ssh/"
-  (dired-filename . "/home/rec/.ssh/authorized_keys"))
- ("/home/rec/git/pytorch/test/functorch/test_ops.py" . 243)
- ("/home/rec/git/pytorch/torch/_prims_common/wrappers.py" . 8944)
- ("/home/rec/git/pytorch/test/test_ops.py" . 96))
+(("/Applications/Emacs.app/Contents/"
+  (dired-filename . "/Applications/Emacs.app/Contents/Resources"))
+ ("/Applications/Emacs.app/Contents/Resources/"
+  (dired-filename . "/Applications/Emacs.app/Contents/Resources/Dutch.lproj"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec"))
+ ("/Users/tom/code/dotfiles/elisp/libraries/"
+  (dired-filename . "/Users/tom/code/dotfiles/elisp/libraries/guess-style.el"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/docker.Makefile"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/.circleci"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/aliases.sh"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/aliases.sh" . 1019)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/experimental.sh" . 5115)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing"))
+ ("/Users/tom/code/" (dired-filename . "/Users/tom/code/.DS_Store"))
+ ("/Users/tom/code/nmr/pyproject.toml" . 13) ("/Users/tom/code/nmr/" . 1795)
+ ("/Users/tom/code/dotfiles/elisp/define-functions.el" . 9250)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/bounds.py"
+  . 7747)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/triton.py"
+  . 30789)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cpp.py"
+  . 49745)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cuda/cutlass_python_evt.py"
+  . 5959)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/mps.py"
+  . 5670)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/halide.py"
+  . 7252)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/dtype_propagation.py"
+  . 6088)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/index_propagation.py"
+  . 2719)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/analyze_preserves_zero_mask.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/runtime/triton_heuristics.py"
+  . 101550)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/select_algorithm.py"
+  . 9685)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_prims_common/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_prims_common/__init__.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/subgraph.py"
+  . 326)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/mkldnn_lowerings.py"
+  . 701)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/ir.py"
+  . 93043)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_prims_common/__init__.py"
+  . 41497)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/lint.grep" . 665)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/lowering.py"
+  . 8114)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/decomposition.py"
+  . 584)
+ ("/Users/tom/code/dotfiles/" (dired-filename . "/Users/tom/code/dotfiles/elisp"))
+ ("/Users/tom/code/dotfiles/elisp/"
+  (dired-filename . "/Users/tom/code/dotfiles/elisp/define-functions.el"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.ssh/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/.ssh/authorized_keys"))
+ ("/Users/tom/code/dedupe/dedupe/"
+  (dired-filename . "/Users/tom/code/dedupe/dedupe/__init__.py"))
+ ("/Users/tom/code/test/python/"
+  (dired-filename . "/Users/tom/code/test/python/generic_parent.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/.git/config" . 195)
+ ("/Users/tom/code/sproc/" (dired-filename . "/Users/tom/code/sproc/README.md"))
+ ("/Users/tom/code/sproc/sproc/__init__.py" . 5060)
+ ("/Users/tom/code/nmr/test/test_types.py" . 586)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/dotfiles/.bash_profile" . 13)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/environment-variables.sh"
+  . 591)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/init-qgpu3.sh" . 153)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python"))
+ ("/Users/tom/code/pytorch/.git/"
+  (dired-filename . "/Users/tom/code/pytorch/.git/config"))
+ ("/Users/tom/code/pytorch/.git/config" . 297)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/ghlogs/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/ghlogs/failed_test_commands.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/ghlogs/failed_test_commands.py" . 1331)
+ ("/Users/tom/code/pytorch/" (dired-filename . "/Users/tom/code/pytorch/who.txt"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/one/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/two"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/two/seven.py"
+  . 126)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/two/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/two/five.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/project/two/five.py"
+  . 154)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/torch/distributions/log_normal.py"
+  . 282)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/out.json"
+  . 4)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/out.json" . 3617482)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/dataclasses.py" . 11)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/messages.py"
+  . 712)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/file_summary.py"
+  . 1435)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/multi_linter_testdata/info.json"
+  . 194)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/torch-env.sh"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/torch-env.sh" . 385)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/four" . 758)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/argparse.py" . 66103)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/three" . 11)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/add.patch" . 133)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/mv.patch"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/test_multi_linter.py"
+  . 289)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/mv.patch" . 82)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/git-sandbox/remove.patch" . 137)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/logging/"
+  (dired-filename
+   . "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/logging/__init__.py"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/logging/__init__.py"
+  . 13911)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/unittest/"
+  (dired-filename
+   . "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/unittest/case.py"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/unittest/case.py"
+  . 43045)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/dummy.py" . 1306)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/patches/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/patches/add.patch"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/dotfiles/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/dotfiles/.bashrc"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/dotfiles/.bashrc" . 431)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/" . 135)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cpp_flex_attention_template.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/typing/module_fix.py" . 454)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/typing/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/typing/fix_color.py"))
+ ("/Users/tom/Downloads/40096640979" . 11291)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cuda/cuda_kernel.py"
+  . 550)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/graph.py"
+  . 1905)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_functorch/deprecated.py"
+  . 3824)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_functorch/make_functional.py"
+  . 9355)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/rocm/rocm_kernel.py"
+  . 145)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/kernel/flex_attention.py"
+  . 9629)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py"
+  . 5832)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cpp_flex_attention_template.py"
+  . 1189)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/comm_lowering.py"
+  . 6645)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pullman/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/pullman/pullman.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pullman/pyproject.toml" . 46)
+ ("/Users/tom/" (dired-filename . "/Users/tom/.git_template"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/define-functions.el"
+  . 8655)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/.diff" . 7348)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/linters.diff" . 86772)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/head.diff" . 86986)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/files.json" . 826)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/errors.sh" . 14)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.cache/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/.cache/pullman"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.cache/pullman/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/.cache/pullman/pullman.json"))
+ ("/Users/tom/code/masbo/" (dired-filename . "/Users/tom/code/masbo/README.md"))
+ ("/Users/tom/code/dedupe/" (dired-filename . "/Users/tom/code/dedupe/dedupe"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/README.md" . 65)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/test_results"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/filecmp.py" . 2963)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/test_expected/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/test_expected/torch-_inductor-br.py-1.patch"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/test_split_patch.py" . 2715)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/diff.diff" . 7129)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/accelerator"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_functorch/_aot_autograd/traced_function_transforms.py"
+  . 3651)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/errors.sh" . 1260)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py"
+  . 2838)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/patches-2/torch-_inductor-ir.py-1.patch"
+  . 4213)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/git/test-log.txt" . 495)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/rl.sh" . 1067)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/glo.sh" . 476)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pullman/README.md" . 2159)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/torch/_inductor/decomposition.py"
+  . 34693)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/torch/_inductor/utils.py"
+  . 47575)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/unit-test-failures.sh"
+  . 2460)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/typing.diff" . 15288)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/test-python.py" . 178)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/wrapper.py"
+  . 61990)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/compile_fx_async.py"
+  . 2123)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/multi_linter.py"
+  . 5766)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/token.py" . 186)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/tokenize.py" . 1803)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/linter_test_case.py"
+  . 150)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata/python_code.py.txt.report.json"
+  . 6760)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata/python_code.py.txt"
+  . 1271)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/typing.py" . 1226)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/break_test.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata/python_code.py.txt.lintrunner"
+  . 788)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/simd.py"
+  . 53870)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/distributed/device_mesh.py"
+  . 16085)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/fx/experimental/proxy_tensor.py"
+  . 37101)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/fx/graph.py" . 9016)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/fx/graph_module.py"
+  . 20279)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/fx/passes/utils/fuser_utils.py"
+  . 5538)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/serialization.py"
+  . 40828)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/common.py"
+  . 14537)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/functools.py" . 36456)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/typing-review.diff" . 41514)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata/python_code.py.txt.single.line.json"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/mkldnn_ir.py"
+  . 7032)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/python_info.py"
+  . 2274)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/fix-docstring.diff" . 23418)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/benchmarks/dynamo/pr_time_benchmarks/expected_results.csv"
+  . 1503)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_tensor.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_tensor.py" . 34225)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cpp_gemm_template.py"
+  . 48078)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/lib/python3.9/site-packages/typing_extensions.py"
+  . 96749)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/testing/_internal/common_utils.py"
+  . 506)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/test/inductor/test_flex_attention.py"
+  . 178029)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/test/inductor/test_torchinductor.py"
+  . 500260)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/test_docstring_linter.py"
+  . 1047)
+ ("/Users/tom/*scratch*" . 150279)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter.py"
+  . 4865)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/file_linter.py"
+  . 449)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/__init__.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/"
+  . 2140)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/python_file.py"
+  . 1124)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/lint.grep" . 3436)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/set_linter.py"
+  . 955)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/__init__.py"
+  . 915)
+ ("/Users/tom/code/psplit/pyproject.toml" . 63)
+ ("/Users/tom/code/psplit/test_psplit.py" . 1995)
+ ("/Users/tom/code/psplit/.git/config" . 296)
+ ("/Users/tom/code/psplit/psplit.py" . 1404)
+ ("/Users/tom/code/psplit/" (dired-filename . "/Users/tom/code/psplit/README.md"))
+ ("/Users/tom/code/psplit/README.md" . 3412)
+ ("/Users/tom/code/multi/" (dired-filename . "/Users/tom/code/multi/multi.toml"))
+ ("/Users/tom/code/multi/multi.toml" . 463)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pullman/pullman.py" . 8994)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codegen/cpp_template_kernel.py"
+  . 7181)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/bash/git.sh" . 5698)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/define-functions.el"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/elisp/keyboard-shortcuts.el"
+  . 2095)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/dotfiles/.gitconfig" . 85)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/block.py"
+  . 374)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/codecache.py"
+  . 40028)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/docstring_linter.py"
+  . 6910)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/split_patch.py" . 5348)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/_linter/argument_parser.py"
+  . 1161)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/linter/adapters/tmp/"
+  . 175)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/lowering.py"
+  . 223859)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/torch/_inductor/lowering.py"
+  . 145047)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codecache.py"
+  . 93946)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/benchmarks/dynamo/pr_time_benchmarks/expected_results.csv"
+  . 1503)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/ir.py" . 220907)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/tools/test/docstring_linter_testdata/little.txt"
+  . 50)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/patches/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/patches/torch-_inductor-ir.py-11.patch"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/patches/torch-_inductor-ir.py-11.patch"
+  . 1893)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/lint.grep" . 1270)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/results.txt" . 2336)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/torch/_inductor/runtime/benchmarking.py"
+  . 534)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.cache/pullman/pullman.json" . 8630)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pullman/tmp/" . 149)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/typing/fix_color.py" . 20)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/split_patch/patches/little.diff" . 293)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/collections/__init__.py"
+  . 6292)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/aot.diff" . 1729)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/test/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-typing/pytorch/test/mkldnn_verbose.py"))
+ ("/Users/tom/docstring.txt" . 23120)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/dotfiles/dotfiles/.emacs.d/lisp/zencoding-mode.el"
+  . 22745)
+ ("/Users/tom/pytorch-docs.json" . 54614) ("/Users/tom/full_report.json" . 1600)
+ ("/Users/tom/code/pytorch/who.txt" . 10361)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-lint/pytorch/reflog.txt" . 6944)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/lost.diff" . 4772)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch/d.diff" . 7730)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-decomp/pytorch"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-constant/pytorch/benchmarks/dynamo/pr_time_benchmarks/expected_results.csv"
+  . 1297)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git-constant/pytorch/benchmarks/dynamo/pr_time_benchmarks/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/git-constant/pytorch/benchmarks/dynamo/pr_time_benchmarks/expected_results.csv"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/typing/module_meta.py"
+  . 463)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/submodules/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/submodules/foo"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/pull_manager.py" . 4283)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/magic2.py" . 268)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/magic-out.txt" . 4107)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/importer_counter.py" . 3610)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/import_example.py" . 40)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/count_type_ignores.py"
+  . 645)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/python/comparison.py" . 510)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/bash/fix_annotations.sh" . 357)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/bash/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/bash/fix_annotations.sh"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/test/.git/config" . 8)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/pyatomix/__init__.py" . 1210)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/pyatomix/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/pyatomix/__init__.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/atomix_base/src/main.cpp"
+  . 8641)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/atomix_base/src/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/atomix_base/src/main.cpp"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/atomix_base/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/atomix_base/src"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/.git/config" . 150)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/"
+  (dired-filename . "/scp:rec@eu.quansight.dev#2223:/home/rec/code/pyatomix/atomix_base"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.secrets.sh" . 18)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.pull_manager.json" . 3475)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.ghstackrc" . 136)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.condarc" . 45)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/lib/python3.9/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/lib/python3.9/stringprep.py"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/bin/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/bin/usort"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev/bin"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev-hint/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev-hint/COPYING"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev-decomp/lib/python3.9/unittest/loader.py"
+  . 13044)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/"
+  (dired-filename
+   . "/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/envs/pytorch-dev-hint"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/.conda/" . 358)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/prime-aot.diff" . 8503)
+ ("/scp:rec@eu.quansight.dev#2223:/tmp/rec/ir-split-4.diff" . 17344)
+ ("/code_archive/" (dired-filename . "/code_archive/engora-search"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/fractions.py" . 6762)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/share/"
+  (dired-filename . "/Library/Frameworks/Python.framework/Versions/3.9/share/doc"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/webbrowser.py" . 2413)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/uuid.py" . 5181)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/types.py" . 565)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/textwrap.py" . 17491)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/subprocess.py" . 3842)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/pathlib.py" . 40509)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/keyword.py" . 1048)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/ipaddress.py" . 41671)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/fileinput.py" . 4228)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/enum.py" . 14139)
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/"
+  (dired-filename
+   . "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/re.py"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/lib/"
+  (dired-filename . "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/include/python3.9/"
+  (dired-filename
+   . "/Library/Frameworks/Python.framework/Versions/3.9/include/python3.9/Python-ast.h"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/include/"
+  (dired-filename
+   . "/Library/Frameworks/Python.framework/Versions/3.9/include/python3.9"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/bin/"
+  (dired-filename . "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3"))
+ ("/Library/Frameworks/Python.framework/Versions/3.9/"
+  (dired-filename . "/Library/Frameworks/Python.framework/Versions/3.9/bin"))
+ ("/Users/tom/code/nmr/test/test_time_format.py" . 71)
+ ("/Users/tom/code/nmr/test/"
+  (dired-filename . "/Users/tom/code/nmr/test/test_types.py"))
+ ("/Users/tom/code/nmr/nmr/words.py" . 843)
+ ("/Users/tom/code/nmr/nmr/types/time/"
+  (dired-filename . "/Users/tom/code/nmr/nmr/types/time/string.py"))
+ ("/Users/tom/code/nmr/nmr/types/integer.py" . 91)
+ ("/Users/tom/code/nmr/nmr/nmr.py" . 249)
+ ("/Users/tom/code/nmr/nmr/count_words.py" . 346)
+ ("/Users/tom/code/nmr/nmr/" (dired-filename . "/Users/tom/code/nmr/nmr/__main__.py"))
+ ("/Users/tom/code/dotfiles/elisp/link-into-emacs.d/"
+  (dired-filename . "/Users/tom/code/dotfiles/elisp"))
+ ("/Users/tom/code/dotfiles/dotfiles/"
+  (dired-filename . "/Users/tom/code/dotfiles/dotfiles/.bashrc"))
+ ("/Users/tom/code/dotfiles/bash/"
+  (dired-filename . "/Users/tom/code/dotfiles/bash/aliases.sh"))
+ ("/Users/tom/Documents/inductor_report.json" . 12028)
+ ("/tmp/" (dired-filename . "/tmp/.s.PGSQL.5432"))
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/old.conda/envs/pytorch-dev/lib/python3.9/argparse.py"
+  . 65952)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/old.conda/envs/pytorch-dev-unused/lib/python3.9/site-packages/typing_extensions.py"
+  . 316)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/old.conda/envs/pytorch-dev-decomp/lib/python3.9/unittest/loader.py"
+  . 19034)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/miniconda3/etc/profile.d/conda.sh" . 2075)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/torch-clone.sh" . 19)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/pytorch-build.sh" . 306)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/partial.yaml" . 285)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/README.md" . 3748)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/storage.py" . 21785)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/fx/node.py" . 6439)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/fx/graph.py" . 723)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/fx/experimental/symbolic_shapes.py"
+  . 29477)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/cuda/memory.py" . 22959)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_refs/linalg/__init__.py"
+  . 4582)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_refs/__init__.py" . 19744)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_prims/__init__.py"
+  . 79513)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_library/utils.py" . 13861)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/utils.py" . 1842)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/select_algorithm.py"
+  . 53942)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/runtime/triton_heuristics.py"
+  . 21083)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/ops_handler.py"
+  . 8790)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/mkldnn_lowerings.py"
+  . 17678)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/mkldnn_ir.py"
+  . 104)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/loop_body.py"
+  . 9513)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/kernel/flex_attention.py"
+  . 5911)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/kernel/conv.py"
+  . 17957)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/jagged_lowerings.py"
+  . 92)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/graph.py"
+  . 47955)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/fx_passes/b2b_gemm.py"
+  . 16673)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/dtype_propagation.py"
+  . 7577)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/compile_fx_ext.py"
+  . 5916)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/comms.py" . 9218)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/comm_lowering.py"
+  . 12512)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/comm_analysis.py"
+  . 966)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/wrapper.py"
+  . 27533)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/triton_combo_kernel.py"
+  . 7977)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/triton.py"
+  . 154020)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/simd_kernel_features.py"
+  . 10242)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/simd.py"
+  . 24831)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/rocm/rocm_template_buffer.py"
+  . 209)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/rocm/rocm_kernel.py"
+  . 827)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/mps.py"
+  . 12261)
+ ("/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch/torch/_inductor/codegen/halide.py"
+  . 39258))

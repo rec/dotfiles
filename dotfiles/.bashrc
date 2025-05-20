@@ -5,13 +5,13 @@ if [ -f $SECRETS ]; then
 fi
 
 IFS=. read -ra hosts <<< $(hostname)
-host=$hosts
+set -- $hosts
+host=$1
 
 export CODE_ROOT=~/code
 
 bash_root=$CODE_ROOT/dotfiles/bash
 bash_file=$bash_root/init-${host}.sh
-bash_file=${bash_file}
 
 . $bash_file
 

@@ -75,7 +75,7 @@
 (gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
-(gsk [f12] 'speedbar)
+;; (gsk [f12] 'speedbar)
 
 (gsk [print] 'raise-next-frame)
 (gsk [f13] 'raise-next-frame)
