@@ -9,7 +9,7 @@ for file in .bash_completion .bashrc .bash_profile .emacs .emacs.d .gitconfig; d
     t=$target/$file
 
     if [ -f $t ]; then
-        mv $t $t.bak
+        mv -f $t $t.bak
     fi
     ln -s $s $t
 done

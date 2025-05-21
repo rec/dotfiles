@@ -1,4 +1,6 @@
-DOTFILES=/code/dotfiles/dotfiles
+DOTFILES=~/code/dotfiles/dotfiles/
+
+rm -f ~/.bash_completion ~/.bash_profile ~/.bashrc ~/.emacs ~/.emacs.d ~/.gitconfig ~/.gitignore
 
 ln -s $DOTFILES.bash_completion ~/.bash_completion
 ln -s $DOTFILES.bash_profile ~/.bash_profile

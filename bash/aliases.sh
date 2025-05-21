@@ -3,6 +3,7 @@ alias read_aliases="source ~/code/dotfiles/bash/aliases.sh"
 alias bbb="find . -name \*.py | xargs $CODE_ROOT/env/black/bin/black -l 79 -S"
 alias bui='pip uninstall -y torch && python setup.py develop'
 
+alias conda=/home/rec/miniconda3/bin/conda
 alias ctest='pushd ~/code/test && git add . && gi ; popd'
 
 # alias ca='conda activate pytorch-dev$PYTORCH_BUILD_SUFFIX'

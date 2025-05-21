@@ -149,18 +149,6 @@ FILENAME should lack slashes."
   (default-dired)
 )
 
-(defun home-dired ()
-  (interactive)
-  (dired "/Users/tom/Documents/code/rec/src/rec")
-)
-
-(defun home-dired-two ()
-  (interactive)
-  (to-two)
-  (other-window 1)
-  (home-dired)
-)
-
 (defun reload-file()
   (interactive)
   (find-alternate-file (buffer-file-name))
@@ -311,3 +299,21 @@ FILENAME should lack slashes."
 
 (defalias 'type-ignore
    (kmacro "C-x o C-e C-SPC C-r [ <escape> w C-x o C-e SPC SPC # SPC t y p e : SPC i g n o r e C-y"))
+
+(defun spawn-impl(directory buffer-name cmd)
+  (interactive)
+  (if (get-buffer buffer-name)
+      (switch-to-buffer buffer-name)
+    (progn
+     (dired (format "/scp:rec@eu.quansight.dev#2223:~/git%s/pytorch/" directory))
+     (pop-to-buffer (get-buffer-create (generate-new-buffer-name buffer-name)))))
+  (shell (current-buffer))
+  (process-send-string nil cmd)
+)
+
+(defun spawn-shell(name)
+  "Invoke shell test"
+  (interactive "MName of shell: ")
+  (if (or (string= name "shell") (string= name ""))
+      (spawn-impl "" "*shell*" "c")
+    (spawn-impl (concat "-" name) (format "*%s*" name) (format "c %s\n" name))))
