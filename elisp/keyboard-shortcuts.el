@@ -31,30 +31,11 @@
   (other-window -1)
   )
 
-(define-key key-translation-map (kbd "<kp-multiply>") "\C-g")
+;;(define-key key-translation-map (kbd "<kp-multiply>") "\C-g")
 (define-key key-translation-map (kbd "<kp-1>") "\C-s")
 (define-key key-translation-map (kbd "<kp-3>") "\C-r")
 
 (defalias 'gsk 'global-set-key)
-
-;; (gsk (kbd "<clear>") 'dabbrev-expand)
-;;(define-key key-translation-map (kbd "<clear>") "\M-/")
-
-;;(gsk [clear] 'dabbrev-expand)
-
-;; from http://xahlee.info/emacs/emacs/emacs_isearch_by_arrow_keys.html
-;; (progn
-;;   ;; set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
-;;   ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
-;;   (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
-
-;;   ;; (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
-;;   ;; (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
-
-;;   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
-;;   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer)
-;;   )
-
 
 (gsk [M-z] 'zop-to-char)
 (gsk [Scroll_Lock] 'undo)
@@ -62,10 +43,9 @@
 (gsk [f1] 'next-error)
 (gsk [f2] 'kmacro-call-macro)
 (gsk [f3] 'switch-to-buffer)
-(gsk [f4] 'do-list-buffers)
+(gsk [f4] 'goto-line)
 (gsk [f5] 'find-file)
-(gsk [f6] 'swirly-get-file-name)
-;; (gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
+(gsk [f6] 'reload-file)
 
 (gsk [f7] 'swirly-recompile)
 (gsk [C-f7] 'swirly-compile)
@@ -75,7 +55,6 @@
 (gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
 (gsk [f10] 'query-replace)
 (gsk [f11] 'shell)
-;; (gsk [f12] 'speedbar)
 
 (gsk [print] 'raise-next-frame)
 (gsk [f13] 'raise-next-frame)
@@ -85,7 +64,6 @@
 (gsk [f15] 'undo)
 (gsk [pause] 'undo)
 
-;; (gsk [f13] 'cycle-windows) where to put this?
 (gsk [kp-equal] 'balance-windows)
 
 (gsk [kp-add] 'split-window-vertically)
@@ -93,8 +71,7 @@
 (gsk [kp-enter] 'repeat-complex-command)
 (gsk [kp-multiply] 'keyboard-quit)
 (gsk [kp-subtract] 'delete-window)
-(gsk [kp-decimal] 'aquamacs-kill-word)
-;; (gsk [kp-decimal] 'aquamacs-move-end-of-line)
+(gsk [kp-decimal] 'kill-word)
 
 (gsk [C-kp-add] 'split-to-unit-test)
 (gsk [C-kp-multiply] 'cycle-windows)
@@ -120,16 +97,15 @@
       (gsk [kp-3] 'isearch-backward)
 
       (gsk [kp-0] 'kill-line)
-      ;; (gsk [kp-0] 'aquamacs-move-beginning-of-line)
 
       ;; A- means "Mac command key"
       (gsk [A-left] 'previous-tab-or-buffer)
       (gsk [A-right] 'next-tab-or-buffer)
 
-      (gsk [A-f1] 'goto-line)
+      (gsk [A-f1] 'do-list-buffers)
       (gsk [A-f3] 'switch-to-buffer-other-frame)
       (gsk [A-f4] 'do-list-buffers)
-      (gsk [A-f5] 'reload-file)
+      (gsk [A-f5] 'swirly-get-file-name)
       (gsk [A-f6] 'magit-status)
       (gsk [A-f7] 'to-compile)
       (gsk [A-f8] 'grep)
@@ -160,10 +136,10 @@
     (gsk [kp-begin] 'exchange-point-and-mark)
     (gsk [kp-right] 'jump-to-next-pos))
 
-    (gsk [s-f1] 'goto-line)
+    (gsk [s-f1] 'do-list-buffers)
     (gsk [s-f3] 'switch-to-buffer-other-frame)
     (gsk [s-f4] 'do-list-buffers)
-    (gsk [s-f5] 'reload-file)
+    (gsk [s-f5] 'swirly-get-file-name)
     (gsk [s-f6] 'magit-status)
     (gsk [s-f7] 'to-compile)
     (gsk [s-f8] 'grep)
@@ -180,8 +156,13 @@
     (gsk [s-kp-divide] 'apply-macro-to-region-lines)
     )
 
-;; navigation
-;; navigation
+
+;; (gsk [kp-0] 'aquamacs-move-beginning-of-line)
+;; (gsk [f13] 'cycle-windows) where to put this?
+;; (gsk [f6] 'git-commit-commit)  ;; why doesn't this work!?
+;; (gsk [f12] 'speedbar)
+;; (gsk [kp-decimal] 'aquamacs-move-end-of-line)
+
 
 
 ;; TODO:
