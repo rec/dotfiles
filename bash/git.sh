@@ -51,7 +51,7 @@ alias gcon='git st | grep -w UU'
 gd() {
     out=/tmp/rec/$(git symbolic-ref --short HEAD).diff
     g diff HEAD~ > $out
-    echo "Written to $out"
+    echo $out
 }
 
 alias gdiff='git diff > /tmp/git.diff'
