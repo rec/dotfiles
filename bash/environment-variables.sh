@@ -18,7 +18,7 @@ parse_git_branch() {
 }
 
 if tput setaf 128 2> /dev/null ; then
-    branch_c="\[$(tput setaf 37)\]"
+    branch_c="\[$(tput setaf 95)\]"
     time_c="\[$(tput setaf 143)\]"
     user_c="\[$(tput setaf 95)\]"
     dir_c="\[$(tput setaf 21)\]"
