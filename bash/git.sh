@@ -67,11 +67,6 @@ alias glm='git l master..'
 
 alias gmr='gr main && g merge working && gp && gr working'
 
-gnew() {
-    g switch -c $1 \
-        && git push --set-upstream origin $1
-}
-
 alias go='g go'
 alias gob='g go b'
 alias goc='g go c'
@@ -89,7 +84,7 @@ alias gpum='git pull upstream main && git st'
 
 alias gr='git rot'
 alias gra='git rebase --abort'
-alias grc='git rebase --continue'
+alias grc='GIT_EDITOR=true git rebase --continue'
 alias gri='git rebase -i upstream/dev'
 alias grm='g reset --soft main'
 alias grs='g restore --source=HEAD~ --'

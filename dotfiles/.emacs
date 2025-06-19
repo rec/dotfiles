@@ -106,6 +106,7 @@
  '(font-lock-preprocessor-face ((t (:inherit font-lock-builtin-face :foreground "color-106"))))
  '(font-lock-string-face ((t (:foreground "SlateBlue2"))))
  '(font-lock-type-face ((t (:foreground "PaleGreen4"))))
+ '(font-lock-variable-name-face ((t (:foreground "DarkGoldenrod"))))
  '(link ((t (:foreground "cyan3" :underline t))))
  '(whitespace-empty ((t (:background "white smoke" :foreground "firebrick"))))
  '(whitespace-line ((t (:background "gray93" :foreground "black"))))
