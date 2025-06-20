@@ -47,11 +47,12 @@
  '(explicit-shell-file-name "/bin/bash")
  '(fill-column 88)
  '(global-mark-ring-max 256)
- '(global-whitespace-mode t)
+ '(global-whitespace-mode nil)
  '(grep-command
    "egrep -nHIR * --include \\*.py --include \\*.h --include \\*.cpp --include \\*.yaml --exclude-dir=build -e ")
  '(grep-find-command
-   '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +" . 85))
+   '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +"
+     . 85))
  '(grep-find-template
    "find <D> <X> -type f <F> -exec grep <C> -nH --null -e <R> \\{\\} +")
  '(grep-find-use-xargs 'exec-plus)
@@ -66,7 +67,10 @@
  '(magit-auto-revert-mode nil)
  '(mark-ring-max 256)
  '(package-selected-packages
-   '(saveplace git-gutter git-gutter+ yaml-mode template shell-here s realgud python-mode pylint protobuf-mode markdown-mode magit-filenotify live-preview google-c-style golden-ratio-scroll-screen electric-operator dash-functional dash-at-point cython-mode counsel blacken))
+   '(saveplace git-gutter git-gutter+ yaml-mode template shell-here s realgud python-mode
+               pylint protobuf-mode markdown-mode magit-filenotify live-preview
+               google-c-style golden-ratio-scroll-screen electric-operator
+               dash-functional dash-at-point cython-mode counsel blacken))
  '(py-indent-offset 4)
  '(python-indent 4)
  '(python-indent-offset 4)
@@ -81,7 +85,7 @@
  '(template-auto-insert t)
  '(template-subdirectories '("./" "Templates/" "~/.emacs.d/Templates"))
  '(tool-bar-mode nil)
- '(visible-bell t)
+ '(visible-bell nil)
  '(visual-line-mode nil t))
 
 (custom-set-faces
