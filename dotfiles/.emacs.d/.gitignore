@@ -12,3 +12,4 @@ url/
 .emacs.desktop
 places/
 eln-cache/
+tramp
