@@ -1,5 +1,7 @@
 alias read_aliases="source ~/code/dotfiles/bash/aliases.sh"
 
+alias act="source .venv/bin/activate"
+
 alias bbb="find . -name \*.py | xargs $CODE_ROOT/env/black/bin/black -l 79 -S"
 alias bui='pip uninstall -y torch && python setup.py develop'
 
