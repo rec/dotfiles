@@ -18,16 +18,17 @@
 # clean out `/tmp/$USER` if your machine doesn't get rebooted often.
 
 rl() {
-    tmp=/tmp/$USER
+    tmp=${TMPDIR:=/tmp}/$USER
     procid=$$
+    cmd="$@"
     out=$tmp/$procid.out.txt
 
-    if ! mkdir -p tmp ; then
+    if ! mkdir -p $tmp ; then
         echo "Unable to mkdir -p $tmp"
         return 1
     fi
 
-    if $@ > $out 2>&1 ; then
+    if $cmd > $out 2>&1 ; then
         return 0
     else
         cat $out
