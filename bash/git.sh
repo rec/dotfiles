@@ -58,7 +58,7 @@ alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
 alias gfx='git commit --fixup'
-alias gf='rl git fetch'
+alias gf='rl fetch upstream && rl g fetch'
 
 alias gi='git infer -a && git push'
 

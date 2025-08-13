@@ -30,6 +30,24 @@
 (load-library "startup")
 (xterm-mouse-mode +1)
 
+;; https://coredumped.dev/2025/06/18/making-tramp-go-brrrr./
+(setq remote-file-name-inhibit-locks t
+      tramp-use-scp-direct-remote-copying t
+      remote-file-name-inhibit-auto-save-visited t)
+
+(setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
+      tramp-verbose 2)
+
+(connection-local-set-profile-variables
+ 'remote-direct-async-process
+ '((tramp-direct-async-process . t)))
+
+(connection-local-set-profiles
+ '(:application tramp :machine "server")
+ 'remote-direct-async-process)
+
+(setq magit-tramp-pipe-stty-settings 'pty)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -45,7 +63,7 @@
  '(global-mark-ring-max 256)
  '(global-whitespace-mode nil)
  '(grep-command
-   "egrep -nHIR * --include \\*.py --include \\*.h --include \\*.cpp --include \\*.yaml --exclude-dir=build -e ")
+   "egrep -nHIR * --include \\*.py --include \\*.pyi --include \\*.h --include \\*.cpp  --include \\*.c  --include \\*.cu --include \\*.yaml --include \\*.yml --exclude-dir torch/include --exclude-dir third_party --exclude-dir=build -we ")
  '(grep-find-command
    '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +"
      . 85))
