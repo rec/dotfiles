@@ -10,7 +10,7 @@ _gclean() {
     git submodule foreach --recursive git reset --hard
 }
 
-alias gclean='rl _gclean'
+alias gclean='quiet _gclean'
 
 # alias gc='git commit'
 # alias g=git
@@ -19,15 +19,15 @@ g() {
 }
 
 strict() {
-    rl git fetch upstream viable/strict \
-        && rl git rebase upstream/viable/strict \
-        && rl git submodule update --init --recursive
+    quiet git fetch upstream viable/strict \
+        && quiet git rebase upstream/viable/strict \
+        && quiet git submodule update --init --recursive
 }
 
 mstrict() {
-    rl git fetch upstream main \
-        && rl git rebase upstream/main \
-        && rl git submodule update --init --recursive
+    quiet git fetch upstream main \
+        && quiet git rebase upstream/main \
+        && quiet git submodule update --init --recursive
 }
 
 torch-clean() {
@@ -68,7 +68,7 @@ alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
 alias gfx='git commit --fixup'
-alias gf='rl fetch upstream && rl g fetch'
+alias gf='quiet fetch upstream && quiet g fetch'
 
 alias gi='git infer -a && git push'
 
@@ -116,7 +116,7 @@ ghc() {
     else
         arg=https://github.com/pytorch/pytorch/pull/$s
     fi
-    rl ghstack checkout $arg
+    quiet ghstack checkout $arg
 }
 
 ghcs() {

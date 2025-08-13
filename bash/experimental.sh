@@ -68,7 +68,7 @@ _build() {
         && echo "$(parse_git_branch)$(git rev-parse HEAD) $(pwd -P)" >> ~/compilations.txt
 }
 
-alias build='rl _build'
+alias build='quiet _build'
 
 export GIT_API_ROOT=https://api.github.com/repos/pytorch/pytorch
 
