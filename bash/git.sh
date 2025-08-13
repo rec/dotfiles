@@ -1,6 +1,16 @@
 # Git aliases
+alias read_git="source ~/code/dotfiles/bash/git.sh"
 
-alias psp="~/code/split_patch/split_patch.py"
+alias psp="~/code/psplit/psplit.py"
+
+_gclean() {
+    git clean -xfd
+    git reset --hard
+    git submodule foreach --recursive git clean -xfd
+    git submodule foreach --recursive git reset --hard
+}
+
+alias gclean='rl _gclean'
 
 # alias gc='git commit'
 # alias g=git

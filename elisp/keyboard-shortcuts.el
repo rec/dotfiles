@@ -82,6 +82,10 @@
 (gsk [A-M-up] 'back-window)
 (gsk [s-z] 'undo)
 
+(gsk [M-down] 'move-line-down)
+(gsk [M-up] 'move-line-up)
+
+
 (if (string-equal system-type "darwin")
     (progn
       (gsk [kp-7] 'yank)

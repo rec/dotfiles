@@ -28,14 +28,17 @@ alias fm="python3.11 $CODE_ROOT/test/python/ffmpeg.py"
 alias gtags="find . -name \*.py -or -name git-\* | xargs etags > TAGS"
 
 alias hg="history 250 | grep"
+alias hi="history 20"
 
 alias l="exa -lF --git"
 alias lr='rl lintrunner init && lintrunner -a | python ~/code/test/python/fix_lint.py | tee lint.grep'
+alias lrr='rl lintrunner init && lintrunner --take=MYPY,RUFF -a | python ~/code/test/python/fix_lint.py | tee lint.grep'
 alias lsd='ls -d ~/git*'
 
 alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
 alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"
 
+alias p=python
 alias pi="pip install --upgrade pip && python3 -m pip install -e .[dev]"
 alias pm='python ~/code/pullman/pullman.py'
 alias pop="popd; pushd ."
@@ -51,6 +54,7 @@ alias s1="sleep 1"
 alias sb="source ~/.bash_profile"
 alias ssp="ssh -l pi $CHOPIN"
 
-alias ts='date "+%Y%m%d_%H%M%S"'
-alias tm='tmux new-session -A -s'
+alias ta='type -a'
 alias tl='tmux list-sessions'
+alias tm='tmux new-session -A -s'
+alias ts='date "+%Y%m%d_%H%M%S"'
