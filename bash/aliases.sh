@@ -46,6 +46,8 @@ alias ppb="poetry publish --build"
 alias py="arch -arm64 python"
 alias pytags="find . -name \*.py | xargs etags"
 
+alias q=quiet
+
 alias recs="$CODE_ROOT/recs/.direnv/python-3.10/bin/python -m recs"
 alias rmpyc="find . -name \*.pyc | xargs rm"
 alias rs="rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos"

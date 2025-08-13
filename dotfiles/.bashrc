@@ -1,27 +1,4 @@
-SECRETS=~/.secrets.sh
-
-if [ -f $SECRETS ]; then
-    source $SECRETS
-fi
-
-IFS=. read -ra hosts <<< $(hostname)
-set -- $hosts
-host=$1
-
-export CODE_ROOT=~/code
-bash_root=$CODE_ROOT/dotfiles/bash
-
-if [[ "$host" == "bolt" ]]; then
-    . $bash_root/init-bolt.sh
-else
-    . $bash_root/init-qgpu3.sh
-fi
-
-. $bash_root/aliases.sh
-. $bash_root/environment-variables.sh
-. $bash_root/functions.sh
-. $bash_root/rl.sh
-. $bash_root/interactive.sh
+. ~/code/dotfiles/bash/bashrc.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

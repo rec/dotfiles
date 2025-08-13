@@ -162,8 +162,8 @@ tcomp() {
 # https://medium.com/the-lazy-developer/an-alias-for-new-aliases-c6500ae0f73e
 function new-alias() {
     local last_command=$(echo `history |tail -n2 |head -n1` | sed 's/[0-9]* //')
-    echo alias $1="'""$last_command""'" >> $CODE_ROOT/dotfiles/bash/aliases.sh
-    source $CODE_ROOT/dotfiles/bash/aliases.sh
+    echo alias $1="'""$last_command""'" >> $BASH_ROOT/aliases.sh
+    source $BASH_ROOT/aliases.sh
 }
 
 # `git add` all .js, .max, maxhelp and .txt files, commit and push.
