@@ -57,7 +57,8 @@
 (gsk [f11] 'shell)
 
 (gsk [print] 'raise-next-frame)
-(gsk [f13] 'raise-next-frame)
+(gsk [f13] 'ns-next-frame)
+(gsk [s-f13] 'ns-prev-frame)
 
 (gsk [f14] 'save-buffer)
 

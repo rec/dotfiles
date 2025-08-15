@@ -49,6 +49,7 @@ alias pytags="find . -name \*.py | xargs etags"
 alias q=quiet
 
 alias recs="$CODE_ROOT/recs/.direnv/python-3.10/bin/python -m recs"
+alias rto='recs -R -i Mac -i FLOW+9-10 -o "/Users/tom/Documents/Work/Music/T.O.™/{ddate}/{device}'
 alias rmpyc="find . -name \*.pyc | xargs rm"
 alias rs="rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos"
 
