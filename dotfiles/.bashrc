@@ -14,3 +14,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export PATH="/home/rec/.pixi/bin:$PATH"

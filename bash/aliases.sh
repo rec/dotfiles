@@ -38,7 +38,7 @@ alias lsd='ls -d ~/git*'
 alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
 alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"
 
-alias p=python
+alias pcit="python -c 'import torch'"
 alias pi="pip install --upgrade pip && python3 -m pip install -e .[dev]"
 alias pm='python ~/code/pullman/pullman.py'
 alias pop="popd; pushd ."

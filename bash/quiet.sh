@@ -20,7 +20,6 @@
 quiet() {
     tmp=${TMPDIR:=/tmp}/$USER
     procid=$$
-    cmd="$@"
     out=$tmp/$procid.out.txt
 
     if ! mkdir -p $tmp ; then
@@ -28,7 +27,7 @@ quiet() {
         return 1
     fi
 
-    if $cmd > $out 2>&1 ; then
+    if $@ > $out 2>&1 ; then
         return 0
     else
         cat $out

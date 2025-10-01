@@ -15,6 +15,8 @@
 (add-to-list 'auto-mode-alist '("\\.(js|json)\\'"   . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.grep\\'" . grep-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cuh\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 

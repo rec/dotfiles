@@ -19,15 +19,15 @@ g() {
 }
 
 strict() {
-    quiet git fetch upstream viable/strict \
-        && quiet git rebase upstream/viable/strict \
-        && quiet git submodule update --init --recursive
+    git fetch upstream viable/strict \
+        && git rebase upstream/viable/strict \
+        && git submodule update --init --recursive
 }
 
 mstrict() {
-    quiet git fetch upstream main \
-        && quiet git rebase upstream/main \
-        && quiet git submodule update --init --recursive
+    git fetch upstream main \
+        && git rebase upstream/main \
+        && git submodule update --init --recursive
 }
 
 torch-clean() {
@@ -68,7 +68,7 @@ alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
 alias gfx='git commit --fixup'
-alias gf='quiet g fetch upstream && quiet g fetch'
+alias gf='g fetch upstream && g fetch'
 
 alias gi='git infer -a && git push'
 
@@ -110,13 +110,22 @@ alias gv='git revert --no-edit'
 
 alias gw='git switch'
 
+grh() {
+    if [ -z "$1" ] ; then
+        count=1
+    else
+        count="$1"
+    fi
+    git reset --hard HEAD@{$count}
+}
+
 ghc() {
     if [[ $1 == https* ]] ; then
         arg=$1
     else
         arg=https://github.com/pytorch/pytorch/pull/$s
     fi
-    quiet ghstack checkout $arg
+    ghstack checkout $arg
 }
 
 ghcs() {

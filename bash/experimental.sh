@@ -61,14 +61,12 @@ tn() {
     fi
 }
 
-_build() {
+build() {
     cd ~/git/torch-build \
         && ./pytorch-build.sh \
         && cdt \
         && echo "$(parse_git_branch)$(git rev-parse HEAD) $(pwd -P)" >> ~/compilations.txt
 }
-
-alias build='quiet _build'
 
 export GIT_API_ROOT=https://api.github.com/repos/pytorch/pytorch
 
@@ -101,6 +99,15 @@ flac2mp3() {
          -print \
          -exec sh -c \
          'i="{}"; ffmpeg -i "$i" -y -v 0 -vcodec copy -acodec alac "${i%.flac}".m4a && rm -f "$i"' \;
+}
+
+wav2mp3() {
+    find . \
+         -type f \
+         -name '*.wav' \
+         -print \
+         -exec sh -c \
+         'i="{}"; ffmpeg -i "$i" -b:a 256k -ar 48000 "${i}".mp3 && rm -f "$i"' \;
 }
 
 
