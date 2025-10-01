@@ -56,7 +56,7 @@
  '(compilation-always-kill t)
  '(compile-command "NO_COLOR=1 d run-tests")
  '(cursor-type 'box)
- '(dirtrack-list '("^.*:\\(.*\\)\\$" 1))
+ '(dirtrack-list '("^.*@.*:\\(.*\\)\\$" 1))
  '(etags-table-search-up-depth 10)
  '(explicit-shell-file-name "/bin/bash")
  '(fill-column 88)

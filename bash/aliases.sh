@@ -7,7 +7,6 @@ alias bui='pip uninstall -y torch && python setup.py develop'
 
 alias ctest='pushd ~/code/test && git add . && gi ; popd'
 
-# alias ca='conda activate pytorch-dev$PYTORCH_BUILD_SUFFIX'
 alias cds="cd $CODE_ROOT/recs"
 alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
@@ -49,7 +48,6 @@ alias pytags="find . -name \*.py | xargs etags"
 alias q=quiet
 
 alias recs="$CODE_ROOT/recs/.direnv/python-3.10/bin/python -m recs"
-alias rto='recs -R -i Mac -i FLOW+9-10 -o "/Users/tom/Documents/Work/Music/T.O.™/{ddate}/{device}'
 alias rmpyc="find . -name \*.pyc | xargs rm"
 alias rs="rsync --archive --verbose /Volumes/Matmos/iTunes/Music /Volumes/McLuhan/Matmos"
 
@@ -59,5 +57,6 @@ alias ssp="ssh -l pi $CHOPIN"
 
 alias ta='type -a'
 alias tl='tmux list-sessions'
+alias totm='echo "NO recs -R -i Mac -i FLOW+9-10 -o "/Users/tom/Documents/Work/Music/T.O.™/{ddate}/{device}""'
 alias tm='tmux new-session -A -s'
 alias ts='date "+%Y%m%d_%H%M%S"'

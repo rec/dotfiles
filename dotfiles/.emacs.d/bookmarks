@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("LinearCrossEntropyLoss"
+(("CrossEntropyLossImpl.h"
+ (filename . "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/csrc/api/include/torch/nn/modules/loss.h")
+ (front-context-string . "CrossEntropyLoss")
+ (rear-context-string . "truct TORCH_API ")
+ (position . 28226)
+ (last-modified 26772 45122 53434 0))
+("LinearCrossEntropyLoss"
  (filename . "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/nn/modules/loss.py")
  (front-context-string . "CrossEntropyLoss")
  (rear-context-string . ")\n\n\nclass Linear")
