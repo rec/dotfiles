@@ -1,7 +1,7 @@
 # Git aliases
-read_git() { source ~/code/dotfiles/bash/git.sh ; }
+alias read_git="source ~/code/dotfiles/bash/git.sh"
 
-psp() { ~/code/psplit/psplit.py ; }
+alias psp="~/code/psplit/psplit.py"
 
 _gclean() {
     git clean -xfd
@@ -10,7 +10,7 @@ _gclean() {
     git submodule foreach --recursive git reset --hard
 }
 
-gclean() { quiet _gclean ; }
+alias gclean='quiet _gclean'
 
 # alias gc='git commit'
 # alias g=git
@@ -37,26 +37,26 @@ torch-clean() {
         git submodule update --init --recursive
 }
 
-garc() { git add . && git rebase --continue ; }
+alias garc='git add . && git rebase --continue'
 
-gb() { git branch ; }
-gbi() { git bisect ; }
-gbis() { git bisect start HEAD ; }
-gbiru() { git bisect run ; }
-gbir() { git bisect reset ; }
-gbo() { gb -r | grep " origin/" ; }
-gbr() { git symbolic-ref --short HEAD ; }
-ghs() { ghstack submit -u ; }
+alias gb='git branch'
+alias gbi='git bisect'
+alias gbis='git bisect start HEAD'
+alias gbiru='git bisect run'
+alias gbir='git bisect reset'
+alias gbo='gb -r | grep " origin/"'
+alias gbr='git symbolic-ref --short HEAD'
+# alias ghs='ghstack submit -u'
 
-gc() { git switch ; }
-gca() { git commit --amend ; }
-gcaa() { git commit --amend -a ; }
-gcam() { git commit --amend -m ; }
-gcan() { git commit --amend --no-edit ; }
-gcama() { git commit --amend --no-edit -a ; }
-gcp() { git cherry-pick ; }
+alias gc='git switch'
+alias gca='git commit --amend'
+alias gcaa='git commit --amend -a'
+alias gcam='git commit --amend -m'
+alias gcan='git commit --amend --no-edit'
+alias gcama='git commit --amend --no-edit -a'
+alias gcp='git cherry-pick'
 
-gcon() { git st | grep -w UU ; }
+alias gcon='git st | grep -w UU'
 
 gd() {
     out=/tmp/rec/$(git symbolic-ref --short HEAD).diff
@@ -64,51 +64,51 @@ gd() {
     echo $out
 }
 
-gdiff() { git diff > /tmp/git.diff ; }
-gdu() { g delete . && g update ; }
+alias gdiff='git diff > /tmp/git.diff'
+alias gdu='g delete . && g update'
 
-gfx() { git commit --fixup ; }
-gf() { g fetch upstream && g fetch ; }
+alias gfx='git commit --fixup'
+alias gf='g fetch upstream && g fetch'
 
-gi() { git infer -a && git push ; }
+alias gi='git infer -a && git push'
 
-gl() { git l ; }
-glm() { git l master.. ; }
+alias gl='git l'
+alias glm='git l master..'
 
-gmr() { gr main && g merge working && gp && gr working ; }
+alias gmr='gr main && g merge working && gp && gr working'
 
-go() { g go ; }
-gob() { g go b ; }
-goc() { g go c ; }
-goi() { g go i ; }
-gom() { g go m 1 ; }
-gop() { g go p ; }
-got() { g go t ; }
+alias go='g go'
+alias gob='g go b'
+alias goc='g go c'
+alias goi='g go i'
+alias gom='g go m 1'
+alias gop='g go p'
+alias got='g go t'
 
-gp() { git push ; }
-gpf() { git push --force-with-lease ; }
-gps() { git push --set-upstream origin ; }
-gpu() { git push upstream `git branch --show-current` ; }
-gpuf() { git push upstream --force-with-lease `git branch --show-current` ; }
-gpum() { git pull upstream main && git st ; }
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gps='git push --set-upstream origin'
+alias gpu='git push upstream `git branch --show-current`'
+alias gpuf='git push upstream --force-with-lease `git branch --show-current`'
+alias gpum='git pull upstream main && git st'
 
-gr() { git rot ; }
-gra() { git rebase --abort ; }
-grc() { GIT_EDITOR=true git rebase --continue ; }
-gri() { git rebase -i upstream/dev ; }
-grm() { g reset --soft main ; }
-grs() { g restore --source=HEAD~ -- ; }
+alias gr='git rot'
+alias gra='git rebase --abort'
+alias grc='GIT_EDITOR=true git rebase --continue'
+alias gri='git rebase -i upstream/dev'
+alias grm='g reset --soft main'
+alias grs='g restore --source=HEAD~ --'
 
-gs() { gl; echo; g st ; }
-gsh() { git show > /tmp/git.diff ; }
-gsn() { git show --name-only ; }
-gsp() { git split && gp ; }
+alias gs='gl; echo; g st'
+alias gsh='git show > /tmp/git.diff'
+alias gsn='git show --name-only'
+alias gsp='git split && gp'
 
-gu() { git update ; }
+alias gu='git update'
 
-gv() { git revert --no-edit ; }
+alias gv='git revert --no-edit'
 
-gw() { git switch ; }
+alias gw='git switch'
 
 grh() {
     if [ -z "$1" ] ; then
