@@ -2,13 +2,9 @@ from __future__ import annotations
 from pathlib import Path
 import re
 import itertools
+import json
 import functools
 import typing as t
-try:
-    # import superduperdb as s
-    pass
-except ImportError:
-    pass
 
 
 print('...loaded PYTHONSTARTUP at', __file__)

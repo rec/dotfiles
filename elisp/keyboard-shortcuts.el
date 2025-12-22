@@ -54,7 +54,14 @@
 (gsk [f8] 'swirly-grep)
 (gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
 (gsk [f10] 'query-replace)
-(gsk [f11] 'shell)
+
+(defun to-shell()
+  (interactive)
+  (switch-to-buffer "*shell*")
+  )
+
+(gsk [f11] 'to-shell)
+
 
 (gsk [print] 'raise-next-frame)
 (gsk [f13] 'ns-next-frame)
@@ -64,6 +71,8 @@
 
 (gsk [f15] 'undo)
 (gsk [pause] 'undo)
+
+(gsk [f16] 'list-buffers)
 
 (gsk [kp-equal] 'balance-windows)
 
@@ -118,7 +127,7 @@
       ;;f10
       (gsk [4194411] 'kill-this-buffer)
 
-      (gsk [A-f11] 'swirly-run-python)
+      ;;(gsk [A-f11] 'swirly-run-python)
       (gsk [A-f12] 'dabbrev-expand)
       (gsk [A-f13] 'yank-pop)
       (gsk [A-f14] 'swirly-save-all)
@@ -150,7 +159,7 @@
     (gsk [s-f8] 'grep)
     (gsk [s-f9] 'magit-file-rename)
       ;;f10
-    (gsk [s-f11] 'swirly-run-python)
+    ;;(gsk [s-f11] 'swirly-run-python)
     (gsk [s-f12] 'kill-ring-save)
     (gsk [s-f13] 'yank-pop)
     (gsk [s-f14] 'swirly-save-all)

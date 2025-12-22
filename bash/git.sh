@@ -1,6 +1,15 @@
 # Git aliases
 alias read_git="source ~/code/dotfiles/bash/git.sh"
 
+grp() {
+    if [ $1 ] ; then
+        name=$1
+    else
+        name=HEAD
+    fi
+    git rev-parse --short $name
+}
+
 alias psp="~/code/psplit/psplit.py"
 
 _gclean() {
@@ -19,22 +28,22 @@ g() {
 }
 
 strict() {
-    git fetch upstream viable/strict \
-        && git rebase upstream/viable/strict \
-        && git submodule update --init --recursive
+    q git fetch upstream viable/strict \
+        && q git rebase upstream/viable/strict \
+        && q git submodule update --init --recursive
 }
 
 mstrict() {
-    git fetch upstream main \
-        && git rebase upstream/main \
-        && git submodule update --init --recursive
+    q git fetch upstream main \
+        && q git rebase upstream/main \
+        && q git submodule update --init --recursive
 }
 
 torch-clean() {
-    python setup.py clean && \
-        git clean -xdf aten build third_party torch && \
-        git submodule foreach "git clean -xdf" && \
-        git submodule update --init --recursive
+    q python setup.py clean && \
+        q git clean -xdf aten build third_party torch && \
+        q git submodule foreach "git clean -xdf" && \
+        q git submodule update --init --recursive
 }
 
 alias garc='git add . && git rebase --continue'
@@ -68,7 +77,7 @@ alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
 alias gfx='git commit --fixup'
-alias gf='g fetch upstream && g fetch'
+alias gf='q git fetch upstream && q git fetch'
 
 alias gi='git infer -a && git push'
 
@@ -164,6 +173,15 @@ greset() {
         NAME=HEAD
     fi
     git reset --hard $NAME
+}
+
+greset-no() {
+    if [ $1 ] ; then
+        NAME=$1
+    else
+        NAME=HEAD
+    fi
+    git -c submodule.recurse=false reset --hard $NAME
 }
 
 # Back up the current branch.
