@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eux
+
+NO_COLOR=1
+project=$(basename $(pwd))
+
+ruff check --select I --fix $project test* | sed 's/  --> //g'
+ruff format
+pyrefly check $project | sed 's/  --> //g'
+pytest

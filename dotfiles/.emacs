@@ -53,9 +53,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(compilation-always-kill t)
  '(compile-command "NO_COLOR=1 d run-tests")
  '(cursor-type 'box)
+ '(delete-selection-mode t)
  '(dirtrack-list '("^.*@.*:\\(.*\\)\\$" 1))
  '(etags-table-search-up-depth 10)
  '(explicit-shell-file-name "/bin/bash")
@@ -63,7 +65,7 @@
  '(global-mark-ring-max 256)
  '(global-whitespace-mode nil)
  '(grep-command
-   "egrep -nHIR * --include \\*.py --include \\*.pyi --include \\*.h --include \\*.cpp  --include \\*.c  --include \\*.cu --include \\*.yaml --include \\*.yml --exclude-dir torch/include --exclude-dir third_party --exclude-dir=build -we ")
+   "egrep -nHIR * --include \\*.py --include \\*.pyi --include \\*.pyi.in --include \\*.h --include \\*.cpp  --include \\*.c  --include \\*.cu --include \\*.yaml --include \\*.yml --exclude-dir torch/include --exclude-dir third_party --exclude-dir=build -we ")
  '(grep-find-command
    '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +"
      . 85))
@@ -81,10 +83,10 @@
  '(magit-auto-revert-mode nil)
  '(mark-ring-max 256)
  '(package-selected-packages
-   '(saveplace git-gutter git-gutter+ yaml-mode template shell-here s realgud python-mode
-               pylint protobuf-mode markdown-mode magit-filenotify live-preview
-               google-c-style golden-ratio-scroll-screen electric-operator
-               dash-functional dash-at-point cython-mode counsel blacken))
+   '(blacken counsel cython-mode dash-at-point dash-functional electric-operator git-gutter
+             git-gutter+ golden-ratio-scroll-screen google-c-style live-preview
+             magit-filenotify markdown-mode nhexl-mode protobuf-mode pylint python-mode
+             realgud s saveplace shell-here template yaml-mode))
  '(py-indent-offset 4)
  '(python-indent 4)
  '(python-indent-offset 4)
