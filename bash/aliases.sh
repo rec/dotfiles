@@ -30,7 +30,7 @@ alias lrp='quiet lintrunner init && lintrunner -a --take=PYREFLY | python ~/code
 alias lrr='quiet lintrunner init && lintrunner --take=MYPY,RUFF -a | python ~/code/test/python/fix_lint.py | tee lint.grep'
 alias lsd='ls -d ~/git*'
 
-alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
+# alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
 alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"
 
 alias pcit="python -c 'import torch'"

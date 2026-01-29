@@ -35,6 +35,7 @@
 (define-key key-translation-map (kbd "<kp-1>") "\C-s")
 (define-key key-translation-map (kbd "<kp-3>") "\C-r")
 
+(global-unset-key [C-z])
 (defalias 'gsk 'global-set-key)
 
 (gsk [M-z] 'zop-to-char)

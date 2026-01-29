@@ -1,7 +1,7 @@
 [alias]
     a = commit -a --amend --no-edit
     aliases = config --get-regexp alias
-    l = !git --no-pager log --oneline --decorate-refs-exclude=refs/tags -4
+    l = !git --no-pager log --oneline --decorate-refs-exclude=refs/tags -7
     ll = log --oneline -10
     fixup = "!f() { \
              TARGET=$(git rev-parse "$1"); \

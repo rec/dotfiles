@@ -1,4 +1,8 @@
 from __future__ import annotations
+try:
+    import numpy as np
+except Exception:
+    pass
 from pathlib import Path
 import re
 import itertools

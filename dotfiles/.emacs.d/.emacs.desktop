@@ -2,30 +2,246 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Sep 10 13:57:25 2024
+;; Created Thu Jan 29 14:54:21 2026
 ;; Desktop file format version 208
-;; Emacs version 27.1
+;; Emacs version 30.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26336 20549 492710 200000) (desktop . "208") "rec@qgpu3" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (cursor-color . "black") (tool-bar-lines . 0) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (font . "tty") (height . 43) (width . 120) (modeline . t) (unsplittable) (menu-bar-lines . 1) (tab-bar-lines . 0) (frameset--id . "77AD-98C5-D0EE-36FB") (frameset--mini t)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 120) (pixel-height . 42) (total-width . 120) (total-height . 42) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 120) (pixel-height . 21) (total-width . 120) (total-height . 21) (normal-height . 0.5) (normal-width . 1.0) (buffer "test_tensorpipe_agent.py" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 120) (pixel-height . 21) (total-width . 120) (total-height . 21) (normal-height . 0.5) (normal-width . 1.0) (buffer "*Warnings*" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 233) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (27003 26253 94465 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (border-width . 0) (height . 56) (width . 80) (visibility . t) (display) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (scroll-bar-foreground) (scroll-bar-background) (foreground-color . "Black") (background-color . "White") (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (font-parameter) (cursor-color . "black") (last-focus-update) (frameset--id . "3308-2832-F1DA-56F2") (frameset--mini t) (GUI:height . 54) (GUI:width . 120) (modeline . t) (unsplittable) (GUI:left . 164) (GUI:top . 68) (icon-name) (explicit-name) (tool-bar-position . top) (font . "tty")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 80) (pixel-height . 55) (total-width . 80) (total-height . 55) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("*scratch*" 1 1))) (((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (scroll-bar-foreground) (scroll-bar-background) (tool-bar-lines . 0) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (cursor-color . "black") (font-parameter) (environment) (modeline . t) (unsplittable) (frameset--id . "77AD-98C5-D0EE-36FB") (frameset--mini t . t) (display) (visibility . t) (last-focus-update) (icon-name) (explicit-name) (tool-bar-position . top) (GUI:height . 57) (GUI:width . 92) (GUI:left . 61) (GUI:top . 25) (height . 56) (width . 80) (font . "tty")) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 80) (pixel-height . 55) (total-width . 80) (total-height . 55) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 80) (pixel-height . 28) (total-width . 80) (total-height . 28) (normal-height . 0.5) (normal-width . 1.0) (buffer ".gitignore" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 35) (start . 1)) (prev-buffers ("elisp" 1 365) ("git.sh" 1 1892) (".gitconfig" 1 85) ("git-go" 1 3616) ("aliases.sh" 1 640) ("environment-variables.sh" 1 179) (".emacs.desktop" 1 322) ("code" 1 65) ("tuney<code>" 1 1022) ("keyboard" 1 214) ("_base.py" 1 5154) ("pynput" 1 258) ("darwin.py" 1 6359) ("__init__.py" 1 5880) ("audio" 1 128) ("tuney<tuney>" 1 219) ("__main__.py" 1 162) ("COMMIT_EDITMSG" 1 1) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 80) (pixel-height . 27) (total-width . 80) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer ".gitignore" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 35) (start . 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '(#("print('" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("commands " 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("bpdb" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("Method" 0 6 (isearch-case-fold-search nil isearch-regexp-function nil)) #("var_get" 0 7 (isearch-regexp-function nil isearch-case-fold-search t)) #("skipfunc" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("lookup_inner" 0 12 (isearch-case-fold-search t isearch-regexp-function nil)) #("test_dict_keys" 0 14 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_out(" 0 9 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_grad(" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("break" 0 5 (isearch-regexp-function nil isearch-case-fold-search t)) #("test_grad" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("unbind_copy" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("gradgrad" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("'alias_copy" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("as_strided" 0 10 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq search-ring '(#("self.running =" 0 14 (isearch-case-fold-search t isearch-regexp-function nil)) #("set" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("_mark_read" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("_condition" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("class" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("child" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("style" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("case_" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("2008" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #(".avi" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("between" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("desktop" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("note" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("return " 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("self.config" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("pyrefly" 0 7 (isearch-case-fold-search t isearch-regexp-function nil))))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git-decomp/pytorch/tools/autograd/gen_variable_type.py" "~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch/torch/overrides.py" "~/git/pytorch/torch/_dynamo/variables/user_defined.py" "~/git-clean/pytorch/torch/_dynamo/variables/builtin.py" "~/git-clean/pytorch/" "~/git/pytorch/" "~/git/pytorch/torch/_dynamo/variables/builtin.py" "~/git/pytorch/torch/_dynamo/convert_frame.py" "~/git/pytorch/torch/_dynamo/trace_rules.py" "~/git/pytorch/torch/_dynamo/variables/builtin.py" "/home/rec/.conda/envs/pytorch-dev/lib/python3.8/types.py" "~/git/pytorch/torch/_dynamo/variables/base.py" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch/torch/_dynamo/bytecode_transformation.py" "~/git/pytorch/torch/_dynamo/variables/functions.py" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_dynamo/symbolic_convert.py" "~/git/pytorch" "~/git/pytorch/torch/_prims/context.py" "~/git/pytorch" "~/.ssh/config" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/pytorch-build.sh" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/bash/experimental.sh" "/scp:rec@eu.quansight.dev#2223:~/src/torch-build/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:/home/rec/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_decomp/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_inductor/decomposition.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:/tmp/rec/add-decompositions.diff" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_39_23_765575-pid_91353/torchinductor/model__0_forward_1.0/" "/code/pytorch/model.py" "/code/pytorch/torch_compile_debug/run_2024_06_13_16_33_40_248986-pid_91127/torchinductor/model__0_inference_0.0/" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/torch-build/" "/scp:rec@eu.quansight.dev#2223:/home/rec/git/pytorch" "/code/dotfiles" "/code/dotfiles/dotfiles/.emacs" "~/synthetic/code/dotfiles" "/code/dotfiles/dotfiles" "/code/dotfiles" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/link-into-emacs.d/lisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp" "/scp:rec@eu.quansight.dev#2223:~/code/dotfiles/elisp/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/opinfo/refs.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/commands.sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_ops.py" "/code/dotfiles/bash/experimental.sh" "/bin/sh" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/torch/_inductor/lowering.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/testing/_internal/common_methods_invocations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/functorch/test_vmap_registrations.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/aten/src/ATen/functorch/BatchRulesDecompositions.cpp" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0" "/code/pytorch/torch_compile_debug/run_2024_06_12_12_03_21_240882-pid_83695/torchinductor/model___9.0/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test/test_mps.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/distributed/_tensor/test_dtensor_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/git_as_strided/pytorch/test/functorch/test_vmap.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "~/Library/Preferences/Aquamacs Emacs/" "/code/dotfiles/elisp/keyboard-shortcuts.el" "/code/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/test.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/test/functorch/test_ops.py" "/scp:rec@eu.quansight.dev#2223:~/src/pytorch/torch/_refs/__init__.py" "/scp:rec@eu.quansight.dev#2223:/bin/bash" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/"))
+(setq file-name-history '("~/code/dotfiles/dotfiles/.gitignore" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/oops.txt" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/tuney/keyboard.py" "~/code/tuney/tuney/audio/" "~/code/tuney/tuney/runnable.py" "~/code/tuney/tuney/audio/runnable.py" "~/code/tuney/tuney" "~/code/tuney/.venv/lib/python3.12/site-packages/pynput" "~/code/tuney/.venv/lib/python3.12/site-packages/pynput/keyboard/" "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/__init__.py" "~/code/tuney/tuney/keyboard.py" "~/code/tuney/tuney/__main__.py" "~/code/tuney/tuney/note_grid.py" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/scripts/stopwatch.tcss" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/mvi.txt" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/dotfiles/bash/environment-variables.sh" "~/code/gitz/git-go" "~/.gitconfig" "~/code/dotfiles/bash/git.sh" "~/code/dotfiles/bash/aliases.sh" "~/code" "~/code/dotfiles/elisp/" "~/code/dotfiles/dotfiles" "~/code/dotfiles/" "~/code/tuney" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/note.py" "~/code/tuney/tuney" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/note.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/pyrefly.toml" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/player.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/pyrefly.toml" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/.lintrunner.toml" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/errors.txt" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/pyrefly.toml" "/scp:rec@eu.quansight.dev#2223:~/git-typing/pytorch/.lintrunner.toml" "/scp:rec@eu.quansight.dev#2223:~/git-typing/pytorch/pyrefly.toml" "/scp:rec@eu.quansight.dev#2223:~/git-typing/pytorch" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/.lintrunner.toml" "~/code/test/python/" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/device_config.py" "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/typing.py" "~/code/fixo/" "~/code/tuney/tuney/audio/device_config.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney" "~/code/tuney/.venv/lib/python3.10/site-packages" "~/code/tuney/tuney/note.py" "~/code/tuney/tuney/audio/buffered_synth_player.py" "~/Downloads/Sevish Tunings Pack/Eikosany/scl/Dekany 1 3 5 9 13.scl" "~/Downloads/Sevish Tunings Pack/Eikosany/tun" "~/Downloads/" "~/code/tuney/tuney/audio/__init__.py" "/Users/tom/code/dotfiles/bin/python_startup.py" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/playback.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/playback.py" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/audio/file_playback.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/audio/file_playback.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/runnable.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/" "~/code/tuney/tuney" "~/code/tuney/tuney/audio/__init__.py"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/home/rec/git-constant/pytorch/test/distributed/rpc/test_tensorpipe_agent.py"
-  "test_tensorpipe_agent.py"
-  'python-mode
-  '(eldoc-mode git-gutter-mode global-whitespace-mode)
-  1
+  "/Users/tom/code/dotfiles/dotfiles/.gitignore"
+  ".gitignore"
+  'fundamental-mode
+  '(font-lock-mode)
+  35
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26336 20547 481409 696000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27003 26250 866608 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.git/COMMIT_EDITMSG"
+  "COMMIT_EDITMSG"
+  'text-mode
+  '(font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 27003 26212 792723 560000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/__main__.py"
+  "__main__.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  162
+  '(113 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27003 24214 777846 583000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (113 113 162 113 162 113 113 162))))
+
+(desktop-create-buffer 208
+  nil
+  "tuney"
+  'dired-mode
+  '(font-lock-mode)
+  219
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/tuney/")
+  '((buffer-display-time 27003 23353 443828 583000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "audio"
+  'dired-mode
+  '(font-lock-mode)
+  128
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/tuney/audio/")
+  '((buffer-display-time 27003 23350 683769 583000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/_util/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  5880
+  '(7710 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27003 22943 83363 583000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (4317))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/_util/darwin.py"
+  "darwin.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  6359
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27003 22781 146022 583000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "pynput"
+  'dired-mode
+  '(font-lock-mode)
+  258
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/")
+  '((buffer-display-time 27003 22377 304100 583000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/keyboard/_base.py"
+  "_base.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  5154
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27003 22369 728950 583000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "keyboard"
+  'dired-mode
+  '(font-lock-mode)
+  214
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/keyboard/")
+  '((buffer-display-time 27003 22359 862314 583000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "tuney"
+  'dired-mode
+  '(font-lock-mode)
+  1022
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/")
+  '((buffer-display-time 27003 19276 713471 583000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "code"
+  'dired-mode
+  '(font-lock-mode)
+  65
+  '(nil nil)
+  t
+  '("/Users/tom/code/")
+  '((buffer-display-time 27003 19272 550501 583000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/elisp/.emacs.desktop"
+  ".emacs.desktop"
+  'emacs-lisp-mode
+  '(eldoc-mode font-lock-mode)
+  322
+  '(322 nil)
+  nil
+  nil
+  '((buffer-display-time 27003 19260 485356 583000) (buffer-file-coding-system . utf-8-emacs-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/environment-variables.sh"
+  "environment-variables.sh"
+  'sh-mode
+  '(sh-electric-here-document-mode font-lock-mode)
+  179
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27003 18367 489394 648000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/aliases.sh"
+  "aliases.sh"
+  'sh-mode
+  '(sh-electric-here-document-mode font-lock-mode)
+  640
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27003 18367 145422 648000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/gitz/git-go"
+  "git-go"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  3616
+  '(586 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27003 18369 618482 648000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (7109 953))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/dotfiles/.gitconfig"
+  ".gitconfig"
+  'conf-windows-mode
+  '(font-lock-mode)
+  85
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27003 18071 998499 648000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/git.sh"
+  "git.sh"
+  'sh-mode
+  '(sh-electric-here-document-mode font-lock-mode)
+  1892
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27003 18073 390688 648000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "elisp"
+  'dired-mode
+  '(font-lock-mode)
+  365
+  '(nil nil)
+  t
+  '("/Users/tom/code/dotfiles/elisp/")
+  '((buffer-display-time 27003 26226 335129 0))
   '((mark-ring nil)))
 

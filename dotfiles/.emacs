@@ -58,14 +58,16 @@
  '(compile-command "NO_COLOR=1 d run-tests")
  '(cursor-type 'box)
  '(delete-selection-mode t)
+ '(desktop-save-mode t)
  '(dirtrack-list '("^.*@.*:\\(.*\\)\\$" 1))
  '(etags-table-search-up-depth 10)
  '(explicit-shell-file-name "/bin/bash")
  '(fill-column 88)
+ '(global-auto-revert-mode t)
  '(global-mark-ring-max 256)
  '(global-whitespace-mode nil)
  '(grep-command
-   "egrep -nHIR * --include \\*.py --include \\*.pyi --include \\*.pyi.in --include \\*.h --include \\*.cpp  --include \\*.c  --include \\*.cu --include \\*.yaml --include \\*.yml --exclude-dir torch/include --exclude-dir third_party --exclude-dir=build -we ")
+   "egrep -nHIR * --exclude-dir=build --exclude-dir=.venv -we ")
  '(grep-find-command
    '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +"
      . 85))

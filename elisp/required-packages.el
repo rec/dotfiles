@@ -6,7 +6,7 @@
 ;; (require 'cython-mode)
 (require 'dash)
 (require 'dash-functional)
-;; (require 'defaultcontent)
+(require 'defaultcontent)
 (require 'dired-x)
 (require 'git-gutter)
 ;;(require 'google-c-style)

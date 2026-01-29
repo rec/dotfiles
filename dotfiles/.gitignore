@@ -1,3 +1,4 @@
-TAGS
 .DS_Store
 annotations.json
+.idea/
+.emacs.d/
