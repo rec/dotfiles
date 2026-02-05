@@ -13,8 +13,8 @@ alias cdr="cd $CODE_ROOT/recs"
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
 alias da="direnv allow"
-alias dboard="$CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi dashboard --push"
-alias dashboard="$CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi dashboard --push"
+# alias dboard="$CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi dashboard --push"
+# alias dashboard="$CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi dashboard --push"
 alias dev="ssh -p 2223 rec@eu.quansight.dev"
 
 alias ffpmeg="ffpmeg -hide_banner"
@@ -30,8 +30,8 @@ alias lrp='quiet lintrunner init && lintrunner -a --take=PYREFLY | python ~/code
 alias lrr='quiet lintrunner init && lintrunner --take=MYPY,RUFF -a | python ~/code/test/python/fix_lint.py | tee lint.grep'
 alias lsd='ls -d ~/git*'
 
-# alias multi="d $CODE_ROOT/multi/.direnv/python-3.11/bin/python -m multi"
-alias mkdocs="$CODE_ROOT/multi/.direnv/python-3.11.1/bin/mkdocs"
+# alias multi="$CODE_ROOT/multi/.venv/bin/python -m multi"
+alias mkdocs="$CODE_ROOT/multi/.venv/bin/mkdocs"
 
 alias pcit="python -c 'import torch'"
 alias pi="pip install --upgrade pip && python3 -m pip install -e .[dev]"
