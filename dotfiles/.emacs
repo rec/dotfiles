@@ -53,6 +53,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-revert-interval 5)
+ '(auto-revert-use-notify nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
  '(compile-command "NO_COLOR=1 d run-tests")
@@ -67,7 +69,7 @@
  '(global-mark-ring-max 256)
  '(global-whitespace-mode nil)
  '(grep-command
-   "egrep -nHIR * --exclude-dir=build --exclude-dir=.venv -we ")
+   "egrep -nHIR * --include=\\*.py --include=\\*.toml --exclude-dir=build --exclude-dir=.venv -we ")
  '(grep-find-command
    '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +"
      . 85))
@@ -82,7 +84,7 @@
  '(indicate-buffer-boundaries 'left)
  '(kill-ring-max 1024)
  '(large-file-warning-threshold nil)
- '(magit-auto-revert-mode nil)
+ '(magit-auto-revert-mode t)
  '(mark-ring-max 256)
  '(package-selected-packages
    '(blacken counsel cython-mode dash-at-point dash-functional electric-operator git-gutter

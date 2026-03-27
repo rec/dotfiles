@@ -1,0 +1,5 @@
+# Alt+Up: Search forward or backward for commands starting with what you've typed:
+"\e[1;3A": history-search-backward
+
+# Alt+Down: Search backward for commands starting with what you've typed:
+"\e[1;3B": history-search-forward

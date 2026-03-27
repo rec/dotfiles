@@ -2,270 +2,1122 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Feb  4 20:56:44 2026
+;; Created Fri Mar 27 13:13:27 2026
 ;; Desktop file format version 208
-;; Emacs version 30.1
+;; Emacs version 30.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (27011 42108 499032 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (border-width . 0) (height . 56) (width . 80) (visibility . t) (display) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (scroll-bar-foreground) (scroll-bar-background) (foreground-color . "Black") (background-color . "White") (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (font-parameter) (cursor-color . "black") (last-focus-update) (frameset--id . "3308-2832-F1DA-56F2") (frameset--mini t) (GUI:height . 54) (GUI:width . 120) (modeline . t) (unsplittable) (GUI:left . 164) (GUI:top . 68) (icon-name) (explicit-name) (tool-bar-position . top) (font . "tty")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 80) (pixel-height . 55) (total-width . 80) (total-height . 55) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("*scratch*" 1 1))) (((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (scroll-bar-foreground) (scroll-bar-background) (tool-bar-lines . 0) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "unspecified-fg") (background-color . "unspecified-bg") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (cursor-color . "black") (font-parameter) (environment) (modeline . t) (unsplittable) (frameset--id . "77AD-98C5-D0EE-36FB") (frameset--mini t . t) (display) (visibility . t) (last-focus-update) (icon-name) (explicit-name) (tool-bar-position . top) (GUI:height . 57) (GUI:width . 92) (GUI:left . 61) (GUI:top . 25) (height . 56) (width . 80) (font . "tty")) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 80) (pixel-height . 55) (total-width . 80) (total-height . 55) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 80) (pixel-height . 26) (total-width . 80) (total-height . 26) (normal-height . 0.4814814814814815) (normal-width . 1.0) (buffer "pyproject.toml" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 565) (start . 1)) (prev-buffers ("git-rebase-todo" 1 671) (".gitignore" 1 35) ("elisp" 1 365) ("git.sh" 1 1892) (".gitconfig" 1 85) ("git-go" 1 3616) ("aliases.sh" 1 644) ("environment-variables.sh" 1 179) (".emacs.desktop" 1 322) ("code" 1 65) ("tuney<code>" 1 1022) ("keyboard" 1 214) ("_base.py" 1 5154) ("pynput" 1 258) ("darwin.py" 1 6359) ("__init__.py" 1 5880) ("audio" 1 128) ("tuney<tuney>" 1 219) ("__main__.py" 1 162) ("COMMIT_EDITMSG" 1 1) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 80) (pixel-height . 29) (total-width . 80) (total-height . 29) (normal-height . 0.5185185185185185) (normal-width . 1.0) (buffer ".gitignore" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 45) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (27078 29799 198773 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (border-width . 0) (visibility . t) (display) (width . 90) (height . 39) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "Black") (background-color . "White") (scroll-bar-foreground) (scroll-bar-background) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (line-spacing) (left-fringe . 0) (right-fringe . 0) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title . "Ediff") (inhibit-double-buffering) (icon-type) (auto-raise . t) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (font-parameter) (cursor-color . "black") (icon-name . "Ediff _/59") (user-position . t) (last-focus-update) (frameset--id . "055B-2BC4-AB58-69B2") (frameset--mini t) (modeline . t) (unsplittable) (explicit-name) (tool-bar-position . top) (GUI:height . 4) (GUI:width . 18) (GUI:left . 1106) (GUI:top . 25) (font . "tty")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 90) (pixel-height . 38) (total-width . 90) (total-height . 38) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("*scratch*" 1 1))) (((minibuffer . t) (border-width . 0) (visibility . t) (display) (width . 90) (height . 38) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "Black") (background-color . "White") (scroll-bar-foreground) (scroll-bar-background) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (font-parameter) (cursor-color . "black") (last-focus-update) (frameset--id . "6636-9587-F2A0-6ED0") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (GUI:height . 53) (GUI:width . 96) (GUI:left . 878) (GUI:top . 137) (font . "tty")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 90) (pixel-height . 37) (total-width . 90) (total-height . 37) (normal-height . 1.0) (normal-width . 1.0) (buffer "run-tests" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 278) (start . 69)) (prev-buffers ("bin" 1 1) ("pyproject.toml<fing>" 1 320) ("layout.py" 1223 2554) ("renderer.py" 932 1345))) (((minibuffer . t) (border-width . 0) (visibility . t) (display) (width . 90) (height . 38) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "Black") (background-color . "White") (scroll-bar-foreground) (scroll-bar-background) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (font-parameter) (cursor-color . "black") (last-focus-update . t) (frameset--id . "509C-1EA3-0DD7-C8E4") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (GUI:height . 59) (GUI:width . 176) (GUI:left . 97) (GUI:top . 45) (font . "tty")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 90) (pixel-height . 37) (total-width . 90) (total-height . 37) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)) (prev-buffers ("*scratch*" 1 1))) (((minibuffer . t) (border-width . 0) (visibility . t) (display) (width . 90) (height . 38) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "Black") (background-color . "White") (scroll-bar-foreground) (scroll-bar-background) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (font-parameter) (cursor-color . "black") (last-focus-update) (frameset--id . "E185-EBC0-51AF-B6EF") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (GUI:height . 56) (GUI:width . 99) (GUI:left . 502) (GUI:top . 178) (font . "tty")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 90) (pixel-height . 37) (total-width . 90) (total-height . 37) (normal-height . 1.0) (normal-width . 1.0) (buffer "recorder-fingerings.svg" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 31431) (start . 30324))) (((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (scroll-bar-foreground) (scroll-bar-background) (tool-bar-lines . 0) (fontsize . 0) (GUI:font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (GUI:fullscreen) (cursor-color . "black") (font-parameter) (environment) (last-focus-update) (frameset--id . "7BF8-9CD0-70BA-ABF3") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (visibility . t) (display) (explicit-name) (tool-bar-position . top) (GUI:height . 55) (GUI:width . 85) (GUI:left . 733) (GUI:top . 212) (font . "tty") (height . 38) (width . 90)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 90) (pixel-height . 37) (total-width . 90) (total-height . 37) (normal-height . 1.0) (normal-width . 1.0) (buffer "edited-ranges.json" (selected) (hscroll . 0) (fringes 0 0 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 5625) (start . 4684)) (prev-buffers ("vl70" 1 1) ("midi" 1 1) ("syx" 1 1) ("prog" 1 1) ("sysexy<code>" 1 1) ("sysexy<sysexy>" 1 1) ("vl70.txt" 1019 1315) ("prog.txt" 773 807) ("code" 1 1) ("compare_set.py" 1 388))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '(#("self.running =" 0 14 (isearch-case-fold-search t isearch-regexp-function nil)) #("set" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("_mark_read" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("_condition" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("class" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("child" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("style" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("case_" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("2008" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #(".avi" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("between" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("desktop" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("note" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("return " 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("self.config" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("pyrefly" 0 7 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq search-ring '(#("hendrix" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("sys" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("all" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("wc " 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("filter_list" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("yak" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("above" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("self" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("self._add(" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("c" 0 1 (isearch-case-fold-search t isearch-regexp-function nil)) #("sel" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("title" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("footer" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("title_" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("text" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("footer_height" 0 13 (isearch-case-fold-search t isearch-regexp-function nil))))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("~/code/def_main/pyproject.toml" "~/code/multi/.git/rebase-merge/git-rebase-todo" "~/code/dotfiles/dotfiles/.gitignore" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/oops.txt" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/tuney/keyboard.py" "~/code/tuney/tuney/audio/" "~/code/tuney/tuney/runnable.py" "~/code/tuney/tuney/audio/runnable.py" "~/code/tuney/tuney" "~/code/tuney/.venv/lib/python3.12/site-packages/pynput" "~/code/tuney/.venv/lib/python3.12/site-packages/pynput/keyboard/" "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/__init__.py" "~/code/tuney/tuney/keyboard.py" "~/code/tuney/tuney/__main__.py" "~/code/tuney/tuney/note_grid.py" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/scripts/stopwatch.tcss" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/mvi.txt" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/tuney/.git/COMMIT_EDITMSG" "~/code/tuney/.git/rebase-merge/git-rebase-todo" "~/code/dotfiles/bash/environment-variables.sh" "~/code/gitz/git-go" "~/.gitconfig" "~/code/dotfiles/bash/git.sh" "~/code/dotfiles/bash/aliases.sh" "~/code" "~/code/dotfiles/elisp/" "~/code/dotfiles/dotfiles" "~/code/dotfiles/" "~/code/tuney" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/note.py" "~/code/tuney/tuney" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/note.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/pyrefly.toml" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/player.py" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/pyrefly.toml" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/.lintrunner.toml" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/errors.txt" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/pyrefly.toml" "/scp:rec@eu.quansight.dev#2223:~/git-typing/pytorch/.lintrunner.toml" "/scp:rec@eu.quansight.dev#2223:~/git-typing/pytorch/pyrefly.toml" "/scp:rec@eu.quansight.dev#2223:~/git-typing/pytorch" "/scp:rec@eu.quansight.dev#2223:~/git/pytorch/.lintrunner.toml" "~/code/test/python/" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/device_config.py" "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/typing.py" "~/code/fixo/" "~/code/tuney/tuney/audio/device_config.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney" "~/code/tuney/.venv/lib/python3.10/site-packages" "~/code/tuney/tuney/note.py" "~/code/tuney/tuney/audio/buffered_synth_player.py" "~/Downloads/Sevish Tunings Pack/Eikosany/scl/Dekany 1 3 5 9 13.scl" "~/Downloads/Sevish Tunings Pack/Eikosany/tun" "~/Downloads/" "~/code/tuney/tuney/audio/__init__.py" "/Users/tom/code/dotfiles/bin/python_startup.py" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/playback.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/playback.py" "~/code/tuney/tuney/audio/synth_player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/audio/file_playback.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/audio/file_playback.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/runnable.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/"))
+(setq file-name-history '("~/temp.txt" "~/" "~/code/sysexy" "~/code/sysexy/syx/prog.syx" "~/code/sysexy/prog.syx" "~/code/sysexy" "~/code/midi/" "~/code/sysexy" "~/code/sysexy/syx" "~/code" "~/code/test/python/compare_set.py" "~/code/dotfiles/bin/" "~/code/fing/pyproject.toml" "~/code/test/python" "~/code/test/python/compare_set.py" "~/code/test/python" "~/code/rec/lovely-numbers/introduction.md" "~/code/rec/lovely-numbers" "~/code/rec/" "~/Documents/" "~/" "~/code" "~/code/fing/charts" "~/code/fing/fing/sizes.py" "~/code/fing/charts" "~/code/fing/charts/recorder-fingerings.svg" "~/code/fing/charts" "~/code/fing/git.diff" "~/code/fing/charts/recorder-fingerings.svg" "~/code/fing/fing/note.py" "~/code/fing/fing/fingering_system.py" "~/code/fing/fing/sizes.py" "~/code/fing/charts" "~/code/fing/charts/" "~/code/fing/git.diff" "~/code/fing/fing/sizes.py" "~/code/fing/charts/" "~/code/fing/charts" "~/code/fing/fing/renderer.py" "~/code/fing/charts" "~/code/fing/charts/recorder-fingerings.color.saved.svg" "~/code/fing/charts/recorder-fingerings.svg" "~/code/fing/charts/recorder-fingerings.color.saved.svg" "~/code/fing/test" "~/code/fing/charts/recorder-fingerings.svg" "~/code/fing/charts" "~/*saved-shell*" "~/code/fing/charts/recorder-fingerings.color.svg" "~/code/fing/" "~/code/fing/charts/recorder-fingerings.color.svg" "~/code/fing/git.diff" "~/code/fing/charts/recorder-fingerings.color.svg" "~/code/fing/fingerings/" "~/code/fing/charts" "~/code/fing" "~/code/fing/charts" "~/code/fing/charts/recorder-fingerings.svg" "~/code/fing/charts/recorder-fingerings.color.svg" "~/code/fing/charts/recorder-fingerings.svg" "~/code/fing/charts" "~/code/fixo/fixo" "~/code/test/python" "~/code/test/python/test_tokenizer.py" "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/tokenize.py" "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/token.py" "~/code/fixo/" "~/code/test/python" "~/code/test/python/process_lambdas.py" "~/code/fixo/" "~/code/test/python/one_line_lambdas.py" "~/code/test/python/" "~/code/fing/fing/layout.py" "~/code/fing/pyproject.toml" "~/code/fing" "~/code/fing/fing/layout.py" "~/code/fing/test" "~/code/fing/test/" "~/code/test/python/" "~/code/fing/test/sizes.json" "~/code/fing/charts" "~/code/fing/charts/" "~/code/fing/charts/recorder-fingerings.svg" "~" "~/code/fing/" "~/code/fing/charts/simple.svg" "~/code/fing/charts" "~/code/dotfiles/dotfiles/.inputrc" "~/code/dotfiles/dotfiles/" "~/code/fing/test/test_rendering.py" "~/code/fing/test/test_read_layout.py" "~/code/fing/test" "~/code/fing/charts/" "~/code/fing/fingerings/recorder/recorder-fingering.layout.toml" "~/code/fing/fingerings/recorder/" "~/code/fing/fing/renderer.py" "~/code/fing/fingerings/recorder/" "~/code/fing" "~/code/fing/fingerings/recorder/recorder-fingering.colors.toml" "~/code/fing/" "~/code/fing/test"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/dotfiles/.gitignore"
-  ".gitignore"
-  'fundamental-mode
-  '(font-lock-mode)
-  45
-  '(45 nil)
-  nil
-  nil
-  '((buffer-display-time 27011 42101 307838 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (45))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/def_main/pyproject.toml"
-  "pyproject.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  565
-  '(565 nil)
-  nil
-  nil
-  '((buffer-display-time 27011 42101 307838 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/.git/rebase-merge/git-rebase-todo"
-  "git-rebase-todo"
-  'git-rebase-mode
-  '(font-lock-mode)
-  671
-  '(nil nil)
-  t
-  nil
-  '((buffer-display-time 27010 5332 414566 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/.git/COMMIT_EDITMSG"
-  "COMMIT_EDITMSG"
-  'text-mode
-  '(font-lock-mode)
-  1
-  '(1 nil)
-  nil
-  nil
-  '((buffer-display-time 27010 5281 335399 467000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/__main__.py"
-  "__main__.py"
-  'python-mode
-  '(eldoc-mode font-lock-mode)
-  162
-  '(113 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27010 3283 568140 490000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (113 113 162 113 162 113 113 162))))
-
-(desktop-create-buffer 208
-  nil
-  "tuney"
-  'dired-mode
-  '(font-lock-mode)
-  219
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/tuney/")
-  '((buffer-display-time 27010 2422 447045 490000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "audio"
-  'dired-mode
-  '(font-lock-mode)
-  128
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/tuney/audio/")
-  '((buffer-display-time 27010 2419 767225 490000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/_util/__init__.py"
-  "__init__.py"
-  'python-mode
-  '(eldoc-mode font-lock-mode)
-  5880
-  '(7710 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27010 2012 246011 490000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (4317))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/_util/darwin.py"
-  "darwin.py"
-  'python-mode
-  '(eldoc-mode font-lock-mode)
-  6359
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27010 1850 392627 490000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "pynput"
-  'dired-mode
-  '(font-lock-mode)
-  258
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/")
-  '((buffer-display-time 27010 1446 621789 490000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/keyboard/_base.py"
-  "_base.py"
-  'python-mode
-  '(eldoc-mode font-lock-mode)
-  5154
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27010 1439 131577 490000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "keyboard"
-  'dired-mode
-  '(font-lock-mode)
-  214
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pynput/keyboard/")
-  '((buffer-display-time 27010 1429 338692 490000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "tuney"
-  'dired-mode
-  '(font-lock-mode)
-  1022
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/")
-  '((buffer-display-time 27009 63882 279510 490000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "code"
-  'dired-mode
-  '(font-lock-mode)
-  65
-  '(nil nil)
-  t
-  '("/Users/tom/code/")
-  '((buffer-display-time 27009 63878 190990 490000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
   "/Users/tom/code/dotfiles/elisp/.emacs.desktop"
   ".emacs.desktop"
-  'emacs-lisp-mode
-  '(eldoc-mode font-lock-mode)
-  322
-  '(322 nil)
+  'fundamental-mode
   nil
-  nil
-  '((buffer-display-time 27009 63866 274099 490000) (buffer-file-coding-system . utf-8-emacs-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bash/environment-variables.sh"
-  "environment-variables.sh"
-  'sh-mode
-  '(sh-electric-here-document-mode font-lock-mode)
-  179
+  1
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27009 62973 465930 555000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bash/aliases.sh"
-  "aliases.sh"
-  'sh-mode
-  '(sh-electric-here-document-mode font-lock-mode)
-  644
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 27009 62973 250225 555000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/gitz/git-go"
-  "git-go"
-  'python-mode
-  '(eldoc-mode font-lock-mode)
-  3616
-  '(586 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27009 62975 875138 555000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (7109 953))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/dotfiles/.gitconfig"
-  ".gitconfig"
-  'conf-windows-mode
-  '(font-lock-mode)
-  85
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 27009 62678 386020 555000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bash/git.sh"
-  "git.sh"
-  'sh-mode
-  '(sh-electric-here-document-mode font-lock-mode)
-  1892
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 27009 62679 904768 555000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-emacs-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
   "elisp"
   'dired-mode
-  '(font-lock-mode)
-  365
+  nil
+  1
   '(nil nil)
   t
   '("/Users/tom/code/dotfiles/elisp/")
-  '((buffer-display-time 27010 5296 914980 907000))
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/environment-variables.sh"
+  "environment-variables.sh"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/Documents/Work/writing/diosynth.md"
+  "diosynth.md"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/elisp/keyboard-shortcuts.el"
+  "keyboard-shortcuts.el"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . prefer-utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/dotfiles/.gitconfig"
+  ".gitconfig"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "gitz"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/gitz/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/gitz/git-go"
+  "git-go"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "recs"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/recs/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/git.sh"
+  "git.sh"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "uv"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/.local/share/uv/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "python"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/.local/share/uv/python/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/error_maker.py"
+  "error_maker.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "test"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/test/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/cache_method.py"
+  "cache_method.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/definitions.md"
+  "definitions.md"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "writing"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/writing/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/writing/old-README.md"
+  "old-README.md"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/README.md"
+  "README.md"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/locals.py"
+  "locals.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/locals5.py"
+  "locals5.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/.python-version"
+  ".python-version"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/pyproject.toml"
+  "pyproject.toml"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/fix_input_variables.py"
+  "fix_input_variables.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/multi/multi/runner.py"
+  "runner.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "multi"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/multi/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/interactive.sh"
+  "interactive.sh"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "bash"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/dotfiles/bash/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "svg_samples"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/svg_samples/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/svg_samples/copyleft.svg"
+  "copyleft.svg"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "fing"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/fing/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/xml_to_str.py"
+  "xml_to_str.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/__main__.py"
+  "__main__.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "dotfiles"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/dotfiles/dotfiles/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/dotfiles/.inputrc"
+  ".inputrc"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/clean_json.py"
+  "clean_json.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/test_fingerings.py"
+  "test_fingerings.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/test_rendering.py"
+  "test_rendering.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/render_chart.py"
+  "render_chart.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/tokenize.py"
+  "tokenize.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/test_tokenizer.py"
+  "test_tokenizer.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/token.py"
+  "token.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fixo/fixo/token_edit.py"
+  "token_edit.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/one_line_lambdas.py"
+  "one_line_lambdas.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fixo/fixo/type_edit.py"
+  "type_edit.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "fixo"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fixo/fixo/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "blocks"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fixo/fixo/blocks/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fixo/fixo/blocks/python_file.py"
+  "python_file.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/process_lambdas.py"
+  "process_lambdas.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "fingerings"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/fingerings/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "recorder"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/fingerings/recorder/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "fing"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/test_fix_text_indenting.py"
+  "test_fix_text_indenting.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "test"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/test/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/constants.py"
+  "constants.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/test_sizes.py"
+  "test_sizes.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fingerings/recorder/recorder-fingering.colors.toml"
+  "recorder-fingering.colors.toml"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/fingering_system.py"
+  "fingering_system.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/note.py"
+  "note.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/git.diff"
+  "git.diff"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/charts/recorder-fingerings.color.svg"
+  "recorder-fingerings.color.svg"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "charts"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/fing/charts/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/chart_piece.py"
+  "chart_piece.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/sizes.py"
+  "sizes.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/charts/recorder-fingerings.svg"
+  "recorder-fingerings.svg"
+  'fundamental-mode
+  nil
+  31431
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27078 29789 795518 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/renderer.py"
+  "renderer.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fingerings/recorder/recorder-fingering.layout.toml"
+  "recorder-fingering.layout.toml"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fingerings/recorder/recorder-fingering.toml"
+  "recorder-fingering.toml"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "writing"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/Documents/Work/writing/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "Work"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/Documents/Work/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "Documents"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/Documents/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "rec"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/rec/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "lovely-numbers"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/rec/lovely-numbers/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/rec/lovely-numbers/introduction.md"
+  "introduction.md"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "python"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/test/python/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/fing/layout.py"
+  "layout.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/pyproject.toml"
+  "pyproject.toml"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "bin"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/dotfiles/bin/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bin/run-tests"
+  "run-tests"
+  'fundamental-mode
+  nil
+  278
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27078 29789 800295 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/compare_set.py"
+  "compare_set.py"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "code"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/sysexy/syx/vl70.txt"
+  "vl70.txt"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "sysexy"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/sysexy/sysexy/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "prog"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/sysexy/syx/prog/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "midi"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/midi/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "vl70"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/midi/vl70/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "syx"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/sysexy/syx/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/sysexy/syx/prog.txt"
+  "prog.txt"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/midi/vl70/edited-ranges.json"
+  "edited-ranges.json"
+  'fundamental-mode
+  nil
+  5625
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27078 29789 744804 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "sysexy"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/code/sysexy/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "~"
+  'dired-mode
+  nil
+  1
+  '(nil nil)
+  t
+  '("/Users/tom/")
+  '((buffer-display-time))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/temp.txt"
+  "temp.txt"
+  'fundamental-mode
+  nil
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 

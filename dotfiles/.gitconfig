@@ -12,12 +12,15 @@
     list = log --oneline -8
     ; https://blog.filippo.io/git-fixup-amending-an-older-commit/\
     xe = -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE="%cD" git commit --amend --no-edit' rebase -i
+    graph = log --all --graph --decorate --oneline
 
 [core]
     autocrlf = input
     excludesfile = ~/.gitignore
     hooksPath = ~/code/dotfiles/git-hooks
     pager =
+    compression = 9
+    whitespace = trailing-space
 
 [diff]
     indentHeuristic = true
@@ -51,6 +54,7 @@
 
 [rerere]
     enabled = true
+    autoupdate = true
 
 [user]
     email = tom@swirly.com
@@ -60,3 +64,24 @@
 [submodule]
     fetchJobs = 4
     recurse = true
+
+;; https://micahkepe.com/blog/gitconfig/
+
+[branch]
+    sort = -committerdate
+
+[commit]
+    verbose = true
+
+[help]
+    autocorrect = prompt
+
+[maintenance]
+    auto = true
+    strategy = incremental
+
+[status]
+    branch = true
+
+[tag]
+    sort = -version:refname
