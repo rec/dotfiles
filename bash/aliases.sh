@@ -43,12 +43,16 @@ alias pytags="find . -name \*.py | xargs etags"
 
 alias q=quiet
 
-alias recs="$CODE_ROOT/recs/.direnv/python-3.10/bin/python -m recs"
+alias recs="/Users/tom/code/recs/.venv/bin/python -m recs"
 
 alias sb="source ~/.bash_profile"
 
 alias ta='type -a'
 alias tl='tmux list-sessions'
 alias totm='echo "NO recs -R -i Mac -i FLOW+9-10 -o "/Users/tom/Documents/Work/Music/T.O.™/{ddate}/{device}""'
+
+alias bem='recs -R -i Mac -i FLOW -o "/Users/tom/Documents/Work/Music/BEM/{ddate}/{ptime}/{channel} + {time}" -f wav -f mp3'
+# alias bem='recs -R -i Mac -i FLOW -o "/Users/tom/Documents/Work/Music/BEM/{ddate}/{device}" -f wav -f mp3'
+
 alias tm='tmux new-session -A -s'
 alias ts='date "+%Y%m%d_%H%M%S"'

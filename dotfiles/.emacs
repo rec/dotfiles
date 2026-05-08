@@ -1,18 +1,13 @@
-;; ____________________________________________________________________________
-;; Aquamacs custom-file warning:
-;; Warning: After loading this .emacs file, Aquamacs will also load
-;; customizations from `custom-file' (customizations.el). Any settings there
-;; will override those made here.
-;; Consider moving your startup settings to the Preferences.el file, which
-;; is loaded after `custom-file':
-;; ~/Library/Preferences/Aquamacs Emacs/Preferences
-;; _____________________________________________________________________________
+
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+
+(setq magit-auto-revert-mode nil)
 (package-initialize)
+
 
 ;; (setq elisp-path (expand-file-name "~/code/dotfiles/elisp"))
 
@@ -46,7 +41,7 @@
  '(:application tramp :machine "server")
  'remote-direct-async-process)
 
-(setq magit-tramp-pipe-stty-settings 'pty)
+;; (setq magit-tramp-pipe-stty-settings 'pty)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -84,13 +79,12 @@
  '(indicate-buffer-boundaries 'left)
  '(kill-ring-max 1024)
  '(large-file-warning-threshold nil)
- '(magit-auto-revert-mode t)
  '(mark-ring-max 256)
  '(package-selected-packages
    '(blacken counsel cython-mode dash-at-point dash-functional electric-operator git-gutter
-             git-gutter+ golden-ratio-scroll-screen google-c-style live-preview
+             git-gutter+ golden-ratio-scroll-screen google-c-style live-preview magit
              magit-filenotify markdown-mode nhexl-mode protobuf-mode pylint python-mode
-             realgud s saveplace shell-here template yaml-mode))
+             realgud s saveplace shell-here template with-editor yaml-mode))
  '(py-indent-offset 4)
  '(python-indent 4)
  '(python-indent-offset 4)

@@ -4,10 +4,11 @@ try:
 except Exception:
     pass
 from pathlib import Path
-import re
+import dataclasses as dc
+import functools
 import itertools
 import json
-import functools
+import re
 import typing as t
 
 

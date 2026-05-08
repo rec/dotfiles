@@ -10,13 +10,13 @@ fix_errors_file=~/code/test/python/fix_error_messages.py
 fix_errors="$system_python $fix_errors_file"
 
 ruff check $@  --select B,E,F,I $project test* | $fix_errors
-qruff format | $fix_errors
-pytest -vvvvv | $fix_errors
+ruff format | $fix_errors
+pytest -vvvvv --rootdir=test | $fix_errors
 ty check $project | $fix_errors
 
 version=$(cat .python-version)
 version=${version//./}
 find test $project -name \*.py | xargs pyupgrade --py${version}-plus
 
-coverage run $(which pytest)
-coverage html
+# coverage run $(which pytest) --rootdir=test
+# coverage html
