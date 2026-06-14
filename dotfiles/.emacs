@@ -52,7 +52,7 @@
  '(auto-revert-use-notify nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
- '(compile-command "NO_COLOR=1 d run-tests")
+ '(compile-command "act && NO_COLOR=1 run-tests")
  '(cursor-type 'box)
  '(delete-selection-mode t)
  '(desktop-save-mode t)
