@@ -2,356 +2,188 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Fri May  8 19:36:24 2026
+;; Created Sun Jun 14 15:30:15 2026
 ;; Desktop file format version 208
-;; Emacs version 30.1
+;; Emacs version 30.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (27134 7960 892102 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update) (frameset--id . "1E92-93DB-AF4F-DA9A") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 55) (width . 85) (left . 621) (top . 75)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 711) (pixel-height . 918) (total-width . 88) (total-height . 54) (normal-height . 1.0) (normal-width . 1.0) (buffer "project.py" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1728) (start . 1165)) (prev-buffers ("strains.txt" 1 149) ("writing" 1 128) ("Work" 1 664) ("Documents" 1 613))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update) (frameset--id . "E04B-D45E-9CF7-1088") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 59) (width . 129) (left . 367) (top . 43)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 1063) (pixel-height . 986) (total-width . 133) (total-height . 58) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1063) (pixel-height . 493) (total-width . 133) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "*compilation*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))) (leaf (last . t) (pixel-width . 1063) (pixel-height . 493) (total-width . 133) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "update.py" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 470) (start . 239)))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update) (frameset--id . "6636-9587-F2A0-6ED0") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 59) (width . 123) (left . 85) (top . 25)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 1015) (pixel-height . 986) (total-width . 127) (total-height . 58) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1015) (pixel-height . 493) (total-width . 127) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "pyproject.toml<fmix>" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 82) (start . 1)) (prev-buffers ("update.py" 648 1220) ("*Buffer List*" 1 1))) (leaf (last . t) (pixel-width . 1015) (pixel-height . 493) (total-width . 127) (total-height . 29) (normal-height . 0.5) (normal-width . 1.0) (buffer "*compilation*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 212) (start . 1)))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update) (frameset--id . "509C-1EA3-0DD7-C8E4") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 55) (width . 104) (left . 950) (top . 30)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 863) (pixel-height . 918) (total-width . 108) (total-height . 54) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 863) (pixel-height . 459) (total-width . 108) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "pyproject.toml<xmod>" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 999) (start . 677)) (prev-buffers ("pyproject.toml<editor>" 1 40) ("*shell*" 315186 356705) ("update.py" 239 859) ("pyproject.toml<xmod>" 487 714) ("commands" 1 402) ("multi.toml" 1 677))) (leaf (last . t) (pixel-width . 863) (pixel-height . 459) (total-width . 108) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "*shell*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 356705) (start . 355749)) (prev-buffers ("runner.py" 242 621) ("project.py" 2287 2495) ("*shell*" 317318 317668) ("pyproject.toml<xmod>" 779 779)))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (environment) (last-focus-update . t) (display . "bolt.local") (visibility . t) (frameset--id . "E185-EBC0-51AF-B6EF") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 55) (width . 85) (left . 991) (top . 113)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 711) (pixel-height . 918) (total-width . 88) (total-height . 54) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 711) (pixel-height . 459) (total-width . 88) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 148) (start . 1)) (prev-buffers ("pyproject.toml<fmix>" 151 306))) (leaf (last . t) (pixel-width . 711) (pixel-height . 459) (total-width . 88) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "pyproject.toml<tuney>" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 741) (start . 480)))))])
+(setq desktop-saved-frameset [frameset 1 (27182 44263 386851 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update) (frameset--id . "6636-9587-F2A0-6ED0") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 58) (width . 106) (left . 725) (top . 212)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 879) (pixel-height . 969) (total-width . 109) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (buffer "git.diff" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 2630) (start . 2195)) (prev-buffers ("*shell*" 632670 665814) ("layout.py" 1 75) ("control_panel.py" 2618 2618) ("*compilation*" 1 5651))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (environment) (display . "bolt.local") (visibility . t) (last-focus-update) (frameset--id . "509C-1EA3-0DD7-C8E4") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 58) (width . 113) (left . 947) (top . 25)) ((min-height . 16) (min-width . 10) (min-height-ignore . 8) (min-width-ignore . 6) (min-height-safe . 4) (min-width-safe . 2) (min-pixel-height . 272) (min-pixel-width . 80) (min-pixel-height-ignore . 136) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 68) (min-pixel-width-safe . 16)) vc (pixel-width . 935) (pixel-height . 969) (total-width . 117) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 935) (pixel-height . 255) (total-width . 117) (total-height . 15) (normal-height . 0.25) (normal-width . 1.0) (buffer "run-tests" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 471) (start . 345))) (leaf (pixel-width . 935) (pixel-height . 238) (total-width . 117) (total-height . 14) (normal-height . 0.25) (normal-width . 1.0) (buffer "multi.sh" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 74) (start . 1)) (prev-buffers ("*Buffer List*" 1 230))) (leaf (pixel-width . 935) (pixel-height . 238) (total-width . 117) (total-height . 14) (normal-height . 0.25) (normal-width . 1.0) (buffer "*compilation*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 758) (start . 524))) (leaf (last . t) (pixel-width . 935) (pixel-height . 238) (total-width . 117) (total-height . 14) (normal-height . 0.25) (normal-width . 1.0) (buffer "*Man getopts*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 3506) (start . 3506)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '(#("wait" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("con" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("clean" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("def run" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("hatck" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("poetry init" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("name" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("version" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("def update" 0 10 (isearch-case-fold-search t isearch-regexp-function nil)) #("fmix" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("tuney" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("versiopn" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("config" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("tomlkit" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("play" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("isinstance" 0 10 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq search-ring '(#("'" 0 1 (isearch-case-fold-search t isearch-regexp-function nil)) #("getopts" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("f" 0 1 (isearch-case-fold-search t isearch-regexp-function nil)) #("NO" 0 2 (isearch-case-fold-search nil isearch-regexp-function nil)) #("md" 0 2 (isearch-case-fold-search t isearch-regexp-function nil)) #("charpress" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("_saved" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("saved_tet" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("player." 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("[merge" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("stoppab" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("layoyu" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("listener" 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("_saved_text" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("runner(" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("oscilla" 0 7 (isearch-case-fold-search t isearch-regexp-function nil))))
 (setq regexp-search-ring nil)
-(setq register-alist nil)
-(setq file-name-history '("~/code/fmix/pyproject.toml" "~/code/multi/multi/commands/" "~/code/multi/multi" "~/code/multi/" "~/code/multi/multi/git.py" "~/code/multi/multi/runner.py" "~/code/editor/pyproject.toml" "~/code/multi/multi/commands/" "~/code" "~/code/multi/" "~/code/multi/multi/" "~/code/multi/multi" "~/code/tuney/tuney" "~/code/tuney/tuney/audio" "/Users/tom/code/tuney/tuney/audio/player.py" "~/code/fmix" "~/code/fmix/test/__init__.py" "~/code/fmix/test/test_help.py" "~/code/fmix/test/__init__.py" "~/code/fmix/test/test_config_file.py" "~/code/fmix/test" "~/code/fmix/git.diff" "~/code/fmix" "~/code/fmix/pyproject.toml" "~/code/fmix/.venv/lib/python3.13/site-packages/pydantic" "~/code/fmix/.venv/lib/python3.13/site-packages/pydantic/__init__.py" "~/code/dotfiles/bash/aliases.sh" "~/code/fmix/test/" "~/code" "~/code/fmix" "~/code/fmix/test/" "~/code/fing" "~/code/fing/test/test_help.py" "~/code/fing/test/" "~/code/fmix/fmix/" "~/code/xmod/pyproject.toml" "~/code/fmix/tyro_test.py" "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/tyro" "~/code/fmix/tyro_test.py" "~/code/fmix/audio.py" "~/code/fmix/fmix/" "~/code/fmix/fmix/audio.py" "~/code/fmix/tyro_test.py" "~/code/fmix/fmix/fmix.py" "~/code/fmix/fmix/__main__.py" "~/code/fmix/fmix/files.py" "~/code/fmix/fmix" "~/code/fmix/fmix/time.py" "~/" "~/code/fmix/fmix/fmix.py" "~/code/fmix/hello.txt" "~/code/fmix/unknown.txt" "~/code/fmix" "~/code/dotfiles/dotfiles/.gitconfig" "~/Documents/Work/writing/strains.txt" "~/Documents/" "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/tyro/__init__.py" "~/code/fmix/audio.py" "~/code/tuney/pyproject.toml" "~/code/fmix/pyproject.toml" "~/code/fmix/fmix/__main__.py" "~/code/fmix/fmix/" "~/code/fmix/test" "~/code/fmix/fmix/__main__.py" "~/code/fmix" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/device.py" "~/code/fmix/fmix/audio.py" "~/code/fmix/fmix/render.py" "~/code/fmix/fmix/audio.py" "~/code/fmix" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/audio/sample_data.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/runnable.py" "~/code/tuney/tuney" "~/code/tuney/tuney/audio/sample_data.py" "~/code/tuney/tuney/audio/players.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/tuney/tuney/audio" "~/code/tuney/tuney/audio/array_player.py" "~/code/tuney/tuney/audio/file_player.py" "~/code/fmix" "~/code/fmix/test" "~/code/fmix/fmix" "~/code/fmix/fmix/dsp.py" "~/code/tuney/tuney/" "~/code/fmix/fmix/render.py" "~/code/fmix/.venv/lib/python3.13/site-packages/annotated_types" "~/code/fmix/fmix" "~/code/fmix/fmix/time.py" "~/code/fmix/test" "~/code/fmix/fmix/" "~/code/fmix/scripts" "~/code/fmix/" "/Users/tom/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/dataclasses.py" "~/code" "~/code/" "/Users/tom/code/dotfiles/bin/python_startup.py" "~/code"))
+(setq register-alist (list (list 313465889 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook (lambda nil (set-marker mk 187 (get-buffer "reformat_error_messages.py")))) mk))))
+(setq file-name-history '("/tmp/multi.sh" "~/code/dotfiles/bin" "~/code/dotfiles/bin/reformat_error_messages.py" "~/code/dotfiles/bin/fix_error_messages.py" "~/code/dotfiles/bin" "~/code/dotfiles/bin/" "~/code/test/python/fix_error_messages.py" "~/code/dotfiles/dotfiles/.emacs.d/elpa" "~/code/dotfiles" "~/code/dotfiles/" "~/code/dotfiles/bash/git.sh" "~/code/fmix/" "~/code/tuney/test" "~/.gitconfig" "~/code/tuney/tuney/runnable.py" "~/code/tuney/git.diff" "~/code/tuney/test" "~/code/tuney/tuney/ui/control_panel.py" "~/code/tuney/tuney/ui/layout.py" "~/code/tuney/tuney/" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/test" "~/code/tuney/test/test_audio_output.py" "~/code/tuney/test" "~/code/tuney/test/test_cli.py" "~/Library/" "~/code/tuney/git.diff" "~/.codex/" "~/code/tuney/AGENTS.md" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/test/test_audio_dataclasses.py" "~/.codex/" "~/code/tuney/tuney/" "~/code/tuney/tuney" "~/code/tuney" "~/code/tuney/tuney/tuney.py" "~/code/tuney/tuney/ui/tuney.py" "~/code/tuney/tuney/" "~/code/tuney/.python-version" "~/code/tuney/AGENTS.md" "~/.codex" "~/.codex/" "~/code/tuney/AGENTS.md" "~/code/tyro/src/tyro/lines.txt" "~/code/test/python/longest_lines.py" "~/code/test/python/" "~/code/tyro/.git/COMMIT_EDITMSG" "~/code/tyro/pyproject.toml" "~/code/tuney/tuney" "~/code/tuney/" "~/code/tuney/tuney" "~/code/tuney/" "~/code/" "~/code/tuney/.venv/lib/python3.12/site-packages/sounddevice.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/ui/tuney.py" "~/code/tuney/tuney/runnable.py" "~/code/tuney/tuney/types.py" "~/code/tuney/tuney/ui/app.py" "~/code/tuney/tuney/mapper/linear_mapper.py" "~/code/tuney/tuney" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/" "~/code/tuney/git.diff" "/tmp/git.diff" "~/code/tuney/git.diff" "~/code/tuney/tuney" "~/code/tuney/tuney/audio/__init__.py" "~/code/tuney/tuney/audio/device.py" "~/code/tuney/tuney" "~/code/fmix/" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/tuney/audio/multi_player.py" "~/code/tuney/tuney/time/text_timings.py" "~/code/tuney/tuney/time" "~/code/tuney/git.diff" "~/code/tuney/tuney/ui/" "~/code/tuney/tuney/types.py" "~/code/tuney/tuney/" "~/code/tuney/tuney" "~/code/tuney/tuney/time/" "~/code/tuney/tuney/ui/toggle_button.py" "~/code/tuney/.venv/lib/python3.12/site-packages/customtkinter/__init__.py" "~/code/tuney/tuney/ui/layout.py" "~/code/tuney/tuney/ui/app.py" "~/code/tuney/.venv/lib/python3.12/site-packages/customtkinter" "~/code/tuney/.venv/lib/python3.12/site-packages/customtkinter/__init__.py" "~/code/tuney/tuney/ui/app.py" "~/code/tuney/tuney/" "~/code/tuney/tuney/audio/player.py" "~/code/tuney/tuney/time/text_timings.py" "~/code/tuney/tuney" "~/code/impall/impall/__init__.py" "~/code/impall/.python-version" "~/code/impall/README.md"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/commands/update.py"
-  "update.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  470
-  '(1301 nil)
+  "/Users/tom/code/dotfiles/bin/run-tests"
+  "run-tests"
+  'sh-mode
+  '(font-lock-mode sh-electric-here-document-mode)
+  471
+  '(845 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 7930 819441 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1323 1323 614 982 1301 1421 1301 1301 1359 647 822 1221 1161 859 999 1029 892 339 968 939 947 939 684 684 684 684 859 684 859 859 859 859 760 692 859 684 859 684 684 692 692 859 859 859 859 859 859 859 859 859 859 859 859 859 684 863 869 913 892 981 892 1161 1143 1143 1159 1199 1359 892 823 822 782 1159 1159 531 1301 1300 1323 614 1655 1655 1097 1220 646))))
+  '((buffer-display-time 27182 44233 352378 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (638 1 1 847 285 894 781 781 781 107 84 53 31 31 781 781 781 781 781 781 781 781 781 781 781 781 781 776 777 444 444 133 133 134 133 133 133 133 133 133 133 133 133 388 134 204 177 1222 847 1052 1062 1062 1052 939 1222 133 204 845 1222 1222 133 133 133 1222 875 133 781 1046 966 966 826 845 845 203 131 168 30 31 93))))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/recs/recs/cfg/cli.py"
-  "cli.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  864
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 6512 402128 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/pyproject.toml"
-  "pyproject.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  82
-  '(83 nil)
-  nil
-  nil
-  '((buffer-display-time 27134 6220 328252 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (58 58 156 156 156 156 156 156 151 156 151 156 156))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/git.py"
-  "git.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  1006
+  "/tmp/multi.sh"
+  "multi.sh"
+  'sh-mode
+  '(font-lock-mode sh-electric-here-document-mode)
+  74
   '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5998 468040 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/multi.py"
-  "multi.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  2573
-  '(2574 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5874 534293 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (2574 2256 2476 947 899 737 737 681 2022 2022 2255 2476 2476))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/commands/files.py"
-  "files.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  1549
-  '(1549 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5738 665394 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/commands/mkdocs.py"
-  "mkdocs.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  3961
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5722 475753 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/commands/readme.py"
-  "readme.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  67
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5722 475753 0) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27182 44233 352378 0) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  "commands"
+  "bin"
   'dired-mode
   '(font-lock-mode)
-  684
+  558
   '(nil nil)
   t
-  '("/Users/tom/code/multi/multi/commands/")
-  '((buffer-display-time 27134 5691 718766 0))
+  '("/Users/tom/code/dotfiles/bin/")
+  '((buffer-display-time 27182 43523 4015 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bin/reformat_error_messages.py"
+  "reformat_error_messages.py"
+  'python-mode
+  '(font-lock-mode eldoc-mode outline-minor-mode)
+  187
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (indent-tabs-mode) (buffer-display-time 27182 43546 861647 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/tuney.py"
+  "tuney.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode font-lock-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode)
+  3154
+  '(186 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 39273 729381 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (186 186 3380 3370 3370 3574 3518 3340 1241 1241 1201 1172 1 1 3340 3340 2253 1383 1383 1383 1118 1383 1383 1383 1325 1383 3575 3089 3089 3154 1199 1003 186 982 982 982 982 982 982 982 186 982 982 982 982 982 982 186 186 186 186 186 186 186 186 186 186 186 186 186 100 186 186 186 186 186 186 1 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 1 1 1 186 186 186 186 186 186 186 1 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 186 3339))))
+
+(desktop-create-buffer 208
+  nil
+  "elpa"
+  'dired-mode
+  '(font-lock-mode)
+  4519
+  '(399 nil)
+  t
+  '("/Users/tom/code/dotfiles/dotfiles/.emacs.d/elpa/")
+  '((buffer-display-time 27182 39245 361316 0))
+  '((mark-ring (4519))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/dotfiles/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(font-lock-mode eldoc-mode)
+  2858
+  '(1437 nil)
+  nil
+  nil
+  '((buffer-display-time 27182 39039 785334 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1437))))
+
+(desktop-create-buffer 208
+  nil
+  "dotfiles"
+  'dired-mode
+  '(font-lock-mode)
+  580
+  '(nil nil)
+  t
+  '("/Users/tom/code/dotfiles/")
+  '((buffer-display-time 27182 38993 594819 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/elisp/set-variables.el"
+  "set-variables.el"
+  'emacs-lisp-mode
+  '(font-lock-mode eldoc-mode)
+  1248
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27182 38976 399662 0) (buffer-file-coding-system . prefer-utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  "multi"
+  "elisp"
   'dired-mode
   '(font-lock-mode)
-  497
+  238
   '(nil nil)
   t
-  '("/Users/tom/code/multi/multi/")
-  '((buffer-display-time 27134 5351 580908 0))
+  '("/Users/tom/code/dotfiles/elisp/")
+  '((buffer-display-time 27182 38956 988680 0))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/__main__.py"
-  "__main__.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
+  "/Users/tom/code/dotfiles/bash/aliases.sh"
+  "aliases.sh"
+  'sh-mode
+  '(sh-electric-here-document-mode font-lock-mode)
+  1318
+  '(1253 nil)
+  nil
+  nil
+  '((buffer-display-time 27182 37543 259463 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1291 1253 2062 2106 1981 2091 1981 1981 1725 1737 1725 1737 1737 2283 1226 1157 1991 1990 1890 1 1251 2282 2249 1157 1226 1226 1868 1981 2106 2106 1979 2283 2249 1525))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/git.sh"
+  "git.sh"
+  'sh-mode
+  '(font-lock-mode sh-electric-here-document-mode)
   1
-  '(nil nil)
+  '(1183 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5350 726803 0) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27182 37486 316421 0) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/project.py"
-  "project.py"
+  "/Users/tom/code/fmix/test/__init__.py"
+  "__init__.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  1727
-  '(1034 nil)
+  '(eldoc-mode font-lock-mode)
+  413
+  '(168 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 5239 763257 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (842 1568 648 2010 1203 1034 1 2010 648 1034 2715 1727))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 37456 96107 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (11 1 1 1 1 1 1 1 1 1 1 1 1 1 1 116 59 60))))
 
 (desktop-create-buffer 208
-  nil
-  "soundfile-0.13.1.dist-info"
-  'dired-mode
-  '(font-lock-mode)
-  561
-  '(561 nil)
-  t
-  '("/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/soundfile-0.13.1.dist-info/")
-  '((buffer-display-time 27134 4561 253503 0))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "multi"
-  'dired-mode
-  '(font-lock-mode)
-  969
-  '(1023 nil)
-  t
-  '("/Users/tom/code/multi/")
-  '((buffer-display-time 27134 4475 469789 0))
-  '((mark-ring (969))))
-
-(desktop-create-buffer 208
-  "/Users/tom/Documents/Work/writing/strains.txt"
-  "strains.txt"
-  'text-mode
-  '(font-lock-mode)
-  149
-  '(100 nil)
-  nil
-  nil
-  '((buffer-display-time 27134 4438 107761 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (1))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/xmod/pyproject.toml"
-  "pyproject.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  999
-  '(779 nil)
-  nil
-  nil
-  '((buffer-display-time 27134 3384 772741 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (714 779 779 740 779 773 1275 773 1275 1275 43 25 37 773 773 779 1275 1275 1275 1275 773 773 773 773 1275 773 779 773 779 714 739 772 1275 779 779))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/editor/pyproject.toml"
-  "pyproject.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  475
-  '(40 nil)
-  nil
-  nil
-  '((buffer-display-time 27134 3143 88405 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (40 40 40 40 40 40 40 1 40 40))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi/runner.py"
-  "runner.py"
+  "/Users/tom/code/fmix/test/test_render_data.py"
+  "test_render_data.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  621
-  '(621 nil)
+  '(eldoc-mode font-lock-mode)
+  325
+  '(189 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27134 3069 955786 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "pydantic"
-  'dired-mode
-  '(font-lock-mode)
-  2259
-  '(209 nil)
-  t
-  '("/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/pydantic/")
-  '((buffer-display-time 27133 64254 464561 0))
-  '((mark-ring (2259))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/multi/multi.toml"
-  "multi.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  677
-  '(232 nil)
-  nil
-  nil
-  '((buffer-display-time 27133 64016 6681 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (209 187 187 187 1 448 448 677))))
-
-(desktop-create-buffer 208
-  nil
-  "code"
-  'dired-mode
-  '(font-lock-mode)
-  111
-  '(1 nil)
-  t
-  '("/Users/tom/code/")
-  '((buffer-display-time 27133 63912 650363 0))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/audio/device.py"
-  "device.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  848
-  '(1 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27133 52519 129627 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/audio/player.py"
-  "player.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  1572
-  '(1543 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27133 52510 393795 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (557 418 557 535))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/fmix.py"
-  "fmix.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  1
-  '(1 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27133 52472 845751 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1 3268 208 1007 1007 1 3233 3233 3202 3117 3019 893 2282 3182 3289 3173 3289 2282 2300 3292 3233 2282 2300 1042 544 86 86 2527 2787 2787 2787 2787 2787 2787 2787 2787 86 44 44 1 86 86 86 86 86 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 1 44 44 44 44 44 44 44 44 44 44 44 2787 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 1 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 86 86 2787 2787 2787 86 86 86 86 86 86 86 86 2331 2331 2331 2788 2330 3292 3292 1227 1227 1227 1227 1227 1201 939 208))))
-
-(desktop-create-buffer 208
-  nil
-  "tuney"
-  'dired-mode
-  '(font-lock-mode)
-  223
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/tuney/")
-  '((buffer-display-time 27133 52445 840417 0))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/audio/players.py"
-  "players.py"
-  'python-mode
-  '(smerge-mode font-lock-mode eldoc-mode)
-  360
-  '(172 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27133 52425 15235 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (882 172 882 882 882 172 172 172 172 146 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 36 36 36 36 882 36 36 36 36 36 36 36 36 36 36 36 882 882 36 36 36 36 36 36 36 36 36 36 36 36 882 36 1 882 36 36 882 882 882 882 36 882 882 882 882 36 36 36 36 36 882 882 882 36 60 882 882 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 172 882 172 172 144 172 172 360 616))))
-
-(desktop-create-buffer 208
-  nil
-  "audio"
-  'dired-mode
-  '(font-lock-mode)
-  586
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/tuney/audio/")
-  '((buffer-display-time 27133 52386 639668 0))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/__main__.py"
-  "__main__.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  449
-  '(852 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 55221 393919 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (843 843 24 843 843 843 843 1059 24 24 24 24 24 24 24 24 24 24 1088 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 1 1 1 1 1 1 1 1 1099 1099 1087 1098 1 1 1 1 1 1 1087 1 1099 24 24 24 24 24 1099))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 37068 158065 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (189 199 199 199 199 199 199 199 199 199 199 199 199 199 199 199 199 1569 199 199 1569 1569 1569 1569 1569 1569 1569 199 199 199 199 199 199 199 199 199 199 199 199 199 37 36 37 37 1 6 1 6 6 6 6 6 6 6 6 37 6 6 37 6 6 6 6 6 1 6 37 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 37 199 199 199 199 199 199 199 199 199 199 199 199 199 199 199 199 1569 325))))
 
 (desktop-create-buffer 208
   nil
@@ -362,283 +194,823 @@
   '(nil nil)
   t
   '("/Users/tom/code/fmix/")
-  '((buffer-display-time 27132 51545 910338 0))
+  '((buffer-display-time 27182 37068 158065 0))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/__init__.py"
-  "__init__.py"
+  "/Users/tom/code/tuney/test/test_scale.py"
+  "test_scale.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  492
-  '(365 nil)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  206
+  '(85 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 51323 36402 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (263 259 259 295 185 185 168 35 118 35 1 492))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/test_config_file.py"
-  "test_config_file.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  86
-  '(86 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 51290 508726 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (37 36 168 61 148 148 148 61 118 168 118 36 36 168 119 61 1 1 1 168))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/test_help.py"
-  "test_help.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  100
-  '(60 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 51235 232631 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (169 79 60 37 37 37 1 37 37 37 37 169 169 169 169 62 169 62 62 62 60 37 37 37 169 1 169 169 100))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/test_render_data.py"
-  "test_render_data.py"
-  'python-mode
-  '(eldoc-mode font-lock-mode)
-  37
-  '(37 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 50692 745673 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (36 251 218 1 6 1 6 6 6 6 6 6 6 6 728 6 6 728 6 6 6 6 6 1 6 728 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 251))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 37068 158065 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 121 85 467 618 549 467 85 85 85 469 85 85 85 85 85 85))))
 
 (desktop-create-buffer 208
   nil
   "test"
   'dired-mode
   '(font-lock-mode)
-  74
-  '(1 nil)
+  412
+  '(nil nil)
   t
-  '("/Users/tom/code/fmix/test/")
-  '((buffer-display-time 27132 50580 685576 0))
-  '((mark-ring (1 1 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/edit_point.py"
-  "edit_point.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  237
-  '(67 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 49388 44977 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (37 340 213 256 1 37 37 37 37 37 37 37 37 37 37 427 37 37 37 37 427 427 37 427 37 1 427 427 37 427 427 427 427 37 37 427 427 427 427 37 37 427 427 427 427 1 1 427 37 1 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 427 37 37 37 37 37 37 37 37 37 37 202 427))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/pydantic/__init__.py"
-  "__init__.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  2267
-  '(2267 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 46895 645018 0) (buffer-file-coding-system . undecided-unix))
+  '("/Users/tom/code/tuney/test/")
+  '((buffer-display-time 27182 36996 972412 0))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bash/experimental.sh"
-  "experimental.sh"
-  'sh-mode
-  '(font-lock-mode sh-electric-here-document-mode)
-  2505
-  '(2505 nil)
-  nil
-  nil
-  '((buffer-display-time 27132 46594 132445 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (2505 2445))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bash/aliases.sh"
-  "aliases.sh"
-  'sh-mode
-  '(sh-electric-here-document-mode font-lock-mode)
-  981
-  '(1997 nil)
-  nil
-  nil
-  '((buffer-display-time 27132 46546 219062 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (2041 1916 2026 1916 1916 1660 1672 1660 1672 1672 2218 1226 1157 1926 1925 1825 1 1251 2217 2184 1157 1226 1226 1803 1916 2041 2041 1914 2218 2184 1460))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/audio.py"
-  "audio.py"
+  "/Users/tom/code/tuney/tuney/ui/layout.py"
+  "layout.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  375
-  '(1479 nil)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode smerge-mode font-lock-mode)
+  1670
+  '(1041 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 45824 688489 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1479 546 554 1479 592 236 234))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 35859 807300 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (3201 3201 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 1 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 1 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 1 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37))))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/time.py"
-  "time.py"
+  "/Users/tom/code/tuney/tuney/ui/app.py"
+  "app.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  48
-  '(902 nil)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  2131
+  '(13 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 45596 845280 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1180 1080 92 92 508 508 508 928 1132 928 902 902 1132 1080 1024 1000 983 1050 422 445 92 445 902 902 902 902 49 902 902 902 443 36 36 912 1184 1132 928 928 1132 1075 1191 902 999 866 1194 902))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 35845 520574 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 1 1 1 1 1 1 1 1 1 1 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 1 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 1 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 1 1 13 13 13 13 13 13 13 13 13 13 13 13 2434 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 2434 2434 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 2434 13 13 13 13 13 13 13 13 13 13 13))))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/help.txt"
-  "help.txt"
+  "/Users/tom/code/tuney/tuney/time/sequencer.py"
+  "sequencer.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  748
+  '(425 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 35641 906119 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (406 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 1 1 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 1597 44 1596 44 44 44 44 44 575))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/oscillator_player.py"
+  "oscillator_player.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  603
+  '(625 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 34969 516194 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (625 602 585 570 37 236 923 2230 3 1 1340 645 59 59 59 995 923 1150 59 59 37 37 37 59 1 1011 59 931 931 931 37 37 37 37 37 931 1119 59 59 59 59 1860 1858 1860 1858 2150 59 37 37 37 2229 59 2150 1858 1991 59 59 37 37 931 59 59 59 59 59 1150 923 1463 1010 1461))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pydantic/fields.py"
+  "fields.py"
+  'python-mode
+  '(font-lock-mode eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode)
+  66372
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 34916 722774 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/player.py"
+  "player.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  464
+  '(820 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 34420 266062 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (820 37 1565 950 950 37))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/players.py"
+  "players.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode smerge-mode font-lock-mode)
+  321
+  '(499 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27182 34344 310179 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (370 452 452 452 452 452 370 370 370 742 579 579 579 579 579 281 172 910 172 910 910 910 172 172 172 172 146 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 36 36 36 36 910 36 36 36 36 36 36 36 36 36 36 36 910 910 36 36 36 36 36 36 36 36 36 36 36 36 910 36 1 910 36 36 910 910 910 910 36 910 910 910 910 36 36 36 36 36 910 910 910 36 60 910 910 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 60 172 910 172 172 144 172 172 281 648 835 280 369 369 280 280 648 604 579 579 579 672 604 578 742 369 370 533 648 370 370 533 672))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/dotfiles/.gitconfig"
+  ".gitconfig"
+  'conf-windows-mode
+  '(font-lock-mode)
+  1110
+  '(1083 nil)
+  nil
+  nil
+  '((buffer-display-time 27182 34298 269843 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1083 399 399))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/concurrent.py"
+  "concurrent.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  2183
+  '(251 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 40498 198755 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1910 1949 1910 1933 499 251 251 1497 1418 2442 2183))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/runnable.py"
+  "runnable.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  883
+  '(24 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 39391 130995 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (170 143 59 144 1 474 59))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/multi_player.py"
+  "multi_player.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  420
+  '(242 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 39379 570013 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (242 242 242 242 242 242 242 242 242 242 185 107 1776 1966 107 107 2 1 107 1 1 107 1 107 107 107 107 1796 1758 107 107 107 107 107 107 1966 1966 1776 107 1966 107 107 1829 185 185 185 1606 242 1966 393 839 839))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/git.diff"
+  "git.diff"
+  'diff-mode
+  '(font-lock-mode)
+  2630
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 27181 37410 811328 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (4118 1 1 5716 5716 1 5716 5716))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/time/text_timings.py"
+  "text_timings.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  2105
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 37500 909027 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/scale/scale.py"
+  "scale.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  3174
+  '(4137 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 37496 380762 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (417 2653 1508 2653 2590 1819 51 1 1254 84 84 4137 84 84 84 84 84 84 84 84 84 84 1 84 84 84 84 84 84 84 84 84 84 84 84 84 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 4137 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 1 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 1 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 84 84 84 84 84 84 84 84 84 84 2653 2653 84 84 84 84 84 84 84 84))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/scale/tuning.py"
+  "tuning.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  3192
+  '(363 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 37491 279100 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (68 68 68 37 2779 2757 3173 2690 37 37 37 37 37 2690 2690 3142 2847 2847 2847 2820 67 3038))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/cli.py"
+  "cli.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1043
+  '(44 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 37490 307478 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 1288 1288 1288))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/ui/control_panel.py"
+  "control_panel.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  2618
+  '(158 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 34180 19769 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (158 3595 158 2720))))
+
+(desktop-create-buffer 208
+  nil
+  "tuney"
+  'dired-mode
+  '(font-lock-mode)
+  583
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/tuney/")
+  '((buffer-display-time 27181 20044 189366 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/oscillator.py"
+  "oscillator.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  390
+  '(37 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27181 18614 414437 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (37 37 37 37 917 917 917 37 37 37 37 37 37 37 917 37 37 917 37 37 37 37 917 917 1 1 917 37 37 37 37 917 37 37 37 37 37 37 37 37 37 37 37 917 917 917 37 37 917 37 917 917 917 37 917 917 37 37 37 37 917 37 37 37))))
+
+(desktop-create-buffer 208
+  nil
+  "tuney"
+  'dired-mode
+  '(font-lock-mode)
+  1371
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/")
+  '((buffer-display-time 27181 13707 168839 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/.codex/config.toml"
+  "config.toml"
+  'conf-toml-mode
+  '(font-lock-mode)
+  290
+  '(283 nil)
+  nil
+  nil
+  '((buffer-display-time 27181 13707 168839 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (256 256 256 1 1988 351 1 256 1 441 1 441 384 377 323 2005))))
+
+(desktop-create-buffer 208
+  nil
+  ".codex"
+  'dired-mode
+  '(font-lock-mode)
+  643
+  '(nil nil)
+  t
+  '("/Users/tom/.codex/")
+  '((buffer-display-time 27181 13479 35624 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/scale/note.py"
+  "note.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  310
+  '(37 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27180 20832 156689 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (139 76 256 256 233 282 1 465 166 186 165 464 311))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/AGENTS.md"
+  "AGENTS.md"
+  'markdown-mode
+  '(eldoc-mode font-lock-mode)
+  2154
+  '(2109 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 27180 5078 791752 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (2080 2060 1387 1376 1178 1080 1080 1065 1018 1064 1038 1034 963 785 634 1 1 1 1 1 1 896 846 207 2154))))
+
+(desktop-create-buffer 208
+  "/Users/tom/.codex/AGENTS.md"
+  "AGENTS.md"
+  'markdown-mode
+  '(font-lock-mode eldoc-mode)
+  5616
+  '(4290 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 27180 4200 398948 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/test/test_audio_dataclasses.py"
+  "test_audio_dataclasses.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode smerge-mode font-lock-mode)
+  1252
+  '(18 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27180 3664 614719 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 1620 1 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 18 1620 18 1620 18 18 18))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/types.py"
+  "types.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27179 61963 631999 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (293 293 293 1 1 293 1 293 293 293 1 1 1 1 1 293 1 1 293 1 1 1 1 293 1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/__main__.py"
+  "__main__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  19
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27179 61134 817504 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "ui"
+  'dired-mode
+  '(font-lock-mode)
+  277
+  '(nil nil)
+  t
+  '("/Users/tom/code/tuney/tuney/ui/")
+  '((buffer-display-time 27179 60979 24674 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.python-version"
+  ".python-version"
+  'fundamental-mode
+  '(font-lock-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27179 60094 400894 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/.codex/.codex-global-state.json"
+  ".codex-global-state.json"
+  'js-json-mode
+  '(font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 2) (buffer-display-time 27179 59335 706111 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tyro/src/tyro/_arguments.py"
+  "_arguments.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  6718
+  '(6947 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27179 56851 181 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (7031 6603 6685 26259 21233 21233 21016 21016 21016 20716 20716 20862 20715 21233 20716 20655 4760 3568 3568 3568 3568 3568 3568 3568 3568 3568 3568 3568 20655 20715 31523 31607))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/test/python/longest_lines.py"
+  "longest_lines.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  41
+  '(127 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27179 56415 930487 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (102 13 13 102 102 102 102 1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tyro/src/tyro/lines.txt"
+  "lines.txt"
   'text-mode
   '(font-lock-mode)
   1
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27132 44345 449896 0) (buffer-file-coding-system . utf-8-unix))
+  '((buffer-display-time 27179 56369 927525 0) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fing/test/test_rendering.py"
-  "test_rendering.py"
+  nil
+  "python"
+  'dired-mode
+  '(font-lock-mode)
+  332
+  '(nil nil)
+  t
+  '("/Users/tom/code/test/python/")
+  '((buffer-display-time 27179 55955 172270 0))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tyro/pyproject.toml"
+  "pyproject.toml"
+  'conf-toml-mode
+  '(font-lock-mode)
+  2677
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 27179 55194 723477 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tyro/src/tyro/_backends/_argparse_help_formatting.py"
+  "_argparse_help_formatting.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
+  '(eldoc-mode font-lock-mode)
+  18722
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27179 54848 772077 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tyro/src/tyro/_backends/_completion/_completion_script.py"
+  "_completion_script.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  2414
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27179 54831 342219 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "code"
+  'dired-mode
+  '(font-lock-mode)
+  111
+  '(3304 nil)
+  t
+  '("/Users/tom/code/")
+  '((buffer-display-time 27178 58435 293581 210000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/keyboard/listener.py"
+  "listener.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  487
+  '(311 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27178 58369 740436 210000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 175 175 175 175 175 175 175 175 175 175 175 311 175 175 175 1 1 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 175 311 175 311 311 311 311 311 311 311 311 175 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311 311))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/.python-version"
+  ".python-version"
+  'fundamental-mode
+  '(font-lock-mode)
+  1
+  '(6 nil)
+  nil
+  nil
+  '((buffer-display-time 27178 58372 105379 210000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/device.py"
+  "device.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  211
+  '(218 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27178 54410 747432 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (481 481 1 7 7 7 7 7 481 218 218))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/sounddevice.py"
+  "sounddevice.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  81592
+  '(79837 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27178 54360 110217 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (8482 7139 1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/test/twelve_tet.py"
+  "twelve_tet.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  136
+  '(1525 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27177 20582 453727 390000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1525 1525 72))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/mapper/linear_mapper.py"
+  "linear_mapper.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  490
+  '(122 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27177 13030 740405 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27177 10735 549926 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/soundfile.py"
+  "soundfile.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  31525
+  '(15341 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27175 61594 472318 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (13410 22671 19787 20852 24400 1 1 20853 52860 36984 36886 12055 7784 13380 1 22273 31652 39821 29353 19293 64865 19002 10164 6321 1044 803 25275 13868 2493 2991 5312 1 19568 19421 19233 6091 1 19306 15108 13337 1 64865 19702 3161 2715 1 1 13480 1 1 61755 61727 12617 61045 62119 49093 64865 661 1 64240 285 285 61727 19963 19845 6091 10165 10164 25275 10164 22273 13380 36886 20887 20852 22450))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/keyboard/key_press.py"
+  "key_press.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  339
+  '(37 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27175 55688 477939 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (42 42 427 1 42 37 37 37 37 42 42 42 42 42 42 42 42 42 42 42 37 37 37 42 37 42 42 42 42 42 42 42 42 36 42 42 42 42 42 37 42 37 37 37 42 42 37 36 36 36 37 37 37 42 42 37 37 42 42 42 42 42 42 42 42 42 42 42 42 42 42))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/audio/sample_data.py"
+  "sample_data.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  245
+  '(37 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27175 59227 983686 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (37 37 37 37 37 37))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/test/test_text_timings.py"
+  "test_text_timings.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  198
+  '(198 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27175 55521 196364 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (194 194 194 395 659))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/time/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27175 54675 987221 390000))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/impall/.python-version"
+  ".python-version"
+  'fundamental-mode
+  '(font-lock-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 27174 36259 348455 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/impall/README.md"
+  "README.md"
+  'markdown-mode
+  '(eldoc-mode font-lock-mode)
   567
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 44149 875547 0) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 4) (buffer-display-time 27174 34637 311158 390000) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fing/test/constants.py"
-  "constants.py"
+  "/Users/tom/code/tuney/tuney/keyboard/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27173 44629 616380 390000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/test/test_tone_scale.py"
+  "test_tone_scale.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  568
+  '(81 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27173 42051 831464 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (81 568))))
+
+(desktop-create-buffer 208
+  "/Users/tom/Documents/Work/writing/puzzles.txt"
+  "puzzles.txt"
+  'text-mode
+  '(font-lock-mode)
+  5778
+  '(4978 nil)
+  nil
+  nil
+  '((buffer-display-time 27173 18794 612173 390000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (4239 4235 4235 3486 3841 3939 3486 4002 3718 3700 3700 3700 3652 3652 4138 4121 3549 3549 3549 3549 3486 3486 3486 3486 3486 3486 783 1251 737 737 737 737 160 1 1 1 159 710 710 737 737))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/tyro/conf/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 14830 421314 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/tyro/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 14786 579482 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/tyro/_unsafe_cache.py"
+  "_unsafe_cache.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1303
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 11318 594757 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/read_tyro.py"
+  "read_tyro.py"
   'python-mode
   '(eldoc-mode font-lock-mode)
-  409
-  '(353 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 44145 596403 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1 446))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/audio_file.py"
-  "audio_file.py"
-  'python-mode
-  '(smerge-mode font-lock-mode eldoc-mode)
-  1210
-  '(1150 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 44006 175014 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (71 71 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 36 66 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 66 66 36 36 36 66 36 36 36 36 36 36 1 36 36 36 36 36 36 36 36 36 36 36 36 36 36 36 66 36 36 66 66 36 66 36 36 66 36 36 36 36 66 36 36 66 36 36 36 36 36 36 36 36 36 66 66 36 36 36 36 36 66 36 36 36 36 36 36 36 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 1441 1441 66 66 66 66))))
-
-(desktop-create-buffer 208
-  nil
-  "fing"
-  'dired-mode
-  '(font-lock-mode)
-  1289
+  1
   '(nil nil)
-  t
-  '("/Users/tom/code/fing/")
-  '((buffer-display-time 27132 43942 378042 0))
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 10529 583102 390000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  nil
-  "test"
-  'dired-mode
-  '(font-lock-mode)
-  532
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/test/")
-  '((buffer-display-time 27132 43895 609142 0))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/short.toml"
-  "short.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  21
-  '(20 nil)
-  nil
-  nil
-  '((buffer-display-time 27132 42139 838736 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (20 312))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/sample.toml"
-  "sample.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  272
-  '(258 nil)
-  nil
-  nil
-  '((buffer-display-time 27132 42138 508142 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (624 668 668 668))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/tyro_test.py"
-  "tyro_test.py"
+  "/Users/tom/code/multi/multi/commands/bump_version.py"
+  "bump_version.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  134
-  '(134 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 42060 766273 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1 395 1 293 333 347 134 222 346 134 89 134 134 89 221 292 244 134 100 244 345 274 395 395))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/tyro/_arguments.py"
-  "_arguments.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  14223
-  '(11427 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27132 41648 727929 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (11766 11766 11782 11427))))
-
-(desktop-create-buffer 208
-  nil
-  "fmix"
-  'dired-mode
-  '(font-lock-mode)
-  221
+  '(eldoc-mode font-lock-mode)
+  1237
   '(1 nil)
-  t
-  '("/Users/tom/code/fmix/fmix/")
-  '((buffer-display-time 27132 38918 518654 0))
-  '((mark-ring (1 1 1 1))))
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 3162 183955 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (587 404 587 587 339 367 940 818 801 801 367 367 367 321 610 938 366))))
 
 (desktop-create-buffer 208
-  nil
-  "tyro"
-  'dired-mode
-  '(font-lock-mode)
-  205
+  "/Users/tom/code/tuney/tuney/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  1
   '(nil nil)
-  t
-  '("/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/tyro/")
-  '((buffer-display-time 27128 60703 548018 0))
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 2617 578587 390000))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/tuney/keyboard/modifiers.py"
+  "modifiers.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  989
+  '(1182 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27172 1462 863204 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1102 1048 1048 37 620 1013))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/test/test_impall.py"
+  "test_impall.py"
+  'python-mode
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
+  73
+  '(103 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27170 51768 113669 390000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (103 1 1 103))))
+
+(desktop-create-buffer 208
+  "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/__init__.py"
+  "__init__.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  590
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27149 64178 88238 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/impall/test_impall.py"
+  "test_impall.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27149 62780 609862 82000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -646,215 +1018,335 @@
   "files.py"
   'python-mode
   '(eldoc-mode font-lock-mode)
-  736
-  '(736 nil)
+  416
+  '(1012 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27127 27381 374653 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (37 37 37 736 736 736 736 736 37 37 37 37 37 37 37 37 736 37 37 37 37 736 37 37 736 736 37 37 736 736 736 736 736 736 736 736 736 736 736 736 37 37 37 736 736 736 736 37 37 37 736 37 37 37 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 736 37 37 37 37))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27145 55489 95674 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (585 532 92 92 92 92 92 92 1012 48 48 48 1012 1012 1012 1012 1012 48 48 48 48 48 48 48 48 1012 48 48 48 48 1012 48 48 1012 1012 48 48 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 48 48 48 1012 1012 1012 1012 48 48 48 1012 48 48 48 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 1012 48 48 48 48 92 92 925 1012 92 1012))))
 
 (desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/render.py"
+  "render.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  553
+  '(242 nil)
   nil
-  "writing"
-  'dired-mode
-  '(font-lock-mode)
-  128
-  '(nil nil)
-  t
-  '("/Users/tom/Documents/Work/writing/")
-  '((buffer-display-time 27127 19639 775322 0))
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27144 49758 38270 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (336 556 287 554 638 1193 1171 1098 1078 1147 1147 1078 1090 1147 1147 556 570 556 566 694 770 800 150 336 336 150 150 150 291 287 287 287 287 68 68 68 68 68 68 68 68 68 68 1331 68 68 1331 68 68 68 68 68 68 68 68 68 68 68 1331 68 1331 1331 68 68 68 68 68 68 68 68 68 68 68 1331 68 68 68 68 68 504 1063 1007 1063 1077 1063 1077 1077 1077 754 753 556 694 1032 1302 1221 452 554))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/test/test_config_file.py"
+  "test_config_file.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  195
+  '(195 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27144 49169 989319 82000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
+  "/Users/tom/code/fmix/test/test_sample_files.py"
+  "test_sample_files.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  350
+  '(94 nil)
   nil
-  "Work"
-  'dired-mode
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27144 31756 362576 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (94 680 630 649 649 630 630 649 649 630 630 649 630 649 649 649 524 524 327 26 26 26 1 327 327 308 26 327 377 377 554 554 523 493 554 554 569 523 523 308 431 680 583 584 583 93 279 629 629 640 641 629 680 680 680 649 680 680 680 680 583 568))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/time.py"
+  "time.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  902
+  '(37 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27144 29870 440970 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 36 36 37 37 37 37 37 37 37 37 37 37 37 1194 37 934))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/fade.py"
+  "fade.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  624
+  '(279 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27144 29725 514615 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (626 1 1089 1297 36 992 992 1089 1297 992 992 992 900 992 992 992 1297 900 36 1297 36 36 36 1 1 1 1 1 1 1 1 1297 1 1297 1297 1297 1297 1297 1297 1297 1297 1297 1297 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1297 669 1297 565 273 624 626 625 1297 624))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/constants.py"
+  "constants.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  188
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27143 13042 937176 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (190 1 541 1 1 1 1 1 1 1 1 1 572 188))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/audio.py"
+  "audio.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  1272
+  '(147 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27143 12899 792256 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (245 189 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 1414 1414 37 37 1414 37 37 37 37 37 1414 37 37))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/test/test_audio_file.py"
+  "test_audio_file.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  216
+  '(537 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27143 12708 534294 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (37 37 537 37 37 537 37 537 37 37 37 425 304 499 216))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/audio_file.py"
+  "audio_file.py"
+  'python-mode
+  '(eldoc-mode smerge-mode font-lock-mode)
+  507
+  '(204 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27143 12646 989869 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (180 187 824 701 181 187 187 674 29 29 1459 29 29 29 1459 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 1 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 29 438))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/dsp.py"
+  "dsp.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  263
+  '(53 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27143 11654 889302 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (904 773 904 838 53 53 53 53 53 53 53 621 621 838 884 1 1 1 1 1 1070 687 53 53 928 263))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/scripts/paragraph.py"
+  "paragraph.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  95
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27141 45364 856176 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (320 313 306 299 292 285 278 271 264 257 251 239 232 225 44 1 1 407 1 438 415))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/edit_point.py"
+  "edit_point.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  435
+  '(42 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27139 33771 876560 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (42 37 42 42 42 1 37 37 37 37 37 37 37 37 37 37 473 37 37 37 37 473 473 37 473 37 1 473 473 37 473 473 473 473 37 37 473 473 473 473 37 37 473 473 473 473 1 1 473 37 1 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 37 473 37 37 37 37 37 37 37 37 37 37 42 473))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/samplerate.py"
+  "samplerate.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27139 29816 975585 82000))
+  '((mark-ring (1 1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/fmix/curve.py"
+  "curve.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27139 28833 836457 82000))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/dotfiles/bash/environment-variables.sh"
+  "environment-variables.sh"
+  'fundamental-mode
   '(font-lock-mode)
-  664
+  179
   '(nil nil)
-  t
-  '("/Users/tom/Documents/Work/")
-  '((buffer-display-time 27127 19638 765108 0))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "Documents"
-  'dired-mode
-  '(font-lock-mode)
-  613
-  '(1142 nil)
-  t
-  '("/Users/tom/Documents/")
-  '((buffer-display-time 27127 19534 278385 0))
-  '((mark-ring (1142))))
-
-(desktop-create-buffer 208
-  nil
-  "~"
-  'dired-mode
-  '(font-lock-mode)
-  4745
-  '(1136 nil)
-  t
-  '("/Users/tom/")
-  '((buffer-display-time 27127 19524 24706 0))
-  '((mark-ring (1))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/dotfiles/.gitconfig"
-  ".gitconfig"
-  'conf-windows-mode
-  '(font-lock-mode)
-  160
-  '(nil nil)
   nil
   nil
-  '((buffer-display-time 27127 17207 308200 180000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27138 2689 17823 82000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/tyro/__init__.py"
   "__init__.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
+  '(eldoc-mode font-lock-mode)
   431
   '(431 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27124 34163 790730 180000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27136 34074 461843 82000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/tuney/pyproject.toml"
-  "pyproject.toml"
-  'conf-toml-mode
-  '(font-lock-mode)
-  741
-  '(715 nil)
-  nil
-  nil
-  '((buffer-display-time 27134 1064 549585 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (1111 393 1063 1111 596))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/scale/note.py"
-  "note.py"
+  "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/tyro/conf/__init__.py"
+  "__init__.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  173
+  '(eldoc-mode font-lock-mode)
+  927
   '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27123 13244 985517 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (474 174 194 173))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27136 33509 206261 82000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/test_sample_files.py"
-  "test_sample_files.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  568
-  '(94 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27121 61959 301097 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (94 680 630 649 649 630 630 649 649 630 630 649 630 649 649 649 524 524 327 26 26 26 1 327 327 308 26 327 377 377 554 554 523 493 554 554 569 523 523 308 431 680 583 584 583 93 279 629 629 640 641 629 680 680 680 649 680 680 680 680 583 568))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/render.py"
-  "render.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  266
-  '(68 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 42061 173321 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (68 68 68 68 68 68 68 68 68 1242 68 68 1242 68 68 68 68 68 68 68 68 68 68 68 1242 68 1242 1242 68 68 68 68 68 68 68 68 68 68 68 1242 68 68 68 68 68))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/runnable.py"
-  "runnable.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  714
-  '(1 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 40010 143793 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (541))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bin/run-tests"
-  "run-tests"
+  "/Users/tom/code/multi/.python-version"
+  ".python-version"
   'fundamental-mode
   '(font-lock-mode)
-  502
-  '(379 nil)
-  nil
-  nil
-  '((buffer-display-time 27119 35391 37027 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (170 156 534 317 69 565 565 565 345 69))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/ui/layout.py"
-  "layout.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  1939
+  1
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 33081 712913 180000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27135 8241 928616 904000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/dsp.py"
-  "dsp.py"
+  "/Users/tom/code/multi/multi/git.py"
+  "git.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
-  18
-  '(641 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 28552 572994 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (641 854 900 1 1 1 1 1 1086 707))))
-
-(desktop-create-buffer 208
-  nil
-  "annotated_types"
-  'dired-mode
-  '(font-lock-mode)
-  329
-  '(nil nil)
-  t
-  '("/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/annotated_types/")
-  '((buffer-display-time 27119 18536 741410 180000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/_pytest/assertion/rewrite.py"
-  "rewrite.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  6978
-  '(nil nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 18480 25624 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/dataclasses.py"
-  "dataclasses.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  32727
+  '(eldoc-mode font-lock-mode)
+  1006
   '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 18469 105224 180000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27135 5412 455803 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/multi/multi/multi.py"
+  "multi.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  2573
+  '(2574 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27135 5289 354804 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (2574 2256 2476 947 899 737 737 681 2022 2022 2255 2476 2476))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/multi/multi/commands/files.py"
+  "files.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  1549
+  '(1549 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27135 5154 237410 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/multi/multi/commands/mkdocs.py"
+  "mkdocs.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  3961
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27135 5138 845083 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/multi/multi/commands/readme.py"
+  "readme.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  67
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27135 5139 601842 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/Documents/Work/writing/strains.txt"
+  "strains.txt"
+  'text-mode
+  '(font-lock-mode)
+  149
+  '(100 nil)
+  nil
+  nil
+  '((buffer-display-time 27135 3856 270998 904000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/multi/multi/runner.py"
+  "runner.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  621
+  '(621 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27135 2489 751450 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fmix/test/test_help.py"
+  "test_help.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  100
+  '(60 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27133 50657 427445 904000) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (169 79 60 37 37 37 1 37 37 37 37 169 169 169 169 62 169 62 62 62 60 37 37 37 169 1 169 169 100))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/fing/test/test_rendering.py"
+  "test_rendering.py"
+  'python-mode
+  '(eldoc-mode font-lock-mode)
+  567
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27133 43573 896953 904000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -866,80 +1358,20 @@
   '(1165 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 17962 581602 180000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27120 17390 709013 84000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring (1168 1083 860 906 745 456 690 690 566 1 564 984 690 216 216 64 1 564 637 888 1029 1258))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/fmix/fade.py"
-  "fade.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  217
-  '(37 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 14486 966616 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (217 217 37 1 37 37 217))))
-
-(desktop-create-buffer 208
-  nil
-  "scripts"
-  'dired-mode
-  '(font-lock-mode)
-  167
-  '(nil nil)
-  t
-  '("/Users/tom/code/fmix/scripts/")
-  '((buffer-display-time 27119 14059 942506 180000))
-  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/Users/tom/code/dotfiles/bin/python_startup.py"
   "python_startup.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
+  '(eldoc-mode font-lock-mode)
   216
   '(116 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27119 12514 593718 180000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27120 11943 640423 84000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "tuney"
-  'dired-mode
-  '(font-lock-mode)
-  1119
-  '(nil nil)
-  t
-  '("/Users/tom/code/tuney/")
-  '((buffer-display-time 27116 54461 356399 180000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/types.py"
-  "types.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  401
-  '(401 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27116 54377 890193 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/tuney/audio/__init__.py"
-  "__init__.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  66
-  '(65 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27116 54303 299994 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1))))
 
 (desktop-create-buffer 208
   "/Users/tom/Documents/conversation-with-loic.txt"
@@ -950,140 +1382,44 @@
   '(301 nil)
   nil
   nil
-  '((buffer-display-time 27116 50047 237961 180000) (buffer-file-coding-system . utf-8-unix))
+  '((buffer-display-time 27117 49476 536739 84000) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring (301 300 106 301 301 16 16 1 1 301 15 103 103 301 355 103 355 47 103 401))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/test/test_audio_file.py"
-  "test_audio_file.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  44
-  '(465 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27115 38801 554803 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (37 37 465 37 37 465 37 465 37 37 37))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fmix/.venv/lib/python3.13/site-packages/soundfile.py"
-  "soundfile.py"
-  'python-mode
-  '(font-lock-mode eldoc-mode)
-  20887
-  '(52860 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27115 38356 639024 180000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (36984 36886 12055 7784 13380 1 22273 31652 39821 29353 19293 64865 19002 10164 6321 1044 803 25275 13868 2493 2991 5312 1 19568 19421 19233 6091 1 19306 15108 13337 1 64865 19702 3161 2715 1 1 13480 1 1 61755 61727 12617 61045 62119 49093 64865 661 1 64240 285 285 61727 19963 19845 6091 10165 10164 25275 10164 22273 13380 36886 20887))))
 
 (desktop-create-buffer 208
   "/Users/tom/code/fmix/scripts/print_soundfile_types.py"
   "print_soundfile_types.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
+  '(eldoc-mode font-lock-mode)
   110
   '(85 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27115 33753 791824 180000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27116 33184 20155 84000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring (85))))
-
-(desktop-create-buffer 208
-  nil
-  "audio"
-  'dired-mode
-  '(font-lock-mode)
-  126
-  '(1 nil)
-  t
-  '("/Users/tom/code/fmix/test/audio/")
-  '((buffer-display-time 27115 33122 211282 180000))
-  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/Users/tom/code/recs/recs/cfg/run_cli.py"
   "run_cli.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
+  '(eldoc-mode font-lock-mode)
   31
   '(1 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27115 30544 232092 180000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27116 29975 526045 84000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring (313 381 623 586 621 644 31))))
-
-(desktop-create-buffer 208
-  nil
-  "recs"
-  'dired-mode
-  '(font-lock-mode)
-  320
-  '(nil nil)
-  t
-  '("/Users/tom/code/recs/recs/")
-  '((buffer-display-time 27115 30508 882284 180000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "base"
-  'dired-mode
-  '(font-lock-mode)
-  125
-  '(nil nil)
-  t
-  '("/Users/tom/code/recs/recs/base/")
-  '((buffer-display-time 27115 30482 342450 180000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "recs"
-  'dired-mode
-  '(font-lock-mode)
-  1641
-  '(nil nil)
-  t
-  '("/Users/tom/code/recs/")
-  '((buffer-display-time 27115 30474 857952 180000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "python"
-  'dired-mode
-  '(font-lock-mode)
-  297
-  '(nil nil)
-  t
-  '("/Users/tom/code/test/python/")
-  '((buffer-display-time 27115 29913 10220 180000))
-  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/Users/tom/code/test/python/context_manager_return.py"
   "context_manager_return.py"
   'python-mode
-  '(font-lock-mode eldoc-mode)
+  '(eldoc-mode font-lock-mode)
   203
   '(41 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27112 44886 340703 922000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27113 44319 305651 826000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring (1))))
-
-(desktop-create-buffer 208
-  nil
-  "bin"
-  'dired-mode
-  '(font-lock-mode)
-  224
-  '(nil nil)
-  t
-  '("/Users/tom/code/dotfiles/bin/")
-  '((buffer-display-time 27111 17611 511644 922000))
-  '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/Users/tom/code/fmix/test/short.txt"
@@ -1094,7 +1430,7 @@
   '(119 nil)
   nil
   nil
-  '((buffer-display-time 27099 39526 428851 77000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27100 38960 377249 981000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring (119 119))))
 
 (desktop-create-buffer 208
@@ -1106,7 +1442,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27099 36440 897384 77000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27100 35875 632065 981000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1118,7 +1454,7 @@
   '(210 nil)
   nil
   nil
-  '((buffer-display-time 27099 28621 231739 77000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27100 28056 765717 981000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1130,7 +1466,7 @@
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27095 19858 78530 77000) (buffer-file-coding-system . undecided-unix))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27096 19294 499487 981000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1142,31 +1478,7 @@
   '(nil nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27095 19813 91609 77000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "16-08-00"
-  'dired-mode
-  '(font-lock-mode)
-  312
-  '(nil nil)
-  t
-  '("/Users/tom/Documents/Work/Music/BEM/2026-03-28/16-08-00/")
-  '((buffer-display-time 27095 17545 341325 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "2026-03-28"
-  'dired-mode
-  '(font-lock-mode)
-  498
-  '(nil nil)
-  t
-  '("/Users/tom/Documents/Work/Music/BEM/2026-03-28/")
-  '((buffer-display-time 27095 17534 97897 77000))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27096 19250 281498 981000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1178,55 +1490,7 @@
   '(446 nil)
   nil
   nil
-  '((buffer-display-time 27092 50030 584360 77000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "toml"
-  'dired-mode
-  '(font-lock-mode)
-  121
-  '(nil nil)
-  t
-  '("/Users/tom/code/test/toml/")
-  '((buffer-display-time 27092 41777 367557 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "BEM"
-  'dired-mode
-  '(font-lock-mode)
-  227
-  '(nil nil)
-  t
-  '("/Users/tom/Documents/Work/Music/BEM/")
-  '((buffer-display-time 27091 39474 853954 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "dotfiles"
-  'dired-mode
-  '(font-lock-mode)
-  430
-  '(nil nil)
-  t
-  '("/Users/tom/code/dotfiles/")
-  '((buffer-display-time 27082 29585 106749 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "recorder"
-  'dired-mode
-  '(font-lock-mode)
-  327
-  '(253 nil)
-  t
-  '("/Users/tom/code/fing/fingerings/recorder/")
-  '((buffer-display-time 27082 15148 713074 77000))
+  '((buffer-display-time 27093 49469 200193 981000) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1238,67 +1502,7 @@
   '(nil nil)
   nil
   nil
-  '((tab-width . 4) (buffer-display-time 27082 14521 655522 77000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "wx7"
-  'dired-mode
-  '(font-lock-mode)
-  174
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/fingerings/wx7/")
-  '((buffer-display-time 27082 14517 850717 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "fingerings"
-  'dired-mode
-  '(font-lock-mode)
-  280
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/fingerings/")
-  '((buffer-display-time 27082 10248 321590 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "sax"
-  'dired-mode
-  '(font-lock-mode)
-  128
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/fingerings/sax/")
-  '((buffer-display-time 27082 10222 205773 77000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "vl70"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/midi/vl70/")
-  '((buffer-display-time 27082 10084 106043 359000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "midi"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/midi/")
-  '((buffer-display-time 27082 10084 462402 359000))
+  '((tab-width . 4) (buffer-display-time 27083 13961 823345 981000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1310,19 +1514,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10087 643155 359000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "lovely-numbers"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/rec/lovely-numbers/")
-  '((buffer-display-time 27082 10088 17203 359000))
+  '((buffer-display-time 27083 9529 666580 263000) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1334,19 +1526,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10092 670792 359000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "charts"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/charts/")
-  '((buffer-display-time 27082 10093 2583 359000))
+  '((buffer-display-time 27083 9535 775281 263000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1358,7 +1538,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10096 926411 359000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27083 9541 5955 263000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1370,19 +1550,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10102 883703 359000) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "dotfiles"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/dotfiles/dotfiles/")
-  '((buffer-display-time 27082 10103 228984 359000))
+  '((buffer-display-time 27083 9547 742050 263000) (buffer-file-coding-system . utf-8-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1394,19 +1562,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10105 133225 359000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "fing"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/fing/")
-  '((buffer-display-time 27082 10105 460111 359000))
+  '((buffer-display-time 27083 9551 38141 263000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1418,19 +1574,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10106 651520 359000) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "svg_samples"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/code/fing/svg_samples/")
-  '((buffer-display-time 27082 10106 988337 359000))
+  '((buffer-display-time 27083 9554 13890 263000) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1442,7 +1586,7 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10108 221369 359000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27083 9556 746421 263000) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -1454,90 +1598,18 @@
   '(nil nil)
   nil
   nil
-  '((buffer-display-time 27082 10109 679644 359000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/fing/.python-version"
-  ".python-version"
-  'fundamental-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 27082 10111 452206 359000) (buffer-file-coding-system . undecided-unix))
+  '((buffer-display-time 27179 6935 453050 0) (buffer-file-coding-system . undecided-unix))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   nil
-  "test"
+  "time"
   'dired-mode
   '(font-lock-mode)
-  1
+  231
   '(nil nil)
   t
-  '("/Users/tom/code/tuney/test/")
-  '((buffer-display-time 27082 10115 378089 359000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "uv"
-  'dired-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  t
-  '("/Users/tom/.local/share/uv/")
-  '((buffer-display-time 27082 10116 736412 359000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/elisp/keyboard-shortcuts.el"
-  "keyboard-shortcuts.el"
-  'fundamental-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 27082 10119 775168 359000) (buffer-file-coding-system . prefer-utf-8-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/dotfiles/bash/environment-variables.sh"
-  "environment-variables.sh"
-  'fundamental-mode
-  '(font-lock-mode)
-  1
-  '(nil nil)
-  nil
-  nil
-  '((buffer-display-time 27082 10121 8110 359000) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  ".git"
-  'dired-mode
-  '(font-lock-mode)
-  124
-  '(nil nil)
-  t
-  '("/Users/tom/code/sysexy/.git/")
-  '((buffer-display-time 27112 41438 507010 922000))
-  '((mark-ring nil)))
-
-(desktop-create-buffer 208
-  nil
-  "sysexy"
-  'dired-mode
-  '(font-lock-mode)
-  180
-  '(nil nil)
-  t
-  '("/Users/tom/code/sysexy/")
-  '((buffer-display-time 27112 41441 987741 922000))
+  '("/Users/tom/code/tuney/tuney/time/")
+  '((buffer-display-time 27179 60893 520022 0))
   '((mark-ring nil)))
 

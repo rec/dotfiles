@@ -35,27 +35,7 @@
     (define-key c++-mode-map "," 'self-insert-command)
     )
 
-;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
-
-
-;; (add-hook 'python-mode-hook #'electric-operator-mode)
-;; (add-hook 'javascript-mode-hook #'electric-operator-mode)
-
 (add-hook 'yaml-mode-hook
           (lambda ()
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)
             ))
-
-
-;; (add-hook 'c-mode-common-hook #'electric-operator-mode)
-
-;; (defun my-python-mode-common-hook ()
-;;   (setq python-basic-offset 4)
-;; ;;  (define-key python-mode-map "\C-m" 'newline-and-indent)
-;; )
-
-;; (add-hook 'python-mode-common-hook 'my-python-mode-common-hook)
-;;(add-hook 'c-mode-common-hook 'electric-pair-mode)
-;;(add-hook 'python-mode-hook 'electric-pair-mode)
-
-;; (add-hook 'python-mode-hook 'blacken-mode)
