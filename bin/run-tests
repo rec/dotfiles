@@ -2,17 +2,46 @@
 
 set -eux
 
-export NO_COLOR=1
+USAGE="USAGE: run-tests -dfr
+-d: Disable error reformatting
+-f: Pass --fix to ruff
+-r: Regenerate test data"
+
+# https://stackoverflow.com/a/246128/43839
 project=$(basename $(pwd))
 
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+reformat_errors_file=$script_dir/reformat_error_messages.py
 system_python=~/code/test/.venv/bin/python
-fix_errors_file=~/code/test/python/fix_error_messages.py
-fix_errors="$system_python $fix_errors_file"
 
-ruff check $@  --select B,E,F,I $project test* | $fix_errors
-ruff format | $fix_errors
-pytest -vvvvv --rootdir=test | $fix_errors
-ty check $project | $fix_errors
+reformat_errors="$system_python $reformat_errors_file"
+fix=''
+rewriting=''
+
+while getopts 'fr' flag; do
+    case "${flag}" in
+        f) fix=--fix
+           ;;
+        r) export REWRITE_TEST_DATA=1
+           export EXPECTTEST_ACCEPT=1
+           rewriting=--regen-all
+           ;;
+        d) reformat_errors=cat
+           ;;
+        *) echo "Do not understand flag -${flag}\n$USAGE" >&2
+           exit 1
+           ;;
+    esac
+done
+
+export NO_COLOR=1
+
+ruff check --select B,E,F,I $project test* $fix | $reformat_errors
+if [ $fix ]; then
+    ruff format | $reformat_errors
+fi
+pytest -vvvvv $rewriting | $reformat_errors
+ty check $project | $reformat_errors
 
 version=$(cat .python-version)
 version=${version//./}
