@@ -30,6 +30,7 @@ alias lrp='quiet lintrunner init && lintrunner -a --take=PYREFLY | python ~/code
 alias lrr='quiet lintrunner init && lintrunner --take=MYPY,RUFF -a | python ~/code/test/python/fix_lint.py | tee lint.grep'
 alias lsd='ls -d ~/git*'
 
+alias md='g update-ref refs/head/main dev && g push origin main'
 alias multi="$CODE_ROOT/multi/.venv/bin/multi"
 alias mkdocs="$CODE_ROOT/multi/.venv/bin/mkdocs"
 
