@@ -2,44 +2,32 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Jun 17 21:08:38 2026
+;; Created Wed Jun 17 21:22:37 2026
 ;; Desktop file format version 208
 ;; Emacs version 30.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (27186 61622 711943 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (last-focus-update) (frameset--id . "5073-D453-8ACA-1F33") (frameset--mini t) (height . 55) (width . 85) (modeline . t) (unsplittable) (left . 905) (top . 53) (icon-name) (visibility . t) (display . "bolt.local") (explicit-name) (tool-bar-position . top)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 711) (pixel-height . 918) (total-width . 89) (total-height . 54) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 711) (pixel-height . 459) (total-width . 89) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "tuney<code>" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1120) (start . 1)) (prev-buffers ("config.toml" 1 297) ("text_timings.py" 1270 1851))) (leaf (last . t) (pixel-width . 711) (pixel-height . 459) (total-width . 89) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "config.toml" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 297) (start . 1)))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update) (frameset--id . "6636-9587-F2A0-6ED0") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 58) (width . 106) (left . 962) (top . 25)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 879) (pixel-height . 969) (total-width . 110) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (buffer "AGENTS.md<.codex>" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 4511) (start . 3169)) (prev-buffers ("tuning.py" 671 861))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (environment) (display . "bolt.local") (visibility . t) (last-focus-update) (frameset--id . "509C-1EA3-0DD7-C8E4") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 54) (width . 105) (left . 735) (top . 86)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 871) (pixel-height . 901) (total-width . 109) (total-height . 53) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 871) (pixel-height . 459) (total-width . 109) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "move_task.py" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 257) (start . 257)) (prev-buffers ("*shell*" 1098595 1100268) ("TASKS.md" 2 2352) ("move_task.py" 1 271))) (leaf (last . t) (pixel-width . 871) (pixel-height . 442) (total-width . 109) (total-height . 26) (normal-height . 0.5) (normal-width . 1.0) (buffer "move_task.py" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (27186 62461 722733 0) (desktop . "208") "tom@bolt.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (last-focus-update) (frameset--id . "5073-D453-8ACA-1F33") (frameset--mini t) (height . 55) (width . 85) (modeline . t) (unsplittable) (left . 905) (top . 53) (icon-name) (visibility . t) (display . "bolt.local") (explicit-name) (tool-bar-position . top)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 6) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 136) (min-pixel-width . 80) (min-pixel-height-ignore . 68) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 34) (min-pixel-width-safe . 16)) vc (pixel-width . 711) (pixel-height . 918) (total-width . 89) (total-height . 54) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 711) (pixel-height . 459) (total-width . 89) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "tuney<code>" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1120) (start . 1)) (prev-buffers ("config.toml" 1 297) ("text_timings.py" 1270 1851))) (leaf (last . t) (pixel-width . 711) (pixel-height . 459) (total-width . 89) (total-height . 27) (normal-height . 0.5) (normal-width . 1.0) (buffer "config.toml" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 297) (start . 1)))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (display . "bolt.local") (scroll-bar-foreground) (scroll-bar-background) (font-parameter) (display-type . color) (background-mode . light) (cursor-color . "black") (visibility . t) (last-focus-update . t) (frameset--id . "6636-9587-F2A0-6ED0") (frameset--mini t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 58) (width . 106) (left . 962) (top . 25)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 879) (pixel-height . 969) (total-width . 110) (total-height . 57) (normal-height . 1.0) (normal-width . 1.0) (buffer "*shell*" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1119883) (start . 1117662)) (prev-buffers ("*shell*" 1114613 1119883) ("move_task" 556 1678) ("scripts" 1 171) ("AGENTS.md<.codex>" 3169 4742) ("tuning.py" 671 861))) (((minibuffer . t) (fontsize . 0) (font . "-*-Monaco-regular-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (horizontal-scroll-bars) (foreground-color . "Black") (background-color . "White") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 1) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "black") (font-parameter) (environment) (display . "bolt.local") (visibility . t) (last-focus-update) (frameset--id . "509C-1EA3-0DD7-C8E4") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (explicit-name) (tool-bar-position . top) (height . 54) (width . 105) (left . 735) (top . 86)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 6) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 871) (pixel-height . 901) (total-width . 109) (total-height . 53) (normal-height . 1.0) (normal-width . 1.0) (buffer "move_task" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 2 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 1165) (start . 1)) (prev-buffers ("*Buffer List*" 1 147))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring '(#("#" 0 1 (isearch-case-fold-search t isearch-regexp-function nil)) #("gfx" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("push" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("prompt" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("git" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("_set_mode" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("'" 0 1 (isearch-case-fold-search t isearch-regexp-function nil)) #("tuney/tuney" 0 11 (isearch-case-fold-search t isearch-regexp-function nil)) #("toml" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("dump" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("dumps" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("chars" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("rege" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("_comm" 0 5 (isearch-case-fold-search t isearch-regexp-function nil)) #("on_" 0 3 (isearch-case-fold-search t isearch-regexp-function nil)) #("replay" 0 6 (isearch-case-fold-search t isearch-regexp-function nil))))
 (setq regexp-search-ring nil)
-(setq register-alist (list (list 313465889 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook (lambda nil (set-marker mk 257 (get-buffer "move_task.py")))) mk))))
-(setq file-name-history '("~/code/tuney/scripts/move_task.py" "~/code/tuney/scripts/" "~/code/tuney/AGENTS.md" "~/code/tuney/" "~/code/tuney/AGENTS.md" "~/code/tuney" "~/code/tuney/TASK.md" "~/code/tuney/AGENTS.md" "~/.codex/AGENTS.md" "~/code/tuney" "~/.codex" "~/.codex/AGENTS.md" "~/code/tuney/test" "~/code/tuney/git.diff" "~/code/tuney/test/" "~/code/tuney/test" "~/code/tuney/AGENTS.md" "~/code/tuney/pyproject.toml" "~/code/tuney/test/" "~/" "~/test.json" "~/" "~/code/tuney/tuney/serialize.py" "~/code/tuney/tuney/toml.py" "~/.codex/" "~/code/tuney/test/test_tuney.py" "~/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/__init__.py" "~/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/" "~/code/tuney/.venv/lib/python3.12/site-packages/mido" "~/code/tuney/typings/mido/__init__.pyi" "~/code/tuney/tuney" "~/code/tuney/.venv/lib/python3.12/site-packages/mido/__init__.py" "~/code/tuney/tuney/audio/midi.py" "~/code/tuney/tuney/ui/note_button.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/ui/note_frame.py" "~/code/tuney/tuney/ui/" "~/code/tuney/test/test_cli_help.py" "~/code/tuney/test/test_cli_help/test_tuney_help_output.txt" "~/code/tuney/.git/" "~/code/tuney/tuney/mapper/mapper.py" "~/code/tuney/tuney/mapper/linear_mapper.py" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney/tuney/mapper/" "~/code/tuney" "~/code/tuney/tuney/scale" "~/code/tuney/tuney/scale/accidentals.py" "~/code/tuney/test/" "~/code/tuney/.python-version" "~/code/tuney/tuney" "/tmp/multi.sh" "~/code/dotfiles/bin" "~/code/dotfiles/bin/reformat_error_messages.py" "~/code/dotfiles/bin/fix_error_messages.py" "~/code/dotfiles/bin" "~/code/dotfiles/bin/" "~/code/test/python/fix_error_messages.py" "~/code/dotfiles/dotfiles/.emacs.d/elpa" "~/code/dotfiles" "~/code/dotfiles/" "~/code/dotfiles/bash/git.sh" "~/code/fmix/" "~/code/tuney/test" "~/.gitconfig" "~/code/tuney/tuney/runnable.py" "~/code/tuney/git.diff" "~/code/tuney/test" "~/code/tuney/tuney/ui/control_panel.py" "~/code/tuney/tuney/ui/layout.py" "~/code/tuney/tuney/" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/test" "~/code/tuney/test/test_audio_output.py" "~/code/tuney/test" "~/code/tuney/test/test_cli.py" "~/Library/" "~/code/tuney/git.diff" "~/.codex/" "~/code/tuney/AGENTS.md" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/test/test_audio_dataclasses.py" "~/.codex/" "~/code/tuney/tuney/" "~/code/tuney/tuney" "~/code/tuney" "~/code/tuney/tuney/tuney.py" "~/code/tuney/tuney/ui/tuney.py" "~/code/tuney/tuney/" "~/code/tuney/.python-version" "~/code/tuney/AGENTS.md" "~/.codex" "~/.codex/" "~/code/tuney/AGENTS.md" "~/code/tyro/src/tyro/lines.txt" "~/code/test/python/longest_lines.py"))
+(setq register-alist (list (list 313465889 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook (lambda nil (set-marker mk 55 (get-buffer "move_task")))) mk))))
+(setq file-name-history '("~/code/tuney/scripts" "~/code/tuney/scripts/move_task" "~/code/tuney/scripts/move_task.py" "~/code/tuney/scripts" "~/code/tuney/scripts/move_task.py" "~/code/tuney/scripts/" "~/code/tuney/AGENTS.md" "~/code/tuney/" "~/code/tuney/AGENTS.md" "~/code/tuney" "~/code/tuney/TASK.md" "~/code/tuney/AGENTS.md" "~/.codex/AGENTS.md" "~/code/tuney" "~/.codex" "~/.codex/AGENTS.md" "~/code/tuney/test" "~/code/tuney/git.diff" "~/code/tuney/test/" "~/code/tuney/test" "~/code/tuney/AGENTS.md" "~/code/tuney/pyproject.toml" "~/code/tuney/test/" "~/" "~/test.json" "~/" "~/code/tuney/tuney/serialize.py" "~/code/tuney/tuney/toml.py" "~/.codex/" "~/code/tuney/test/test_tuney.py" "~/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/__init__.py" "~/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/" "~/code/tuney/.venv/lib/python3.12/site-packages/mido" "~/code/tuney/typings/mido/__init__.pyi" "~/code/tuney/tuney" "~/code/tuney/.venv/lib/python3.12/site-packages/mido/__init__.py" "~/code/tuney/tuney/audio/midi.py" "~/code/tuney/tuney/ui/note_button.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/ui/note_frame.py" "~/code/tuney/tuney/ui/" "~/code/tuney/test/test_cli_help.py" "~/code/tuney/test/test_cli_help/test_tuney_help_output.txt" "~/code/tuney/.git/" "~/code/tuney/tuney/mapper/mapper.py" "~/code/tuney/tuney/mapper/linear_mapper.py" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney/tuney/mapper/" "~/code/tuney" "~/code/tuney/tuney/scale" "~/code/tuney/tuney/scale/accidentals.py" "~/code/tuney/test/" "~/code/tuney/.python-version" "~/code/tuney/tuney" "/tmp/multi.sh" "~/code/dotfiles/bin" "~/code/dotfiles/bin/reformat_error_messages.py" "~/code/dotfiles/bin/fix_error_messages.py" "~/code/dotfiles/bin" "~/code/dotfiles/bin/" "~/code/test/python/fix_error_messages.py" "~/code/dotfiles/dotfiles/.emacs.d/elpa" "~/code/dotfiles" "~/code/dotfiles/" "~/code/dotfiles/bash/git.sh" "~/code/fmix/" "~/code/tuney/test" "~/.gitconfig" "~/code/tuney/tuney/runnable.py" "~/code/tuney/git.diff" "~/code/tuney/test" "~/code/tuney/tuney/ui/control_panel.py" "~/code/tuney/tuney/ui/layout.py" "~/code/tuney/tuney/" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/git.diff" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney" "~/code/tuney/tuney/audio/oscillator.py" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/test" "~/code/tuney/test/test_audio_output.py" "~/code/tuney/test" "~/code/tuney/test/test_cli.py" "~/Library/" "~/code/tuney/git.diff" "~/.codex/" "~/code/tuney/AGENTS.md" "~/code/tuney/tuney/audio/oscillator_player.py" "~/code/tuney/test/test_audio_dataclasses.py" "~/.codex/" "~/code/tuney/tuney/" "~/code/tuney/tuney" "~/code/tuney" "~/code/tuney/tuney/tuney.py" "~/code/tuney/tuney/ui/tuney.py" "~/code/tuney/tuney/" "~/code/tuney/.python-version" "~/code/tuney/AGENTS.md"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/tom/code/tuney/scripts/move_task.py"
-  "move_task.py"
+  "/Users/tom/code/tuney/scripts/move_task"
+  "move_task"
   'python-mode
-  '(font-lock-mode eldoc-mode outline-minor-mode)
-  257
-  '(1 nil)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
+  1678
+  '(1654 nil)
   nil
   nil
-  '((tab-width . 4) (indent-tabs-mode) (buffer-display-time 27186 61584 519002 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (1 381 323 237 248 271))))
-
-(desktop-create-buffer 208
-  "/Users/tom/code/tuney/TASKS.md"
-  "TASKS.md"
-  'markdown-mode
-  '(font-lock-mode eldoc-mode)
-  2352
-  '(2 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-display-time 27186 61515 612009 0) (buffer-file-coding-system . undecided-unix))
-  '((mark-ring (2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2352))))
+  '((tab-width . 4) (indent-tabs-mode) (buffer-display-time 27186 62247 556669 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1654 405 55 55 55 52 1 1 1 1 1 1 1 1 1 1 1 1 1 53 52 405 1620 1576))))
 
 (desktop-create-buffer 208
   nil
@@ -50,7 +38,7 @@
   '(nil nil)
   t
   '("/Users/tom/code/tuney/scripts/")
-  '((buffer-display-time 27186 61219 129085 0))
+  '((buffer-display-time 27186 62209 604602 0))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
@@ -58,12 +46,24 @@
   "AGENTS.md"
   'markdown-mode
   '(font-lock-mode eldoc-mode)
-  5998
+  4742
   '(7569 nil)
   nil
   nil
-  '((tab-width . 4) (buffer-display-time 27186 59455 880410 0) (buffer-file-coding-system . utf-8-unix))
-  '((mark-ring (7583 7583 7794 7794 7440 7440 3393 3393 7189 1 7440 6075 3937 4515 2634 1 3393 3392 3392 3392 3392 3392 3392 3392 5858 4856 6155 5858 3431 3432 3392 3392 3392 4945 3384 4575 4575 4532 6560 7440 7189 3393 7440 3393 4511 5132 5132 6708 7861 7910 7910 7910 7910 6074 5998))))
+  '((tab-width . 4) (buffer-display-time 27186 62072 224056 0) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (7583 7583 7794 7794 7440 7440 3393 3393 7189 1 7440 6075 3937 4515 2634 1 3393 3392 3392 3392 3392 3392 3392 3392 5858 4856 6155 5858 3431 3432 3392 3392 3392 4945 3384 4575 4575 4532 6560 7440 7189 3393 7440 3393 4511 5132 5132 6708 7861 7910 7910 7910 7910 6074 5998 4750 4743 4742))))
+
+(desktop-create-buffer 208
+  "/Users/tom/code/tuney/TASKS.md"
+  "TASKS.md"
+  'markdown-mode
+  '(font-lock-mode eldoc-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 27186 61921 903349 0) (buffer-file-coding-system . undecided-unix))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2352))))
 
 (desktop-create-buffer 208
   "/Users/tom/.codex/config.toml"
@@ -93,7 +93,7 @@
   "/Users/tom/code/tuney/tuney/ui/control_panel.py"
   "control_panel.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   18125
   '(79 nil)
   nil
@@ -117,7 +117,7 @@
   "/Users/tom/code/tuney/scripts/simple_grid.py"
   "simple_grid.py"
   'python-mode
-  '(font-lock-mode eldoc-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   25
   '(nil nil)
   nil
@@ -141,7 +141,7 @@
   "/Users/tom/code/tuney/tuney/mapper/mapper.py"
   "mapper.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   739
   '(238 nil)
   nil
@@ -153,7 +153,7 @@
   "/Users/tom/code/tuney/tuney/scale/tuning.py"
   "tuning.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   882
   '(784 nil)
   nil
@@ -165,7 +165,7 @@
   "/Users/tom/code/tuney/tuney/audio/oscillator.py"
   "oscillator.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   435
   '(37 nil)
   nil
@@ -177,7 +177,7 @@
   "/Users/tom/code/tuney/tuney/audio/midi.py"
   "midi.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   1198
   '(1344 nil)
   nil
@@ -189,7 +189,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/sounddevice.py"
   "sounddevice.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1536
   '(1 nil)
   nil
@@ -213,7 +213,7 @@
   "/Users/tom/code/tuney/tuney/audio/device.py"
   "device.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   244
   '(1 nil)
   nil
@@ -249,7 +249,7 @@
   "/Users/tom/code/tuney/tuney/time/text_timings.py"
   "text_timings.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1851
   '(nil nil)
   nil
@@ -261,7 +261,7 @@
   "/Users/tom/code/tuney/test/test_control_panel.py"
   "test_control_panel.py"
   'python-mode
-  '(font-lock-mode eldoc-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   4488
   '(1 nil)
   nil
@@ -273,7 +273,7 @@
   "/Users/tom/code/tuney/tuney/audio/multi_player.py"
   "multi_player.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   293
   '(1151 nil)
   nil
@@ -285,7 +285,7 @@
   "/Users/tom/code/tuney/test/test_serialize.py"
   "test_serialize.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   865
   '(865 nil)
   nil
@@ -321,7 +321,7 @@
   "/Users/tom/code/tuney/tuney/ui/layout.py"
   "layout.py"
   'python-mode
-  '(eldoc-mode flymake-mode smerge-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode smerge-mode font-lock-mode)
   1813
   '(1 nil)
   nil
@@ -333,7 +333,7 @@
   "/Users/tom/code/tuney/tuney/ui/app.py"
   "app.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   2471
   '(210 nil)
   nil
@@ -357,7 +357,7 @@
   "/Users/tom/code/tuney/tuney/audio/player.py"
   "player.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1086
   '(37 nil)
   nil
@@ -393,7 +393,7 @@
   "/Users/tom/code/tuney/tuney/serialize.py"
   "serialize.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   51
   '(nil nil)
   nil
@@ -405,7 +405,7 @@
   "/Users/tom/code/tuney/tuney/tuney.py"
   "tuney.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   5488
   '(37 nil)
   nil
@@ -417,7 +417,7 @@
   "/Users/tom/code/tuney/test/test_tuney.py"
   "test_tuney.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   40
   '(nil nil)
   nil
@@ -429,7 +429,7 @@
   "/Users/tom/code/tuney/tuney/keyboard/listener.py"
   "listener.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1010
   '(222 nil)
   nil
@@ -441,7 +441,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/__init__.py"
   "__init__.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   108
   '(108 nil)
   nil
@@ -453,7 +453,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/amidi.py"
   "amidi.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   271
   '(1108 nil)
   nil
@@ -465,7 +465,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/mido/__init__.py"
   "__init__.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   2929
   '(2833 nil)
   nil
@@ -501,7 +501,7 @@
   "/Users/tom/code/tuney/typings/mido/__init__.pyi"
   "__init__.pyi"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   1
   '(nil nil)
   nil
@@ -525,7 +525,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/mido/backends/backend.py"
   "backend.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   5
   '(nil nil)
   nil
@@ -537,7 +537,7 @@
   "/Users/tom/code/tuney/tuney/cli.py"
   "cli.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   436
   '(44 nil)
   nil
@@ -549,7 +549,7 @@
   "/Users/tom/code/tuney/tuney/ui/note_button.py"
   "note_button.py"
   'python-mode
-  '(font-lock-mode eldoc-mode flymake-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   473
   '(343 nil)
   nil
@@ -561,7 +561,7 @@
   "/Users/tom/code/tuney/tuney/ui/note_frame.py"
   "note_frame.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode outline-minor-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode outline-minor-mode)
   142
   '(142 nil)
   nil
@@ -633,7 +633,7 @@
   "/Users/tom/code/tuney/tuney/scale/scale.py"
   "scale.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   2515
   '(3641 nil)
   nil
@@ -657,7 +657,7 @@
   "/Users/tom/code/tuney/test/test_scale.py"
   "test_scale.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   293
   '(437 nil)
   nil
@@ -813,7 +813,7 @@
   "/Users/tom/code/tuney/tuney/time/sequencer.py"
   "sequencer.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   740
   '(417 nil)
   nil
@@ -825,7 +825,7 @@
   "/Users/tom/code/tuney/tuney/audio/oscillator_player.py"
   "oscillator_player.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   603
   '(625 nil)
   nil
@@ -837,7 +837,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/pydantic/fields.py"
   "fields.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   66372
   '(nil nil)
   nil
@@ -849,7 +849,7 @@
   "/Users/tom/code/tuney/tuney/audio/players.py"
   "players.py"
   'python-mode
-  '(eldoc-mode flymake-mode smerge-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode smerge-mode font-lock-mode)
   321
   '(499 nil)
   nil
@@ -873,7 +873,7 @@
   "/Users/tom/code/tuney/tuney/audio/concurrent.py"
   "concurrent.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   2183
   '(251 nil)
   nil
@@ -885,7 +885,7 @@
   "/Users/tom/code/tuney/tuney/runnable.py"
   "runnable.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   883
   '(24 nil)
   nil
@@ -897,7 +897,7 @@
   "/Users/tom/code/tuney/test/test_audio_dataclasses.py"
   "test_audio_dataclasses.py"
   'python-mode
-  '(eldoc-mode flymake-mode smerge-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode smerge-mode font-lock-mode)
   4240
   '(8 nil)
   nil
@@ -909,7 +909,7 @@
   "/Users/tom/code/tuney/tuney/types.py"
   "types.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(1 nil)
   nil
@@ -921,7 +921,7 @@
   "/Users/tom/code/tuney/tuney/__main__.py"
   "__main__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   19
   '(nil nil)
   nil
@@ -1041,7 +1041,7 @@
   "/Users/tom/code/tuney/test/twelve_tet.py"
   "twelve_tet.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   136
   '(1525 nil)
   nil
@@ -1053,7 +1053,7 @@
   "/Users/tom/code/tuney/tuney/audio/__init__.py"
   "__init__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(1 nil)
   nil
@@ -1077,7 +1077,7 @@
   "/Users/tom/code/tuney/tuney/audio/sample_data.py"
   "sample_data.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   245
   '(37 nil)
   nil
@@ -1089,7 +1089,7 @@
   "/Users/tom/code/tuney/test/test_text_timings.py"
   "test_text_timings.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   191
   '(191 nil)
   nil
@@ -1101,7 +1101,7 @@
   "/Users/tom/code/tuney/tuney/time/__init__.py"
   "__init__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(1 nil)
   nil
@@ -1137,7 +1137,7 @@
   "/Users/tom/code/tuney/tuney/keyboard/__init__.py"
   "__init__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(1 nil)
   nil
@@ -1149,7 +1149,7 @@
   "/Users/tom/code/tuney/test/test_tone_scale.py"
   "test_tone_scale.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   568
   '(81 nil)
   nil
@@ -1173,7 +1173,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/tyro/conf/__init__.py"
   "__init__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(nil nil)
   nil
@@ -1185,7 +1185,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/tyro/__init__.py"
   "__init__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(nil nil)
   nil
@@ -1197,7 +1197,7 @@
   "/Users/tom/code/tuney/.venv/lib/python3.12/site-packages/tyro/_unsafe_cache.py"
   "_unsafe_cache.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1303
   '(nil nil)
   nil
@@ -1233,7 +1233,7 @@
   "/Users/tom/code/tuney/tuney/__init__.py"
   "__init__.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   1
   '(nil nil)
   nil
@@ -1245,7 +1245,7 @@
   "/Users/tom/code/tuney/tuney/keyboard/modifiers.py"
   "modifiers.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   989
   '(1182 nil)
   nil
@@ -1257,7 +1257,7 @@
   "/Users/tom/code/tuney/test/test_impall.py"
   "test_impall.py"
   'python-mode
-  '(eldoc-mode flymake-mode font-lock-mode)
+  '(eglot-semantic-tokens-mode eglot-inlay-hints-mode eldoc-mode flymake-mode eglot--managed-mode font-lock-mode)
   73
   '(103 nil)
   nil
