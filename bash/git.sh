@@ -77,7 +77,6 @@ alias gdiff='git diff > /tmp/git.diff'
 alias gdu='g delete . && g update'
 
 alias gfx='git commit --fixup'
-alias gf='q git fetch upstream && q git fetch'
 
 alias gi='git infer -a && git push'
 
@@ -126,6 +125,15 @@ grh() {
         count="$1"
     fi
     git reset --hard HEAD@{$count}
+}
+
+gf() {
+    if [ -z "$1" ] ; then
+        _ref=HEAD
+    else
+        _ref="$1"
+    fi
+    git commit -a --fixup $_ref
 }
 
 ghc() {
