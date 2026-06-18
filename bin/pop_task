@@ -2,59 +2,32 @@
 
 import re
 import sys
+from itertools import chain
+
+PARTS = '## TODO', '## DONE'
 
 
 def main(file_path='TASKS.md'):
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
-    except FileNotFoundError:
-        print(f"Error: The file '{file_path}' was not found.", file=sys.stderr)
-        return
+    with open(file_path) as fp:
+        lines = list(fp)
+    before, todo, done, index = [], [], [], 0
+    for line in lines:
+        index += index < 2 and line.strip() in PARTS
+        (before, todo, done)[index].append(line)
 
-    pattern = r"(## TODO\n)(.*?)(## DONE\n?)(.*)"
-    match = re.search(pattern, content, re.DOTALL)
+    assert todo[0].startswith(PARTS[0])
+    assert done[0].startswith(PARTS[1])
 
-    if not match:
-        print(
-            "Error: Could not find both '## TODO' and '## DONE' sections in the file.",
-            file=sys.stderr,
-        )
-        return
+    before_task, task, after_task, index = [], [], [], 0
+    for i, line in enumerate(todo):
+        index += index < 2 and line.startswith('##') and line.strip() not in PARTS
+        (before_task, task, after_task)[index].append(line)
 
-    todo_header, todo_content, done_header, done_content = match.groups()
-    rep_pattern = r"(^\n)## "
-
-    sub_pattern = r"(### .*?)(?=\n### |\Z)"
-    sub_match = re.search(sub_pattern, todo_content, re.DOTALL)
-
-    if not sub_match:
-        print("Error: No tasks found in the TODO section.", file=sys.stderr)
-        return
-
-    task_to_move = sub_match.group(1).strip()
-
-    print(task_to_move)
-
-    updated_todo_content = todo_content.replace(sub_match.group(1), "", 1)
-    updated_todo_content = re.sub(r"\n{3,}", "\n\n", updated_todo_content)
-
-    done_content = done_content.strip()
-    if done_content:
-        updated_done_content = done_content + "\n\n" + task_to_move + "\n"
-    else:
-        updated_done_content = task_to_move + "\n"
-
-    final_content = (
-        todo_header + updated_todo_content.strip() + "\n\n" +
-        done_header + updated_done_content
-    )
-
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(final_content)
+    if any(t.strip() for t in task):
+        cr = [task.pop()]
+        lines = before + before_task + after_task + done + cr + task
+        print(*lines)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 2:
-            sys.exit("Usage: python move_task.py <path_to_markdown_file.md>")
     main(*sys.argv[1:])
