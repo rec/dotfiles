@@ -23,10 +23,11 @@ def main(file_path='TASKS.md'):
         index += index < 2 and line.startswith('##') and line.strip() not in PARTS
         (before_task, task, after_task)[index].append(line)
 
-    if any(t.strip() for t in task):
-        cr = [task.pop()]
-        lines = before + before_task + after_task + done + cr + task
-        print(*lines)
+    if not any(t.strip() for t in task):
+        exit('ERROR: No tasks found')
+    parts = before, before_task, after_task, done, [task.pop()], task
+    with open(file_path, 'w') as fp:
+        fp.writelines(i for p in parts for i in p)
 
 
 if __name__ == "__main__":
