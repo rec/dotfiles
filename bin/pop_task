@@ -23,6 +23,7 @@ def main(file_path='TASKS.md'):
         return
 
     todo_header, todo_content, done_header, done_content = match.groups()
+    rep_pattern = r"(^\n)## "
 
     sub_pattern = r"(### .*?)(?=\n### |\Z)"
     sub_match = re.search(sub_pattern, todo_content, re.DOTALL)

@@ -81,11 +81,13 @@
  '(large-file-warning-threshold nil)
  '(mark-ring-max 256)
  '(package-selected-packages
-   '(counsel cython-mode dash-at-point dash-functional eglot electric-operator
-             git-gutter git-gutter+ golden-ratio-scroll-screen google-c-style
-             live-preview magit magit-filenotify markdown-mode nhexl-mode protobuf-mode
-             pylint python-mode realgud s saveplace shell-here template with-editor
-             yaml-mode))
+   '(blacken codex-ide counsel cython-mode dash-at-point dash-functional eglot
+             electric-operator git-gutter git-gutter+ golden-ratio-scroll-screen
+             google-c-style live-preview magit magit-filenotify markdown-mode nhexl-mode
+             protobuf-mode pylint python-mode realgud s saveplace shell-here template
+             with-editor yaml-mode))
+ '(package-vc-selected-packages
+   '((codex-ide :url "https://github.com/dgillis/emacs-codex-ide")))
  '(py-indent-offset 4)
  '(python-indent 4)
  '(python-indent-offset 4)

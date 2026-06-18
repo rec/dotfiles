@@ -11,3 +11,7 @@
 
 (use-package clipetty
   :hook (after-init . global-clipetty-mode))
+
+(use-package codex-ide
+  :vc (:url "https://github.com/dgillis/emacs-codex-ide" :rev :newest)
+  :bind ("C-c C-;" . codex-ide-menu))
