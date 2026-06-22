@@ -23,9 +23,9 @@ def main():
     done_file = root / 'done.md'
 
     def is_sep(s):
-        return i.startswith('---')
+        return s.startswith('---')
 
-    cuts: list[list[str]] = []
+    cuts: list[list[str]] = [[]]
     for line in task_file.open():
         cuts[-1].append(line)
         if is_sep(line):
@@ -34,17 +34,23 @@ def main():
     while cuts:
         task = cuts.pop(0)
         if any(t.strip() and not is_sep(t) for t in task):
-            if is_sep(task[-1]):
-                task.pop()
-            print(*task)
-            with task_file.open('w') as fp:
-                fp.writelines(i for c in cuts for i in c)
-            with done_file.open('a') as fp:
-                fp.write('---\n')
-                fp.writelines(task)
-            return
+            break
+    else:
+        sys.exit('No tasks found')
 
-    sys.exit('No tasks found')
+    def skip_empty(it):
+        found = False
+        for i in it:
+            if found := found or not i.strip():
+                yield i
+
+    print(*task)
+    with task_file.open('w') as fp:
+        fp.writelines(skip_empty(i for c in cuts for i in c))
+    with done_file.open('a') as fp:
+        fp.write('---\n\n')
+        fp.writelines(skip_empty(task))
+
 
 
 if __name__ == "__main__":
