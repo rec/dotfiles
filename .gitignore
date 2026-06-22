@@ -1,3 +1,4 @@
 elisp/desktop/
 .DS_Store
 dotfiles/.emacs.d/places
+dotfiles/.emacs.d/.emacs.desktop
