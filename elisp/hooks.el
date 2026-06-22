@@ -1,6 +1,7 @@
 ;; Comment this out to not change whitespace on save.
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
-
+(add-hook 'eglot-managed-mode-hook
+          (lambda () (eglot-inlay-hints-mode -1)))
 (add-hook 'shell-mode-hook #'(lambda () (dirtrack-mode 1)))
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
