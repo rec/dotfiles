@@ -34,22 +34,23 @@ def main():
     while cuts:
         task = cuts.pop(0)
         if any(t.strip() and not is_sep(t) for t in task):
-            break
+                break
     else:
         sys.exit('No tasks found')
 
-    def skip_empty(it):
+    def drop_empty(it):
         found = False
         for i in it:
             if found := found or not i.strip():
                 yield i
 
+    old_line = task.pop() if is_sep(task[-1]) else '---\n'
     print(*task)
     with task_file.open('w') as fp:
-        fp.writelines(skip_empty(i for c in cuts for i in c))
+        fp.writelines(drop_empty(i for c in cuts for i in c))
     with done_file.open('a') as fp:
-        fp.write('---\n\n')
-        fp.writelines(skip_empty(task))
+        fp.write(f'{old_line}\n')
+        fp.writelines(drop_empty(task))
 
 
 
