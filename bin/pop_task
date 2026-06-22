@@ -28,6 +28,7 @@ def main(file_path='TASKS.md'):
     parts = before, before_task, after_task, done, [task.pop()], task
     with open(file_path, 'w') as fp:
         fp.writelines(i for p in parts for i in p)
+    print(*task)
 
 
 if __name__ == "__main__":
