@@ -6,10 +6,10 @@ alias bui='pip uninstall -y torch && python setup.py develop'
 
 alias ctest='pushd ~/code/test && git add . && gi ; popd'
 
-alias cds="cd $CODE_ROOT/recs"
-alias cdl="cd $CODE_ROOT/litoid"
+# alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
 alias cdr="cd $CODE_ROOT/recs"
+alias cdt="cd $CODE_ROOT/tuney"
 alias cpptags="find src -name \*.h -or -name \*.hpp -or -name \*.cpp | xargs etags"
 
 alias da="direnv allow"
