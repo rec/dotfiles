@@ -28,10 +28,6 @@ all() {
     popd > /dev/null
 }
 
-cdt() {
-    cd ~/git${PYTORCH_BUILD_SUFFIX}/pytorch
-}
-
 ca() {
     conda activate pytorch-dev${PYTORCH_BUILD_SUFFIX}
 }
