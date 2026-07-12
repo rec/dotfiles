@@ -64,7 +64,7 @@
  '(global-mark-ring-max 256)
  '(global-whitespace-mode nil)
  '(grep-command
-   "egrep -nHIR * --include=\\*.py --include=\\*.toml --exclude-dir=build --exclude-dir=.venv -we ")
+   "egrep -nHIR * --include=\\*.py --include=\\*.toml --exclude-dir=build --exclude-dir=dist --exclude-dir=.venv -we ")
  '(grep-find-command
    '("find . -type f -exec egrep --exclude-dir={build,htmlcov} -nHIR * --include \\*.py -e  \\{\\} +"
      . 85))

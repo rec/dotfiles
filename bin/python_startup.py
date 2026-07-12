@@ -10,6 +10,7 @@ import itertools
 import json
 import re
 import typing as t
+from fractions import Fraction
 
 
 print('...loaded PYTHONSTARTUP at', __file__)

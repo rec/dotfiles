@@ -37,14 +37,13 @@ alias mkdocs="$CODE_ROOT/multi/.venv/bin/mkdocs"
 alias pcit="python -c 'import torch'"
 alias pi="pip install --upgrade pip && python3 -m pip install -e .[dev]"
 alias pm='python ~/code/pullman/pullman.py'
-alias pop="popd; pushd ."
+# alias pop="popd; pushd ."
 alias ppb="poetry publish --build"
 alias py="arch -arm64 python"
 alias pytags="find . -name \*.py | xargs etags"
 
 alias q=quiet
 
-alias recs="/Users/tom/code/recs/.venv/bin/python -m recs"
 
 alias sb="source ~/.bash_profile"
 
