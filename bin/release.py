@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 import platform
+import re
 import subprocess
 import sys
 from collections.abc import Callable
@@ -34,6 +35,7 @@ def main() -> int:
     pyproject = read_pyproject()
     project = project_table(pyproject)
     project_name = project_name_from(project)
+    python_version = python_version_from(project)
     app_name = project_name[:1].upper() + project_name[1:]
     dependencies = {dependency_name(d) for d in project_dependencies(project)}
 
@@ -55,7 +57,7 @@ def main() -> int:
     run("uv", "run", "ruff", "check", "--fix", "--select", "B,E,F,I", *ruff_paths)
     run("uv", "run", "ruff", "format", "--check", *ruff_paths)
     run("uv", "run", "ty", "check", project_name)
-    run_pyupgrade(find_paths)
+    run_pyupgrade(find_paths, python_version)
     run("git", "diff", "--check")
 
     if git_output("status", "--porcelain"):
@@ -109,6 +111,15 @@ def project_dependencies(project: dict[str, object]) -> list[str]:
     return [d for d in cast(list[object], dependencies) if isinstance(d, str)]
 
 
+def python_version_from(project: dict[str, object]) -> str:
+    requires_python = project.get("requires-python")
+    if not isinstance(requires_python, str):
+        raise SystemExit("pyproject.toml does not contain project.requires-python")
+    if (match := re.search(r"3\.(\d+)", requires_python)) is None:
+        raise SystemExit("project.requires-python must contain a Python 3 version")
+    return f"3{match.group(1)}"
+
+
 def dependency_name(dependency: str) -> str:
     for s in ";[=<>~!":
         dependency = dependency.split(s, 1)[0]
@@ -132,8 +143,7 @@ def checked_paths(project_name: str) -> tuple[list[str], list[str]]:
     return ruff_paths, find_paths
 
 
-def run_pyupgrade(find_paths: list[str]) -> None:
-    python_version = Path(".python-version").read_text().strip().replace(".", "")
+def run_pyupgrade(find_paths: list[str], python_version: str) -> None:
     files = [str(p) for root in find_paths for p in Path(root).rglob("*.py")]
     if files:
         run("uv", "run", "pyupgrade", f"--py{python_version}-plus", *files)
