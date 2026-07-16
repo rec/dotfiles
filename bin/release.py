@@ -4,6 +4,7 @@ from __future__ import annotations
 import os
 import platform
 import re
+import shutil
 import subprocess
 import sys
 from collections.abc import Callable
@@ -78,6 +79,7 @@ def main() -> int:
     run("git", "push")
     run("git", "tag", tag)
     run("git", "push", "origin", tag)
+    clean_dist()
     return 0
 
 
@@ -147,6 +149,17 @@ def run_pyupgrade(find_paths: list[str], python_version: str) -> None:
     files = [str(p) for root in find_paths for p in Path(root).rglob("*.py")]
     if files:
         run("uv", "run", "pyupgrade", f"--py{python_version}-plus", *files)
+
+
+def clean_dist() -> None:
+    dist = Path("dist")
+    if not dist.is_dir():
+        return
+    for path in dist.iterdir():
+        if path.is_dir() and not path.is_symlink():
+            shutil.rmtree(path)
+        else:
+            path.unlink()
 
 
 def build_project(project_name: str, app_name: str, dependencies: set[str]) -> None:
