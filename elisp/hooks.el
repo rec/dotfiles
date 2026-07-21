@@ -2,7 +2,15 @@
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
 (add-hook 'eglot-managed-mode-hook
           (lambda () (eglot-inlay-hints-mode -1)))
-(add-hook 'shell-mode-hook #'(lambda () (dirtrack-mode 1)))
+;; (add-hook 'shell-mode-hook #'(lambda () (dirtrack-mode 1)))
+
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (shell-dirtrack-mode -1)
+            (setq-local dirtrack-list
+                        '("^[^#$\n]* [^#$\n]*@[^:\n]+:\\([^#$\n]+\\)[$#] " 1))
+            (dirtrack-mode 1)))
+
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; (add-hook 'dired-mode-hook (lambda () (dired-omit-mode t)))
