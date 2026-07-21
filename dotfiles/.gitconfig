@@ -51,7 +51,7 @@
     autoSetupRemote = True
 
 [rebase]
-    autosquash = false
+    autosquash = true
     autostash = true
 
 [rerere]
