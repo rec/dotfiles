@@ -45,7 +45,7 @@ ty check $project | $reformat_errors
 
 version=$(cat .python-version)
 version=${version//./}
-find test $project -name \*.py | xargs pyupgrade --py${version}-plus
+find test* $project -name \*.py | xargs pyupgrade --py${version}-plus
 
 # coverage run $(which pytest) --rootdir=test
 # coverage html
