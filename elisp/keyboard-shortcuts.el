@@ -14,12 +14,10 @@
 )
 
 (defun swirly-grep()
-  "Run grep in the *grep* buffer."
+  "Run grep in the git directory."
   (interactive)
-  (let ()
-    (switch-to-buffer "*grep*")
-    (call-interactively 'grep)
-    ))
+  (let ((default-directory (find-file-upwards ".git")))
+    (call-interactively 'grep)))
 
 (defun to-compile()
   (interactive)
