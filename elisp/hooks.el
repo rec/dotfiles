@@ -8,7 +8,7 @@
           (lambda ()
             (shell-dirtrack-mode -1)
             (setq-local dirtrack-list
-                        '("^[^#$\n]* [^#$\n]*@[^:\n]+:\\([^#$\n]+\\)[$#] " 1))
+                        '("^[^#$\n]* [^#$\n]*@[^:\n]+:\\(?:\033\\[[0-9;]*m\\)*\\([^#$\033\n]+\\)[$#]\\(?:\033\\[[0-9;]*m\\)* " 1))
             (dirtrack-mode 1)))
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
