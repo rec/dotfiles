@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo `git rev-parse HEAD` `date +%s` >> ~/.git-commit-ids
+echo `git rev-parse HEAD` `date +%s` >> ~/code/dotfiles/git-commit-ids/git-commit-ids.txt
