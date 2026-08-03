@@ -55,9 +55,24 @@
 (gsk [f10] 'query-replace)
 
 (defun to-shell()
+  "Switch to a shell in this git directory, or create one there."
   (interactive)
-  (switch-to-buffer "*shell*")
-  )
+  (let ((project-directory
+         (file-name-as-directory (expand-file-name (find-file-upwards ".git"))))
+        (shell-buffer nil))
+    (dolist (buffer (buffer-list))
+      (when (and (not shell-buffer)
+                 (with-current-buffer buffer
+                   (and (eq major-mode 'shell-mode)
+                        (let ((shell-directory
+                               (file-name-as-directory (expand-file-name default-directory))))
+                          (or (string= shell-directory project-directory)
+                              (file-in-directory-p shell-directory project-directory))))))
+        (setq shell-buffer buffer)))
+    (if shell-buffer
+        (switch-to-buffer shell-buffer)
+      (let ((default-directory project-directory))
+        (shell (generate-new-buffer-name "*shell*"))))))
 
 (gsk [f11] 'to-shell)
 
