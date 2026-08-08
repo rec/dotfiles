@@ -4,12 +4,27 @@
           (lambda () (eglot-inlay-hints-mode -1)))
 ;; (add-hook 'shell-mode-hook #'(lambda () (dirtrack-mode 1)))
 
+(defconst swirly-shell-prompt-directory-regexp
+  "^[^#$\n]* [^#$\n]*@[^:\n]+:\\(?:\033\\[[0-9;]*m\\)*\\([^#$\033\n]+\\)[$#]\\(?:\033\\[[0-9;]*m\\)* ")
+
+(defun swirly-track-shell-directory (input)
+  "Track shell directory from INPUT."
+  (when (string-match swirly-shell-prompt-directory-regexp input)
+    (let* ((directory (match-string 1 input))
+           (expanded-directory (file-name-as-directory (expand-file-name directory)))
+           (current-directory (file-name-as-directory (expand-file-name default-directory))))
+      (when (and (not (string= directory ""))
+                 (not (string= expanded-directory current-directory))
+                 (file-accessible-directory-p expanded-directory))
+        (shell-process-cd directory))))
+  input)
+
 (add-hook 'shell-mode-hook
           (lambda ()
             (shell-dirtrack-mode -1)
-            (setq-local dirtrack-list
-                        '("^[^#$\n]* [^#$\n]*@[^:\n]+:\\(?:\033\\[[0-9;]*m\\)*\\([^#$\033\n]+\\)[$#]\\(?:\033\\[[0-9;]*m\\)* " 1))
-            (dirtrack-mode 1)))
+            (dirtrack-mode -1)
+            (remove-hook 'comint-preoutput-filter-functions 'swirly-track-shell-directory t)
+            (add-hook 'comint-preoutput-filter-functions 'swirly-track-shell-directory nil t)))
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
