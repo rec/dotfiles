@@ -76,6 +76,7 @@
 
 (gsk [f11] 'to-shell)
 
+(global-set-key (kbd "C-z") #'ignore)
 
 (gsk [print] 'raise-next-frame)
 (gsk [f13] 'ns-next-frame)
