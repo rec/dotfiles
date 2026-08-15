@@ -2,7 +2,7 @@ build-stubs() {
     (cd build && cmake --build . --target torch_python_stubs)
 }
 
-rotp() {
+rp() {
     local target=lyte
 
     case "$PWD/" in
@@ -12,5 +12,5 @@ rotp() {
         "$HOME/code/twitcho"/*) target=lyte ;;
     esac
 
-    cd "$HOME/code/$target"
+    cd "$HOME/code/$target" && act
 }
