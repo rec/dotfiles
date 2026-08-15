@@ -3,23 +3,14 @@ build-stubs() {
 }
 
 rotp() {
-    local project
-    local root
+    local target=lyte
 
-    for project in lyte recs showco twitcho; do
-        root="$HOME/code/$project"
-        case "$PWD/" in
-            "$root"/*)
-                case "$project" in
-                    lyte) cd "$HOME/code/recs" ;;
-                    recs) cd "$HOME/code/showco" ;;
-                    showco) cd "$HOME/code/twitcho" ;;
-                    twitcho) cd "$HOME/code/lyte" ;;
-                esac
-                return
-                ;;
-        esac
-    done
+    case "$PWD/" in
+        "$HOME/code/lyte"/*) target=recs ;;
+        "$HOME/code/recs"/*) target=showco ;;
+        "$HOME/code/showco"/*) target=twitcho ;;
+        "$HOME/code/twitcho"/*) target=lyte ;;
+    esac
 
-    cd "$HOME/code/lyte"
+    cd "$HOME/code/$target"
 }
