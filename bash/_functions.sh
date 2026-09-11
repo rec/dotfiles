@@ -2,15 +2,30 @@ build-stubs() {
     (cd build && cmake --build . --target torch_python_stubs)
 }
 
-rp() {
-    local target=lyte
+r() {
+    local current_project target
+    local -a projects
 
-    case "$PWD/" in
-        "$HOME/code/lyte"/*) target=recs ;;
-        "$HOME/code/recs"/*) target=showco ;;
-        "$HOME/code/showco"/*) target=twitcho ;;
-        "$HOME/code/twitcho"/*) target=lyte ;;
-    esac
+    read -r -a projects <<< "$R_PROJECTS"
+    target=${projects[0]}
+
+    for ((i = 0; i < ${#projects[@]}; i++)); do
+        current_project=${projects[i]}
+        if [[ "$PWD/" == "$HOME/code/$current_project/"* ]]; then
+            target=${projects[(i + 1) % ${#projects[@]}]}
+            break
+        fi
+    done
 
     cd "$HOME/code/$target" && act
+}
+
+sleep-safe() {
+  disks=$(diskutil list external physical | awk '/^\/dev\// { sub("/dev/", "", $1); print $1 }')
+
+  for disk in $disks; do
+    diskutil eject "$disk" || return 1
+  done
+
+  pmset sleepnow
 }
