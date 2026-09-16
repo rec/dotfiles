@@ -1,16 +1,15 @@
 # Usual suspects
 
-`Depends on` lists declared package dependencies, except the explicitly marked
-optional showCo to lyte runtime integration. `RPC`, `Daemon`, and `Status`
-describe the corresponding Reccy subclass settings: RPC enabled, a service
-specification, and a custom status model.
+`Depends on` lists package and direct runtime dependencies. `RPC`, `Daemon`,
+and `Status` describe the corresponding Reccy subclass settings: RPC enabled,
+a service specification, and a custom status model.
 
 | Project | Depends on | Dependent | CLI | TUI | GUI | Library | RPC | Daemon | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| lyte | reccy, uFor | showCo (optional runtime integration) | X | - | - | - | X | X | X |
+| lyte | reccy, uFor | showCo | X | - | - | - | X | X | X |
 | streamO | reccy | showCo | X | - | - | - | X | X | X |
 | recs | reccy, uFor | showCo | X | X | X | - | X | X | - |
-| showCo | reccy, recs, streamO; lyte (optional runtime integration) | - | X | - | X | - | - | X | - |
+| showCo | reccy, recs, streamO; lyte | - | X | - | X | - | - | X | - |
 | enge | uFor | tuney | - | - | - | X | - | - | - |
 | uFor | - | lyte, enge, recs, tuney | - | - | - | X | - | - | - |
 | tuney | enge, reccy, uFor | - | X | - | X | - | - | - | - |
