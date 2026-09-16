@@ -1,21 +1,20 @@
 # Usual suspects
 
-Snapshot of the eight repositories in `~/code`, based on their current
-`pyproject.toml`, entry points, and direct service integrations. A dependency is
-listed when it is declared as a project dependency; Showco's optional Lyte
-service integration is called out separately because it is not declared in its
-package metadata.
+`Depends on` lists declared package dependencies, except the explicitly marked
+optional showCo to lyte runtime integration. `RPC`, `Daemon`, and `Status`
+describe the corresponding Reccy subclass settings: RPC enabled, a service
+specification, and a custom status model.
 
-| Project | Direct usual-suspect dependencies | Usual suspects that depend on it | Interfaces | Reccy configuration |
-| --- | --- | --- | --- | --- |
-| Lyte | Reccy, Ufor | Showco optionally integrates its service | CLI: `lyte`<br>TUI: no<br>GUI: no<br>Pure library: no | Two Reccy services share `name = "lyte"`, service identity `com.swirly.lyte`, `LYTE_DAEMON`, and `\\.\pipe\lyte`; both enable RPC. `LyteMidiDaemon` publishes `LyteMidiStatus`; `InstallationService` publishes `InstallationStatus`. |
-| Streamo | Reccy | Showco | CLI: `streamo`<br>TUI: no<br>GUI: no<br>Pure library: no | `Streamo` uses `name = "streamo"`, `com.swirly.streamo`, `STREAMO_DAEMON`, and `\\.\pipe\streamo`; RPC is enabled and it publishes the base `ReccyStatus`. Its TOML model supplies capture, ingest, encoding, title-card, local-display, and participant-image settings. |
-| Recs | Reccy, Ufor | Showco | CLI: `recs`<br>TUI: yes, Rich live display<br>GUI: yes, optional PySide6 live window<br>Pure library: no | `ExternalServer` uses `name = "recs"`, `com.swirly.recs`, `RECS_DAEMON`, and `\\.\pipe\recs`; RPC is enabled. It accepts optional control and event endpoint overrides and publishes control, row, and waveform events. It does not set a Reccy status model. |
-| Showco | Reccy, Recs, Streamo; optional runtime integration with Lyte | None | CLI: `showco`<br>TUI: no<br>GUI: yes, browser web UI<br>Pure library: no | `ShowcoDaemon` uses `name = "showco"`, `com.swirly.showco`, `SHOWCO_DAEMON`, and `\\.\pipe\showco`, with daemon module `showco`. It uses Reccy's service installation/status support only: RPC and status publishing remain disabled. Its service registry also loads the Lyte, Recs, and Streamo specifications. |
-| Enge | Ufor | Tuney | CLI: no<br>TUI: no<br>GUI: no<br>Pure library: yes | No Reccy subclass. |
-| Ufor | None | Lyte, Enge, Recs, Tuney | CLI: no<br>TUI: no<br>GUI: no<br>Pure library: yes | No Reccy subclass. |
-| Tuney | Enge, Reccy, Ufor | None | CLI: `tuney`<br>TUI: no<br>GUI: yes, PySide6 desktop instrument<br>Pure library: no | No Reccy subclass. It uses Reccy configuration utilities, including unit parsing. |
-| Reccy | None | Lyte, Streamo, Recs, Showco, Tuney | CLI: no installed command<br>TUI: no<br>GUI: no<br>Pure library: yes | Shared configuration, service, IPC/RPC, logging, and runtime library. |
+| Project | Depends on | Dependent | CLI | TUI | GUI | Library | RPC | Daemon | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| lyte | reccy, uFor | showCo (optional runtime integration) | X | - | - | - | X | X | X |
+| streamO | reccy | showCo | X | - | - | - | X | X | X |
+| recs | reccy, uFor | showCo | X | X | X | - | X | X | - |
+| showCo | reccy, recs, streamO; lyte (optional runtime integration) | - | X | - | X | - | - | X | - |
+| enge | uFor | tuney | - | - | - | X | - | - | - |
+| uFor | - | lyte, enge, recs, tuney | - | - | - | X | - | - | - |
+| tuney | enge, reccy, uFor | - | X | - | X | - | - | - | - |
+| reccy | - | lyte, streamO, recs, showCo, tuney | - | - | - | X | - | - | - |
 
 ## Reccy conventions
 
