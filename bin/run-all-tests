@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+code_dir=$(cd -- "$script_dir/../.." && pwd)
+projects=(lyte streamo recs showco enge ufor tuney reccy)
+failed_projects=()
+
+for project in "${projects[@]}"; do
+    printf '\n===== %s =====\n' "$project"
+    if (
+        cd -- "$code_dir/$project"
+        uv run pytest
+    ); then
+        printf '%s: passed\n' "$project"
+    else
+        status=$?
+        printf '%s: failed (exit %s)\n' "$project" "$status"
+        failed_projects+=("$project")
+    fi
+done
+
+printf '\n===== summary =====\n'
+if ((${#failed_projects[@]} == 0)); then
+    printf 'All projects passed.\n'
+    exit 0
+fi
+
+printf 'Failed projects: %s\n' "${failed_projects[*]}"
+exit 1
