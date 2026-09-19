@@ -79,6 +79,7 @@ def main() -> int:
     run("git", "push")
     run("git", "tag", tag)
     run("git", "push", "origin", tag)
+    run("gh", "release", "create", tag, "--verify-tag", "--generate-notes")
     clean_dist()
     return 0
 
