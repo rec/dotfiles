@@ -29,6 +29,23 @@
   (other-window -1)
   )
 
+(defun to-shell()
+  "Switch to the current project's shell, or the default shell."
+  (interactive)
+  (let ((project-directory (find-file-upwards-base ".git")))
+    (if project-directory
+        (let ((shell-buffer-name
+               (format "-%s-"
+                       (file-name-nondirectory
+                        (directory-file-name project-directory)))))
+          (if (get-buffer shell-buffer-name)
+              (switch-to-buffer shell-buffer-name)
+            (let ((default-directory project-directory))
+              (shell shell-buffer-name))))
+      (if (get-buffer "*shell*")
+          (switch-to-buffer "*shell*")
+        (shell "*shell*")))))
+
 ;;(define-key key-translation-map (kbd "<kp-multiply>") "\C-g")
 (define-key key-translation-map (kbd "<kp-1>") "\C-s")
 (define-key key-translation-map (kbd "<kp-3>") "\C-r")
@@ -53,26 +70,6 @@
 (gsk [f8] 'swirly-grep)
 (gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
 (gsk [f10] 'query-replace)
-
-(defun to-shell()
-  "Switch to a shell in this git directory, or create one there."
-  (interactive)
-  (let ((project-directory
-         (file-name-as-directory (expand-file-name (find-file-upwards ".git"))))
-        (shell-buffer nil))
-    (dolist (buffer (buffer-list))
-      (when (and (not shell-buffer)
-                 (with-current-buffer buffer
-                   (and (eq major-mode 'shell-mode)
-                        (let ((shell-directory
-                               (file-name-as-directory (expand-file-name default-directory))))
-                          (or (string= shell-directory project-directory)
-                              (file-in-directory-p shell-directory project-directory))))))
-        (setq shell-buffer buffer)))
-    (if shell-buffer
-        (switch-to-buffer shell-buffer)
-      (let ((default-directory project-directory))
-        (shell (generate-new-buffer-name "*shell*"))))))
 
 (gsk [f11] 'to-shell)
 
