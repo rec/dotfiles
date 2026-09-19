@@ -164,6 +164,9 @@ def clean_dist() -> None:
 
 def build_project(project_name: str, app_name: str, dependencies: set[str]) -> None:
     repo_root = Path.cwd()
+    entrypoint = repo_root / "install" / "pyinstaller_entrypoint.py"
+    if not entrypoint.is_file():
+        return
     build_root = (
         Path(os.environ.get("TMPDIR", "/tmp")) / f"{project_name}-release-build"
     )
@@ -205,7 +208,7 @@ def build_project(project_name: str, app_name: str, dependencies: set[str]) -> N
         if (path := Path(p)).is_file():
             args.extend(["--add-data", f"{repo_root / path}:{path.name}"])
 
-    args.append("install/pyinstaller_entrypoint.py")
+    args.append(str(entrypoint))
 
     run("uv", "run", "--with", "pyinstaller", "--with", "pillow", "pyinstaller", *args)
 
