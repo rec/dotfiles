@@ -29,3 +29,17 @@ sleep-safe() {
 
   pmset sleepnow
 }
+
+commits-today() {
+    local repo count total=0
+
+    for repo in "$@"; do
+        git -C "$repo" rev-parse --git-dir >/dev/null 2>&1 || continue
+        count=$(git -C "$repo" rev-list --all --count --since=midnight) || return
+        (( count > 0 )) || continue
+        printf '%s: %s\n' "$repo" "$count"
+        total=$((total + count))
+    done
+
+    printf 'Total: %s\n' "$total"
+}
