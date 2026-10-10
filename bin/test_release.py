@@ -34,7 +34,6 @@ class ReleaseTest(unittest.TestCase):
                     "project": {
                         "name": "library",
                         "requires-python": ">=3.11",
-                        "dynamic": ["version"],
                     }
                 },
             ),
@@ -129,9 +128,41 @@ class ReleaseTest(unittest.TestCase):
     def test_publish_builds_after_clearing_dist_at_the_end(self) -> None:
         self.check_release(publish=True)
 
-    def check_release(self, publish: bool) -> None:
+    def test_maturin_release_commits_cargo_versions_and_publishes(self) -> None:
+        self.check_release(publish=True, dynamic=True)
+
+    def test_cargo_version_bump_preserves_the_manifest(self) -> None:
+        release = release_module()
+        original = (
+            '[package]\nname = "midirp"\nversion = "1.2.3" # release\n\n'
+            '[dependencies]\npyo3 = "=0.29.3"\n'
+        )
+        for part, expected in (
+            ("major", "2.0.0"),
+            ("minor", "1.3.0"),
+            ("patch", "1.2.4"),
+        ):
+            with (
+                self.subTest(part=part),
+                TemporaryDirectory() as directory,
+                chdir(directory),
+            ):
+                path = Path("Cargo.toml")
+                path.write_text(original)
+                self.assertEqual(
+                    release.bump_cargo_version(part, dry_run=True), expected
+                )
+                self.assertEqual(path.read_text(), original)
+                self.assertEqual(release.bump_cargo_version(part), expected)
+                self.assertEqual(
+                    path.read_text(), original.replace('"1.2.3"', f'"{expected}"')
+                )
+
+    def check_release(self, publish: bool, dynamic: bool = False) -> None:
         release = release_module()
         pyproject = {"name": "library", "requires-python": ">=3.10"}
+        if dynamic:
+            pyproject["dynamic"] = ["version"]
         with (
             mock.patch.dict(release.os.environ, {"VIRTUAL_ENV": "/tmp/uv-launcher"}),
             mock.patch.object(
@@ -140,7 +171,11 @@ class ReleaseTest(unittest.TestCase):
                 ["release.py", "minor", *(["--publish"] if publish else [])],
             ),
             mock.patch.object(release, "git_output", side_effect=["", "main", ""]),
-            mock.patch.object(release, "read_pyproject", return_value={}),
+            mock.patch.object(
+                release,
+                "read_pyproject",
+                return_value={"build-system": {"build-backend": "maturin"}},
+            ),
             mock.patch.object(release, "project_table", return_value=pyproject),
             mock.patch.object(release, "project_name_from", return_value="library"),
             mock.patch.object(release, "python_version_from", return_value="310"),
@@ -159,6 +194,9 @@ class ReleaseTest(unittest.TestCase):
             mock.patch.object(release, "clean_dist") as clean_dist,
             mock.patch.object(release, "run") as run,
             mock.patch.object(release, "run_linter") as run_linter,
+            mock.patch.object(
+                release, "bump_cargo_version", return_value="1.2.3"
+            ) as bump_cargo_version,
         ):
             calls = mock.Mock()
             calls.attach_mock(run, "run")
@@ -167,6 +205,16 @@ class ReleaseTest(unittest.TestCase):
             self.assertNotIn("VIRTUAL_ENV", release.os.environ)
 
         run_linter.assert_any_call("uv", "run", "ty", "check", "library")
+        if dynamic:
+            bump_cargo_version.assert_has_calls(
+                [mock.call("minor", dry_run=True), mock.call("minor")]
+            )
+            run.assert_any_call("git", "add", "Cargo.toml", "Cargo.lock")
+            run.assert_any_call("cargo", "update", "--workspace", "--offline")
+            self.assertNotIn(
+                mock.call("uv", "version", "--bump", "minor", "--no-sync"),
+                run.mock_calls,
+            )
         run.assert_has_calls(
             [
                 mock.call("git", "push", "origin", "v1.2.3"),
