@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run python
+#!/usr/bin/env -S uv run --with tyro --with pydantic python
 from __future__ import annotations
 
 import os
@@ -10,9 +10,11 @@ import sys
 from collections.abc import Callable
 from importlib import import_module
 from pathlib import Path
-from typing import cast
+from typing import Annotated, Literal, cast
 
-VALID_PARTS = {"patch", "minor", "major"}
+import tyro
+from pydantic import BaseModel
+
 PACKAGING_READMES = (
     "README.md",
     "packaging/README-WINDOWS.txt",
@@ -21,10 +23,14 @@ PACKAGING_READMES = (
 )
 
 
+class ReleaseCommand(BaseModel, frozen=True):
+    part: Annotated[Literal["patch", "minor", "major"], tyro.conf.Positional] = "patch"
+    publish: bool = False
+
+
 def main() -> int:
-    part = sys.argv[1] if len(sys.argv) > 1 else "patch"
-    if part not in VALID_PARTS:
-        sys.exit("usage: release.sh [patch|minor|major]")
+    command = tyro.cli(ReleaseCommand)
+    part = command.part
 
     if git_output("status", "--porcelain"):
         sys.exit("release requires a clean working tree")
@@ -83,6 +89,9 @@ def main() -> int:
     run("git", "push", "origin", tag)
     run("gh", "release", "create", tag, "--verify-tag", "--generate-notes")
     clean_dist()
+    if command.publish:
+        run("uv", "build")
+        run("uv", "publish")
     return 0
 
 
