@@ -14,11 +14,48 @@ def release_module():
     assert spec is not None
     assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
 
 class ReleaseTest(unittest.TestCase):
+    def test_failed_version_preview_stops_before_verification(self) -> None:
+        release = release_module()
+        error = "We cannot get or set dynamic project versions in: pyproject.toml"
+        with (
+            mock.patch.object(sys, "argv", ["release.py", "minor", "--publish"]),
+            mock.patch.dict(release.os.environ),
+            mock.patch.object(release, "git_output", side_effect=["", "main"]),
+            mock.patch.object(
+                release,
+                "read_pyproject",
+                return_value={
+                    "project": {
+                        "name": "library",
+                        "requires-python": ">=3.11",
+                        "dynamic": ["version"],
+                    }
+                },
+            ),
+            mock.patch.object(
+                release.subprocess,
+                "run",
+                return_value=subprocess.CompletedProcess(
+                    [], 2, stdout="", stderr=error
+                ),
+            ),
+            mock.patch.object(release, "run") as run,
+            self.assertRaises(SystemExit) as stopped,
+        ):
+            release.main()
+        run.assert_not_called()
+        self.assertEqual(
+            str(stopped.exception),
+            "uv version --bump minor --dry-run --short failed with exit status 2:\n"
+            + error,
+        )
+
     def test_linter_changes_stop_release_cleanly(self) -> None:
         release = release_module()
         for tool in ("ruff", "ty", "pyupgrade"):
@@ -86,11 +123,22 @@ class ReleaseTest(unittest.TestCase):
 
         run.assert_not_called()
 
-    def test_release_publishes_pushed_tag(self):
+    def test_release_publishes_pushed_tag(self) -> None:
+        self.check_release(publish=False)
+
+    def test_publish_builds_after_clearing_dist_at_the_end(self) -> None:
+        self.check_release(publish=True)
+
+    def check_release(self, publish: bool) -> None:
         release = release_module()
         pyproject = {"name": "library", "requires-python": ">=3.10"}
         with (
-            mock.patch.object(sys, "argv", ["release.py"]),
+            mock.patch.dict(release.os.environ, {"VIRTUAL_ENV": "/tmp/uv-launcher"}),
+            mock.patch.object(
+                sys,
+                "argv",
+                ["release.py", "minor", *(["--publish"] if publish else [])],
+            ),
             mock.patch.object(release, "git_output", side_effect=["", "main", ""]),
             mock.patch.object(release, "read_pyproject", return_value={}),
             mock.patch.object(release, "project_table", return_value=pyproject),
@@ -108,11 +156,15 @@ class ReleaseTest(unittest.TestCase):
             ),
             mock.patch.object(release, "build_project"),
             mock.patch.object(release, "run_pyupgrade"),
-            mock.patch.object(release, "clean_dist"),
+            mock.patch.object(release, "clean_dist") as clean_dist,
             mock.patch.object(release, "run") as run,
             mock.patch.object(release, "run_linter") as run_linter,
         ):
+            calls = mock.Mock()
+            calls.attach_mock(run, "run")
+            calls.attach_mock(clean_dist, "clean_dist")
             release.main()
+            self.assertNotIn("VIRTUAL_ENV", release.os.environ)
 
         run_linter.assert_any_call("uv", "run", "ty", "check", "library")
         run.assert_has_calls(
@@ -128,3 +180,14 @@ class ReleaseTest(unittest.TestCase):
                 ),
             ]
         )
+        if publish:
+            self.assertEqual(
+                calls.mock_calls[-3:],
+                [
+                    mock.call.clean_dist(),
+                    mock.call.run("uv", "build"),
+                    mock.call.run("uv", "publish"),
+                ],
+            )
+        else:
+            self.assertEqual(calls.mock_calls[-1], mock.call.clean_dist())
