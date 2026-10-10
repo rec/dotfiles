@@ -55,9 +55,11 @@ def main() -> int:
     ruff_paths, find_paths = checked_paths(project_name)
 
     run("uv", "run", "pytest")
-    run("uv", "run", "ruff", "check", "--fix", "--select", "B,E,F,I", *ruff_paths)
-    run("uv", "run", "ruff", "format", "--check", *ruff_paths)
-    run("uv", "run", "ty", "check", ruff_paths[0])
+    run_linter(
+        "uv", "run", "ruff", "check", "--fix", "--select", "B,E,F,I", *ruff_paths
+    )
+    run_linter("uv", "run", "ruff", "format", "--check", *ruff_paths)
+    run_linter("uv", "run", "ty", "check", ruff_paths[0])
     run_pyupgrade(find_paths, python_version)
     run("git", "diff", "--check")
 
@@ -152,7 +154,7 @@ def checked_paths(project_name: str) -> tuple[list[str], list[str]]:
 def run_pyupgrade(find_paths: list[str], python_version: str) -> None:
     files = [str(p) for root in find_paths for p in Path(root).rglob("*.py")]
     if files:
-        run("uv", "run", "pyupgrade", f"--py{python_version}-plus", *files)
+        run_linter("uv", "run", "pyupgrade", f"--py{python_version}-plus", *files)
 
 
 def clean_dist() -> None:
@@ -273,6 +275,16 @@ def command_fails(*args: str) -> bool:
 
 def run(*args: str) -> None:
     subprocess.run(args, check=True)
+
+
+def run_linter(*args: str) -> None:
+    result = subprocess.run(args)
+    if changes := git_output("status", "--porcelain"):
+        sys.exit(
+            f"{args[2]} changed the working tree; review and commit the changes, "
+            f"then rerun the release:\n{changes}"
+        )
+    result.check_returncode()
 
 
 if __name__ == "__main__":

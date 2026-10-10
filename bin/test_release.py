@@ -1,4 +1,5 @@
 import importlib.util
+import subprocess
 import sys
 import unittest
 from contextlib import chdir
@@ -18,6 +19,42 @@ def release_module():
 
 
 class ReleaseTest(unittest.TestCase):
+    def test_linter_changes_stop_release_cleanly(self) -> None:
+        release = release_module()
+        for tool in ("ruff", "ty", "pyupgrade"):
+            for returncode in (0, 1):
+                with (
+                    self.subTest(tool=tool, returncode=returncode),
+                    mock.patch.object(
+                        release.subprocess,
+                        "run",
+                        return_value=subprocess.CompletedProcess([], returncode),
+                    ),
+                    mock.patch.object(
+                        release, "git_output", return_value=" M library/live.py"
+                    ),
+                    self.assertRaises(SystemExit) as stopped,
+                ):
+                    release.run_linter("uv", "run", tool)
+                self.assertEqual(
+                    str(stopped.exception),
+                    f"{tool} changed the working tree; review and commit the changes, "
+                    "then rerun the release:\n M library/live.py",
+                )
+
+    def test_linter_failure_without_changes_is_not_ignored(self) -> None:
+        release = release_module()
+        with (
+            mock.patch.object(
+                release.subprocess,
+                "run",
+                return_value=subprocess.CompletedProcess([], 2),
+            ),
+            mock.patch.object(release, "git_output", return_value=""),
+            self.assertRaises(subprocess.CalledProcessError),
+        ):
+            release.run_linter("uv", "run", "pyupgrade")
+
     def test_verification_paths_follow_the_package_layout(self) -> None:
         release = release_module()
         for source in ("library", "src/library"):
@@ -63,10 +100,11 @@ class ReleaseTest(unittest.TestCase):
             mock.patch.object(release, "run_pyupgrade"),
             mock.patch.object(release, "clean_dist"),
             mock.patch.object(release, "run") as run,
+            mock.patch.object(release, "run_linter") as run_linter,
         ):
             release.main()
 
-        run.assert_any_call("uv", "run", "ty", "check", "src/library")
+        run_linter.assert_any_call("uv", "run", "ty", "check", "src/library")
         run.assert_has_calls(
             [
                 mock.call("git", "push", "origin", "v1.2.3"),
