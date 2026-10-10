@@ -20,6 +20,42 @@ def release_module():
 
 
 class ReleaseTest(unittest.TestCase):
+    def test_failed_version_preview_stops_before_verification(self) -> None:
+        release = release_module()
+        error = "We cannot get or set dynamic project versions in: pyproject.toml"
+        with (
+            mock.patch.object(sys, "argv", ["release.py", "minor", "--publish"]),
+            mock.patch.dict(release.os.environ),
+            mock.patch.object(release, "git_output", side_effect=["", "main"]),
+            mock.patch.object(
+                release,
+                "read_pyproject",
+                return_value={
+                    "project": {
+                        "name": "library",
+                        "requires-python": ">=3.11",
+                        "dynamic": ["version"],
+                    }
+                },
+            ),
+            mock.patch.object(
+                release.subprocess,
+                "run",
+                return_value=subprocess.CompletedProcess(
+                    [], 2, stdout="", stderr=error
+                ),
+            ),
+            mock.patch.object(release, "run") as run,
+            self.assertRaises(SystemExit) as stopped,
+        ):
+            release.main()
+        run.assert_not_called()
+        self.assertEqual(
+            str(stopped.exception),
+            "uv version --bump minor --dry-run --short failed with exit status 2:\n"
+            + error,
+        )
+
     def test_linter_changes_stop_release_cleanly(self) -> None:
         release = release_module()
         for tool in ("ruff", "ty", "pyupgrade"):
@@ -97,6 +133,7 @@ class ReleaseTest(unittest.TestCase):
         release = release_module()
         pyproject = {"name": "library", "requires-python": ">=3.10"}
         with (
+            mock.patch.dict(release.os.environ, {"VIRTUAL_ENV": "/tmp/uv-launcher"}),
             mock.patch.object(
                 sys,
                 "argv",
@@ -127,6 +164,7 @@ class ReleaseTest(unittest.TestCase):
             calls.attach_mock(run, "run")
             calls.attach_mock(clean_dist, "clean_dist")
             release.main()
+            self.assertNotIn("VIRTUAL_ENV", release.os.environ)
 
         run_linter.assert_any_call("uv", "run", "ty", "check", "library")
         run.assert_has_calls(

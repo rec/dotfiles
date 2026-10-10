@@ -31,6 +31,7 @@ class ReleaseCommand(BaseModel, frozen=True):
 def main() -> int:
     command = tyro.cli(ReleaseCommand)
     part = command.part
+    os.environ.pop("VIRTUAL_ENV", None)
 
     if git_output("status", "--porcelain"):
         sys.exit("release requires a clean working tree")
@@ -274,7 +275,13 @@ def git_output(*args: str) -> str:
 
 
 def command_output(*args: str) -> str:
-    return subprocess.run(args, text=True, capture_output=True).stdout.strip()
+    result = subprocess.run(args, text=True, capture_output=True)
+    if result.returncode:
+        sys.exit(
+            f"{' '.join(args)} failed with exit status {result.returncode}:\n"
+            f"{result.stderr.strip()}"
+        )
+    return result.stdout.strip()
 
 
 def command_fails(*args: str) -> bool:
