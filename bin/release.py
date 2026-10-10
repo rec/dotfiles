@@ -132,9 +132,9 @@ def dependency_name(dependency: str) -> str:
 
 
 def checked_paths(project_name: str) -> tuple[list[str], list[str]]:
-    source = Path("src") / project_name
+    source = Path(project_name)
     if not source.is_dir():
-        source = Path(project_name)
+        sys.exit(f"release requires a top-level Python package directory: {source}")
     ruff_paths = [str(source)]
     find_paths = [str(source)]
 

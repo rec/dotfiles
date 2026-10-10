@@ -55,17 +55,27 @@ class ReleaseTest(unittest.TestCase):
         ):
             release.run_linter("uv", "run", "pyupgrade")
 
-    def test_verification_paths_follow_the_package_layout(self) -> None:
+    def test_verification_paths_use_the_top_level_package(self) -> None:
         release = release_module()
-        for source in ("library", "src/library"):
-            with self.subTest(source=source), TemporaryDirectory() as directory:
-                with chdir(directory):
-                    Path(source).mkdir(parents=True)
-                    Path("test").mkdir()
-                    Path("install").mkdir()
-                    ruff_paths, find_paths = release.checked_paths("library")
-                self.assertEqual(ruff_paths, [source, "install", "test"])
-                self.assertEqual(find_paths, [source, "install", "test"])
+        with TemporaryDirectory() as directory, chdir(directory):
+            Path("library").mkdir()
+            Path("test").mkdir()
+            Path("install").mkdir()
+            ruff_paths, find_paths = release.checked_paths("library")
+        self.assertEqual(ruff_paths, ["library", "install", "test"])
+        self.assertEqual(find_paths, ["library", "install", "test"])
+
+    def test_missing_top_level_package_stops_with_a_clear_message(self) -> None:
+        release = release_module()
+        with TemporaryDirectory() as directory, chdir(directory):
+            Path("src/library").mkdir(parents=True)
+            Path("python/library").mkdir(parents=True)
+            with self.assertRaises(SystemExit) as stopped:
+                release.checked_paths("library")
+        self.assertEqual(
+            str(stopped.exception),
+            "release requires a top-level Python package directory: library",
+        )
 
     def test_library_project_skips_pyinstaller(self):
         release = release_module()
@@ -94,7 +104,7 @@ class ReleaseTest(unittest.TestCase):
             mock.patch.object(
                 release,
                 "checked_paths",
-                return_value=(["src/library"], ["src/library"]),
+                return_value=(["library"], ["library"]),
             ),
             mock.patch.object(release, "build_project"),
             mock.patch.object(release, "run_pyupgrade"),
@@ -104,7 +114,7 @@ class ReleaseTest(unittest.TestCase):
         ):
             release.main()
 
-        run_linter.assert_any_call("uv", "run", "ty", "check", "src/library")
+        run_linter.assert_any_call("uv", "run", "ty", "check", "library")
         run.assert_has_calls(
             [
                 mock.call("git", "push", "origin", "v1.2.3"),
