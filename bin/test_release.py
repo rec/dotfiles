@@ -1,6 +1,7 @@
 import importlib.util
 import sys
 import unittest
+from contextlib import chdir
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import mock
@@ -17,6 +18,18 @@ def release_module():
 
 
 class ReleaseTest(unittest.TestCase):
+    def test_verification_paths_follow_the_package_layout(self) -> None:
+        release = release_module()
+        for source in ("library", "src/library"):
+            with self.subTest(source=source), TemporaryDirectory() as directory:
+                with chdir(directory):
+                    Path(source).mkdir(parents=True)
+                    Path("test").mkdir()
+                    Path("install").mkdir()
+                    ruff_paths, find_paths = release.checked_paths("library")
+                self.assertEqual(ruff_paths, [source, "install", "test"])
+                self.assertEqual(find_paths, [source, "install", "test"])
+
     def test_library_project_skips_pyinstaller(self):
         release = release_module()
         with TemporaryDirectory() as directory:
@@ -41,7 +54,11 @@ class ReleaseTest(unittest.TestCase):
                 release, "command_output", side_effect=["1.2.3", "1.2.3"]
             ),
             mock.patch.object(release, "command_fails", return_value=False),
-            mock.patch.object(release, "checked_paths", return_value=([], [])),
+            mock.patch.object(
+                release,
+                "checked_paths",
+                return_value=(["src/library"], ["src/library"]),
+            ),
             mock.patch.object(release, "build_project"),
             mock.patch.object(release, "run_pyupgrade"),
             mock.patch.object(release, "clean_dist"),
@@ -49,6 +66,7 @@ class ReleaseTest(unittest.TestCase):
         ):
             release.main()
 
+        run.assert_any_call("uv", "run", "ty", "check", "src/library")
         run.assert_has_calls(
             [
                 mock.call("git", "push", "origin", "v1.2.3"),

@@ -57,7 +57,7 @@ def main() -> int:
     run("uv", "run", "pytest")
     run("uv", "run", "ruff", "check", "--fix", "--select", "B,E,F,I", *ruff_paths)
     run("uv", "run", "ruff", "format", "--check", *ruff_paths)
-    run("uv", "run", "ty", "check", project_name)
+    run("uv", "run", "ty", "check", ruff_paths[0])
     run_pyupgrade(find_paths, python_version)
     run("git", "diff", "--check")
 
@@ -130,8 +130,11 @@ def dependency_name(dependency: str) -> str:
 
 
 def checked_paths(project_name: str) -> tuple[list[str], list[str]]:
-    ruff_paths = [project_name]
-    find_paths = [project_name]
+    source = Path("src") / project_name
+    if not source.is_dir():
+        source = Path(project_name)
+    ruff_paths = [str(source)]
+    find_paths = [str(source)]
 
     if Path("install").is_dir():
         ruff_paths.append("install")
