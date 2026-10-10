@@ -61,6 +61,7 @@ def main() -> int:
             "uv", "version", "--bump", part, "--dry-run", "--short"
         )
     tag = f"v{target_version}"
+    repository = git_output("remote", "get-url", "origin")
 
     if command_fails("git", "rev-parse", "--verify", "--quiet", tag):
         sys.exit(f"tag already exists: {tag}")
@@ -104,7 +105,16 @@ def main() -> int:
     run("git", "push")
     run("git", "tag", tag)
     run("git", "push", "origin", tag)
-    run("gh", "release", "create", tag, "--verify-tag", "--generate-notes")
+    run(
+        "gh",
+        "release",
+        "create",
+        tag,
+        "--repo",
+        repository,
+        "--verify-tag",
+        "--generate-notes",
+    )
     clean_dist()
     if command.publish:
         run("uv", "build")

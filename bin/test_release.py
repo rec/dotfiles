@@ -170,7 +170,11 @@ class ReleaseTest(unittest.TestCase):
                 "argv",
                 ["release.py", "minor", *(["--publish"] if publish else [])],
             ),
-            mock.patch.object(release, "git_output", side_effect=["", "main", ""]),
+            mock.patch.object(
+                release,
+                "git_output",
+                side_effect=["", "main", "git@github.com:rec/library.git", ""],
+            ),
             mock.patch.object(
                 release,
                 "read_pyproject",
@@ -223,6 +227,8 @@ class ReleaseTest(unittest.TestCase):
                     "release",
                     "create",
                     "v1.2.3",
+                    "--repo",
+                    "git@github.com:rec/library.git",
                     "--verify-tag",
                     "--generate-notes",
                 ),
