@@ -40,6 +40,62 @@ def test_directory_without_pyproject_is_silently_skipped(dry_run: bool) -> None:
 
 
 @pytest.mark.parametrize("dry_run", [True, False])
+@pytest.mark.parametrize("invalid", ["hello/foo\n", "[project]\nrequires-python = [\n"])
+def test_parse_errors_are_reported_and_next_project_is_processed(
+    dry_run: bool, invalid: str
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        root = Path(directory)
+        broken, valid = root / "broken", root / "valid"
+        broken.mkdir()
+        valid.mkdir()
+        broken_path = broken / "pyproject.toml"
+        broken_path.write_text(invalid)
+        valid_path = valid / "pyproject.toml"
+        original = '[project]\nrequires-python = ">=3.15"\n'
+        valid_path.write_text(original)
+        valid.joinpath(".python-version").write_text("3.15\n")
+        arguments = ["fix-classifiers.py", str(broken), str(valid)]
+        if dry_run:
+            arguments.append("--dry-run")
+        with (
+            mock.patch.object(sys, "argv", arguments),
+            mock.patch.object(
+                module.subprocess,
+                "run",
+                side_effect=[
+                    subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                    subprocess.CompletedProcess(
+                        [],
+                        0,
+                        stdout="abc123 Update classifiers in pyproject.toml\n",
+                        stderr="",
+                    ),
+                    subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                ],
+            ) as run,
+            redirect_stdout(StringIO()) as output,
+            redirect_stderr(StringIO()) as errors,
+        ):
+            assert module.main() == 0
+        assert errors.getvalue().startswith(f"{broken_path}: ")
+        assert "at line" in errors.getvalue()
+        assert "Traceback" not in errors.getvalue()
+        assert errors.getvalue().count("\n") == 1
+        assert broken_path.read_text() == invalid
+        assert not broken.joinpath(".python-version").exists()
+        if dry_run:
+            assert f"--- {valid_path}\n+++ {valid_path}\n" in output.getvalue()
+            assert valid_path.read_text() == original
+            run.assert_not_called()
+        else:
+            assert output.getvalue() == "abc123 Update classifiers in pyproject.toml\n"
+            assert "classifiers =" in valid_path.read_text()
+            assert run.call_count == 3
+
+
+@pytest.mark.parametrize("dry_run", [True, False])
 @pytest.mark.parametrize(
     "original",
     [

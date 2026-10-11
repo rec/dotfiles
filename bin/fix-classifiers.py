@@ -19,6 +19,7 @@ from packaging.requirements import Requirement
 from packaging.specifiers import SpecifierSet
 from packaging.version import Version
 from pydantic import BaseModel, Field
+from tomlkit.exceptions import ParseError
 from tomlkit.items import Array, Table
 
 
@@ -59,7 +60,11 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
         if not path.is_file():
             return
     original = path.read_text()
-    document = tomlkit.parse(original)
+    try:
+        document = tomlkit.parse(original)
+    except ParseError as error:
+        print(f"{path}: {error}", file=sys.stderr)
+        return
     project = cast(Table | None, document.get("project"))
     if project is None or "requires-python" not in project:
         return
