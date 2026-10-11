@@ -23,6 +23,110 @@ def classifiers_module() -> ModuleType:
     return module
 
 
+@pytest.mark.parametrize("dry_run", [True, False])
+def test_directory_without_pyproject_is_silently_skipped(dry_run: bool) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        with (
+            mock.patch.object(module.subprocess, "run") as run,
+            redirect_stdout(StringIO()) as output,
+            redirect_stderr(StringIO()) as errors,
+        ):
+            module.fix_classifiers(Path(directory), dry_run=dry_run)
+        assert output.getvalue() == ""
+        assert errors.getvalue() == ""
+        assert list(Path(directory).iterdir()) == []
+        run.assert_not_called()
+
+
+@pytest.mark.parametrize("dry_run", [True, False])
+@pytest.mark.parametrize("invalid", ["hello/foo\n", "[project]\nrequires-python = [\n"])
+def test_parse_errors_are_reported_and_next_project_is_processed(
+    dry_run: bool, invalid: str
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        root = Path(directory)
+        broken, valid = root / "broken", root / "valid"
+        broken.mkdir()
+        valid.mkdir()
+        broken_path = broken / "pyproject.toml"
+        broken_path.write_text(invalid)
+        valid_path = valid / "pyproject.toml"
+        original = '[project]\nrequires-python = ">=3.15"\n'
+        valid_path.write_text(original)
+        valid.joinpath(".python-version").write_text("3.15\n")
+        arguments = ["fix-classifiers.py", str(broken), str(valid)]
+        if dry_run:
+            arguments.append("--dry-run")
+        with (
+            mock.patch.object(sys, "argv", arguments),
+            mock.patch.object(
+                module.subprocess,
+                "run",
+                side_effect=[
+                    subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                    subprocess.CompletedProcess(
+                        [],
+                        0,
+                        stdout="abc123 Update classifiers in pyproject.toml\n",
+                        stderr="",
+                    ),
+                    subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                ],
+            ) as run,
+            redirect_stdout(StringIO()) as output,
+            redirect_stderr(StringIO()) as errors,
+        ):
+            assert module.main() == 0
+        assert errors.getvalue().startswith(f"{broken_path}: ")
+        assert "at line" in errors.getvalue()
+        assert "Traceback" not in errors.getvalue()
+        assert errors.getvalue().count("\n") == 1
+        assert broken_path.read_text() == invalid
+        assert not broken.joinpath(".python-version").exists()
+        if dry_run:
+            assert f"--- {valid_path}\n+++ {valid_path}\n" in output.getvalue()
+            assert valid_path.read_text() == original
+            run.assert_not_called()
+        else:
+            assert output.getvalue() == "abc123 Update classifiers in pyproject.toml\n"
+            assert "classifiers =" in valid_path.read_text()
+            assert run.call_count == 3
+
+
+@pytest.mark.parametrize("dry_run", [True, False])
+@pytest.mark.parametrize(
+    "original",
+    [
+        "[tool.example]\nvalue = true\n",
+        "[project]\n",
+        '[project]\nname = "example"\n'
+        '[dependency-groups]\ndev = ["example @ git://example.com/example.git"]\n',
+    ],
+)
+def test_missing_project_fields_silently_skip_all_changes(
+    dry_run: bool, original: str
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "pyproject.toml"
+        path.write_text(original)
+        version_path = path.with_name(".python-version")
+        version_path.write_text("3.14\n")
+        with (
+            mock.patch.object(module.subprocess, "run") as run,
+            redirect_stdout(StringIO()) as output,
+            redirect_stderr(StringIO()) as errors,
+        ):
+            module.fix_classifiers(Path(directory), dry_run=dry_run)
+        assert output.getvalue() == ""
+        assert errors.getvalue() == ""
+        assert path.read_text() == original
+        assert version_path.read_text() == "3.14\n"
+        run.assert_not_called()
+
+
 @pytest.mark.parametrize(
     ("requirement", "minors"),
     [
@@ -248,3 +352,83 @@ def test_python_version_has_its_own_commit_and_commit_output(
             module.fix_classifiers(path)
         assert output.getvalue() == ""
         run.assert_not_called()
+
+
+@pytest.mark.parametrize("dry_run", [True, False])
+@pytest.mark.parametrize("correct_classifiers", [True, False])
+def test_git_dependency_urls_get_a_separate_commit_or_diff(
+    dry_run: bool, correct_classifiers: bool
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "pyproject.toml"
+        original = (
+            '[project]\nrequires-python = ">=3.15"\n'
+            "dependencies = [\n"
+            '  "direct @ git://example.com/direct.git@main", # keep\n'
+            '  "vcs @ git+git://example.com/vcs.git@v1#subdirectory=src",\n'
+            '  "secure @ git+https://example.com/secure.git",\n'
+            '  "ssh @ git+ssh://git@example.com/ssh.git",\n'
+            "  \"regular>=1; python_version >= '3.10'\",\n"
+            "]\n"
+            "[dependency-groups]\n"
+            'dev = ["dev @ git://example.com/dev.git", {include-group = "lint"}]\n'
+            'lint = ["ruff"]\n'
+            "[project.urls]\n"
+            'Repository = "git://example.com/unchanged.git"\n'
+        )
+        if correct_classifiers:
+            original = original.replace(
+                "[project]\n",
+                '[project]\nclassifiers = ["Programming Language :: Python :: 3", '
+                '"Programming Language :: Python :: 3.15"]\n',
+            )
+        path.write_text(original)
+        path.with_name(".python-version").write_text("3.15\n")
+        messages = (
+            ["Update classifiers in pyproject.toml"] if not correct_classifiers else []
+        ) + ["Remove git:// URLs"]
+        results = []
+        for message in messages:
+            results.extend(
+                [
+                    subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                    subprocess.CompletedProcess(
+                        [], 0, stdout=f"abc123 {message}\n", stderr=""
+                    ),
+                    subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                ]
+            )
+        with (
+            mock.patch.object(module.subprocess, "run", side_effect=results) as run,
+            redirect_stdout(StringIO()) as output,
+        ):
+            module.fix_classifiers(path, dry_run=dry_run)
+        if dry_run:
+            assert path.read_text() == original
+            assert (
+                '-  "direct @ git://example.com/direct.git@main", # keep\n'
+                in output.getvalue()
+            )
+            assert (
+                '+  "direct @ https://example.com/direct.git@main", # keep\n'
+                in output.getvalue()
+            )
+            run.assert_not_called()
+        else:
+            updated = path.read_text()
+            assert '"direct @ https://example.com/direct.git@main", # keep' in updated
+            assert (
+                '"vcs @ git+https://example.com/vcs.git@v1#subdirectory=src"' in updated
+            )
+            assert '"dev @ https://example.com/dev.git"' in updated
+            assert '"secure @ git+https://example.com/secure.git"' in updated
+            assert '"ssh @ git+ssh://git@example.com/ssh.git"' in updated
+            assert 'Repository = "git://example.com/unchanged.git"' in updated
+            commits = [c.args[0] for c in run.call_args_list if "commit" in c.args[0]]
+            assert [c[6] for c in commits] == messages
+            assert all(c[-2:] == ["--", "pyproject.toml"] for c in commits)
+            assert output.getvalue() == "".join(f"abc123 {m}\n" for m in messages)
+            with mock.patch.object(module.subprocess, "run") as run:
+                module.fix_classifiers(path)
+            run.assert_not_called()
