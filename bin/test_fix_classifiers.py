@@ -23,6 +23,22 @@ def classifiers_module() -> ModuleType:
     return module
 
 
+@pytest.mark.parametrize("dry_run", [True, False])
+def test_directory_without_pyproject_is_silently_skipped(dry_run: bool) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        with (
+            mock.patch.object(module.subprocess, "run") as run,
+            redirect_stdout(StringIO()) as output,
+            redirect_stderr(StringIO()) as errors,
+        ):
+            module.fix_classifiers(Path(directory), dry_run=dry_run)
+        assert output.getvalue() == ""
+        assert errors.getvalue() == ""
+        assert list(Path(directory).iterdir()) == []
+        run.assert_not_called()
+
+
 @pytest.mark.parametrize(
     ("requirement", "minors"),
     [

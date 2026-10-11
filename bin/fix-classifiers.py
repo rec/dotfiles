@@ -56,6 +56,8 @@ def expected_classifiers(requires_python: str, classifiers: list[str]) -> list[s
 def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
     if path.is_dir():
         path /= "pyproject.toml"
+        if not path.is_file():
+            return
     original = path.read_text()
     document = tomlkit.parse(original)
     project = cast(Table, document["project"])
