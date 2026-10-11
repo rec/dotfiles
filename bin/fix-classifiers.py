@@ -9,7 +9,7 @@ from __future__ import annotations
 import re
 import subprocess
 import sys
-from difflib import unified_diff
+from difflib import SequenceMatcher, unified_diff
 from pathlib import Path
 from typing import Annotated, cast
 
@@ -73,7 +73,21 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
     minimum = minimum_python_version(requires_python)
     expected = expected_classifiers(requires_python, classifiers)
     if classifiers != expected:
-        project["classifiers"] = expected
+        if "classifiers" in project:
+            array = cast(Array, project["classifiers"])
+            edits = SequenceMatcher(None, list(array), expected).get_opcodes()
+            for operation, start, end, new_start, new_end in reversed(edits):
+                if operation == "equal":
+                    continue
+                shared = min(end - start, new_end - new_start)
+                for i in range(shared):
+                    array[start + i] = expected[new_start + i]
+                if end > start + shared:
+                    del array[start + shared : end]
+                for i in range(shared, new_end - new_start):
+                    array.insert(start + i, expected[new_start + i])
+        else:
+            project["classifiers"] = expected
         update_file(
             path,
             original,
