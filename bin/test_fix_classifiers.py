@@ -23,6 +23,48 @@ def classifiers_module() -> ModuleType:
     return module
 
 
+@pytest.mark.parametrize(
+    ("original_array", "expected_array"),
+    [
+        (
+            '[\n  "Programming Language :: Python :: 3.15", # keep\n]',
+            '[\n  "Programming Language :: Python :: 3",\n'
+            '  "Programming Language :: Python :: 3.15", # keep\n]',
+        ),
+        (
+            '["Programming Language :: Python :: 3.15"]',
+            '["Programming Language :: Python :: 3",'
+            '"Programming Language :: Python :: 3.15"]',
+        ),
+        (
+            '[\n    "Programming Language :: Python :: 3.10",\n]',
+            '[\n    "Programming Language :: Python :: 3",\n'
+            '    "Programming Language :: Python :: 3.15",\n]',
+        ),
+    ],
+)
+def test_classifier_changes_preserve_array_layout(
+    original_array: str, expected_array: str
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "pyproject.toml"
+        prefix = '[project]\nrequires-python = ">=3.15"\nclassifiers = '
+        suffix = " # classifiers\n\n[tool.example]\nvalue = true\n"
+        original = prefix + original_array + suffix
+        path.write_text(original)
+        path.with_name(".python-version").write_text("3.15\n")
+        with mock.patch.object(module, "update_file") as update:
+            module.fix_classifiers(path)
+        update.assert_called_once_with(
+            path,
+            original,
+            prefix + expected_array + suffix,
+            "Update classifiers in pyproject.toml",
+            dry_run=False,
+        )
+
+
 @pytest.mark.parametrize("dry_run", [True, False])
 def test_directory_without_pyproject_is_silently_skipped(dry_run: bool) -> None:
     module = classifiers_module()
