@@ -2,7 +2,7 @@
 # /// script
 # dependencies = ["tyro", "pydantic", "tomlkit", "packaging>=26.2"]
 # ///
-"""Align classifiers (through Python 3.15) and .python-version with requires-python."""
+"""Fix Python version metadata and git:// dependency URLs in project files."""
 
 from __future__ import annotations
 
@@ -15,10 +15,11 @@ from typing import Annotated, cast
 
 import tomlkit
 import tyro
+from packaging.requirements import Requirement
 from packaging.specifiers import SpecifierSet
 from packaging.version import Version
 from pydantic import BaseModel, Field
-from tomlkit.items import Table
+from tomlkit.items import Array, Table
 
 
 class ClassifiersCommand(BaseModel, frozen=True):
@@ -81,6 +82,20 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
             "Change inconsistent .python-version",
             dry_run=dry_run,
         )
+    original = tomlkit.dumps(document)
+    groups = cast(Table, document.get("dependency-groups", {}))
+    for dependencies in (project.get("dependencies", []), groups.get("dev", [])):
+        for i, dependency in enumerate(cast(Array, dependencies)):
+            if not isinstance(dependency, str):
+                continue
+            url = Requirement(dependency).url
+            if url is not None and url.startswith(("git://", "git+git://")):
+                dependencies[i] = dependency.replace(
+                    url, url.replace("git://", "https://", 1), 1
+                )
+    updated = tomlkit.dumps(document)
+    if original != updated:
+        update_file(path, original, updated, "Remove git:// URLs", dry_run=dry_run)
 
 
 def minimum_python_version(requires_python: str) -> str:
