@@ -20,6 +20,24 @@ def release_module():
 
 
 class ReleaseTest(unittest.TestCase):
+    def test_help_does_not_sync_the_current_project(self) -> None:
+        script = Path(__file__).with_name("release.py").resolve()
+        with TemporaryDirectory() as directory:
+            project = Path(directory) / "pyproject.toml"
+            original = '[project]\nname = "help-test"\nversion = "0.1.0"\n'
+            project.write_text(original)
+            result = subprocess.run(
+                [str(script), "--help"],
+                cwd=directory,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            self.assertIn("--publish", result.stdout)
+            self.assertEqual(result.stderr, "")
+            self.assertEqual(project.read_text(), original)
+            self.assertEqual(list(Path(directory).iterdir()), [project])
+
     def test_failed_version_preview_stops_before_verification(self) -> None:
         release = release_module()
         error = "We cannot get or set dynamic project versions in: pyproject.toml"

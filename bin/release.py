@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --with tyro --with pydantic python
+#!/Users/tom/code/dotfiles/.venv/bin/python
 from __future__ import annotations
 
 import os
