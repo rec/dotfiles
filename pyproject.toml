@@ -8,6 +8,7 @@ exclude_lines = ["pragma: no cover", "if False:", "if __name__ == .__main__.:", 
 
 [dependency-groups]
 dev = [
+    "packaging>=26.2",
     "pydantic",
     "coverage>=7.13.2",
     "pytest>=9.1.0",
@@ -16,4 +17,5 @@ dev = [
     "ruff>=0.14.14",
     "ty>=0.0.14",
     "tyro",
+    "tomlkit",
 ]
