@@ -39,6 +39,38 @@ def test_directory_without_pyproject_is_silently_skipped(dry_run: bool) -> None:
         run.assert_not_called()
 
 
+@pytest.mark.parametrize("dry_run", [True, False])
+@pytest.mark.parametrize(
+    "original",
+    [
+        "[tool.example]\nvalue = true\n",
+        "[project]\n",
+        '[project]\nname = "example"\n'
+        '[dependency-groups]\ndev = ["example @ git://example.com/example.git"]\n',
+    ],
+)
+def test_missing_project_fields_silently_skip_all_changes(
+    dry_run: bool, original: str
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "pyproject.toml"
+        path.write_text(original)
+        version_path = path.with_name(".python-version")
+        version_path.write_text("3.14\n")
+        with (
+            mock.patch.object(module.subprocess, "run") as run,
+            redirect_stdout(StringIO()) as output,
+            redirect_stderr(StringIO()) as errors,
+        ):
+            module.fix_classifiers(Path(directory), dry_run=dry_run)
+        assert output.getvalue() == ""
+        assert errors.getvalue() == ""
+        assert path.read_text() == original
+        assert version_path.read_text() == "3.14\n"
+        run.assert_not_called()
+
+
 @pytest.mark.parametrize(
     ("requirement", "minors"),
     [

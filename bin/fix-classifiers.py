@@ -60,7 +60,9 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
             return
     original = path.read_text()
     document = tomlkit.parse(original)
-    project = cast(Table, document["project"])
+    project = cast(Table | None, document.get("project"))
+    if project is None or "requires-python" not in project:
+        return
     classifiers = cast(list[str], project.get("classifiers", []))
     requires_python = str(project["requires-python"])
     minimum = minimum_python_version(requires_python)
