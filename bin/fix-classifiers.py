@@ -9,6 +9,7 @@ from __future__ import annotations
 import re
 import subprocess
 import sys
+from difflib import unified_diff
 from pathlib import Path
 from typing import Annotated, cast
 
@@ -53,39 +54,53 @@ def expected_classifiers(requires_python: str, classifiers: list[str]) -> list[s
 def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
     if path.is_dir():
         path /= "pyproject.toml"
-    document = tomlkit.parse(path.read_text())
+    original = path.read_text()
+    document = tomlkit.parse(original)
     project = cast(Table, document["project"])
     classifiers = cast(list[str], project.get("classifiers", []))
     expected = expected_classifiers(str(project["requires-python"]), classifiers)
     if classifiers == expected:
         return
-    if not dry_run:
-        project["classifiers"] = expected
-        path.write_text(tomlkit.dumps(document))
-        result = subprocess.run(
-            [
-                "git",
-                "-C",
-                str(path.resolve().parent),
-                "commit",
-                "--only",
-                "-m",
-                "Update classifiers in pyproject.toml",
-                "--",
-                path.name,
-            ],
-            capture_output=True,
-            text=True,
+    project["classifiers"] = expected
+    updated = tomlkit.dumps(document)
+    if dry_run:
+        print(
+            "\n".join(
+                unified_diff(
+                    original.splitlines(),
+                    updated.splitlines(),
+                    fromfile=str(path),
+                    tofile=str(path),
+                    lineterm="",
+                )
+            )
         )
-        if result.returncode:
-            sys.exit(result.stderr or result.stdout)
-        result = subprocess.run(
-            ["git", "-C", str(path.resolve().parent), "push"],
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode:
-            print(result.stderr or result.stdout, file=sys.stderr, end="")
+        return
+    path.write_text(updated)
+    result = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(path.resolve().parent),
+            "commit",
+            "--only",
+            "-m",
+            "Update classifiers in pyproject.toml",
+            "--",
+            path.name,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        sys.exit(result.stderr or result.stdout)
+    result = subprocess.run(
+        ["git", "-C", str(path.resolve().parent), "push"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        print(result.stderr or result.stdout, file=sys.stderr, end="")
     print(path)
 
 

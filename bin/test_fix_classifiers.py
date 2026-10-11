@@ -43,7 +43,7 @@ def test_classifiers_follow_version_constraints(
 
 
 @pytest.mark.parametrize("flag", ["--dry-run", "-d"])
-def test_dry_run_prints_only_incorrect_files_without_changes(flag: str) -> None:
+def test_dry_run_prints_diffs_without_changes(flag: str) -> None:
     module = classifiers_module()
     with TemporaryDirectory() as directory:
         path = Path(directory) / "pyproject.toml"
@@ -58,7 +58,13 @@ def test_dry_run_prints_only_incorrect_files_without_changes(flag: str) -> None:
             redirect_stdout(output),
         ):
             assert module.main() == 0
-        assert output.getvalue() == f"{path}\n{path}\n"
+        expected = (
+            f"--- {path}\n+++ {path}\n@@ -1,2 +1,3 @@\n"
+            ' [project]\n requires-python = ">=3.15"\n'
+            '+classifiers = ["Programming Language :: Python :: 3", '
+            '"Programming Language :: Python :: 3.15"]\n'
+        )
+        assert output.getvalue() == expected * 2
         assert path.read_text() == original
         run.assert_not_called()
 
