@@ -49,6 +49,7 @@ def test_dry_run_prints_diffs_without_changes(flag: str) -> None:
         path = Path(directory) / "pyproject.toml"
         original = '[project]\nrequires-python = ">=3.15"\n'
         path.write_text(original)
+        path.with_name(".python-version").write_text("3.15\n")
         output = StringIO()
         with (
             mock.patch.object(
@@ -66,6 +67,7 @@ def test_dry_run_prints_diffs_without_changes(flag: str) -> None:
         )
         assert output.getvalue() == expected * 2
         assert path.read_text() == original
+        assert path.with_name(".python-version").read_text() == "3.15\n"
         run.assert_not_called()
 
 
@@ -80,12 +82,19 @@ def test_edit_commits_only_target_and_reports_push_failure() -> None:
             "\n[tool.example]\nvalue = 42\n"
         )
         output, errors = StringIO(), StringIO()
+        path.with_name(".python-version").write_text("3.15\n")
         with (
             mock.patch.object(
                 module.subprocess,
                 "run",
                 side_effect=[
                     subprocess.CompletedProcess([], 0, stdout="committed", stderr=""),
+                    subprocess.CompletedProcess(
+                        [],
+                        0,
+                        stdout="abc123 Update classifiers in pyproject.toml\n",
+                        stderr="",
+                    ),
                     subprocess.CompletedProcess(
                         [], 1, stdout="", stderr="push failed\n"
                     ),
@@ -114,13 +123,13 @@ def test_edit_commits_only_target_and_reports_push_failure() -> None:
             "--",
             "pyproject.toml",
         ]
-        assert run.call_args_list[1].args[0] == [
+        assert run.call_args_list[2].args[0] == [
             "git",
             "-C",
             str(path.resolve().parent),
             "push",
         ]
-        assert output.getvalue() == f"{path}\n"
+        assert output.getvalue() == "abc123 Update classifiers in pyproject.toml\n"
         assert errors.getvalue() == "push failed\n"
         with (
             mock.patch.object(module.subprocess, "run") as run,
@@ -139,3 +148,103 @@ def test_default_path_is_current_pyproject() -> None:
     ):
         assert module.main() == 0
     fix.assert_called_once_with(Path("pyproject.toml"), dry_run=False)
+
+
+@pytest.mark.parametrize(
+    ("requirement", "minimum"),
+    [
+        (">=3.10", "3.10"),
+        (">=3.10.5", "3.10.5"),
+        (">3.10", "3.10.1"),
+        (">=3.10,!=3.10.*", "3.11"),
+    ],
+)
+def test_python_version_uses_supported_minimum(requirement: str, minimum: str) -> None:
+    assert classifiers_module().minimum_python_version(requirement) == minimum
+
+
+@pytest.mark.parametrize("existing", ["3.14\n", None])
+def test_dry_run_shows_python_version_diff_without_writing(
+    existing: str | None,
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "pyproject.toml"
+        original = '[project]\nrequires-python = ">=3.15"\n'
+        path.write_text(original)
+        version_path = path.with_name(".python-version")
+        if existing is not None:
+            version_path.write_text(existing)
+        with (
+            mock.patch.object(module.subprocess, "run") as run,
+            redirect_stdout(StringIO()) as output,
+        ):
+            module.fix_classifiers(path, dry_run=True)
+        assert f"--- {path}\n+++ {path}\n" in output.getvalue()
+        assert f"--- {version_path}\n+++ {version_path}\n" in output.getvalue()
+        assert "+3.15\n" in output.getvalue()
+        if existing is not None:
+            assert "-3.14\n" in output.getvalue()
+            assert version_path.read_text() == existing
+        else:
+            assert not version_path.exists()
+        assert path.read_text() == original
+        run.assert_not_called()
+
+
+@pytest.mark.parametrize("existing", ["3.14\n", None])
+def test_python_version_has_its_own_commit_and_commit_output(
+    existing: str | None,
+) -> None:
+    module = classifiers_module()
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "pyproject.toml"
+        path.write_text('[project]\nrequires-python = ">=3.15"\n')
+        version_path = path.with_name(".python-version")
+        if existing is not None:
+            version_path.write_text(existing)
+        results = [
+            subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+            subprocess.CompletedProcess(
+                [], 0, stdout="aaa111 Update classifiers in pyproject.toml\n", stderr=""
+            ),
+            subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+        ]
+        if existing is None:
+            results.append(subprocess.CompletedProcess([], 0, stdout="", stderr=""))
+        results.extend(
+            [
+                subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+                subprocess.CompletedProcess(
+                    [],
+                    0,
+                    stdout="bbb222 Change inconsistent .python-version\n",
+                    stderr="",
+                ),
+                subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+            ]
+        )
+        with (
+            mock.patch.object(module.subprocess, "run", side_effect=results) as run,
+            redirect_stdout(StringIO()) as output,
+        ):
+            module.fix_classifiers(path)
+        commits = [c.args[0] for c in run.call_args_list if "commit" in c.args[0]]
+        assert [c[6:] for c in commits] == [
+            ["Update classifiers in pyproject.toml", "--", "pyproject.toml"],
+            ["Change inconsistent .python-version", "--", ".python-version"],
+        ]
+        assert all("--only" in c for c in commits)
+        assert output.getvalue() == (
+            "aaa111 Update classifiers in pyproject.toml\n"
+            "bbb222 Change inconsistent .python-version\n"
+        )
+        assert version_path.read_text() == "3.15\n"
+        assert sum("push" in c.args[0] for c in run.call_args_list) == 2
+        with (
+            mock.patch.object(module.subprocess, "run") as run,
+            redirect_stdout(StringIO()) as output,
+        ):
+            module.fix_classifiers(path)
+        assert output.getvalue() == ""
+        run.assert_not_called()

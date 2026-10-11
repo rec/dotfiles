@@ -2,7 +2,7 @@
 # /// script
 # dependencies = ["tyro", "pydantic", "tomlkit", "packaging>=26.2"]
 # ///
-"""Align Python version classifiers with requires-python, through Python 3.15."""
+"""Align classifiers (through Python 3.15) and .python-version with requires-python."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ from typing import Annotated, cast
 import tomlkit
 import tyro
 from packaging.specifiers import SpecifierSet
+from packaging.version import Version
 from pydantic import BaseModel, Field
 from tomlkit.items import Table
 
@@ -58,11 +59,48 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
     document = tomlkit.parse(original)
     project = cast(Table, document["project"])
     classifiers = cast(list[str], project.get("classifiers", []))
-    expected = expected_classifiers(str(project["requires-python"]), classifiers)
-    if classifiers == expected:
-        return
-    project["classifiers"] = expected
-    updated = tomlkit.dumps(document)
+    requires_python = str(project["requires-python"])
+    minimum = minimum_python_version(requires_python)
+    expected = expected_classifiers(requires_python, classifiers)
+    if classifiers != expected:
+        project["classifiers"] = expected
+        update_file(
+            path,
+            original,
+            tomlkit.dumps(document),
+            "Update classifiers in pyproject.toml",
+            dry_run=dry_run,
+        )
+    version_path = path.with_name(".python-version")
+    original_version = version_path.read_text() if version_path.exists() else ""
+    if original_version.strip() != minimum:
+        update_file(
+            version_path,
+            original_version,
+            minimum + "\n",
+            "Change inconsistent .python-version",
+            dry_run=dry_run,
+        )
+
+
+def minimum_python_version(requires_python: str) -> str:
+    requirement = SpecifierSet(requires_python, prereleases=False)
+    candidates = {Version(f"3.{i}") for i in range(16)}
+    for specifier in requirement:
+        version = Version(specifier.version.removesuffix(".*"))
+        candidates.add(version)
+        release = version.release + (0,) * (3 - len(version.release))
+        candidates.add(Version(f"{release[0]}.{release[1]}.{release[2] + 1}"))
+        candidates.add(Version(f"{release[0]}.{release[1] + 1}"))
+    supported = sorted(v for v in candidates if v in requirement)
+    if not supported:
+        sys.exit(f"No minimum Python version satisfies {requires_python}")
+    return str(supported[0])
+
+
+def update_file(
+    path: Path, original: str, updated: str, message: str, *, dry_run: bool
+) -> None:
     if dry_run:
         print(
             "\n".join(
@@ -76,7 +114,16 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
             )
         )
         return
+    new_file = not path.exists()
     path.write_text(updated)
+    if new_file:
+        result = subprocess.run(
+            ["git", "-C", str(path.resolve().parent), "add", "--", path.name],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode:
+            sys.exit(result.stderr or result.stdout)
     result = subprocess.run(
         [
             "git",
@@ -85,7 +132,7 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
             "commit",
             "--only",
             "-m",
-            "Update classifiers in pyproject.toml",
+            message,
             "--",
             path.name,
         ],
@@ -95,13 +142,20 @@ def fix_classifiers(path: Path, *, dry_run: bool = False) -> None:
     if result.returncode:
         sys.exit(result.stderr or result.stdout)
     result = subprocess.run(
+        ["git", "-C", str(path.resolve().parent), "log", "-1", "--format=%h %s"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        sys.exit(result.stderr or result.stdout)
+    print(result.stdout.strip())
+    result = subprocess.run(
         ["git", "-C", str(path.resolve().parent), "push"],
         capture_output=True,
         text=True,
     )
     if result.returncode:
         print(result.stderr or result.stdout, file=sys.stderr, end="")
-    print(path)
 
 
 if __name__ == "__main__":
