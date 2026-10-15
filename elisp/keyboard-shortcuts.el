@@ -30,23 +30,36 @@
   )
 
 (defun to-shell()
-  "Switch to the current project's shell, or the default shell."
+  "Switch to a shell, or reset and activate the current dashed shell."
   (interactive)
-  (let ((project-directory (find-file-upwards-base ".git")))
-    (if project-directory
-        (let ((shell-buffer-name
-               (format "-%s-"
-                       (file-name-nondirectory
-                        (directory-file-name project-directory)))))
-          (if (get-buffer shell-buffer-name)
-              (switch-to-buffer shell-buffer-name)
-            (let ((default-directory project-directory))
-              (shell shell-buffer-name)
-              (process-send-string (get-buffer-process shell-buffer-name)
-                                   "source .venv/bin/activate\n"))))
-      (if (get-buffer "*shell*")
-          (switch-to-buffer "*shell*")
-        (shell "*shell*")))))
+  (if (and (derived-mode-p 'shell-mode)
+           (string-prefix-p "-" (buffer-name)))
+      (let ((project-directory
+             (file-name-as-directory
+              (expand-file-name
+               (replace-regexp-in-string "\\`-\\|-\\'" "" (buffer-name))
+               "~/code/"))))
+        (cd project-directory)
+        (unless (comint-check-proc (current-buffer))
+          (shell (current-buffer)))
+        (process-send-string (get-buffer-process (current-buffer))
+                             (format "cd -- %s && act\n"
+                                     (shell-quote-argument project-directory))))
+    (let ((project-directory (find-file-upwards-base ".git")))
+      (if project-directory
+          (let ((shell-buffer-name
+		 (format "-%s-"
+			 (file-name-nondirectory
+                          (directory-file-name project-directory)))))
+            (if (get-buffer shell-buffer-name)
+		(switch-to-buffer shell-buffer-name)
+              (let ((default-directory project-directory))
+		(shell shell-buffer-name)
+		(process-send-string (get-buffer-process shell-buffer-name)
+                                     "source .venv/bin/activate\n"))))
+	(if (get-buffer "*shell*")
+            (switch-to-buffer "*shell*")
+          (shell "*shell*"))))))
 
 ;;(define-key key-translation-map (kbd "<kp-multiply>") "\C-g")
 (define-key key-translation-map (kbd "<kp-1>") "\C-s")
@@ -70,7 +83,9 @@
 (gsk [M-f7] 'swirly-kill-compilation)
 
 (gsk [f8] 'swirly-grep)
-(gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
+(gsk [f9] 'rotate-dsb)
+(gsk [C-f9] 'rotate-dsb-backward)
+;; (gsk [f9] 'dabbrev-expand)  ;; swirly-dired)
 (gsk [f10] 'query-replace)
 
 (gsk [f11] 'to-shell)
@@ -126,31 +141,31 @@
 
       (gsk [kp-0] 'kill-line)
 
-      ;; A- means "Mac command key"
-      (gsk [A-left] 'previous-tab-or-buffer)
-      (gsk [A-right] 'next-tab-or-buffer)
+      ;; s- means "Mac command key"
+      (gsk [s-left] 'previous-tab-or-buffer)
+      (gsk [s-right] 'next-tab-or-buffer)
 
-      (gsk [A-f1] 'do-list-buffers)
-      (gsk [A-f3] 'switch-to-buffer-other-frame)
-      (gsk [A-f4] 'do-list-buffers)
-      (gsk [A-f5] 'swirly-get-file-name)
-      (gsk [A-f6] 'magit-status)
-      (gsk [A-f7] 'to-compile)
-      (gsk [A-f8] 'grep)
-      (gsk [A-f9] 'magit-file-rename)
+      (gsk [s-f1] 'do-list-buffers)
+      (gsk [s-f3] 'switch-to-buffer-other-frame)
+      (gsk [s-f4] 'do-list-buffers)
+      (gsk [s-f5] 'swirly-get-file-name)
+      (gsk [s-f6] 'magit-status)
+      (gsk [s-f7] 'to-compile)
+      (gsk [s-f8] 'grep)
+      (gsk [s-f9] 'magit-file-rename)
       ;;f10
       (gsk [4194411] 'kill-this-buffer)
 
-      ;;(gsk [A-f11] 'swirly-run-python)
-      (gsk [A-f12] 'dabbrev-expand)
-      (gsk [A-f13] 'yank-pop)
-      (gsk [A-f14] 'swirly-save-all)
-      (gsk [A-f15] 'redo)
+      ;;(gsk [s-f11] 'swirly-run-python)
+      (gsk [s-f12] 'dabbrev-expand)
+      (gsk [s-f13] 'yank-pop)
+      (gsk [s-f14] 'swirly-save-all)
+      (gsk [s-f15] 'redo)
 
-      (gsk [A-up] 'back-window)
-      (gsk [A-down] 'other-window)
+      (gsk [s-up] 'back-window)
+      (gsk [s-down] 'other-window)
 
-      (gsk [A-kp-divide] 'apply-macro-to-region-lines)
+      (gsk [s-kp-divide] 'apply-macro-to-region-lines)
       (gsk [home] 'beginning-of-buffer)
       (gsk [end] 'end-of-buffer)
       (gsk [M-a] 'mark-whole-buffer)

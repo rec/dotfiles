@@ -4,8 +4,6 @@ alias act="source .venv/bin/activate"
 
 alias bui='pip uninstall -y torch && python setup.py develop'
 
-alias ctest='pushd ~/code/test && git add . && gi ; popd'
-
 # alias cdl="cd $CODE_ROOT/litoid"
 alias cdm="cd $CODE_ROOT/multi"
 alias cdr="cd $CODE_ROOT/recs"
