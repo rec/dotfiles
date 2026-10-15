@@ -24,6 +24,33 @@
 (defun find-file-upwards (file-to-find)
   (or (find-file-upwards-base file-to-find) default-directory))
 
+(defun rotate-dsb (&optional backward)
+  "Switch to the next dashed shell buffer alphabetically.
+When BACKWARD is non-nil, switch to the previous one."
+  (interactive)
+  (let (dsbs)
+    (dolist (buffer (buffer-list))
+      (when (string-match-p "\\`-.*-\\'" (buffer-name buffer))
+        (push buffer dsbs)))
+    (setq dsbs
+          (sort dsbs
+                (lambda (left right)
+                  (string-lessp (buffer-name left) (buffer-name right)))))
+    (when backward
+      (setq dsbs (reverse dsbs)))
+    (if (null dsbs)
+        (user-error "No dashed shell buffers")
+      (let ((current-dsb (memq (current-buffer) dsbs)))
+        (switch-to-buffer
+         (if current-dsb
+             (or (cadr current-dsb) (car dsbs))
+           (car dsbs)))))))
+
+(defun rotate-dsb-backward ()
+  "Switch to the previous dashed shell buffer alphabetically."
+  (interactive)
+  (rotate-dsb t))
+
 (defun kill-matching-buffers (match)
   (interactive "sMatching string: ")
   (if (equal match "")

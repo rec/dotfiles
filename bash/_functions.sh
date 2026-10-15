@@ -2,6 +2,17 @@ build-stubs() {
     (cd build && cmake --build . --target torch_python_stubs)
 }
 
+venv() {
+    if [[ -z "${VIRTUAL_ENV:-}" ]]; then
+        echo "No venv"
+        return 1
+    fi
+
+    cd "$(dirname "$VIRTUAL_ENV")"
+}
+
+export R_PROJECTS="arpeg baccy dvice enge envelfo lyte meedee recs reccy safaz showco streamo tuney ufor"
+
 r() {
     local current_project target
     local -a projects
