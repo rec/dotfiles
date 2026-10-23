@@ -49,8 +49,9 @@ without asking the user to choose a directory.
 An application Project and a working directory must not be assumed to be identical.
 Reusing the directory does not establish that the replacement will belong to
 the same application Project. The user has accepted preserving the working
-directory with Project membership explicitly unverified. The installed app-server
-schema has no application Project membership operation.
+directory with Project membership explicitly unverified. The older `codex` on
+PATH used by `retire` has no application Project membership operation. The newer
+desktop-bundled executable used by `fix` does expose Project operations.
 
 ## Remaining verification
 
@@ -83,7 +84,33 @@ without starting app-server, creating files, or changing chats. This mode runs
 offline, so it shows placeholders for metadata and paths that a real run would
 discover or create.
 
-The `fix` command currently does nothing, including when dry-run is enabled.
+`fix <repo> [<repo>...]` currently reports metadata without changing it. Bare
+repository names resolve under `~/code`; absolute paths also work. Each report
+prints the pyproject description, first level-one README heading (without `# `),
+GitHub description, Codex Project name if present, and every unarchived chat name
+at that working directory. Values are indented by four spaces under the repository
+name. The Project precedes the chats; multiple Projects matching the same directory
+are an error. Icons, backticks, and differing descriptions are preserved as found.
+Entries that are not directories or lack a `pyproject.toml` file are silently
+ignored, including in dry-run mode. If every entry is ignored, nothing is printed
+and no external commands are run.
+Reports also silently skip repos whose pyproject cannot be read or parsed, lacks
+`[project].description`, or has a non-string description. Later repos are still
+reported.
+If `README.md` is missing or has no level-one heading, its report line is
+`(missing)` and the remaining sources are still reported.
+
+`fix --no-codex <repo>...` omits Codex titles and does not start app-server.
+Codex interrogation is enabled by default and can be explicitly enabled with
+`fix --codex <repo>...`. These flags also control which operations dry-run prints.
+
+`fix` uses the desktop app's bundled executable at
+`/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex`, whose installed
+schema supports `project/list`. The older `codex` on PATH used by `retire` lacks
+that operation. This reads Projects through app-server rather than relying on
+internal desktop state files. `gh repo view` reads the GitHub description using
+the repository's configured remote. `-d fix <repo>...` prints only the planned
+reads, without starting app-server or contacting GitHub.
 
 The script stops if Codex requests approvals, user input, or app-only tools that
 this standalone client cannot supply. Missing or empty documents, unsuccessful

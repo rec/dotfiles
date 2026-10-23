@@ -1,0 +1,5 @@
+safer:
+    description = "🧿 A safer writer for files and streams 🧿"
+    🧿 `safer`: A safer writer 🧿
+    🧷 A safer writer 🧷
+    safer
