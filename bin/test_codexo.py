@@ -6,6 +6,7 @@ from io import StringIO
 from pathlib import Path
 
 import pytest
+from pytest_regressions.file_regression import FileRegressionFixture
 
 spec = importlib.util.spec_from_file_location(
     "codexo", Path(__file__).with_name("codexo.py")
@@ -56,23 +57,118 @@ def test_dry_run_prints_operations_without_performing_them(
         assert operation in output
 
 
-@pytest.mark.parametrize("flags", [[], ["-d"], ["--dry-run"]])
-def test_fix_does_nothing(
+@pytest.mark.parametrize("flag", ["-d", "--dry-run"])
+def test_fix_dry_run_lists_repositories_without_reading_them(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
-    flags: list[str],
+    flag: str,
 ) -> None:
-    monkeypatch.setattr(sys, "argv", ["codexo.py", *flags, "fix"])
+    monkeypatch.setattr(sys, "argv", ["codexo.py", flag, "fix", "safer", "tuney"])
 
     def unexpected_operation(*args: object, **kwargs: object) -> None:
-        pytest.fail("Fix must not start app-server or create files")
+        pytest.fail("Dry-run must not start app-server or read repositories")
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
     monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
+    monkeypatch.setattr(codexo, "report_repository", unexpected_operation)
     codexo.main()
     output = capsys.readouterr()
-    assert output.out == ""
+    assert "safer:" in output.out
+    assert "tuney:" in output.out
+    assert "project/list" in output.out
+    assert "thread/list" in output.out
     assert output.err == ""
+
+
+def test_repository_report_preserves_inconsistent_metadata(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    file_regression: FileRegressionFixture,
+) -> None:
+    directory = tmp_path / "code" / "safer"
+    directory.mkdir(parents=True)
+    pyproject = (
+        '[project]\nname = "safer"\n'
+        'description = "🧿 A safer writer for files and streams 🧿"\n'
+    )
+    readme = "# 🧿 `safer`: A safer writer 🧿\n\nBody.\n"
+    (directory / "pyproject.toml").write_text(pyproject)
+    (directory / "README.md").write_text(readme)
+    monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
+    monkeypatch.setattr(
+        codexo.subprocess,
+        "run",
+        lambda *a, **k: codexo.subprocess.CompletedProcess(
+            a, 0, "🧷 A safer writer 🧷\n"
+        ),
+    )
+    monkeypatch.setattr(codexo, "codex_titles", lambda *a: ["safer"])
+    server = codexo.AppServer(StringIO(), StringIO())
+    codexo.report_repository(server, "safer")
+    file_regression.check(capsys.readouterr().out)
+    assert (directory / "pyproject.toml").read_text() == pyproject
+    assert (directory / "README.md").read_text() == readme
+
+
+@pytest.mark.parametrize("matches", [0, 1, 2])
+def test_codex_titles_match_exact_roots_and_put_project_before_all_chats(
+    tmp_path: Path,
+    matches: int,
+) -> None:
+    projects = [{"name": "Other project", "roots": [{"path": str(tmp_path / "child")}]}]
+    selected = [
+        {"name": "Project title", "roots": [{"path": str(tmp_path)}]}
+        for _ in range(matches)
+    ]
+    messages = [
+        {"id": 1, "result": {"data": projects, "nextCursor": "more-projects"}},
+        {"id": 2, "result": {"data": selected}},
+        {
+            "id": 3,
+            "result": {
+                "data": [
+                    {
+                        "id": "a",
+                        "name": "First chat",
+                        "cwd": str(tmp_path),
+                        "status": {"type": "idle"},
+                    }
+                ],
+                "nextCursor": "more-chats",
+            },
+        },
+        {
+            "id": 4,
+            "result": {
+                "data": [
+                    {
+                        "id": "b",
+                        "name": "Second chat",
+                        "cwd": str(tmp_path),
+                        "status": {"type": "idle"},
+                    }
+                ]
+            },
+        },
+    ]
+    writer = StringIO()
+    server = codexo.AppServer(
+        StringIO("".join(json.dumps(m) + "\n" for m in messages)), writer
+    )
+    if matches > 1:
+        with pytest.raises(RuntimeError, match="Multiple Codex projects"):
+            codexo.codex_titles(server, tmp_path)
+    else:
+        titles = codexo.codex_titles(server, tmp_path)
+        assert len(titles) == matches + 2
+        if matches:
+            assert titles[0] == "Project title"
+        assert titles[-2] == "First chat"
+        assert titles[-1] == "Second chat"
+        for r in map(json.loads, writer.getvalue().splitlines()[2:]):
+            assert r["params"]["cwd"] == str(tmp_path)
+            assert r["params"]["archived"] is False
 
 
 def test_turn_retains_events_received_before_start_response() -> None:

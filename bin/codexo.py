@@ -1,7 +1,7 @@
 #!/Users/tom/code/dotfiles/.venv/bin/python
-"""Replace a Codex chat using a verified handover, preserving its cwd and name.
+"""Retire Codex chats and report repository metadata.
 
-Application Project membership is not exposed by app-server and is unverified.
+Retire preserves cwd and name; application Project membership is unverified.
 Run `retire` to select a chat, or `retire THREAD_ID` for a specific chat.
 """
 
@@ -16,6 +16,7 @@ from pathlib import Path
 from tempfile import mkdtemp
 from typing import IO, Annotated, cast
 
+import tomllib
 import tyro
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
@@ -27,7 +28,9 @@ class RetireCommand(BaseModel, frozen=True):
 
 
 class FixCommand(BaseModel, frozen=True):
-    """Do nothing for now."""
+    """Report project descriptions and Codex titles without changing them."""
+
+    repos: Annotated[list[str], tyro.conf.Positional]
 
 
 class CodexoCommand(BaseModel, frozen=True):
@@ -48,6 +51,20 @@ class Chat(BaseModel, frozen=True):
 
 class ChatPage(BaseModel, frozen=True):
     data: list[Chat]
+    nextCursor: str | None = None
+
+
+class ProjectRoot(BaseModel, frozen=True):
+    path: Path
+
+
+class AppProject(BaseModel, frozen=True):
+    name: str
+    roots: list[ProjectRoot]
+
+
+class ProjectPage(BaseModel, frozen=True):
+    data: list[AppProject]
     nextCursor: str | None = None
 
 
@@ -152,14 +169,30 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
-    if isinstance(command.action, FixCommand):
-        return
     if command.dry_run:
-        print_dry_run(command.action.thread_id)
+        if isinstance(command.action, FixCommand):
+            print("Start the desktop app's bundled codex app-server; initialize.")
+            for r in command.action.repos:
+                print(f"{r}:")
+                print(
+                    "    Read pyproject.toml description and first README.md heading."
+                )
+                print("    gh repo view: read the GitHub description.")
+                print("    project/list: find at most one project with this root.")
+                print("    thread/list: list all unarchived chats at this directory.")
+                print("    Print values, with the Codex project before chat titles.")
+            print("Stop app-server; no project information is changed.")
+        else:
+            print_dry_run(command.action.thread_id)
         return
     try:
+        executable = (
+            "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+            if isinstance(command.action, FixCommand)
+            else "codex"
+        )
         with subprocess.Popen(
-            ["codex", "app-server"],
+            [executable, "app-server"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             text=True,
@@ -171,17 +204,103 @@ def main() -> None:
                 server = AppServer(process.stdout, process.stdin)
                 server.request(
                     "initialize",
-                    {"clientInfo": {"name": "codexo", "version": "0.1.0"}},
+                    {
+                        "clientInfo": {"name": "codexo", "version": "0.1.0"},
+                        "capabilities": {
+                            "experimentalApi": isinstance(command.action, FixCommand)
+                        },
+                    },
                 )
                 server.send({"method": "initialized", "params": {}})
-                thread_id = command.action.thread_id or select_chat(server)
-                replace_chat(server, thread_id)
+                if isinstance(command.action, FixCommand):
+                    for r in command.action.repos:
+                        report_repository(server, r)
+                else:
+                    thread_id = command.action.thread_id or select_chat(server)
+                    replace_chat(server, thread_id)
             finally:
                 process.terminate()
-    except (OSError, RuntimeError, ValidationError, EOFError) as error:
+    except (
+        OSError,
+        RuntimeError,
+        ValidationError,
+        EOFError,
+        tomllib.TOMLDecodeError,
+        subprocess.CalledProcessError,
+    ) as error:
         sys.exit(str(error))
     except KeyboardInterrupt:
         sys.exit("Interrupted; any unfinished handover has not archived the old chat.")
+
+
+def report_repository(server: AppServer, repo: str) -> None:
+    directory = (Path.home() / "code" / repo).resolve()
+    with (directory / "pyproject.toml").open("rb") as source:
+        description: str = tomllib.load(source)["project"]["description"]
+    heading = next(
+        (
+            s[2:].strip()
+            for s in (directory / "README.md").read_text().splitlines()
+            if s.startswith("# ")
+        ),
+        None,
+    )
+    if heading is None:
+        raise RuntimeError(f"{directory}/README.md has no level-one heading")
+    github = subprocess.run(
+        ["gh", "repo", "view", "--json", "description", "--jq", ".description"],
+        cwd=directory,
+        stdout=subprocess.PIPE,
+        text=True,
+        check=True,
+    ).stdout.rstrip("\n")
+    titles = codex_titles(server, directory)
+    print(f"{directory.name}:")
+    print(f"    description = {json.dumps(description, ensure_ascii=False)}")
+    print(f"    {heading}")
+    print(f"    {github}")
+    for t in titles:
+        print(f"    {t}")
+    print()
+
+
+def codex_titles(server: AppServer, directory: Path) -> list[str]:
+    projects: list[str] = []
+    cursor: str | None = None
+    while True:
+        page = ProjectPage.model_validate(
+            server.request("project/list", {"cursor": cursor})
+        )
+        projects.extend(
+            p.name
+            for p in page.data
+            if any(r.path.resolve() == directory for r in p.roots)
+        )
+        if page.nextCursor is None:
+            break
+        cursor = page.nextCursor
+    if len(projects) > 1:
+        raise RuntimeError(f"Multiple Codex projects at {directory}: {projects}")
+    titles = projects.copy()
+    cursor = None
+    while True:
+        chats = ChatPage.model_validate(
+            server.request(
+                "thread/list",
+                {
+                    "cursor": cursor,
+                    "cwd": str(directory),
+                    "archived": False,
+                    "modelProviders": [],
+                    "sourceKinds": THREAD_SOURCE_KINDS,
+                    "useStateDbOnly": True,
+                },
+            )
+        )
+        titles.extend(c.name if c.name is not None else "(unnamed)" for c in chats.data)
+        if chats.nextCursor is None:
+            return titles
+        cursor = chats.nextCursor
 
 
 def print_dry_run(thread_id: str | None) -> None:
@@ -297,6 +416,20 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     server.request("thread/archive", {"threadId": old.id})
     print(f"Archived {old.id}. Continue in {new.id} ({old.name}).")
     return new.id
+
+
+THREAD_SOURCE_KINDS = [
+    "cli",
+    "vscode",
+    "exec",
+    "appServer",
+    "subAgent",
+    "subAgentReview",
+    "subAgentCompact",
+    "subAgentThreadSpawn",
+    "subAgentOther",
+    "unknown",
+]
 
 
 if __name__ == "__main__":
