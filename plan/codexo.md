@@ -91,6 +91,13 @@ GitHub description, Codex Project name if present, and every unarchived chat nam
 at that working directory. Values are indented by four spaces under the repository
 name. The Project precedes the chats; multiple Projects matching the same directory
 are an error. Icons, backticks, and differing descriptions are preserved as found.
+Entries that are not directories or lack a `pyproject.toml` file are silently
+ignored, including in dry-run mode. If every entry is ignored, nothing is printed
+and no external commands are run.
+
+`fix --no-codex <repo>...` omits Codex titles and does not start app-server.
+Codex interrogation is enabled by default and can be explicitly enabled with
+`fix --codex <repo>...`. These flags also control which operations dry-run prints.
 
 `fix` uses the desktop app's bundled executable at
 `/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex`, whose installed

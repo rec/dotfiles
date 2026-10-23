@@ -31,6 +31,8 @@ class FixCommand(BaseModel, frozen=True):
     """Report project descriptions and Codex titles without changing them."""
 
     repos: Annotated[list[str], tyro.conf.Positional]
+    codex: Annotated[bool, tyro.conf.arg(prefix_name=False)] = True
+    """Include Codex Project and chat titles."""
 
 
 class CodexoCommand(BaseModel, frozen=True):
@@ -169,23 +171,46 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
+    directories: list[Path] = []
+    if isinstance(command.action, FixCommand):
+        directories = [
+            p
+            for r in command.action.repos
+            if (p := (Path.home() / "code" / r).resolve()).is_dir()
+            and (p / "pyproject.toml").is_file()
+        ]
+        if not directories:
+            return
     if command.dry_run:
         if isinstance(command.action, FixCommand):
-            print("Start the desktop app's bundled codex app-server; initialize.")
-            for r in command.action.repos:
-                print(f"{r}:")
+            if command.action.codex:
+                print("Start the desktop app's bundled codex app-server; initialize.")
+            for p in directories:
+                print(f"{p.name}:")
                 print(
                     "    Read pyproject.toml description and first README.md heading."
                 )
                 print("    gh repo view: read the GitHub description.")
-                print("    project/list: find at most one project with this root.")
-                print("    thread/list: list all unarchived chats at this directory.")
-                print("    Print values, with the Codex project before chat titles.")
-            print("Stop app-server; no project information is changed.")
+                if command.action.codex:
+                    print("    project/list: find at most one project with this root.")
+                    print(
+                        "    thread/list: list all unarchived chats at this directory."
+                    )
+                    print(
+                        "    Print values, with the Codex project before chat titles."
+                    )
+                else:
+                    print("    Print local and GitHub values.")
+            if command.action.codex:
+                print("Stop app-server; no project information is changed.")
         else:
             print_dry_run(command.action.thread_id)
         return
     try:
+        if isinstance(command.action, FixCommand) and not command.action.codex:
+            for p in directories:
+                report_repository(None, p)
+            return
         executable = (
             "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
             if isinstance(command.action, FixCommand)
@@ -213,8 +238,8 @@ def main() -> None:
                 )
                 server.send({"method": "initialized", "params": {}})
                 if isinstance(command.action, FixCommand):
-                    for r in command.action.repos:
-                        report_repository(server, r)
+                    for p in directories:
+                        report_repository(server, p)
                 else:
                     thread_id = command.action.thread_id or select_chat(server)
                     replace_chat(server, thread_id)
@@ -233,8 +258,7 @@ def main() -> None:
         sys.exit("Interrupted; any unfinished handover has not archived the old chat.")
 
 
-def report_repository(server: AppServer, repo: str) -> None:
-    directory = (Path.home() / "code" / repo).resolve()
+def report_repository(server: AppServer | None, directory: Path) -> None:
     with (directory / "pyproject.toml").open("rb") as source:
         description: str = tomllib.load(source)["project"]["description"]
     heading = next(
@@ -254,7 +278,7 @@ def report_repository(server: AppServer, repo: str) -> None:
         text=True,
         check=True,
     ).stdout.rstrip("\n")
-    titles = codex_titles(server, directory)
+    titles = codex_titles(server, directory) if server is not None else []
     print(f"{directory.name}:")
     print(f"    description = {json.dumps(description, ensure_ascii=False)}")
     print(f"    {heading}")

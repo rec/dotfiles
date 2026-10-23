@@ -1,6 +1,7 @@
 import hashlib
 import importlib.util
 import json
+import subprocess
 import sys
 from io import StringIO
 from pathlib import Path
@@ -58,12 +59,22 @@ def test_dry_run_prints_operations_without_performing_them(
 
 
 @pytest.mark.parametrize("flag", ["-d", "--dry-run"])
+@pytest.mark.parametrize("codex_flags", [[], ["--codex"]])
 def test_fix_dry_run_lists_repositories_without_reading_them(
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     flag: str,
+    codex_flags: list[str],
 ) -> None:
-    monkeypatch.setattr(sys, "argv", ["codexo.py", flag, "fix", "safer", "tuney"])
+    for r in ["safer", "tuney"]:
+        directory = tmp_path / "code" / r
+        directory.mkdir(parents=True)
+        (directory / "pyproject.toml").touch()
+    monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
+    monkeypatch.setattr(
+        sys, "argv", ["codexo.py", flag, "fix", *codex_flags, "safer", "tuney"]
+    )
 
     def unexpected_operation(*args: object, **kwargs: object) -> None:
         pytest.fail("Dry-run must not start app-server or read repositories")
@@ -77,6 +88,93 @@ def test_fix_dry_run_lists_repositories_without_reading_them(
     assert "tuney:" in output.out
     assert "project/list" in output.out
     assert "thread/list" in output.out
+    assert output.err == ""
+
+
+@pytest.mark.parametrize("dry_run", [False, True])
+def test_fix_without_codex_skips_invalid_entries_and_never_starts_codex(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    dry_run: bool,
+) -> None:
+    for r in ["safer", "tuney"]:
+        directory = tmp_path / "code" / r
+        directory.mkdir(parents=True)
+        (directory / "pyproject.toml").write_text(
+            '[project]\ndescription = "Local description"\n'
+        )
+        (directory / "README.md").write_text("# Repository title\n")
+    (tmp_path / "code" / "empty").mkdir()
+    (tmp_path / "code" / "file").touch()
+    monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
+    flags = ["-d"] if dry_run else []
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "codexo.py",
+            *flags,
+            "fix",
+            "--no-codex",
+            "missing",
+            "safer",
+            "empty",
+            "file",
+            "tuney",
+        ],
+    )
+
+    def unexpected_operation(*args: object, **kwargs: object) -> None:
+        pytest.fail("Codex must not be interrogated")
+
+    def github_description(
+        *args: object, **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        assert not dry_run
+        return subprocess.CompletedProcess([], 0, "GitHub description\n")
+
+    monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
+    monkeypatch.setattr(codexo, "codex_titles", unexpected_operation)
+    monkeypatch.setattr(codexo.subprocess, "run", github_description)
+    codexo.main()
+    output = capsys.readouterr()
+    assert "safer:" in output.out
+    assert "tuney:" in output.out
+    assert "codex" not in output.out.lower()
+    assert "missing" not in output.out
+    assert "empty" not in output.out
+    assert "file:" not in output.out
+    assert output.out.count('    description = "Local description"') == (
+        0 if dry_run else 2
+    )
+    assert output.err == ""
+
+
+@pytest.mark.parametrize("dry_run", [False, True])
+def test_fix_silently_ignores_all_invalid_entries(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    dry_run: bool,
+) -> None:
+    (tmp_path / "code" / "empty").mkdir(parents=True)
+    (tmp_path / "code" / "file").touch()
+    (tmp_path / "code" / "empty" / "pyproject.toml").mkdir()
+    monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
+    flags = ["-d"] if dry_run else []
+    monkeypatch.setattr(
+        sys, "argv", ["codexo.py", *flags, "fix", "missing", "empty", "file"]
+    )
+
+    def unexpected_operation(*args: object, **kwargs: object) -> None:
+        pytest.fail("Ignored entries must not trigger external operations")
+
+    monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
+    monkeypatch.setattr(codexo.subprocess, "run", unexpected_operation)
+    codexo.main()
+    output = capsys.readouterr()
+    assert output.out == ""
     assert output.err == ""
 
 
@@ -105,7 +203,7 @@ def test_repository_report_preserves_inconsistent_metadata(
     )
     monkeypatch.setattr(codexo, "codex_titles", lambda *a: ["safer"])
     server = codexo.AppServer(StringIO(), StringIO())
-    codexo.report_repository(server, "safer")
+    codexo.report_repository(server, directory)
     file_regression.check(capsys.readouterr().out.rstrip() + "\n")
     assert (directory / "pyproject.toml").read_text() == pyproject
     assert (directory / "README.md").read_text() == readme
