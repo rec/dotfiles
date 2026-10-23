@@ -94,6 +94,9 @@ are an error. Icons, backticks, and differing descriptions are preserved as foun
 Entries that are not directories or lack a `pyproject.toml` file are silently
 ignored, including in dry-run mode. If every entry is ignored, nothing is printed
 and no external commands are run.
+Reports also silently skip repos whose pyproject cannot be read or parsed, lacks
+`[project].description`, or has a non-string description. Later repos are still
+reported.
 
 `fix --no-codex <repo>...` omits Codex titles and does not start app-server.
 Codex interrogation is enabled by default and can be explicitly enabled with

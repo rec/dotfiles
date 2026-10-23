@@ -107,6 +107,9 @@ def test_fix_without_codex_skips_invalid_entries_and_never_starts_codex(
         (directory / "README.md").write_text("# Repository title\n")
     (tmp_path / "code" / "empty").mkdir()
     (tmp_path / "code" / "file").touch()
+    legacy = tmp_path / "code" / "legacy"
+    legacy.mkdir()
+    (legacy / "pyproject.toml").write_text("[tool.old]\n")
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     flags = ["-d"] if dry_run else []
     monkeypatch.setattr(
@@ -121,6 +124,7 @@ def test_fix_without_codex_skips_invalid_entries_and_never_starts_codex(
             "safer",
             "empty",
             "file",
+            "legacy",
             "tuney",
         ],
     )
@@ -145,9 +149,52 @@ def test_fix_without_codex_skips_invalid_entries_and_never_starts_codex(
     assert "missing" not in output.out
     assert "empty" not in output.out
     assert "file:" not in output.out
+    if not dry_run:
+        assert "legacy" not in output.out
     assert output.out.count('    description = "Local description"') == (
         0 if dry_run else 2
     )
+    assert output.err == ""
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        None,
+        b"[tool.old]\n",
+        b"[project]\nname = 'old'\n",
+        b"project = 1\n",
+        b"[project]\ndescription = 1\n",
+        b"[project\n",
+        b"\xff",
+    ],
+)
+def test_unusable_pyproject_is_skipped_silently(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    content: bytes | None,
+) -> None:
+    if content is not None:
+        (tmp_path / "pyproject.toml").write_bytes(content)
+    server = codexo.AppServer(StringIO(), StringIO())
+    codexo.report_repository(server, tmp_path)
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == ""
+
+
+def test_unreadable_pyproject_is_skipped_silently(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    def unreadable(*args: object, **kwargs: object) -> None:
+        raise PermissionError("unreadable pyproject.toml")
+
+    monkeypatch.setattr(codexo.Path, "open", unreadable)
+    codexo.report_repository(None, tmp_path)
+    output = capsys.readouterr()
+    assert output.out == ""
     assert output.err == ""
 
 

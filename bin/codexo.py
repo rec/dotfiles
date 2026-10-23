@@ -259,8 +259,13 @@ def main() -> None:
 
 
 def report_repository(server: AppServer | None, directory: Path) -> None:
-    with (directory / "pyproject.toml").open("rb") as source:
-        description: str = tomllib.load(source)["project"]["description"]
+    try:
+        with (directory / "pyproject.toml").open("rb") as source:
+            description: object = tomllib.load(source)["project"]["description"]
+    except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError, KeyError, TypeError):
+        return
+    if not isinstance(description, str):
+        return
     heading = next(
         (
             s[2:].strip()
