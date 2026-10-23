@@ -106,7 +106,7 @@ def test_repository_report_preserves_inconsistent_metadata(
     monkeypatch.setattr(codexo, "codex_titles", lambda *a: ["safer"])
     server = codexo.AppServer(StringIO(), StringIO())
     codexo.report_repository(server, "safer")
-    file_regression.check(capsys.readouterr().out)
+    file_regression.check(capsys.readouterr().out.rstrip() + "\n")
     assert (directory / "pyproject.toml").read_text() == pyproject
     assert (directory / "README.md").read_text() == readme
 
