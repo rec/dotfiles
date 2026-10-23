@@ -92,17 +92,19 @@ at that working directory. Output is TOML, with the directory name as the top-le
 table and string fields `pyproject`, `README`, and `github`. The optional nested
 `codex` table contains `project` when present and a `chats` array of strings.
 `--no-codex` omits that table; querying a directory with no chats gives `chats = []`.
-Multiple Projects matching the same directory are an error. Icons, backticks,
-and differing descriptions are preserved as found. Serialization uses the existing
-tomlkit dependency.
-Entries that are not directories or lack a `pyproject.toml` file are silently
+Icons, backticks, and differing descriptions are preserved as found. Serialization
+uses the existing tomlkit dependency. Entries that are not directories are silently
 ignored, including in dry-run mode. If every entry is ignored, nothing is printed
 and no external commands are run.
-Reports also silently skip repos whose pyproject cannot be read or parsed, lacks
-`[project].description`, or has a non-string description. Later repos are still
-reported.
-If `README.md` is missing or has no level-one heading, its report line is
-`(missing)` and the remaining sources are still reported.
+
+The four sources are read independently. Any failed source is silently omitted,
+including missing or invalid pyproject metadata, missing README headings, failed
+GitHub lookups, and Codex failures. GitHub stderr is captured rather than printed.
+Missing README values no longer produce `(missing)` placeholders. Repos with no
+available information produce no table; reporting continues with later repos.
+There is no pyproject requirement or Git remote precheck for reading other sources.
+Codex startup or initialization failure disables only the Codex source for that
+run. Multiple Projects at one directory make that directory's Codex source fail.
 
 `fix --no-codex <repo>...` omits Codex titles and does not start app-server.
 Codex interrogation is enabled by default and can be explicitly enabled with
@@ -116,7 +118,7 @@ internal desktop state files. `gh repo view` reads the GitHub description using
 the repository's configured remote. `-d fix <repo>...` prints only the planned
 reads, without starting app-server or contacting GitHub.
 
-The script stops if Codex requests approvals, user input, or app-only tools that
+`retire` stops if Codex requests approvals, user input, or app-only tools that
 this standalone client cannot supply. Missing or empty documents, unsuccessful
 turns, and invalid or mismatching read receipts prevent archiving. If failure
 occurs after creating the replacement, it remains available; the script prints
