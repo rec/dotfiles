@@ -7,6 +7,7 @@ from io import StringIO
 from pathlib import Path
 
 import pytest
+import tomllib
 from pytest_regressions.file_regression import FileRegressionFixture
 
 spec = importlib.util.spec_from_file_location(
@@ -139,21 +140,26 @@ def test_fix_without_codex_skips_invalid_entries_and_never_starts_codex(
         return subprocess.CompletedProcess([], 0, "GitHub description\n")
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
-    monkeypatch.setattr(codexo, "codex_titles", unexpected_operation)
+    monkeypatch.setattr(codexo, "codex_info", unexpected_operation)
     monkeypatch.setattr(codexo.subprocess, "run", github_description)
     codexo.main()
     output = capsys.readouterr()
-    assert "safer:" in output.out
-    assert "tuney:" in output.out
+    if dry_run:
+        assert "safer:" in output.out
+        assert "tuney:" in output.out
+    else:
+        report = tomllib.loads(output.out)
+        for r in ["safer", "tuney"]:
+            assert report[r]["pyproject"] == "Local description"
+            assert report[r]["README"] == "Repository title"
+            assert report[r]["github"] == "GitHub description"
+            assert "codex" not in report[r]
     assert "codex" not in output.out.lower()
     assert "missing" not in output.out
     assert "empty" not in output.out
     assert "file:" not in output.out
     if not dry_run:
         assert "legacy" not in output.out
-    assert output.out.count('    description = "Local description"') == (
-        0 if dry_run else 2
-    )
     assert output.err == ""
 
 
@@ -202,7 +208,7 @@ def test_repository_without_remotes_is_skipped_silently(
         pytest.fail("Repositories without remotes must not query Codex")
 
     monkeypatch.setattr(codexo.subprocess, "run", no_remotes)
-    monkeypatch.setattr(codexo, "codex_titles", unexpected_titles)
+    monkeypatch.setattr(codexo, "codex_info", unexpected_titles)
 
     codexo.report_repository(codexo.AppServer(StringIO(), StringIO()), tmp_path)
 
@@ -276,7 +282,9 @@ def test_repository_report_preserves_inconsistent_metadata(
             a, 0, "🧷 A safer writer 🧷\n"
         ),
     )
-    monkeypatch.setattr(codexo, "codex_titles", lambda *a: ["safer"])
+    monkeypatch.setattr(
+        codexo, "codex_info", lambda *a: codexo.CodexInfo(project="safer")
+    )
     server = codexo.AppServer(StringIO(), StringIO())
     codexo.report_repository(server, directory)
     file_regression.check(capsys.readouterr().out.rstrip() + "\n")
@@ -285,37 +293,44 @@ def test_repository_report_preserves_inconsistent_metadata(
 
 
 @pytest.mark.parametrize("readme", [None, "", "Body text.\n## Section\n"])
+@pytest.mark.parametrize("directory_name", ["repo", "repo.with spaces"])
 def test_missing_readme_heading_prints_placeholder_and_continues_report(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     readme: str | None,
+    directory_name: str,
 ) -> None:
-    (tmp_path / "pyproject.toml").write_text(
+    directory = tmp_path / directory_name
+    directory.mkdir()
+    (directory / "pyproject.toml").write_text(
         '[project]\ndescription = "Local description"\n'
     )
     if readme is not None:
-        (tmp_path / "README.md").write_text(readme)
+        (directory / "README.md").write_text(readme)
     monkeypatch.setattr(
         codexo.subprocess,
         "run",
         lambda *a, **k: subprocess.CompletedProcess([], 0, "GitHub description\n"),
     )
     monkeypatch.setattr(
-        codexo, "codex_titles", lambda *a: ["Codex project", "Codex chat"]
+        codexo,
+        "codex_info",
+        lambda *a: codexo.CodexInfo(project="Codex project", chats=["Codex chat"]),
     )
     server = codexo.AppServer(StringIO(), StringIO())
-    codexo.report_repository(server, tmp_path)
+    codexo.report_repository(server, directory)
     output = capsys.readouterr()
-    assert "    (missing)\n" in output.out
-    assert "    GitHub description\n" in output.out
-    assert "    Codex project\n" in output.out
-    assert "    Codex chat\n" in output.out
+    report = tomllib.loads(output.out)[directory_name]
+    assert report["README"] == "(missing)"
+    assert report["github"] == "GitHub description"
+    assert report["codex"]["project"] == "Codex project"
+    assert report["codex"]["chats"] == ["Codex chat"]
     assert output.err == ""
 
 
 @pytest.mark.parametrize("matches", [0, 1, 2])
-def test_codex_titles_match_exact_roots_and_put_project_before_all_chats(
+def test_codex_info_matches_exact_roots_and_keeps_project_separate_from_chats(
     tmp_path: Path,
     matches: int,
 ) -> None:
@@ -361,14 +376,13 @@ def test_codex_titles_match_exact_roots_and_put_project_before_all_chats(
     )
     if matches > 1:
         with pytest.raises(RuntimeError, match="Multiple Codex projects"):
-            codexo.codex_titles(server, tmp_path)
+            codexo.codex_info(server, tmp_path)
     else:
-        titles = codexo.codex_titles(server, tmp_path)
-        assert len(titles) == matches + 2
-        if matches:
-            assert titles[0] == "Project title"
-        assert titles[-2] == "First chat"
-        assert titles[-1] == "Second chat"
+        info = codexo.codex_info(server, tmp_path)
+        assert info.project == ("Project title" if matches else None)
+        assert len(info.chats) == 2
+        assert info.chats[0] == "First chat"
+        assert info.chats[1] == "Second chat"
         for r in map(json.loads, writer.getvalue().splitlines()[2:]):
             assert r["params"]["cwd"] == str(tmp_path)
             assert r["params"]["archived"] is False

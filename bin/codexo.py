@@ -16,6 +16,7 @@ from pathlib import Path
 from tempfile import mkdtemp
 from typing import IO, Annotated, cast
 
+import tomlkit
 import tomllib
 import tyro
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
@@ -68,6 +69,11 @@ class AppProject(BaseModel, frozen=True):
 class ProjectPage(BaseModel, frozen=True):
     data: list[AppProject]
     nextCursor: str | None = None
+
+
+class CodexInfo(BaseModel, frozen=True):
+    project: str | None = None
+    chats: list[str] = Field(default_factory=list)
 
 
 class RpcMessage(BaseModel, frozen=True):
@@ -196,11 +202,9 @@ def main() -> None:
                     print(
                         "    thread/list: list all unarchived chats at this directory."
                     )
-                    print(
-                        "    Print values, with the Codex project before chat titles."
-                    )
+                    print("    Print TOML with codex.project and codex.chats.")
                 else:
-                    print("    Print local and GitHub values.")
+                    print("    Print local and GitHub values as TOML.")
             if command.action.codex:
                 print("Stop app-server; no project information is changed.")
         else:
@@ -291,17 +295,18 @@ def report_repository(server: AppServer | None, directory: Path) -> None:
         text=True,
         check=True,
     ).stdout.rstrip("\n")
-    titles = codex_titles(server, directory) if server is not None else []
-    print(f"{directory.name}:")
-    print(f"    description = {json.dumps(description, ensure_ascii=False)}")
-    print(f"    {heading}")
-    print(f"    {github}")
-    for t in titles:
-        print(f"    {t}")
-    print()
+    report = tomlkit.table()
+    report["pyproject"] = description
+    report["README"] = heading
+    report["github"] = github
+    if server is not None:
+        report["codex"] = codex_info(server, directory).model_dump(exclude_none=True)
+    document = tomlkit.document()
+    document[directory.name] = report
+    print(tomlkit.dumps(document))
 
 
-def codex_titles(server: AppServer, directory: Path) -> list[str]:
+def codex_info(server: AppServer, directory: Path) -> CodexInfo:
     projects: list[str] = []
     cursor: str | None = None
     while True:
@@ -318,7 +323,7 @@ def codex_titles(server: AppServer, directory: Path) -> list[str]:
         cursor = page.nextCursor
     if len(projects) > 1:
         raise RuntimeError(f"Multiple Codex projects at {directory}: {projects}")
-    titles = projects.copy()
+    info = CodexInfo(project=projects[0] if projects else None)
     cursor = None
     while True:
         chats = ChatPage.model_validate(
@@ -334,9 +339,11 @@ def codex_titles(server: AppServer, directory: Path) -> list[str]:
                 },
             )
         )
-        titles.extend(c.name if c.name is not None else "(unnamed)" for c in chats.data)
+        info.chats.extend(
+            c.name if c.name is not None else "(unnamed)" for c in chats.data
+        )
         if chats.nextCursor is None:
-            return titles
+            return info
         cursor = chats.nextCursor
 
 

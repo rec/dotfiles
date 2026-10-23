@@ -88,9 +88,13 @@ discover or create.
 repository names resolve under `~/code`; absolute paths also work. Each report
 prints the pyproject description, first level-one README heading (without `# `),
 GitHub description, Codex Project name if present, and every unarchived chat name
-at that working directory. Values are indented by four spaces under the repository
-name. The Project precedes the chats; multiple Projects matching the same directory
-are an error. Icons, backticks, and differing descriptions are preserved as found.
+at that working directory. Output is TOML, with the directory name as the top-level
+table and string fields `pyproject`, `README`, and `github`. The optional nested
+`codex` table contains `project` when present and a `chats` array of strings.
+`--no-codex` omits that table; querying a directory with no chats gives `chats = []`.
+Multiple Projects matching the same directory are an error. Icons, backticks,
+and differing descriptions are preserved as found. Serialization uses the existing
+tomlkit dependency.
 Entries that are not directories or lack a `pyproject.toml` file are silently
 ignored, including in dry-run mode. If every entry is ignored, nothing is printed
 and no external commands are run.
