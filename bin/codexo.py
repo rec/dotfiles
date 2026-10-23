@@ -266,6 +266,15 @@ def report_repository(server: AppServer | None, directory: Path) -> None:
         return
     if not isinstance(description, str):
         return
+    remotes = subprocess.run(
+        ["git", "remote"],
+        cwd=directory,
+        stdout=subprocess.PIPE,
+        text=True,
+        check=True,
+    ).stdout
+    if not remotes.strip():
+        return
     try:
         readme = (directory / "README.md").read_text()
     except FileNotFoundError:

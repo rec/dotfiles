@@ -183,6 +183,34 @@ def test_unusable_pyproject_is_skipped_silently(
     assert output.err == ""
 
 
+def test_repository_without_remotes_is_skipped_silently(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\ndescription = "Local description"\n'
+    )
+
+    def no_remotes(
+        command: list[str], **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        assert command == ["git", "remote"]
+        return subprocess.CompletedProcess(command, 0, "")
+
+    def unexpected_titles(*args: object) -> list[str]:
+        pytest.fail("Repositories without remotes must not query Codex")
+
+    monkeypatch.setattr(codexo.subprocess, "run", no_remotes)
+    monkeypatch.setattr(codexo, "codex_titles", unexpected_titles)
+
+    codexo.report_repository(codexo.AppServer(StringIO(), StringIO()), tmp_path)
+
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == ""
+
+
 def test_unreadable_pyproject_is_skipped_silently(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
