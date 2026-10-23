@@ -77,6 +77,10 @@ permission defaults. Run only when the old chat is idle, and leave it idle in
 the desktop app throughout the handover. A separate server may not observe work
 running in another process.
 
+Add `-d` or `--dry-run` to print the planned operations without starting
+app-server, creating files, or changing chats. This mode runs offline, so it shows
+placeholders for metadata and paths that a real run would discover or create.
+
 The script stops if Codex requests approvals, user input, or app-only tools that
 this standalone client cannot supply. Missing or empty documents, unsuccessful
 turns, and invalid or mismatching read receipts prevent archiving. If failure

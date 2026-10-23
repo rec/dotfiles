@@ -22,6 +22,8 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 class CodexoCommand(BaseModel, frozen=True):
     thread_id: Annotated[str | None, tyro.conf.Positional] = None
+    dry_run: Annotated[bool, tyro.conf.arg(aliases=["-d"])] = False
+    """Print planned operations without starting app-server or making changes."""
 
 
 class Chat(BaseModel, frozen=True):
@@ -137,6 +139,9 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
+    if command.dry_run:
+        print_dry_run(command.thread_id)
+        return
     try:
         with subprocess.Popen(
             ["codex", "app-server"],
@@ -162,6 +167,34 @@ def main() -> None:
         sys.exit(str(error))
     except KeyboardInterrupt:
         sys.exit("Interrupted; any unfinished handover has not archived the old chat.")
+
+
+def print_dry_run(thread_id: str | None) -> None:
+    print("Dry run: no app-server, file, or chat operations will be performed.")
+    print("Values in <angle brackets> are determined during a real run.")
+    print("Start codex app-server; send initialize and initialized.")
+    if thread_id is None:
+        print("thread/list: list unarchived app-server chats, 25 per page.")
+        print("Ask for a chat number, fetching further pages as requested.")
+    old_id = thread_id if thread_id is not None else "<selected-chat-id>"
+    print(f"thread/read: read {old_id!r}; require a display name and an idle chat.")
+    print("Preserve <old-chat-name> and <old-working-directory>.")
+    print("Application Project membership is unverified.")
+    print(f"thread/resume: resume {old_id!r}; require it to remain idle.")
+    print("Create a unique codexo- temporary directory.")
+    print("Use <temporary-directory>/handover.md as the handover path.")
+    print(f"turn/start: ask {old_id!r} to write the handover document.")
+    print("Wait for successful turn/completed; require a nonempty handover file.")
+    print("Compute the handover file's SHA-256 checksum.")
+    print("thread/start: create <replacement-chat-id> in <old-working-directory>.")
+    print("Require the replacement working directory to match the old one.")
+    print("thread/name/set: name <replacement-chat-id> <old-chat-name>.")
+    print(
+        "turn/start: ask the replacement to read the handover and return its SHA-256."
+    )
+    print("Wait for successful turn/completed; require a matching checksum receipt.")
+    print(f"thread/archive: archive {old_id!r} only after verification succeeds.")
+    print("Print the replacement ID; stop app-server. Keep the handover file.")
 
 
 def select_chat(server: AppServer) -> str:

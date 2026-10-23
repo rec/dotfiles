@@ -16,6 +16,46 @@ sys.modules[spec.name] = codexo
 spec.loader.exec_module(codexo)
 
 
+@pytest.mark.parametrize("flag", ["-d", "--dry-run"])
+@pytest.mark.parametrize("thread_id", [None, "old-chat-id"])
+def test_dry_run_prints_operations_without_performing_them(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    flag: str,
+    thread_id: str | None,
+) -> None:
+    args = ["codexo.py", flag]
+    if thread_id is not None:
+        args.append(thread_id)
+    monkeypatch.setattr(sys, "argv", args)
+
+    def unexpected_operation(*args: object, **kwargs: object) -> None:
+        pytest.fail("Dry-run must not start app-server or create files")
+
+    monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
+    monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
+    codexo.main()
+    output = capsys.readouterr().out
+    assert "no app-server, file, or chat operations" in output
+    assert ("thread/list:" in output) == (thread_id is None)
+    assert (thread_id or "<selected-chat-id>") in output
+    for operation in [
+        "initialize",
+        "initialized",
+        "thread/read",
+        "thread/resume",
+        "handover.md",
+        "turn/start",
+        "turn/completed",
+        "thread/start",
+        "thread/name/set",
+        "matching checksum",
+        "thread/archive",
+        "stop app-server",
+    ]:
+        assert operation in output
+
+
 def test_turn_retains_events_received_before_start_response() -> None:
     messages = [
         {
