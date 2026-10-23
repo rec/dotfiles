@@ -409,6 +409,7 @@ def test_missing_readme_heading_omits_readme_and_continues_report(
     assert report["github"] == "GitHub description"
     assert report["codex"]["project"] == "Codex project"
     assert report["codex"]["chats"] == ["Codex chat"]
+    assert 'codex = {project = "Codex project", chats = ["Codex chat"]}' in output.out
     assert output.err == ""
 
 

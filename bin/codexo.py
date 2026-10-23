@@ -275,7 +275,12 @@ def report_repository(server: AppServer | None, directory: Path) -> None:
     report = tomlkit.table()
     for name, read in sources.items():
         try:
-            report[name] = read()
+            value = read()
+            if name == "codex":
+                inline = tomlkit.inline_table()
+                inline.update(cast(dict[str, object], value))
+                value = inline
+            report[name] = value
         except Exception:
             # Each source is independent; omit any information that cannot be read.
             continue

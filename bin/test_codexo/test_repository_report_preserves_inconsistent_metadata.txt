@@ -2,7 +2,4 @@
 pyproject = "🧿 A safer writer for files and streams 🧿"
 README = "🧿 `safer`: A safer writer 🧿"
 github = "🧷 A safer writer 🧷"
-
-[safer.codex]
-project = "safer"
-chats = []
+codex = {project = "safer", chats = []}

@@ -90,7 +90,7 @@ prints the pyproject description, first level-one README heading (without `# `),
 GitHub description, Codex Project name if present, and every unarchived chat name
 at that working directory. Output is TOML, with the directory name as the top-level
 table and string fields `pyproject`, `README`, and `github`. The optional nested
-`codex` table contains `project` when present and a `chats` array of strings.
+`codex` inline table contains `project` when present and a `chats` array of strings.
 `--no-codex` omits that table; querying a directory with no chats gives `chats = []`.
 Icons, backticks, and differing descriptions are preserved as found. Serialization
 uses the existing tomlkit dependency. Entries that are not directories are silently
