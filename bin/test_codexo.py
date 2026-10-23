@@ -256,6 +256,32 @@ def test_repository_report_preserves_inconsistent_metadata(
     assert (directory / "README.md").read_text() == readme
 
 
+def test_missing_readme_prints_placeholder_and_continues_report(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    (tmp_path / "pyproject.toml").write_text(
+        '[project]\ndescription = "Local description"\n'
+    )
+    monkeypatch.setattr(
+        codexo.subprocess,
+        "run",
+        lambda *a, **k: subprocess.CompletedProcess([], 0, "GitHub description\n"),
+    )
+    monkeypatch.setattr(
+        codexo, "codex_titles", lambda *a: ["Codex project", "Codex chat"]
+    )
+    server = codexo.AppServer(StringIO(), StringIO())
+    codexo.report_repository(server, tmp_path)
+    output = capsys.readouterr()
+    assert "    (missing)\n" in output.out
+    assert "    GitHub description\n" in output.out
+    assert "    Codex project\n" in output.out
+    assert "    Codex chat\n" in output.out
+    assert output.err == ""
+
+
 @pytest.mark.parametrize("matches", [0, 1, 2])
 def test_codex_titles_match_exact_roots_and_put_project_before_all_chats(
     tmp_path: Path,

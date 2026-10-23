@@ -97,6 +97,8 @@ and no external commands are run.
 Reports also silently skip repos whose pyproject cannot be read or parsed, lacks
 `[project].description`, or has a non-string description. Later repos are still
 reported.
+If `README.md` is missing, its report line is `(missing)` and the remaining
+sources are still reported.
 
 `fix --no-codex <repo>...` omits Codex titles and does not start app-server.
 Codex interrogation is enabled by default and can be explicitly enabled with
