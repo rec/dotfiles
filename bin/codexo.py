@@ -12,13 +12,16 @@ import json
 import subprocess
 import sys
 from collections import deque
+from collections.abc import Callable, Iterator
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
 from tempfile import mkdtemp
 from typing import IO, Annotated, cast
 
+import tomlkit
 import tomllib
 import tyro
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError
 
 
 class RetireCommand(BaseModel, frozen=True):
@@ -68,6 +71,11 @@ class AppProject(BaseModel, frozen=True):
 class ProjectPage(BaseModel, frozen=True):
     data: list[AppProject]
     nextCursor: str | None = None
+
+
+class CodexInfo(BaseModel, frozen=True):
+    project: str | None = None
+    chats: list[str] = Field(default_factory=list)
 
 
 class RpcMessage(BaseModel, frozen=True):
@@ -171,137 +179,143 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
-    directories: list[Path] = []
     if isinstance(command.action, FixCommand):
-        directories = [
-            p
-            for r in command.action.repos
-            if (p := (Path.home() / "code" / r).resolve()).is_dir()
-            and (p / "pyproject.toml").is_file()
-        ]
-        if not directories:
-            return
+        fix_repositories(command.action, command.dry_run)
+        return
     if command.dry_run:
-        if isinstance(command.action, FixCommand):
-            if command.action.codex:
-                print("Start the desktop app's bundled codex app-server; initialize.")
-            for p in directories:
-                print(f"{p.name}:")
-                print(
-                    "    Read pyproject.toml description and first README.md heading."
-                )
-                print("    gh repo view: read the GitHub description.")
-                if command.action.codex:
-                    print("    project/list: find at most one project with this root.")
-                    print(
-                        "    thread/list: list all unarchived chats at this directory."
-                    )
-                    print(
-                        "    Print values, with the Codex project before chat titles."
-                    )
-                else:
-                    print("    Print local and GitHub values.")
-            if command.action.codex:
-                print("Stop app-server; no project information is changed.")
-        else:
-            print_dry_run(command.action.thread_id)
+        print_dry_run(command.action.thread_id)
         return
     try:
-        if isinstance(command.action, FixCommand) and not command.action.codex:
-            for p in directories:
-                report_repository(None, p)
-            return
-        executable = (
-            "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
-            if isinstance(command.action, FixCommand)
-            else "codex"
-        )
-        with subprocess.Popen(
-            [executable, "app-server"],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            text=True,
-            bufsize=1,
-        ) as process:
-            assert process.stdout is not None
-            assert process.stdin is not None
-            try:
-                server = AppServer(process.stdout, process.stdin)
-                server.request(
-                    "initialize",
-                    {
-                        "clientInfo": {"name": "codexo", "version": "0.1.0"},
-                        "capabilities": {
-                            "experimentalApi": isinstance(command.action, FixCommand)
-                        },
-                    },
-                )
-                server.send({"method": "initialized", "params": {}})
-                if isinstance(command.action, FixCommand):
-                    for p in directories:
-                        report_repository(server, p)
-                else:
-                    thread_id = command.action.thread_id or select_chat(server)
-                    replace_chat(server, thread_id)
-            finally:
-                process.terminate()
-    except (
-        OSError,
-        RuntimeError,
-        ValidationError,
-        EOFError,
-        tomllib.TOMLDecodeError,
-        subprocess.CalledProcessError,
-    ) as error:
+        with app_server("codex") as server:
+            thread_id = command.action.thread_id or select_chat(server)
+            replace_chat(server, thread_id)
+    except (OSError, RuntimeError, ValidationError, EOFError) as error:
         sys.exit(str(error))
     except KeyboardInterrupt:
         sys.exit("Interrupted; any unfinished handover has not archived the old chat.")
 
 
-def report_repository(server: AppServer | None, directory: Path) -> None:
-    try:
-        with (directory / "pyproject.toml").open("rb") as source:
-            description: object = tomllib.load(source)["project"]["description"]
-    except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError, KeyError, TypeError):
-        return
-    if not isinstance(description, str):
-        return
-    remotes = subprocess.run(
-        ["git", "remote"],
-        cwd=directory,
+@contextmanager
+def app_server(
+    executable: str, experimental: bool = False, quiet: bool = False
+) -> Iterator[AppServer]:
+    with subprocess.Popen(
+        [executable, "app-server"],
+        stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL if quiet else None,
         text=True,
-        check=True,
-    ).stdout
-    if not remotes.strip():
+        bufsize=1,
+    ) as process:
+        assert process.stdout is not None
+        assert process.stdin is not None
+        try:
+            server = AppServer(process.stdout, process.stdin)
+            server.request(
+                "initialize",
+                {
+                    "clientInfo": {"name": "codexo", "version": "0.1.0"},
+                    "capabilities": {"experimentalApi": experimental},
+                },
+            )
+            server.send({"method": "initialized", "params": {}})
+            yield server
+        finally:
+            process.terminate()
+
+
+def fix_repositories(command: FixCommand, dry_run: bool) -> None:
+    directories = [
+        p for r in command.repos if (p := (Path.home() / "code" / r).resolve()).is_dir()
+    ]
+    if not directories:
         return
-    try:
-        readme = (directory / "README.md").read_text()
-    except FileNotFoundError:
-        heading = "(missing)"
-    else:
-        heading = next(
-            (s[2:].strip() for s in readme.splitlines() if s.startswith("# ")),
-            "(missing)",
+    if dry_run:
+        if command.codex:
+            print("Start the desktop app's bundled codex app-server; initialize.")
+        for p in directories:
+            print(f"{p.name}:")
+            print("    Read pyproject.toml description and first README.md heading.")
+            print("    gh repo view: read the GitHub description.")
+            if command.codex:
+                print("    project/list: find at most one project with this root.")
+                print("    thread/list: list all unarchived chats at this directory.")
+            print("    Print available values as TOML; omit failed sources.")
+        if command.codex:
+            print("Stop app-server; no project information is changed.")
+        return
+    with ExitStack() as stack:
+        server = None
+        if command.codex:
+            try:
+                server = stack.enter_context(
+                    app_server(
+                        "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+                        experimental=True,
+                        quiet=True,
+                    )
+                )
+            except Exception:
+                # Codex is optional, including when startup or initialization fails.
+                pass
+        for p in directories:
+            report_repository(server, p)
+
+
+def report_repository(server: AppServer | None, directory: Path) -> None:
+    sources: dict[str, Callable[[], object]] = {
+        "pyproject": lambda: pyproject_description(directory),
+        "README": lambda: readme_heading(directory),
+        "github": lambda: github_description(directory),
+    }
+    if server is not None:
+        sources["codex"] = lambda: codex_info(server, directory).model_dump(
+            exclude_none=True
         )
-    github = subprocess.run(
+    report = tomlkit.table()
+    for name, read in sources.items():
+        try:
+            value = read()
+            if name == "codex":
+                inline = tomlkit.inline_table()
+                inline.update(cast(dict[str, object], value))
+                value = inline
+            report[name] = value
+        except Exception:
+            # Each source is independent; omit any information that cannot be read.
+            continue
+    if report:
+        document = tomlkit.document()
+        document[directory.name] = report
+        print(tomlkit.dumps(document))
+
+
+def pyproject_description(directory: Path) -> str:
+    with (directory / "pyproject.toml").open("rb") as source:
+        return TypeAdapter(str).validate_python(
+            tomllib.load(source)["project"]["description"]
+        )
+
+
+def readme_heading(directory: Path) -> str:
+    return next(
+        s[2:].strip()
+        for s in (directory / "README.md").read_text().splitlines()
+        if s.startswith("# ")
+    )
+
+
+def github_description(directory: Path) -> str:
+    return subprocess.run(
         ["gh", "repo", "view", "--json", "description", "--jq", ".description"],
         cwd=directory,
-        stdout=subprocess.PIPE,
+        capture_output=True,
         text=True,
         check=True,
     ).stdout.rstrip("\n")
-    titles = codex_titles(server, directory) if server is not None else []
-    print(f"{directory.name}:")
-    print(f"    description = {json.dumps(description, ensure_ascii=False)}")
-    print(f"    {heading}")
-    print(f"    {github}")
-    for t in titles:
-        print(f"    {t}")
-    print()
 
 
-def codex_titles(server: AppServer, directory: Path) -> list[str]:
+def codex_info(server: AppServer, directory: Path) -> CodexInfo:
     projects: list[str] = []
     cursor: str | None = None
     while True:
@@ -318,7 +332,7 @@ def codex_titles(server: AppServer, directory: Path) -> list[str]:
         cursor = page.nextCursor
     if len(projects) > 1:
         raise RuntimeError(f"Multiple Codex projects at {directory}: {projects}")
-    titles = projects.copy()
+    info = CodexInfo(project=projects[0] if projects else None)
     cursor = None
     while True:
         chats = ChatPage.model_validate(
@@ -334,9 +348,11 @@ def codex_titles(server: AppServer, directory: Path) -> list[str]:
                 },
             )
         )
-        titles.extend(c.name if c.name is not None else "(unnamed)" for c in chats.data)
+        info.chats.extend(
+            c.name if c.name is not None else "(unnamed)" for c in chats.data
+        )
         if chats.nextCursor is None:
-            return titles
+            return info
         cursor = chats.nextCursor
 
 
