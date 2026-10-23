@@ -34,9 +34,10 @@ The documented operations cover the core sequence:
 | Request that it read the document | `turn/start` with the accessible document path |
 | Archive the old chat | `thread/archive` |
 
-The document must be saved somewhere the replacement chat can read. A local file
-accessible to both chats is a possible handover mechanism; its exact location and
-format have not been chosen.
+The script creates a unique temporary directory and asks the old chat to save
+`handover.md` there. The file remains available after the script exits, until the
+system cleans its temporary directory. The replacement must return a matching
+SHA-256 checksum before the old chat is archived.
 
 ## Project and working directory
 
@@ -46,17 +47,17 @@ old chat's recorded working directory and supply it when creating the replacemen
 without asking the user to choose a directory.
 
 An application Project and a working directory must not be assumed to be identical.
-Reusing the directory does not yet establish that the replacement will belong to
-the same application Project.
+Reusing the directory does not establish that the replacement will belong to
+the same application Project. The user has accepted preserving the working
+directory with Project membership explicitly unverified. The installed app-server
+schema has no application Project membership operation.
 
 ## Remaining verification
 
 - Verify that a separately launched app-server can see the existing chats in this
   desktop installation.
-- Verify how to create the replacement in the same application Project, including
-  whether supplying the old working directory is sufficient.
-- Verify that the replacement can read the completed handover document before
-  archiving the old chat.
+- Verify the complete handover on live chats. Unit tests cover the archive gate,
+  but do not establish desktop integration or model behavior.
 
 The current chat also exposes app-provided chat management tools, but their
 availability does not establish a supported interface callable directly by an
@@ -64,10 +65,24 @@ independent Python program.
 
 ## Status
 
-Only documentation research and discussion have been completed. No Python program
-has been written, no app-server has been launched, and no chats have been changed.
-The documented thread operations fit the core workflow; access to this
-installation's chats and application Project placement remain unverified.
+Implemented in `bin/codexo.py`, using the existing dotfiles environment's Tyro
+and Pydantic dependencies. The script launches `codex app-server` over stdio.
+No live app-server session has been launched and no chats have been changed
+during implementation. The installed protocol schema was generated and inspected.
+
+Run `/Users/tom/code/dotfiles/bin/codexo.py` to select a chat from paginated
+app-server results, or pass a thread ID as the positional argument. It preserves
+the display name and recorded working directory, using configured model and
+permission defaults. Run only when the old chat is idle, and leave it idle in
+the desktop app throughout the handover. A separate server may not observe work
+running in another process.
+
+The script stops if Codex requests approvals, user input, or app-only tools that
+this standalone client cannot supply. Missing or empty documents, unsuccessful
+turns, and invalid or mismatching read receipts prevent archiving. If failure
+occurs after creating the replacement, it remains available; the script prints
+its ID and the handover path so work can be recovered manually. It does not
+retry, clean up chats, or continue the handed-over task automatically.
 
 ## Additional work beyond the prompt
 

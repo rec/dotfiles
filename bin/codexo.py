@@ -1,0 +1,255 @@
+#!/Users/tom/code/dotfiles/.venv/bin/python
+"""Replace a Codex chat using a verified handover, preserving its cwd and name.
+
+Application Project membership is not exposed by app-server and is unverified.
+Run with no arguments to select a chat, or pass its thread ID.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import subprocess
+import sys
+from collections import deque
+from pathlib import Path
+from tempfile import mkdtemp
+from typing import IO, Annotated, cast
+
+import tyro
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
+
+
+class CodexoCommand(BaseModel, frozen=True):
+    thread_id: Annotated[str | None, tyro.conf.Positional] = None
+
+
+class Chat(BaseModel, frozen=True):
+    id: str
+    name: str | None = None
+    cwd: Path
+    status: dict[str, object]
+
+
+class ChatPage(BaseModel, frozen=True):
+    data: list[Chat]
+    nextCursor: str | None = None
+
+
+class RpcMessage(BaseModel, frozen=True):
+    id: int | str | None = None
+    method: str | None = None
+    params: dict[str, object] = Field(default_factory=dict)
+    result: dict[str, object] | None = None
+    error: dict[str, object] | None = None
+
+
+class Turn(BaseModel, frozen=True):
+    id: str
+    status: str
+    error: dict[str, object] | None = None
+
+
+class ReadReceipt(BaseModel, frozen=True):
+    sha256: str
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class AppServer:
+    """One synchronous JSON-RPC connection, retaining early turn events."""
+
+    def __init__(self, reader: IO[str], writer: IO[str]) -> None:
+        self.reader = reader
+        self.writer = writer
+        self.sequence = 0
+        self.events: deque[RpcMessage] = deque()
+
+    def send(self, message: dict[str, object]) -> None:
+        self.writer.write(json.dumps(message) + "\n")
+        self.writer.flush()
+
+    def receive(self) -> RpcMessage:
+        if not (line := self.reader.readline()):
+            raise RuntimeError("Codex app-server closed the connection")
+        message = RpcMessage.model_validate_json(line)
+        if message.method is not None and message.id is not None:
+            self.send(
+                {
+                    "id": message.id,
+                    "error": {"code": -32601, "message": "Unsupported client request"},
+                }
+            )
+            raise RuntimeError(
+                f"Codex requested {message.method}; this standalone client cannot "
+                "provide approvals, user input, or app-only tools. Old chat retained."
+            )
+        return message
+
+    def request(self, method: str, params: dict[str, object]) -> dict[str, object]:
+        self.sequence += 1
+        request_id = self.sequence
+        self.send({"id": request_id, "method": method, "params": params})
+        while True:
+            message = self.receive()
+            if message.method is not None:
+                if message.method in {"turn/completed", "item/completed"}:
+                    self.events.append(message)
+                continue
+            if message.id != request_id:
+                raise RuntimeError(f"Unexpected app-server response ID: {message.id}")
+            if message.error is not None:
+                raise RuntimeError(f"{method}: {message.error}")
+            if message.result is None:
+                raise RuntimeError(f"{method}: missing result")
+            return message.result
+
+    def run_turn(self, thread_id: str, prompt: str, receipt: bool = False) -> str:
+        params: dict[str, object] = {
+            "threadId": thread_id,
+            "input": [{"type": "text", "text": prompt}],
+        }
+        if receipt:
+            params["outputSchema"] = ReadReceipt.model_json_schema()
+        result = self.request("turn/start", params)
+        started = Turn.model_validate(result["turn"])
+        reply = ""
+        while True:
+            event = self.events.popleft() if self.events else self.receive()
+            if event.params.get("threadId") != thread_id:
+                continue
+            if event.method == "item/completed":
+                if event.params.get("turnId") != started.id:
+                    continue
+                item = cast(dict[str, object], event.params["item"])
+                if item.get("type") == "agentMessage":
+                    text = item.get("text")
+                    if isinstance(text, str):
+                        reply = text
+            elif event.method == "turn/completed":
+                turn = Turn.model_validate(event.params["turn"])
+                if turn.id != started.id:
+                    continue
+                if turn.status != "completed":
+                    raise RuntimeError(f"Turn {turn.id} {turn.status}: {turn.error}")
+                return reply
+
+
+def main() -> None:
+    command = tyro.cli(CodexoCommand)
+    try:
+        with subprocess.Popen(
+            ["codex", "app-server"],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            text=True,
+            bufsize=1,
+        ) as process:
+            assert process.stdout is not None
+            assert process.stdin is not None
+            try:
+                server = AppServer(process.stdout, process.stdin)
+                server.request(
+                    "initialize",
+                    {"clientInfo": {"name": "codexo", "version": "0.1.0"}},
+                )
+                server.send({"method": "initialized", "params": {}})
+                thread_id = command.thread_id or select_chat(server)
+                replace_chat(server, thread_id)
+            finally:
+                process.terminate()
+    except (OSError, RuntimeError, ValidationError, EOFError) as error:
+        sys.exit(str(error))
+    except KeyboardInterrupt:
+        sys.exit("Interrupted; any unfinished handover has not archived the old chat.")
+
+
+def select_chat(server: AppServer) -> str:
+    cursor: str | None = None
+    while True:
+        page = ChatPage.model_validate(
+            server.request(
+                "thread/list",
+                {
+                    "cursor": cursor,
+                    "limit": 25,
+                    "sourceKinds": ["appServer"],
+                    "archived": False,
+                    "sortKey": "updated_at",
+                },
+            )
+        )
+        if not page.data:
+            raise RuntimeError("No Codex app-server chats found")
+        for i, chat in enumerate(page.data, 1):
+            print(f"{i}. {chat.name or '(unnamed)'} [{chat.id}] ({chat.cwd})")
+        choice = input(
+            "Select chat number"
+            + (" or n for next page" if page.nextCursor else "")
+            + ": "
+        )
+        if choice == "n" and page.nextCursor:
+            cursor = page.nextCursor
+        elif choice.isdecimal() and 1 <= int(choice) <= len(page.data):
+            return page.data[int(choice) - 1].id
+        else:
+            print("Choose a number from this page.", file=sys.stderr)
+
+
+def replace_chat(server: AppServer, thread_id: str) -> str:
+    old = Chat.model_validate(
+        server.request("thread/read", {"threadId": thread_id})["thread"]
+    )
+    if not old.name:
+        raise RuntimeError("Selected chat has no display name to preserve")
+    if old.status["type"] not in {"idle", "notLoaded"}:
+        raise RuntimeError("Selected chat must be idle before handover")
+    print(f"Replacing {old.name!r}; preserving {old.cwd}.")
+    print("Application Project membership is unverified.")
+    resumed = Chat.model_validate(
+        server.request("thread/resume", {"threadId": old.id, "excludeTurns": True})[
+            "thread"
+        ]
+    )
+    if resumed.status["type"] != "idle":
+        raise RuntimeError("Selected chat is not idle after resume")
+    handover = Path(mkdtemp(prefix="codexo-")) / "handover.md"
+    print(f"Handover: {handover}", flush=True)
+    server.run_turn(
+        old.id,
+        f"Create a Markdown handover document at {json.dumps(str(handover))}. "
+        "Include the objective, user instructions and decisions, completed work, "
+        "relevant paths and commits, verification results, remaining work "
+        "and blockers. "
+        "Write the file using your file tools. Do not continue implementation, change "
+        "other files, commit, push, create chats, or archive chats. "
+        "Stop when it is saved.",
+    )
+    if not handover.is_file() or not handover.read_text().strip():
+        raise RuntimeError(f"Handover was not written: {handover}; old chat retained")
+    digest = hashlib.sha256(handover.read_bytes()).hexdigest()
+    new = Chat.model_validate(
+        server.request("thread/start", {"cwd": str(old.cwd)})["thread"]
+    )
+    print(f"Replacement chat: {new.id}", flush=True)
+    if new.cwd != old.cwd:
+        raise RuntimeError("Replacement working directory differs; old chat retained")
+    server.request("thread/name/set", {"threadId": new.id, "name": old.name})
+    reply = server.run_turn(
+        new.id,
+        f"Read the complete handover document at {json.dumps(str(handover))} "
+        "using your file tools and retain its context for future work. Compute the "
+        "SHA-256 checksum of the file's bytes using a tool and return it in the sha256 "
+        "field. If you cannot read it, report failure instead of claiming success. "
+        "Do not continue the work, modify files, commit, push, or archive chats.",
+        receipt=True,
+    )
+    if ReadReceipt.model_validate_json(reply).sha256 != digest:
+        raise RuntimeError("Replacement did not verify the handover; old chat retained")
+    server.request("thread/archive", {"threadId": old.id})
+    print(f"Archived {old.id}. Continue in {new.id} ({old.name}).")
+    return new.id
+
+
+if __name__ == "__main__":
+    main()
