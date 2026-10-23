@@ -273,10 +273,8 @@ def report_repository(server: AppServer | None, directory: Path) -> None:
     else:
         heading = next(
             (s[2:].strip() for s in readme.splitlines() if s.startswith("# ")),
-            None,
+            "(missing)",
         )
-        if heading is None:
-            raise RuntimeError(f"{directory}/README.md has no level-one heading")
     github = subprocess.run(
         ["gh", "repo", "view", "--json", "description", "--jq", ".description"],
         cwd=directory,

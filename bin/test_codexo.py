@@ -256,14 +256,18 @@ def test_repository_report_preserves_inconsistent_metadata(
     assert (directory / "README.md").read_text() == readme
 
 
-def test_missing_readme_prints_placeholder_and_continues_report(
+@pytest.mark.parametrize("readme", [None, "", "Body text.\n## Section\n"])
+def test_missing_readme_heading_prints_placeholder_and_continues_report(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
+    readme: str | None,
 ) -> None:
     (tmp_path / "pyproject.toml").write_text(
         '[project]\ndescription = "Local description"\n'
     )
+    if readme is not None:
+        (tmp_path / "README.md").write_text(readme)
     monkeypatch.setattr(
         codexo.subprocess,
         "run",
