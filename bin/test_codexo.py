@@ -24,7 +24,7 @@ def test_dry_run_prints_operations_without_performing_them(
     flag: str,
     thread_id: str | None,
 ) -> None:
-    args = ["codexo.py", flag]
+    args = ["codexo.py", flag, "retire"]
     if thread_id is not None:
         args.append(thread_id)
     monkeypatch.setattr(sys, "argv", args)
@@ -54,6 +54,25 @@ def test_dry_run_prints_operations_without_performing_them(
         "stop app-server",
     ]:
         assert operation in output
+
+
+@pytest.mark.parametrize("flags", [[], ["-d"], ["--dry-run"]])
+def test_fix_does_nothing(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    flags: list[str],
+) -> None:
+    monkeypatch.setattr(sys, "argv", ["codexo.py", *flags, "fix"])
+
+    def unexpected_operation(*args: object, **kwargs: object) -> None:
+        pytest.fail("Fix must not start app-server or create files")
+
+    monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
+    monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
+    codexo.main()
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert output.err == ""
 
 
 def test_turn_retains_events_received_before_start_response() -> None:

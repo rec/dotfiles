@@ -2,7 +2,7 @@
 """Replace a Codex chat using a verified handover, preserving its cwd and name.
 
 Application Project membership is not exposed by app-server and is unverified.
-Run with no arguments to select a chat, or pass its thread ID.
+Run `retire` to select a chat, or `retire THREAD_ID` for a specific chat.
 """
 
 from __future__ import annotations
@@ -20,8 +20,21 @@ import tyro
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 
-class CodexoCommand(BaseModel, frozen=True):
+class RetireCommand(BaseModel, frozen=True):
+    """Replace a chat using a verified handover, then archive the old chat."""
+
     thread_id: Annotated[str | None, tyro.conf.Positional] = None
+
+
+class FixCommand(BaseModel, frozen=True):
+    """Do nothing for now."""
+
+
+class CodexoCommand(BaseModel, frozen=True):
+    action: (
+        Annotated[RetireCommand, tyro.conf.subcommand(name="retire", prefix_name=False)]
+        | Annotated[FixCommand, tyro.conf.subcommand(name="fix", prefix_name=False)]
+    )
     dry_run: Annotated[bool, tyro.conf.arg(aliases=["-d"])] = False
     """Print planned operations without starting app-server or making changes."""
 
@@ -139,8 +152,10 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
+    if isinstance(command.action, FixCommand):
+        return
     if command.dry_run:
-        print_dry_run(command.thread_id)
+        print_dry_run(command.action.thread_id)
         return
     try:
         with subprocess.Popen(
@@ -159,7 +174,7 @@ def main() -> None:
                     {"clientInfo": {"name": "codexo", "version": "0.1.0"}},
                 )
                 server.send({"method": "initialized", "params": {}})
-                thread_id = command.thread_id or select_chat(server)
+                thread_id = command.action.thread_id or select_chat(server)
                 replace_chat(server, thread_id)
             finally:
                 process.terminate()

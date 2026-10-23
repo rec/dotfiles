@@ -70,16 +70,20 @@ and Pydantic dependencies. The script launches `codex app-server` over stdio.
 No live app-server session has been launched and no chats have been changed
 during implementation. The installed protocol schema was generated and inspected.
 
-Run `/Users/tom/code/dotfiles/bin/codexo.py` to select a chat from paginated
-app-server results, or pass a thread ID as the positional argument. It preserves
+Run `/Users/tom/code/dotfiles/bin/codexo.py retire` to select a chat from paginated
+app-server results, or pass a thread ID after `retire`. It preserves
 the display name and recorded working directory, using configured model and
 permission defaults. Run only when the old chat is idle, and leave it idle in
 the desktop app throughout the handover. A separate server may not observe work
 running in another process.
 
-Add `-d` or `--dry-run` to print the planned operations without starting
-app-server, creating files, or changing chats. This mode runs offline, so it shows
-placeholders for metadata and paths that a real run would discover or create.
+Add the top-level `-d` or `--dry-run` flag before the command, for example
+`/Users/tom/code/dotfiles/bin/codexo.py -d retire`, to print the planned operations
+without starting app-server, creating files, or changing chats. This mode runs
+offline, so it shows placeholders for metadata and paths that a real run would
+discover or create.
+
+The `fix` command currently does nothing, including when dry-run is enabled.
 
 The script stops if Codex requests approvals, user input, or app-only tools that
 this standalone client cannot supply. Missing or empty documents, unsuccessful
