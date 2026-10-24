@@ -467,6 +467,8 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     helper = path.with_name("local.codexo.watch-environment.plist")
     labels = ["local.codexo.watch-environment", "local.codexo.watch"]
     registered = set(labels) if loaded else set()
+    unloading: dict[str, int] = {}
+    monkeypatch.setattr(codexo, "sleep", lambda seconds: None)
     if present:
         path.parent.mkdir(parents=True)
         for p in [path, helper]:
@@ -476,11 +478,16 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
         calls.append(args)
         if args[1] == "print":
             label = args[-1].rsplit("/", 1)[-1]
+            if label in unloading:
+                unloading[label] -= 1
+                if unloading[label] == 0:
+                    registered.remove(label)
+                    del unloading[label]
             return subprocess.CompletedProcess(
                 args, 0 if label in registered else 1, ""
             )
         if args[1] == "bootout":
-            registered.remove(args[-1].rsplit("/", 1)[-1])
+            unloading[args[-1].rsplit("/", 1)[-1]] = 2
         elif args[1] == "bootstrap":
             label = plistlib.loads(Path(args[-1]).read_bytes())["Label"]
             assert label not in registered
@@ -553,6 +560,25 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
     assert not any(c[1:3] == ["unsetenv", "CODEX_CLI_PATH"] for c in calls)
     assert registered == set(labels)
+
+
+def test_unload_times_out_if_launchd_keeps_the_registration(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[list[str]] = []
+
+    def run(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        calls.append(args)
+        return subprocess.CompletedProcess(args, 0, "")
+
+    clock = iter([0, 11])
+    monkeypatch.setattr(codexo, "monotonic", lambda: next(clock))
+    monkeypatch.setattr(codexo.subprocess, "run", run)
+    with pytest.raises(
+        TimeoutError, match="waiting for launchd to unload gui/501/local.codexo.watch"
+    ):
+        codexo.unload_launch_agent("gui/501/local.codexo.watch")
+    assert [c[1] for c in calls] == ["bootout", "print"]
 
 
 @pytest.mark.parametrize(

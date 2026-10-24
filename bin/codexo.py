@@ -675,6 +675,22 @@ def watch_launch_agent(command: WatchCommand) -> dict[str, object]:
     return document
 
 
+def unload_launch_agent(target: str) -> None:
+    subprocess.run(["/bin/launchctl", "bootout", target], check=True)
+    deadline = monotonic() + 10
+    while (
+        subprocess.run(
+            ["/bin/launchctl", "print", target],
+            capture_output=True,
+            check=False,
+        ).returncode
+        == 0
+    ):
+        if monotonic() >= deadline:
+            raise TimeoutError(f"Timed out waiting for launchd to unload {target}")
+        sleep(0.05)
+
+
 def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
     path = Path.home() / "Library/LaunchAgents" / f"{WATCH_LABEL}.plist"
     environment_path = path.with_name(f"{WATCH_ENVIRONMENT_LABEL}.plist")
@@ -705,7 +721,9 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             print(f"launchctl setenv CODEX_CLI_PATH {shlex.quote(str(launcher))}")
             print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
             for p, document in agents.items():
-                print(f"Unload {domain}/{document['Label']} if loaded.")
+                print(
+                    f"Unload {domain}/{document['Label']} if loaded; wait for removal."
+                )
                 print(f"Write {p} and launchctl bootstrap {domain} {p}:")
                 print(plistlib.dumps(document).decode(), end="")
         elif isinstance(command.action, WatchUninstallCommand):
@@ -744,7 +762,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
                 check=False,
             )
             if status.returncode == 0:
-                subprocess.run(["/bin/launchctl", "bootout", target], check=True)
+                unload_launch_agent(target)
             p.write_bytes(plistlib.dumps(document))
             subprocess.run(["/bin/launchctl", "bootstrap", domain, str(p)], check=True)
         print(f"Installed codexo watch: {path}")
@@ -769,7 +787,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             )
             installed |= p.is_file() or status.returncode == 0
             if status.returncode == 0:
-                subprocess.run(["/bin/launchctl", "bootout", target], check=True)
+                unload_launch_agent(target)
             p.unlink(missing_ok=True)
         if not installed:
             raise RuntimeError("codexo watch is not installed")

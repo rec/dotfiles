@@ -195,7 +195,9 @@ Daemon commands use a per-user launchd agent:
   GUI login session. The configured interval and prompt are saved as arguments.
   It starts immediately and runs at subsequent logins. Repeating installation
   replaces the saved settings and reloads both agents, unloading each first if
-  it is already loaded. No separate uninstall is needed. It also writes
+  it is already loaded. Removal is polled for up to ten seconds before loading
+  a replacement, since `bootout` can return before teardown completes. A timeout
+  stops installation with an error. No separate uninstall is needed. It also writes
   `~/Library/LaunchAgents/local.codexo.watch-environment.plist`, a RunAtLoad
   helper that runs `launchctl setenv CODEX_CLI_PATH` with the launcher's path,
   and sets that variable immediately during installation. It clears the old
