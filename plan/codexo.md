@@ -131,6 +131,16 @@ retry, clean up chats, or continue the handed-over task automatically.
 Use `watch --interval 120 --prompt "hello"` to configure the interval in seconds
 and the prompt. The default prompt is `hello`. The first poll runs immediately.
 
+`watch --test` also sends `Say "test"` to the most recently updated unarchived
+chat on idle polls without a reset. It uses the same interval, 60 seconds by
+default; use `watch --test --interval 120` to change it. Reset detection continues
+normally, and a qualifying reset sends the configured reset prompt instead of
+the test prompt, with at most one turn started per poll. Test prompts use the
+same idle checks and require the running app's shared server. The first test
+poll runs immediately. Poll logs identify test sends in their detail field.
+Use `watch install --test` to enable this in the daemon; reinstall without
+`--test` to disable it.
+
 The watcher requires the desktop app to use its shared local app-server. The
 installed app supports this launch mode, verified in its bundled implementation.
 `watch install` sets `CODEX_APP_SERVER_USE_LOCAL_DAEMON=1` in the GUI login

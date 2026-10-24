@@ -74,6 +74,10 @@ class WatchCommand(BaseModel, frozen=True):
     prompt: Annotated[
         str, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
     ] = "hello"
+    test: Annotated[
+        bool, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
+    ] = False
+    """Send Say \"test\" on idle polls, using the configured interval."""
     action: tyro.conf.DisallowNone[
         Annotated[
             WatchInstallCommand, tyro.conf.subcommand(name="install", prefix_name=False)
@@ -328,6 +332,8 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
         print("An initial zero or nonzero-to-zero transition can trigger a prompt.")
         print("If idle, send one prompt to the most recently updated unarchived chat:")
         print(command.prompt)
+        if command.test:
+            print('On other idle polls, send Say "test" to that chat.')
         return
     previous: dict[str, int] = {}
     while True:
@@ -343,7 +349,9 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
                         quiet=True,
                         proxy_socket=control_socket,
                     ) as server:
-                        watch_iteration(server, previous, command.prompt, poll)
+                        watch_iteration(
+                            server, previous, command.prompt, poll, command.test
+                        )
                 else:
                     poll.detail = "shared server socket unavailable"
             else:
@@ -387,7 +395,11 @@ def desktop_running() -> bool:
 
 
 def watch_iteration(
-    server: AppServer, previous: dict[str, int], prompt: str, poll: WatchPoll
+    server: AppServer,
+    previous: dict[str, int],
+    prompt: str,
+    poll: WatchPoll,
+    test: bool = False,
 ) -> bool:
     limits = UsageLimits.model_validate(
         server.request("account/rateLimits/read", {})["rateLimits"]
@@ -404,7 +416,7 @@ def watch_iteration(
     reset = any(v == 0 and previous.get(n) != 0 for n, v in current.items())
     previous.update(current)
     poll.idle = chats_idle(server)
-    if not reset or not poll.idle:
+    if not (reset or test) or not poll.idle:
         return False
     page = ChatPage.model_validate(
         server.request(
@@ -435,11 +447,13 @@ def watch_iteration(
         "turn/start",
         {
             "threadId": chat.id,
-            "input": [{"type": "text", "text": prompt}],
+            "input": [{"type": "text", "text": prompt if reset else 'Say "test"'}],
         },
     )
     poll.prompt_sent = True
     poll.detail = f"sent to {chat.id} ({chat.name or '(unnamed)'})"
+    if not reset:
+        poll.detail = f"test prompt {poll.detail}"
     return True
 
 
@@ -475,6 +489,8 @@ def watch_launch_agent(command: WatchCommand) -> dict[str, object]:
         "--prompt",
         command.prompt,
     ]
+    if command.test:
+        arguments.append("--test")
     document: dict[str, object] = {
         "Label": WATCH_LABEL,
         "ProgramArguments": arguments,

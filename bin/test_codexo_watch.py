@@ -135,37 +135,87 @@ def test_windows_are_tracked_independently_and_simultaneous_resets_send_once(
 @pytest.mark.parametrize(
     "blocker", ["busy", "background", "second_page_busy", "resume_active"]
 )
+@pytest.mark.parametrize("test_mode", [False, True])
 def test_any_chat_activity_prevents_prompt_and_zero_is_still_recorded(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
     blocker: str,
+    test_mode: bool,
 ) -> None:
     server, state, sent = watch_context
     state[blocker] = True
     previous: dict[str, int] = {}
     poll = codexo.WatchPoll()
-    assert codexo.watch_iteration(server, previous, "hello", poll) is False
+    assert codexo.watch_iteration(server, previous, "hello", poll, test_mode) is False
     assert poll.idle is False
     assert not sent
     state[blocker] = False
     poll = codexo.WatchPoll()
-    assert codexo.watch_iteration(server, previous, "hello", poll) is False
+    assert (
+        codexo.watch_iteration(server, previous, "hello", poll, test_mode) is test_mode
+    )
     assert poll.idle is True
-    assert poll.prompt_sent is False
-    assert not sent
+    assert poll.prompt_sent is test_mode
+    assert len(sent) == int(test_mode)
 
 
 @pytest.mark.parametrize("missing", ["windows", "chat"])
-def test_missing_usage_or_no_unarchived_chat_does_not_send(
+@pytest.mark.parametrize("test_mode", [False, True])
+def test_missing_usage_only_allows_test_prompts_and_missing_chat_never_sends(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
     missing: str,
+    test_mode: bool,
 ) -> None:
     server, state, sent = watch_context
     if missing == "windows":
         state.update(primary=None, secondary=None)
     else:
         state["chat"] = False
-    assert codexo.watch_iteration(server, {}, "hello", codexo.WatchPoll()) is False
-    assert not sent
+    should_send = test_mode and missing == "windows"
+    assert (
+        codexo.watch_iteration(server, {}, "hello", codexo.WatchPoll(), test_mode)
+        is should_send
+    )
+    assert len(sent) == int(should_send)
+
+
+@pytest.mark.parametrize("interval", [60, 12])
+def test_test_mode_sends_each_poll_and_preserves_reset_prompt(
+    watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    interval: int,
+) -> None:
+    server, state, sent = watch_context
+    state.update(primary=20, secondary=80)
+    monkeypatch.setattr(codexo, "desktop_running", lambda: True)
+    monkeypatch.setattr(codexo.Path, "is_socket", lambda p: True)
+    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    waits: list[float] = []
+
+    def wait(seconds: float) -> None:
+        waits.append(seconds)
+        if len(waits) == 2:
+            state.update(primary=0, secondary=0)
+        if len(waits) == 4:
+            raise KeyboardInterrupt
+
+    monkeypatch.setattr(codexo, "sleep", wait)
+    with pytest.raises(KeyboardInterrupt):
+        codexo.watch(
+            codexo.WatchCommand(test=True, interval=interval, prompt="reset prompt"),
+            False,
+        )
+    assert waits == [interval] * 4
+    assert [s["input"] for s in sent] == [
+        [{"type": "text", "text": p}]
+        for p in ['Say "test"', 'Say "test"', "reset prompt", 'Say "test"']
+    ]
+    assert all(s["threadId"] == "latest" for s in sent)
+    lines = capsys.readouterr().out.splitlines()
+    assert len(lines) == 4
+    assert all("prompt_sent=true" in s for s in lines)
+    assert "test prompt sent to latest" in lines[0]
+    assert "test prompt" not in lines[2]
 
 
 @pytest.mark.parametrize("running", [False, True])
@@ -315,11 +365,13 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
 @pytest.mark.parametrize(
     "operation", [[], ["install"], ["uninstall"], ["restart"], ["daemon"]]
 )
+@pytest.mark.parametrize("test_mode", [False, True])
 def test_watch_dry_run_never_starts_processes_or_writes_files(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     operation: list[str],
+    test_mode: bool,
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     monkeypatch.setattr(
@@ -334,6 +386,7 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
             "12",
             "--prompt",
             "Hi there",
+            *(["--test"] if test_mode else []),
         ],
     )
 
@@ -346,6 +399,8 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
     codexo.main()
     output = capsys.readouterr().out
     assert output
+    if test_mode and not operation:
+        assert 'Say "test"' in output
     if operation == ["install"]:
         assert "launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1" in output
         assert "local.codexo.watch-environment.plist" in output
@@ -392,11 +447,13 @@ def test_daemon_restart_uses_existing_service_and_reports_failure(
 @pytest.mark.parametrize(
     "loaded,present", [(False, False), (False, True), (True, True), (True, False)]
 )
+@pytest.mark.parametrize("test_mode", [False, True])
 def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     loaded: bool,
     present: bool,
+    test_mode: bool,
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     calls: list[list[str]] = []
@@ -426,7 +483,10 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
 
     monkeypatch.setattr(codexo.subprocess, "run", run)
     command = codexo.WatchCommand(
-        action=codexo.WatchInstallCommand(), interval=123, prompt='Hello "there" 📦'
+        action=codexo.WatchInstallCommand(),
+        interval=123,
+        prompt='Hello "there" 📦',
+        test=test_mode,
     )
     monkeypatch.setattr(
         sys,
@@ -439,6 +499,7 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
             "123",
             "--prompt",
             command.prompt,
+            *(["--test"] if test_mode else []),
         ],
     )
     codexo.main()
@@ -446,7 +507,8 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     args = document["ProgramArguments"]
     assert args[0] == sys.executable
     assert args[2] == "watch"
-    assert args[-1] == command.prompt
+    assert args[args.index("--prompt") + 1] == command.prompt
+    assert ("--test" in args) is test_mode
     assert args[args.index("--interval") + 1] == "123.0"
     assert "install" not in args
     assert document["KeepAlive"] is True
@@ -465,11 +527,14 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     assert len([c for c in calls if c[1] == "bootout"]) == (2 if loaded else 0)
     assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
     calls.clear()
-    updated = command.model_copy(update={"interval": 45.0, "prompt": "new prompt"})
+    updated = command.model_copy(
+        update={"interval": 45.0, "prompt": "new prompt", "test": False}
+    )
     codexo.watch_daemon(updated, False)
     args = plistlib.loads(path.read_bytes())["ProgramArguments"]
     assert args[args.index("--interval") + 1] == "45.0"
     assert args[-1] == "new prompt"
+    assert "--test" not in args
     assert len([c for c in calls if c[1] == "bootout"]) == 2
     assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
     assert not any(c[1] == "unsetenv" for c in calls)
