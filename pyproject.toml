@@ -18,4 +18,5 @@ dev = [
     "ty>=0.0.14",
     "tyro",
     "tomlkit",
+    "websockets>=17.2",
 ]
