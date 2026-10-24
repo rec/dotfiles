@@ -133,7 +133,7 @@ and the prompt. The default prompt is `hello`. The first poll runs immediately.
 
 The watcher requires the desktop app to use its shared local app-server. The
 installed app supports this launch mode, verified in its bundled implementation.
-`watch --install` sets `CODEX_APP_SERVER_USE_LOCAL_DAEMON=1` in the GUI login
+`watch install` sets `CODEX_APP_SERVER_USE_LOCAL_DAEMON=1` in the GUI login
 environment and installs a login helper to set it again at subsequent logins.
 Quit and reopen the desktop app once after installation. Future launches can
 use that environment without a manual shell command. The helper lives outside
@@ -180,7 +180,7 @@ partial results are retained in that poll's log; stale prior values are not used
 
 Daemon commands use a per-user launchd agent:
 
-- `watch --install` writes
+- `watch install` writes
   `~/Library/LaunchAgents/local.codexo.watch.plist` and loads it into the current
   GUI login session. The configured interval and prompt are saved as arguments.
   It starts immediately and runs at subsequent logins. An existing installation
@@ -188,14 +188,19 @@ Daemon commands use a per-user launchd agent:
   `~/Library/LaunchAgents/local.codexo.watch-environment.plist`, a RunAtLoad
   helper that runs `launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1`,
   and sets the same variable immediately during installation.
-- `watch --uninstall` unloads both agents if loaded, removes both plists, and
+- `watch uninstall` unloads both agents if loaded, removes both plists, and
   runs `launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON`. Existing app
   processes retain their environment until restarted. A missing installation
   is an error. Either agent or plist is sufficient to count as installed.
-- `watch --daemon` prints launchctl status, or reports that the agent is absent
+- `watch daemon` prints launchctl status, or reports that the agent is absent
   or installed but not loaded.
-- `watch --restart` restarts the registered agent with its saved settings using
+- `watch restart` restarts the registered agent with its saved settings using
   `launchctl kickstart -k`. It reports an error if the service is not loaded.
+
+Use `watch install --interval 120 --prompt "hello"` to save custom settings.
+Plain `watch` continues to poll in the foreground. Management operations are
+subcommands; the former `--install`, `--uninstall`, `--restart`, and `--daemon`
+flags are no longer accepted.
 
 Logs go to `~/Library/Logs/codexo-watch.log`. The agent runs this script using the
 current Python interpreter, preserving its virtual environment. `CODEX_HOME` is

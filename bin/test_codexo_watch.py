@@ -313,7 +313,7 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
 
 
 @pytest.mark.parametrize(
-    "operation", [[], ["--install"], ["--uninstall"], ["--restart"], ["--daemon"]]
+    "operation", [[], ["install"], ["uninstall"], ["restart"], ["daemon"]]
 )
 def test_watch_dry_run_never_starts_processes_or_writes_files(
     tmp_path: Path,
@@ -346,10 +346,10 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
     codexo.main()
     output = capsys.readouterr().out
     assert output
-    if operation == ["--install"]:
+    if operation == ["install"]:
         assert "launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1" in output
         assert "local.codexo.watch-environment.plist" in output
-    elif operation == ["--uninstall"]:
+    elif operation == ["uninstall"]:
         assert "launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON" in output
         assert "local.codexo.watch-environment.plist" in output
     assert not (tmp_path / "Library").exists()
@@ -363,7 +363,7 @@ def test_daemon_restart_uses_existing_service_and_reports_failure(
     available: bool,
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
-    monkeypatch.setattr(sys, "argv", ["codexo.py", "watch", "--restart"])
+    monkeypatch.setattr(sys, "argv", ["codexo.py", "watch", "restart"])
     calls: list[list[str]] = []
 
     def run(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
@@ -400,8 +400,23 @@ def test_daemon_install_uses_foreground_watch_with_configured_arguments(
         return subprocess.CompletedProcess(args, 0, "")
 
     monkeypatch.setattr(codexo.subprocess, "run", run)
-    command = codexo.WatchCommand(install=True, interval=123, prompt='Hello "there" 📦')
-    codexo.watch_daemon(command, False)
+    command = codexo.WatchCommand(
+        action=codexo.WatchInstallCommand(), interval=123, prompt='Hello "there" 📦'
+    )
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "codexo.py",
+            "watch",
+            "install",
+            "--interval",
+            "123",
+            "--prompt",
+            command.prompt,
+        ],
+    )
+    codexo.main()
     path = tmp_path / "Library/LaunchAgents/local.codexo.watch.plist"
     document = plistlib.loads(path.read_bytes())
     args = document["ProgramArguments"]
@@ -409,7 +424,7 @@ def test_daemon_install_uses_foreground_watch_with_configured_arguments(
     assert args[2] == "watch"
     assert args[-1] == command.prompt
     assert args[args.index("--interval") + 1] == "123.0"
-    assert "--install" not in args
+    assert "install" not in args
     assert document["KeepAlive"] is True
     helper = path.with_name("local.codexo.watch-environment.plist")
     environment = plistlib.loads(helper.read_bytes())
@@ -468,7 +483,9 @@ def test_daemon_uninstall_removes_registration_and_file_if_present(
         return subprocess.CompletedProcess(args, 0 if label in registered else 1, "")
 
     monkeypatch.setattr(codexo.subprocess, "run", run)
-    codexo.watch_daemon(codexo.WatchCommand(uninstall=True), False)
+    codexo.watch_daemon(
+        codexo.WatchCommand(action=codexo.WatchUninstallCommand()), False
+    )
     assert not list(directory.glob("*.plist"))
     assert sorted(c[-1].rsplit("/", 1)[-1] for c in calls if c[1] == "bootout") == (
         sorted(labels) if loaded else []
@@ -479,7 +496,9 @@ def test_daemon_uninstall_removes_registration_and_file_if_present(
         "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
     ]
     with pytest.raises(RuntimeError, match="not installed"):
-        codexo.watch_daemon(codexo.WatchCommand(uninstall=True), False)
+        codexo.watch_daemon(
+            codexo.WatchCommand(action=codexo.WatchUninstallCommand()), False
+        )
 
 
 @pytest.mark.parametrize("status", ["absent", "unloaded", "running"])
@@ -501,7 +520,7 @@ def test_daemon_status_reports_loaded_and_installed_states(
             [], 0 if status == "running" else 1, "state = running\n"
         ),
     )
-    codexo.watch_daemon(codexo.WatchCommand(daemon=True), False)
+    codexo.watch_daemon(codexo.WatchCommand(action=codexo.WatchDaemonCommand()), False)
     output = capsys.readouterr().out
     assert {
         "absent": "not installed",
@@ -515,13 +534,33 @@ def test_daemon_status_reports_loaded_and_installed_states(
     [
         {"interval": 0},
         {"interval": -1},
-        {"install": True, "uninstall": True},
-        {"daemon": True, "install": True},
-        {"restart": True, "install": True},
-        {"restart": True, "uninstall": True},
-        {"restart": True, "daemon": True},
     ],
 )
 def test_invalid_watch_configuration_is_rejected(options: dict[str, object]) -> None:
     with pytest.raises(codexo.ValidationError):
         codexo.WatchCommand(**options)
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["--install"],
+        ["--uninstall"],
+        ["--restart"],
+        ["--daemon"],
+        ["install", "restart"],
+        ["uninstall", "daemon"],
+    ],
+)
+def test_watch_rejects_old_flags_and_multiple_subcommands(
+    monkeypatch: pytest.MonkeyPatch, arguments: list[str]
+) -> None:
+    monkeypatch.setattr(sys, "argv", ["codexo.py", "watch", *arguments])
+
+    def unexpected_operation(*args: object, **kwargs: object) -> None:
+        pytest.fail("Invalid arguments must not start processes")
+
+    monkeypatch.setattr(codexo.subprocess, "run", unexpected_operation)
+    with pytest.raises(SystemExit) as error:
+        codexo.main()
+    assert error.value.code == 2

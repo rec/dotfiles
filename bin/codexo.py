@@ -20,7 +20,7 @@ from datetime import datetime
 from pathlib import Path
 from tempfile import mkdtemp
 from time import sleep
-from typing import IO, Annotated, Self, cast
+from typing import IO, Annotated, cast
 
 import tomlkit
 import tomllib
@@ -31,7 +31,6 @@ from pydantic import (
     Field,
     TypeAdapter,
     ValidationError,
-    model_validator,
 )
 
 
@@ -49,28 +48,48 @@ class FixCommand(BaseModel, frozen=True):
     """Include Codex Project and chat titles."""
 
 
+class WatchInstallCommand(BaseModel, frozen=True):
+    """Install the watcher and login environment helper."""
+
+
+class WatchUninstallCommand(BaseModel, frozen=True):
+    """Uninstall the watcher and login environment helper."""
+
+
+class WatchRestartCommand(BaseModel, frozen=True):
+    """Restart the installed daemon."""
+
+
+class WatchDaemonCommand(BaseModel, frozen=True):
+    """Print the installed daemon's status."""
+
+
 class WatchCommand(BaseModel, frozen=True):
     """Prompt an idle Codex chat when either usage window resets."""
 
-    interval: Annotated[float, tyro.conf.arg(prefix_name=False)] = Field(
-        default=60, gt=0
-    )
+    interval: Annotated[
+        float, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
+    ] = Field(default=60, gt=0)
     """Polling interval in seconds."""
-    prompt: Annotated[str, tyro.conf.arg(prefix_name=False)] = "hello"
-    install: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
-    uninstall: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
-    restart: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
-    """Restart the installed daemon."""
-    daemon: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
-    """Print the installed daemon's status."""
-
-    @model_validator(mode="after")
-    def check_daemon_operation(self) -> Self:
-        if sum([self.install, self.uninstall, self.restart, self.daemon]) > 1:
-            raise ValueError(
-                "Choose only one of --install, --uninstall, --restart, or --daemon"
-            )
-        return self
+    prompt: Annotated[
+        str, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
+    ] = "hello"
+    action: tyro.conf.DisallowNone[
+        Annotated[
+            WatchInstallCommand, tyro.conf.subcommand(name="install", prefix_name=False)
+        ]
+        | Annotated[
+            WatchUninstallCommand,
+            tyro.conf.subcommand(name="uninstall", prefix_name=False),
+        ]
+        | Annotated[
+            WatchRestartCommand, tyro.conf.subcommand(name="restart", prefix_name=False)
+        ]
+        | Annotated[
+            WatchDaemonCommand, tyro.conf.subcommand(name="daemon", prefix_name=False)
+        ]
+        | None
+    ] = None
 
 
 class CodexoCommand(BaseModel, frozen=True):
@@ -297,7 +316,7 @@ def app_server(
 
 
 def watch(command: WatchCommand, dry_run: bool) -> None:
-    if command.install or command.uninstall or command.restart or command.daemon:
+    if command.action is not None:
         watch_daemon(command, dry_run)
         return
     if dry_run:
@@ -475,7 +494,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
     environment_path = path.with_name(f"{WATCH_ENVIRONMENT_LABEL}.plist")
     domain = f"gui/{os.getuid()}"
     service = f"{domain}/{WATCH_LABEL}"
-    if command.install:
+    if isinstance(command.action, WatchInstallCommand):
         agents = {
             environment_path: {
                 "Label": WATCH_ENVIRONMENT_LABEL,
@@ -490,24 +509,24 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             path: watch_launch_agent(command),
         }
     if dry_run:
-        if command.install:
+        if isinstance(command.action, WatchInstallCommand):
             print("launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1")
             for p, document in agents.items():
                 print(f"Write {p} and launchctl bootstrap {domain} {p}:")
                 print(plistlib.dumps(document).decode(), end="")
-        elif command.uninstall:
+        elif isinstance(command.action, WatchUninstallCommand):
             print(
                 f"Unload {service} and {domain}/{WATCH_ENVIRONMENT_LABEL} "
                 f"if loaded, then remove {path} and {environment_path}; "
                 "error if not installed."
             )
             print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
-        elif command.restart:
+        elif isinstance(command.action, WatchRestartCommand):
             print(f"Restart the daemon with launchctl kickstart -k {service}.")
         else:
             print(f"Print daemon status with launchctl print {service}.")
         return
-    if command.install:
+    if isinstance(command.action, WatchInstallCommand):
         for p in agents:
             if p.exists():
                 raise RuntimeError(f"codexo watch is already installed: {p}")
@@ -523,11 +542,11 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
         print(f"Installed codexo watch: {path}")
         print("Quit and reopen the desktop app once to use the shared server.")
         return
-    if command.restart:
+    if isinstance(command.action, WatchRestartCommand):
         subprocess.run(["/bin/launchctl", "kickstart", "-k", service], check=True)
         print("Restarted codexo watch.")
         return
-    if command.uninstall:
+    if isinstance(command.action, WatchUninstallCommand):
         installed = False
         for p, label in [
             (environment_path, WATCH_ENVIRONMENT_LABEL),
