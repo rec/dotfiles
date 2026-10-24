@@ -512,6 +512,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
         if isinstance(command.action, WatchInstallCommand):
             print("launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1")
             for p, document in agents.items():
+                print(f"Unload {domain}/{document['Label']} if loaded.")
                 print(f"Write {p} and launchctl bootstrap {domain} {p}:")
                 print(plistlib.dumps(document).decode(), end="")
         elif isinstance(command.action, WatchUninstallCommand):
@@ -527,9 +528,6 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             print(f"Print daemon status with launchctl print {service}.")
         return
     if isinstance(command.action, WatchInstallCommand):
-        for p in agents:
-            if p.exists():
-                raise RuntimeError(f"codexo watch is already installed: {p}")
         path.parent.mkdir(parents=True, exist_ok=True)
         (Path.home() / "Library/Logs").mkdir(parents=True, exist_ok=True)
         subprocess.run(
@@ -537,6 +535,15 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             check=True,
         )
         for p, document in agents.items():
+            target = f"{domain}/{document['Label']}"
+            status = subprocess.run(
+                ["/bin/launchctl", "print", target],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if status.returncode == 0:
+                subprocess.run(["/bin/launchctl", "bootout", target], check=True)
             p.write_bytes(plistlib.dumps(document))
             subprocess.run(["/bin/launchctl", "bootstrap", domain, str(p)], check=True)
         print(f"Installed codexo watch: {path}")

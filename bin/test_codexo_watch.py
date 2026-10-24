@@ -349,6 +349,7 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
     if operation == ["install"]:
         assert "launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1" in output
         assert "local.codexo.watch-environment.plist" in output
+        assert "if loaded" in output
     elif operation == ["uninstall"]:
         assert "launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON" in output
         assert "local.codexo.watch-environment.plist" in output
@@ -388,15 +389,39 @@ def test_daemon_restart_uses_existing_service_and_reports_failure(
     assert not (tmp_path / "Library").exists()
 
 
-def test_daemon_install_uses_foreground_watch_with_configured_arguments(
+@pytest.mark.parametrize(
+    "loaded,present", [(False, False), (False, True), (True, True), (True, False)]
+)
+def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
+    loaded: bool,
+    present: bool,
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     calls: list[list[str]] = []
+    path = tmp_path / "Library/LaunchAgents/local.codexo.watch.plist"
+    helper = path.with_name("local.codexo.watch-environment.plist")
+    labels = ["local.codexo.watch-environment", "local.codexo.watch"]
+    registered = set(labels) if loaded else set()
+    if present:
+        path.parent.mkdir(parents=True)
+        for p in [path, helper]:
+            p.write_bytes(b"old settings")
 
     def run(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
         calls.append(args)
+        if args[1] == "print":
+            label = args[-1].rsplit("/", 1)[-1]
+            return subprocess.CompletedProcess(
+                args, 0 if label in registered else 1, ""
+            )
+        if args[1] == "bootout":
+            registered.remove(args[-1].rsplit("/", 1)[-1])
+        elif args[1] == "bootstrap":
+            label = plistlib.loads(Path(args[-1]).read_bytes())["Label"]
+            assert label not in registered
+            registered.add(label)
         return subprocess.CompletedProcess(args, 0, "")
 
     monkeypatch.setattr(codexo.subprocess, "run", run)
@@ -417,7 +442,6 @@ def test_daemon_install_uses_foreground_watch_with_configured_arguments(
         ],
     )
     codexo.main()
-    path = tmp_path / "Library/LaunchAgents/local.codexo.watch.plist"
     document = plistlib.loads(path.read_bytes())
     args = document["ProgramArguments"]
     assert args[0] == sys.executable
@@ -426,7 +450,6 @@ def test_daemon_install_uses_foreground_watch_with_configured_arguments(
     assert args[args.index("--interval") + 1] == "123.0"
     assert "install" not in args
     assert document["KeepAlive"] is True
-    helper = path.with_name("local.codexo.watch-environment.plist")
     environment = plistlib.loads(helper.read_bytes())
     assert environment == {
         "Label": "local.codexo.watch-environment",
@@ -438,13 +461,19 @@ def test_daemon_install_uses_foreground_watch_with_configured_arguments(
             "1",
         ],
     }
-    assert calls == [
-        environment["ProgramArguments"],
-        ["/bin/launchctl", "bootstrap", f"gui/{codexo.os.getuid()}", str(helper)],
-        ["/bin/launchctl", "bootstrap", f"gui/{codexo.os.getuid()}", str(path)],
-    ]
-    with pytest.raises(RuntimeError, match="already installed"):
-        codexo.watch_daemon(command, False)
+    assert calls[0] == environment["ProgramArguments"]
+    assert len([c for c in calls if c[1] == "bootout"]) == (2 if loaded else 0)
+    assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
+    calls.clear()
+    updated = command.model_copy(update={"interval": 45.0, "prompt": "new prompt"})
+    codexo.watch_daemon(updated, False)
+    args = plistlib.loads(path.read_bytes())["ProgramArguments"]
+    assert args[args.index("--interval") + 1] == "45.0"
+    assert args[-1] == "new prompt"
+    assert len([c for c in calls if c[1] == "bootout"]) == 2
+    assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
+    assert not any(c[1] == "unsetenv" for c in calls)
+    assert registered == set(labels)
 
 
 @pytest.mark.parametrize(

@@ -183,8 +183,9 @@ Daemon commands use a per-user launchd agent:
 - `watch install` writes
   `~/Library/LaunchAgents/local.codexo.watch.plist` and loads it into the current
   GUI login session. The configured interval and prompt are saved as arguments.
-  It starts immediately and runs at subsequent logins. An existing installation
-  is an error; uninstall it before installing different settings. It also writes
+  It starts immediately and runs at subsequent logins. Repeating installation
+  replaces the saved settings and reloads both agents, unloading each first if
+  it is already loaded. No separate uninstall is needed. It also writes
   `~/Library/LaunchAgents/local.codexo.watch-environment.plist`, a RunAtLoad
   helper that runs `launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1`,
   and sets the same variable immediately during installation.
@@ -198,6 +199,7 @@ Daemon commands use a per-user launchd agent:
   `launchctl kickstart -k`. It reports an error if the service is not loaded.
 
 Use `watch install --interval 120 --prompt "hello"` to save custom settings.
+Each installation uses the supplied settings and CLI defaults for omitted options.
 Plain `watch` continues to poll in the foreground. Management operations are
 subcommands; the former `--install`, `--uninstall`, `--restart`, and `--daemon`
 flags are no longer accepted.
