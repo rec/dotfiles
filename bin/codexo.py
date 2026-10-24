@@ -11,6 +11,8 @@ import hashlib
 import json
 import os
 import plistlib
+import shlex
+import signal
 import subprocess
 import sys
 from collections import deque
@@ -19,7 +21,9 @@ from contextlib import ExitStack, contextmanager
 from datetime import datetime
 from pathlib import Path
 from tempfile import mkdtemp
-from time import sleep
+from threading import Thread
+from time import monotonic, sleep
+from types import FrameType
 from typing import IO, Annotated, cast
 
 import tomlkit
@@ -32,6 +36,8 @@ from pydantic import (
     TypeAdapter,
     ValidationError,
 )
+from websockets.exceptions import ConnectionClosedOK, WebSocketException
+from websockets.sync.client import ClientConnection, unix_connect
 
 
 class RetireCommand(BaseModel, frozen=True):
@@ -46,6 +52,12 @@ class FixCommand(BaseModel, frozen=True):
     repos: Annotated[list[str], tyro.conf.Positional]
     codex: Annotated[bool, tyro.conf.arg(prefix_name=False)] = True
     """Include Codex Project and chat titles."""
+
+
+class BridgeCommand(BaseModel, frozen=True):
+    """Internal CLI launcher used by the desktop app."""
+
+    args: Annotated[list[str], tyro.conf.Positional]
 
 
 class WatchInstallCommand(BaseModel, frozen=True):
@@ -101,6 +113,9 @@ class CodexoCommand(BaseModel, frozen=True):
         Annotated[RetireCommand, tyro.conf.subcommand(name="retire", prefix_name=False)]
         | Annotated[FixCommand, tyro.conf.subcommand(name="fix", prefix_name=False)]
         | Annotated[WatchCommand, tyro.conf.subcommand(name="watch", prefix_name=False)]
+        | Annotated[
+            BridgeCommand, tyro.conf.subcommand(name="bridge", prefix_name=False)
+        ]
     )
     dry_run: Annotated[bool, tyro.conf.arg(aliases=["-d"])] = False
     """Print planned operations without starting app-server or making changes."""
@@ -182,18 +197,29 @@ class ReadReceipt(BaseModel, frozen=True):
 class AppServer:
     """One synchronous JSON-RPC connection, retaining early turn events."""
 
-    def __init__(self, reader: IO[str], writer: IO[str]) -> None:
+    def __init__(
+        self, reader: IO[str] | ClientConnection, writer: IO[str] | None = None
+    ) -> None:
         self.reader = reader
         self.writer = writer
         self.sequence = 0
         self.events: deque[RpcMessage] = deque()
 
     def send(self, message: dict[str, object]) -> None:
+        if isinstance(self.reader, ClientConnection):
+            self.reader.send(json.dumps(message))
+            return
+        assert self.writer is not None
         self.writer.write(json.dumps(message) + "\n")
         self.writer.flush()
 
-    def receive(self) -> RpcMessage:
-        if not (line := self.reader.readline()):
+    def receive(self, timeout: float | None = None) -> RpcMessage:
+        line = (
+            self.reader.recv(timeout=timeout)
+            if isinstance(self.reader, ClientConnection)
+            else self.reader.readline()
+        )
+        if not line:
             raise RuntimeError("Codex app-server closed the connection")
         message = RpcMessage.model_validate_json(line)
         if message.method is not None and message.id is not None:
@@ -213,8 +239,18 @@ class AppServer:
         self.sequence += 1
         request_id = self.sequence
         self.send({"id": request_id, "method": method, "params": params})
+        deadline = monotonic() + WATCH_REQUEST_TIMEOUT
         while True:
-            message = self.receive()
+            if isinstance(self.reader, ClientConnection):
+                remaining = deadline - monotonic()
+                if remaining <= 0:
+                    raise TimeoutError(f"{method}: request timed out")
+                try:
+                    message = self.receive(remaining)
+                except TimeoutError:
+                    raise TimeoutError(f"{method}: request timed out") from None
+            else:
+                message = self.receive()
             if message.method is not None:
                 if message.method in {"turn/completed", "item/completed"}:
                     self.events.append(message)
@@ -260,6 +296,15 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
+    if isinstance(command.action, BridgeCommand):
+        if command.dry_run:
+            print("Bridge desktop stdio to its private Unix WebSocket server.")
+            return
+        try:
+            bridge_desktop(command.action.args)
+        except (OSError, RuntimeError, WebSocketException) as error:
+            sys.exit(str(error))
+        return
     if isinstance(command.action, WatchCommand):
         try:
             watch(command.action, command.dry_run)
@@ -289,11 +334,8 @@ def app_server(
     executable: str,
     experimental: bool = False,
     quiet: bool = False,
-    proxy_socket: Path | None = None,
 ) -> Iterator[AppServer]:
     arguments = [executable, "app-server"]
-    if proxy_socket is not None:
-        arguments.extend(["proxy", "--sock", str(proxy_socket)])
     with subprocess.Popen(
         arguments,
         stdin=subprocess.PIPE,
@@ -319,6 +361,137 @@ def app_server(
             process.terminate()
 
 
+def bridge_socket(pid: int) -> Path:
+    return Path(f"/tmp/codexo-{os.getuid()}/app-{pid}.sock")
+
+
+def stop_bridge(signum: int, frame: FrameType | None) -> None:
+    raise SystemExit(0)
+
+
+def bridge_desktop(arguments: list[str]) -> None:
+    server_args = (
+        arguments[arguments.index("app-server") + 1 :]
+        if "app-server" in arguments
+        else []
+    )
+    if (
+        "app-server" not in arguments
+        or (server_args and not server_args[0].startswith("-"))
+        or os.environ.get("CODEX_INTERNAL_ORIGINATOR_OVERRIDE") != "Codex Desktop"
+    ):
+        os.execv(CODEX_EXECUTABLE, [CODEX_EXECUTABLE, *arguments])
+    path = bridge_socket(os.getpid())
+    path.parent.mkdir(mode=0o700, exist_ok=True)
+    signal.signal(signal.SIGTERM, stop_bridge)
+    with subprocess.Popen(
+        [CODEX_EXECUTABLE, *arguments, "--listen", f"unix://{path}"],
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+    ) as process:
+        try:
+            deadline = monotonic() + WATCH_REQUEST_TIMEOUT
+            while not path.is_socket():
+                if process.poll() is not None:
+                    raise RuntimeError(
+                        f"Desktop app-server exited with status {process.returncode}"
+                    )
+                if monotonic() >= deadline:
+                    raise TimeoutError("Desktop app-server socket startup timed out")
+                sleep(0.05)
+            with unix_connect(
+                path,
+                uri="ws://localhost/rpc",
+                open_timeout=WATCH_REQUEST_TIMEOUT,
+                close_timeout=1,
+                max_size=None,
+            ) as connection:
+                forward_desktop(connection, sys.stdin, sys.stdout)
+        finally:
+            process.terminate()
+            try:
+                process.wait(timeout=WATCH_REQUEST_TIMEOUT)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+
+
+def forward_desktop(
+    connection: ClientConnection, reader: IO[str], writer: IO[str]
+) -> None:
+    errors: list[OSError | WebSocketException] = []
+
+    def send_input() -> None:
+        try:
+            for line in reader:
+                connection.send(line.rstrip("\n"))
+        except (OSError, WebSocketException) as error:
+            errors.append(error)
+        finally:
+            connection.close()
+
+    Thread(target=send_input, daemon=True).start()
+    try:
+        while True:
+            message = connection.recv()
+            writer.write(
+                (message.decode() if isinstance(message, bytes) else message) + "\n"
+            )
+            writer.flush()
+    except ConnectionClosedOK:
+        if errors:
+            raise errors[0] from None
+
+
+def desktop_socket() -> Path:
+    output = subprocess.run(
+        ["/bin/ps", "-axo", "pid,ppid,command"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=WATCH_REQUEST_TIMEOUT,
+    ).stdout
+    processes = [s.split(maxsplit=2) for s in output.splitlines()[1:] if s.strip()]
+    app_pids = {
+        p
+        for p, _, c in processes
+        if c.split(" ", 1)[0] == "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+    }
+    prefix = f"{sys.executable} {Path(__file__).resolve()} bridge -- "
+    paths = [
+        bridge_socket(int(p))
+        for p, parent, c in processes
+        if parent in app_pids and c.startswith(prefix)
+    ]
+    if len(paths) != 1:
+        raise RuntimeError(
+            "Desktop bridge unavailable: run codexo watch install, "
+            "then quit and reopen Codex"
+        )
+    return paths[0]
+
+
+@contextmanager
+def desktop_server() -> Iterator[AppServer]:
+    with unix_connect(
+        desktop_socket(),
+        uri="ws://localhost/rpc",
+        open_timeout=WATCH_REQUEST_TIMEOUT,
+        close_timeout=1,
+        max_size=None,
+    ) as connection:
+        server = AppServer(connection)
+        server.request(
+            "initialize",
+            {
+                "clientInfo": {"name": "codexo", "version": "0.1.0"},
+                "capabilities": {"experimentalApi": True},
+            },
+        )
+        server.send({"method": "initialized", "params": {}})
+        yield server
+
+
 def watch(command: WatchCommand, dry_run: bool) -> None:
     if command.action is not None:
         watch_daemon(command, dry_run)
@@ -340,23 +513,20 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
         poll = WatchPoll()
         try:
             if desktop_running():
-                home = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
-                control_socket = home / "app-server-control" / "app-server-control.sock"
-                if control_socket.is_socket():
-                    with app_server(
-                        CODEX_EXECUTABLE,
-                        experimental=True,
-                        quiet=True,
-                        proxy_socket=control_socket,
-                    ) as server:
-                        watch_iteration(
-                            server, previous, command.prompt, poll, command.test
-                        )
-                else:
-                    poll.detail = "shared server socket unavailable"
+                with desktop_server() as server:
+                    watch_iteration(
+                        server, previous, command.prompt, poll, command.test
+                    )
             else:
                 poll.detail = "Codex is not running"
-        except (OSError, RuntimeError, ValueError, EOFError) as error:
+        except (
+            OSError,
+            RuntimeError,
+            ValueError,
+            EOFError,
+            WebSocketException,
+            subprocess.SubprocessError,
+        ) as error:
             poll.detail = f"error: {error}"
         finally:
             log_watch_poll(poll)
@@ -508,6 +678,11 @@ def watch_launch_agent(command: WatchCommand) -> dict[str, object]:
 def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
     path = Path.home() / "Library/LaunchAgents" / f"{WATCH_LABEL}.plist"
     environment_path = path.with_name(f"{WATCH_ENVIRONMENT_LABEL}.plist")
+    launcher = Path.home() / "Library/Application Support/codexo/codex"
+    launcher_text = (
+        f"#!/bin/sh\nexec {shlex.quote(sys.executable)} "
+        f'{shlex.quote(str(Path(__file__).resolve()))} bridge -- "$@"\n'
+    )
     domain = f"gui/{os.getuid()}"
     service = f"{domain}/{WATCH_LABEL}"
     if isinstance(command.action, WatchInstallCommand):
@@ -517,8 +692,8 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
                 "ProgramArguments": [
                     "/bin/launchctl",
                     "setenv",
-                    "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
-                    "1",
+                    "CODEX_CLI_PATH",
+                    str(launcher),
                 ],
                 "RunAtLoad": True,
             },
@@ -526,7 +701,9 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
         }
     if dry_run:
         if isinstance(command.action, WatchInstallCommand):
-            print("launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1")
+            print(f"Write executable {launcher}:\n{launcher_text}", end="")
+            print(f"launchctl setenv CODEX_CLI_PATH {shlex.quote(str(launcher))}")
+            print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
             for p, document in agents.items():
                 print(f"Unload {domain}/{document['Label']} if loaded.")
                 print(f"Write {p} and launchctl bootstrap {domain} {p}:")
@@ -538,6 +715,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
                 "error if not installed."
             )
             print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
+            print(f"Remove {launcher}; launchctl unsetenv CODEX_CLI_PATH")
         elif isinstance(command.action, WatchRestartCommand):
             print(f"Restart the daemon with launchctl kickstart -k {service}.")
         else:
@@ -546,8 +724,15 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
     if isinstance(command.action, WatchInstallCommand):
         path.parent.mkdir(parents=True, exist_ok=True)
         (Path.home() / "Library/Logs").mkdir(parents=True, exist_ok=True)
+        launcher.parent.mkdir(parents=True, exist_ok=True)
+        launcher.write_text(launcher_text)
+        launcher.chmod(0o755)
         subprocess.run(
-            ["/bin/launchctl", "setenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON", "1"],
+            ["/bin/launchctl", "unsetenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON"],
+            check=True,
+        )
+        subprocess.run(
+            ["/bin/launchctl", "setenv", "CODEX_CLI_PATH", str(launcher)],
             check=True,
         )
         for p, document in agents.items():
@@ -563,7 +748,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             p.write_bytes(plistlib.dumps(document))
             subprocess.run(["/bin/launchctl", "bootstrap", domain, str(p)], check=True)
         print(f"Installed codexo watch: {path}")
-        print("Quit and reopen the desktop app once to use the shared server.")
+        print("Quit and reopen the desktop app once to use the codexo bridge.")
         return
     if isinstance(command.action, WatchRestartCommand):
         subprocess.run(["/bin/launchctl", "kickstart", "-k", service], check=True)
@@ -592,6 +777,8 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             ["/bin/launchctl", "unsetenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON"],
             check=True,
         )
+        subprocess.run(["/bin/launchctl", "unsetenv", "CODEX_CLI_PATH"], check=True)
+        launcher.unlink(missing_ok=True)
         print("Uninstalled codexo watch.")
         return
     status = subprocess.run(
@@ -860,6 +1047,7 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
 CODEX_EXECUTABLE = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
 WATCH_LABEL = "local.codexo.watch"
 WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
+WATCH_REQUEST_TIMEOUT = 10
 
 
 THREAD_SOURCE_KINDS = [

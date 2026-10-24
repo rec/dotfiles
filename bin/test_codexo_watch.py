@@ -189,7 +189,7 @@ def test_test_mode_sends_each_poll_and_preserves_reset_prompt(
     state.update(primary=20, secondary=80)
     monkeypatch.setattr(codexo, "desktop_running", lambda: True)
     monkeypatch.setattr(codexo.Path, "is_socket", lambda p: True)
-    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    monkeypatch.setattr(codexo, "desktop_server", lambda *a, **k: nullcontext(server))
     waits: list[float] = []
 
     def wait(seconds: float) -> None:
@@ -219,7 +219,7 @@ def test_test_mode_sends_each_poll_and_preserves_reset_prompt(
 
 
 @pytest.mark.parametrize("running", [False, True])
-def test_watch_without_app_or_shared_socket_only_waits(
+def test_watch_without_app_or_desktop_bridge_only_waits(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
@@ -235,10 +235,12 @@ def test_watch_without_app_or_shared_socket_only_waits(
         raise KeyboardInterrupt
 
     def unexpected_connection(*args: object, **kwargs: object) -> None:
-        pytest.fail("Watch must not launch a new app-server")
+        if running:
+            raise RuntimeError("Desktop bridge unavailable")
+        pytest.fail("Watch must not connect when Codex is not running")
 
     monkeypatch.setattr(codexo, "sleep", wait)
-    monkeypatch.setattr(codexo, "app_server", unexpected_connection)
+    monkeypatch.setattr(codexo, "desktop_server", unexpected_connection)
     with pytest.raises(KeyboardInterrupt):
         codexo.watch(codexo.WatchCommand(), False)
     assert waits == [60]
@@ -250,12 +252,12 @@ def test_watch_without_app_or_shared_socket_only_waits(
     )
     assert "idle=unknown prompt_sent=false" in output.out
     assert (
-        "shared server socket unavailable" if running else "Codex is not running"
+        "Desktop bridge unavailable" if running else "Codex is not running"
     ) in output.out
     assert output.err == ""
 
 
-def test_watch_uses_the_running_server_proxy(
+def test_watch_uses_the_desktop_server(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -267,16 +269,13 @@ def test_watch_uses_the_running_server_proxy(
     monkeypatch.setenv("CODEX_HOME", str(tmp_path))
 
     def connect(*args: object, **kwargs: object) -> nullcontext[object]:
-        assert (
-            kwargs["proxy_socket"]
-            == tmp_path / "app-server-control/app-server-control.sock"
-        )
+        assert not args and not kwargs
         return nullcontext(server)
 
     def wait(interval: float) -> None:
         raise KeyboardInterrupt
 
-    monkeypatch.setattr(codexo, "app_server", connect)
+    monkeypatch.setattr(codexo, "desktop_server", connect)
     monkeypatch.setattr(codexo, "sleep", wait)
     with pytest.raises(KeyboardInterrupt):
         codexo.watch(codexo.WatchCommand(), False)
@@ -299,7 +298,7 @@ def test_every_poll_logs_timestamp_usage_and_current_idle_state_without_reset(
     state.update(primary=20, secondary=80, busy=True)
     monkeypatch.setattr(codexo, "desktop_running", lambda: True)
     monkeypatch.setattr(codexo.Path, "is_socket", lambda p: True)
-    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    monkeypatch.setattr(codexo, "desktop_server", lambda *a, **k: nullcontext(server))
     waits: list[float] = []
 
     def wait(interval: float) -> None:
@@ -322,7 +321,7 @@ def test_every_poll_logs_timestamp_usage_and_current_idle_state_without_reset(
     assert not sent
 
 
-@pytest.mark.parametrize("failure", ["connection", "usage", "idle"])
+@pytest.mark.parametrize("failure", ["connection", "usage", "idle", "timeout"])
 def test_poll_errors_log_only_known_values_and_stay_on_one_line(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
     monkeypatch: pytest.MonkeyPatch,
@@ -332,13 +331,15 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
     server, _, sent = watch_context
     monkeypatch.setattr(codexo, "desktop_running", lambda: True)
     monkeypatch.setattr(codexo.Path, "is_socket", lambda p: True)
-    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    monkeypatch.setattr(codexo, "desktop_server", lambda *a, **k: nullcontext(server))
 
     def unavailable(*args: object, **kwargs: object) -> None:
+        if failure == "timeout":
+            raise TimeoutError("initialize: request timed out")
         raise RuntimeError("query failed\nwith details")
 
-    if failure == "connection":
-        monkeypatch.setattr(codexo, "app_server", unavailable)
+    if failure in {"connection", "timeout"}:
+        monkeypatch.setattr(codexo, "desktop_server", unavailable)
     elif failure == "usage":
         monkeypatch.setattr(server, "request", unavailable)
     else:
@@ -357,7 +358,11 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
         f"primary.usedPercent={expected} secondary.usedPercent={expected}" in output.out
     )
     assert "idle=unknown prompt_sent=false" in output.out
-    assert "error: query failed\\nwith details" in output.out
+    assert (
+        "error: initialize: request timed out"
+        if failure == "timeout"
+        else "error: query failed\\nwith details"
+    ) in output.out
     assert output.err == ""
     assert not sent
 
@@ -396,13 +401,14 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
     monkeypatch.setattr(codexo.subprocess, "run", unexpected_operation)
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
     monkeypatch.setattr(codexo.Path, "write_bytes", unexpected_operation)
+    monkeypatch.setattr(codexo.Path, "write_text", unexpected_operation)
     codexo.main()
     output = capsys.readouterr().out
     assert output
     if test_mode and not operation:
         assert 'Say "test"' in output
     if operation == ["install"]:
-        assert "launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1" in output
+        assert "launchctl setenv CODEX_CLI_PATH" in output
         assert "local.codexo.watch-environment.plist" in output
         assert "if loaded" in output
     elif operation == ["uninstall"]:
@@ -519,11 +525,19 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
         "ProgramArguments": [
             "/bin/launchctl",
             "setenv",
-            "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
-            "1",
+            "CODEX_CLI_PATH",
+            str(tmp_path / "Library/Application Support/codexo/codex"),
         ],
     }
-    assert calls[0] == environment["ProgramArguments"]
+    assert calls[0] == [
+        "/bin/launchctl",
+        "unsetenv",
+        "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
+    ]
+    assert calls[1] == environment["ProgramArguments"]
+    launcher = tmp_path / "Library/Application Support/codexo/codex"
+    assert 'bridge -- "$@"' in launcher.read_text()
+    assert launcher.stat().st_mode & 0o111
     assert len([c for c in calls if c[1] == "bootout"]) == (2 if loaded else 0)
     assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
     calls.clear()
@@ -537,7 +551,7 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     assert "--test" not in args
     assert len([c for c in calls if c[1] == "bootout"]) == 2
     assert [c[-1] for c in calls if c[1] == "bootstrap"] == [str(helper), str(path)]
-    assert not any(c[1] == "unsetenv" for c in calls)
+    assert not any(c[1:3] == ["unsetenv", "CODEX_CLI_PATH"] for c in calls)
     assert registered == set(labels)
 
 
@@ -559,6 +573,9 @@ def test_daemon_uninstall_removes_registration_and_file_if_present(
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     directory = tmp_path / "Library/LaunchAgents"
+    launcher = tmp_path / "Library/Application Support/codexo/codex"
+    launcher.parent.mkdir(parents=True)
+    launcher.write_text("launcher")
     if present:
         directory.mkdir(parents=True)
         for label in labels:
@@ -581,14 +598,11 @@ def test_daemon_uninstall_removes_registration_and_file_if_present(
         codexo.WatchCommand(action=codexo.WatchUninstallCommand()), False
     )
     assert not list(directory.glob("*.plist"))
+    assert not launcher.exists()
     assert sorted(c[-1].rsplit("/", 1)[-1] for c in calls if c[1] == "bootout") == (
         sorted(labels) if loaded else []
     )
-    assert calls[-1] == [
-        "/bin/launchctl",
-        "unsetenv",
-        "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
-    ]
+    assert calls[-1] == ["/bin/launchctl", "unsetenv", "CODEX_CLI_PATH"]
     with pytest.raises(RuntimeError, match="not installed"):
         codexo.watch_daemon(
             codexo.WatchCommand(action=codexo.WatchUninstallCommand()), False

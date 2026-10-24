@@ -136,35 +136,35 @@ chat on idle polls without a reset. It uses the same interval, 60 seconds by
 default; use `watch --test --interval 120` to change it. Reset detection continues
 normally, and a qualifying reset sends the configured reset prompt instead of
 the test prompt, with at most one turn started per poll. Test prompts use the
-same idle checks and require the running app's shared server. The first test
+same idle checks and require the running app's bridge. The first test
 poll runs immediately. Poll logs identify test sends in their detail field.
 Use `watch install --test` to enable this in the daemon; reinstall without
 `--test` to disable it.
 
-The watcher requires the desktop app to use its shared local app-server. The
-installed app supports this launch mode, verified in its bundled implementation.
-`watch install` sets `CODEX_APP_SERVER_USE_LOCAL_DAEMON=1` in the GUI login
-environment and installs a login helper to set it again at subsequent logins.
-Quit and reopen the desktop app once after installation. Future launches can
-use that environment without a manual shell command. The helper lives outside
-the app bundle, so app updates do not overwrite it. Inheritance through the
-app updater's relaunch has not been verified. Login agents have no guaranteed
-ordering, so an app started automatically at login may precede the helper.
+The watcher connects to the desktop app's own server through a Unix WebSocket
+bridge. Run `watch install`, then fully quit and reopen the desktop app once.
+Installation sets the GUI login environment's `CODEX_CLI_PATH` to an executable
+launcher at `~/Library/Application Support/codexo/codex`. The login helper
+restores that setting at future logins. Existing app processes retain their
+old environment until restarted. Login agents have no guaranteed ordering,
+so an app started automatically at login may precede the helper.
 
-For a foreground watcher without installing the agents, quit the desktop app
-first, then launch it with:
+The launcher runs this script's internal `bridge` command. Main desktop
+app-server launches retain the app's original arguments and environment, with
+`--listen unix://PATH` added. The bridge forwards desktop stdio JSON to that
+server as WebSocket messages. Auxiliary CLI commands, including version probes
+and non-desktop servers, execute the original bundled CLI directly. The bridge
+owns its server child and shuts it down when the desktop connection ends.
+The private endpoint is `/tmp/codexo-UID/app-PID.sock`, where PID is the bridge
+process's ID. The watcher discovers that process as a direct child of the
+running desktop app. If it cannot identify exactly one bridge, it logs an
+error and sends nothing. It never substitutes a separate app-server for an
+idle check. A separate shared daemon is neither required nor used.
 
-```sh
-CODEX_APP_SERVER_USE_LOCAL_DAEMON=1 /Applications/ChatGPT.app/Contents/MacOS/ChatGPT
-```
-
-This is a setting for launching the installed desktop app, not a `config.toml`
-key. The watcher connects through the bundled CLI's `app-server proxy` to
-`$CODEX_HOME/app-server-control/app-server-control.sock`, defaulting to
-`~/.codex/app-server-control/app-server-control.sock`. It never starts an
-app-server. When the desktop app is closed or the shared socket is absent, it
-waits for the next poll. A privately launched desktop app-server cannot be used
-for this watcher; the idle check must observe the same server as the desktop app.
+WebSocket connection setup and individual RPC requests time out after ten
+seconds. Notifications do not extend an RPC deadline. Poll failures are logged
+before polling continues. The existing stdio connection remains in use for
+`retire` and `fix`; watch no longer sends JSON through `app-server proxy`.
 
 Both primary and secondary `usedPercent` values are recorded in memory. A window
 qualifies when its first observed value is zero, or its most recent recorded
@@ -185,7 +185,7 @@ Every poll writes a flushed log line containing a local ISO timestamp with UTC
 offset, both `usedPercent` values, idle status, and whether a prompt was sent.
 Idle status is checked on every connected poll, even without a reset. Values
 that could not be queried are logged as `unavailable` or `unknown`, with a reason
-when the app is closed, the shared socket is missing, or a query fails. Available
+when the app is closed, its bridge is unavailable, or a query fails. Available
 partial results are retained in that poll's log; stale prior values are not used.
 
 Daemon commands use a per-user launchd agent:
@@ -197,11 +197,15 @@ Daemon commands use a per-user launchd agent:
   replaces the saved settings and reloads both agents, unloading each first if
   it is already loaded. No separate uninstall is needed. It also writes
   `~/Library/LaunchAgents/local.codexo.watch-environment.plist`, a RunAtLoad
-  helper that runs `launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1`,
-  and sets the same variable immediately during installation.
+  helper that runs `launchctl setenv CODEX_CLI_PATH` with the launcher's path,
+  and sets that variable immediately during installation. It clears the old
+  `CODEX_APP_SERVER_USE_LOCAL_DAEMON` login setting. The launcher and helper live
+  outside the app bundle; app updates do not overwrite them. Updater relaunch
+  inheritance still requires live verification.
 - `watch uninstall` unloads both agents if loaded, removes both plists, and
-  runs `launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON`. Existing app
-  processes retain their environment until restarted. A missing installation
+  removes the launcher and unsets both `CODEX_CLI_PATH` and the old
+  `CODEX_APP_SERVER_USE_LOCAL_DAEMON` login setting. Existing app processes
+  retain their environment until restarted. A missing installation
   is an error. Either agent or plist is sufficient to count as installed.
 - `watch daemon` prints launchctl status, or reports that the agent is absent
   or installed but not loaded.
@@ -219,8 +223,8 @@ current Python interpreter, preserving its virtual environment. `CODEX_HOME` is
 preserved when set during installation. Top-level `-d` prints the planned watch
 or daemon operations without connecting, sending prompts, or installing anything.
 
-Implementation verification uses unit tests only: no watcher was started, no
-daemon was installed, and no live watch prompt was sent.
+Implementation verification uses unit tests only: no watcher or desktop bridge
+was started, no daemon was installed, and no live watch prompt was sent.
 
 ## Additional work beyond the prompt
 
