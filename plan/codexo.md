@@ -125,6 +125,128 @@ occurs after creating the replacement, it remains available; the script prints
 its ID and the handover path so work can be recovered manually. It does not
 retry, clean up chats, or continue the handed-over task automatically.
 
+## Watch
+
+`/Users/tom/code/dotfiles/bin/codexo.py watch` polls every 60 seconds by default.
+Use `watch --interval 120 --prompt "hello"` to configure the interval in seconds
+and the prompt. The default prompt is `hello`. The first poll runs immediately.
+
+`watch --test` also sends `Say "test"` only to the unarchived chat titled exactly
+`codexo` on idle polls without a reset. If that chat is missing or multiple chats
+have that title, it skips the test prompt and logs the reason. It uses the same
+interval, 60 seconds by default; use `watch --test --interval 120` to change it.
+Reset detection continues
+normally, and a qualifying reset sends the configured reset prompt instead of
+the test prompt, with at most one turn started per poll. Test prompts use the
+same idle checks and require the running app's bridge. The first test
+poll runs immediately. Poll logs identify test sends in their detail field.
+Use `watch install --test` to enable this in the daemon; reinstall without
+`--test` to disable it.
+
+The watcher connects to the desktop app's own server through a Unix WebSocket
+bridge. Run `watch install`, then fully quit and reopen the desktop app once.
+Installation sets the GUI login environment's `CODEX_CLI_PATH` to an executable
+launcher at `~/Library/Application Support/codexo/codex`. The login helper
+restores that setting at future logins. Existing app processes retain their
+old environment until restarted. Login agents have no guaranteed ordering,
+so an app started automatically at login may precede the helper.
+
+The launcher runs this script's internal `bridge` command. Main desktop
+app-server launches retain the app's original arguments and environment, with
+`--listen unix://PATH` added. The bridge forwards desktop stdio JSON to that
+server as WebSocket messages. Auxiliary CLI commands, including version probes,
+`--print-startup-config` requests (with or without `--startup-sign-out`), and
+non-desktop servers, execute the original bundled CLI directly. Startup policy
+JSON must reach the desktop app unchanged. The bridge
+owns its server child and shuts it down when the desktop connection ends.
+The private endpoint is `/tmp/codexo-UID/app-PID.sock`, where PID is the bridge
+process's ID. The watcher discovers that process as a direct child of the
+running desktop app. If it cannot identify exactly one bridge, it logs an
+error and sends nothing. It never substitutes a separate app-server for an
+idle check. A separate shared daemon is neither required nor used.
+
+WebSocket connection setup and individual RPC requests time out after ten
+seconds. Notifications do not extend an RPC deadline. Poll failures are logged
+before polling continues. The existing stdio connection remains in use for
+`retire` and `fix`; watch no longer sends JSON through `app-server proxy`.
+
+Both primary and secondary `usedPercent` values are recorded in memory. A window
+qualifies when its first observed value is zero, or its most recent recorded
+value was nonzero and the current value is zero. Missing windows are not treated
+as zero. Either or both qualifying in the same poll causes at most one prompt.
+
+The watcher lists unarchived local chats across every page in order of most
+recent update and selects the first idle chat. Active chats, including those
+waiting for approval or input, are skipped. Background terminals and servers
+do not affect selection. The watcher resumes the selected chat, verifies that
+it is still idle, and starts a turn with the configured prompt. If the chat
+became active, it tries the next candidate. Test prompts check only the chat
+titled `codexo`; activity in other chats does not block them. Activity is checked
+through API snapshots, so a chat could start working between the idle check and
+sending. No new chat is created.
+
+Observations are recorded even when all candidate chats are busy or no
+destination chat exists. Detected resets remain pending until a prompt is successfully sent on
+an idle poll, even if usage increases before then. Multiple pending resets
+produce one prompt. App closure and poll errors preserve the in-memory history
+and pending reset; restarting the watcher begins a new observation history.
+Every poll writes a flushed log line containing a local ISO timestamp with UTC
+offset, both `usedPercent` values, idle status, and whether a prompt was sent.
+The detail identifies skipped busy chats by ID and title, with their status
+and active flags. A chat that becomes active after resuming is identified too.
+`idle=true` means an eligible idle destination was found; it does not mean every
+chat is idle. If all candidates are busy, the reset stays pending.
+Idle status is checked on every connected poll, even without a reset. Values
+that could not be queried are logged as `unavailable` or `unknown`, with a reason
+when the app is closed, its bridge is unavailable, or a query fails. Available
+partial results are retained in that poll's log; stale prior values are not used.
+
+Daemon commands use a per-user launchd agent:
+
+- `watch install` writes
+  `~/Library/LaunchAgents/local.codexo.watch.plist` and loads it into the current
+  GUI login session. The configured interval and prompt are saved as arguments.
+  It starts immediately and runs at subsequent logins. Repeating installation
+  replaces the saved settings and reloads both agents, unloading each first if
+  it is already loaded. Removal is polled for up to ten seconds before loading
+  a replacement, since `bootout` can return before teardown completes. A timeout
+  stops installation with an error. No separate uninstall is needed. It also writes
+  `~/Library/LaunchAgents/local.codexo.watch-environment.plist`, a RunAtLoad
+  helper that runs `launchctl setenv CODEX_CLI_PATH` with the launcher's path,
+  and sets that variable immediately during installation. It clears the old
+  `CODEX_APP_SERVER_USE_LOCAL_DAEMON` login setting. The launcher and helper live
+  outside the app bundle; app updates do not overwrite them. Updater relaunch
+  inheritance still requires live verification. The quit-and-reopen reminder
+  is suppressed when the running desktop app has a detected bridge process
+  and its socket exists. If that check fails, installation still succeeds
+  and prints the reminder.
+- `watch uninstall` unloads both agents if loaded, removes both plists, and
+  removes the launcher and unsets both `CODEX_CLI_PATH` and the old
+  `CODEX_APP_SERVER_USE_LOCAL_DAEMON` login setting. Existing app processes
+  retain their environment until restarted. A missing installation
+  is an error. Either agent or plist is sufficient to count as installed.
+- `watch daemon` prints launchctl status, or reports that the agent is absent
+  or installed but not loaded.
+- `watch restart` restarts the registered agent with its saved settings using
+  `launchctl kickstart -k`. It reports an error if the service is not loaded.
+
+Use `watch install --interval 120 --prompt "hello"` to save custom settings.
+Each installation uses the supplied settings and CLI defaults for omitted options.
+Plain `watch` continues to poll in the foreground. Management operations are
+subcommands; the former `--install`, `--uninstall`, `--restart`, and `--daemon`
+flags are no longer accepted.
+
+Logs go to `~/Library/Logs/codexo-watch.log`. The agent runs this script using the
+current Python interpreter, preserving its virtual environment. `CODEX_HOME` is
+preserved when set during installation. Top-level `-d` prints the planned watch
+or daemon operations without connecting, sending prompts, or installing anything.
+
+Verification includes unit tests and live checks of the installed launcher's
+startup-config response and an isolated desktop bridge. The bridge completed
+its stdio handshake and accepted a second WebSocket client on the same server.
+The isolated server was stopped afterward. The running desktop app was not
+restarted, no daemon was installed, and no live watch prompt was sent.
+
 ## Additional work beyond the prompt
 
 None.

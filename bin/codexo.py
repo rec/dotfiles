@@ -9,19 +9,35 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import plistlib
+import shlex
+import signal
 import subprocess
 import sys
 from collections import deque
 from collections.abc import Callable, Iterator
 from contextlib import ExitStack, contextmanager
+from datetime import datetime
 from pathlib import Path
 from tempfile import mkdtemp
+from threading import Thread
+from time import monotonic, sleep
+from types import FrameType
 from typing import IO, Annotated, cast
 
 import tomlkit
 import tomllib
 import tyro
-from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    TypeAdapter,
+    ValidationError,
+)
+from websockets.exceptions import ConnectionClosedOK, WebSocketException
+from websockets.sync.client import ClientConnection, unix_connect
 
 
 class RetireCommand(BaseModel, frozen=True):
@@ -38,10 +54,68 @@ class FixCommand(BaseModel, frozen=True):
     """Include Codex Project and chat titles."""
 
 
+class BridgeCommand(BaseModel, frozen=True):
+    """Internal CLI launcher used by the desktop app."""
+
+    args: Annotated[list[str], tyro.conf.Positional]
+
+
+class WatchInstallCommand(BaseModel, frozen=True):
+    """Install the watcher and login environment helper."""
+
+
+class WatchUninstallCommand(BaseModel, frozen=True):
+    """Uninstall the watcher and login environment helper."""
+
+
+class WatchRestartCommand(BaseModel, frozen=True):
+    """Restart the installed daemon."""
+
+
+class WatchDaemonCommand(BaseModel, frozen=True):
+    """Print the installed daemon's status."""
+
+
+class WatchCommand(BaseModel, frozen=True):
+    """Prompt an idle Codex chat when either usage window resets."""
+
+    interval: Annotated[
+        float, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
+    ] = Field(default=60, gt=0)
+    """Polling interval in seconds."""
+    prompt: Annotated[
+        str, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
+    ] = "hello"
+    test: Annotated[
+        bool, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
+    ] = False
+    """Send Say \"test\" to the codexo chat on idle polls."""
+    action: tyro.conf.DisallowNone[
+        Annotated[
+            WatchInstallCommand, tyro.conf.subcommand(name="install", prefix_name=False)
+        ]
+        | Annotated[
+            WatchUninstallCommand,
+            tyro.conf.subcommand(name="uninstall", prefix_name=False),
+        ]
+        | Annotated[
+            WatchRestartCommand, tyro.conf.subcommand(name="restart", prefix_name=False)
+        ]
+        | Annotated[
+            WatchDaemonCommand, tyro.conf.subcommand(name="daemon", prefix_name=False)
+        ]
+        | None
+    ] = None
+
+
 class CodexoCommand(BaseModel, frozen=True):
     action: (
         Annotated[RetireCommand, tyro.conf.subcommand(name="retire", prefix_name=False)]
         | Annotated[FixCommand, tyro.conf.subcommand(name="fix", prefix_name=False)]
+        | Annotated[WatchCommand, tyro.conf.subcommand(name="watch", prefix_name=False)]
+        | Annotated[
+            BridgeCommand, tyro.conf.subcommand(name="bridge", prefix_name=False)
+        ]
     )
     dry_run: Annotated[bool, tyro.conf.arg(aliases=["-d"])] = False
     """Print planned operations without starting app-server or making changes."""
@@ -57,6 +131,28 @@ class Chat(BaseModel, frozen=True):
 class ChatPage(BaseModel, frozen=True):
     data: list[Chat]
     nextCursor: str | None = None
+
+
+class UsageWindow(BaseModel, frozen=True):
+    usedPercent: int
+
+
+class UsageLimits(BaseModel, frozen=True):
+    primary: UsageWindow | None = None
+    secondary: UsageWindow | None = None
+
+
+class WatchPoll(BaseModel):
+    primary: int | None = None
+    secondary: int | None = None
+    idle: bool | None = None
+    prompt_sent: bool = False
+    detail: str = ""
+
+
+class WatchState(BaseModel):
+    previous: dict[str, int] = Field(default_factory=dict)
+    pending_reset: bool = False
 
 
 class ProjectRoot(BaseModel, frozen=True):
@@ -101,18 +197,29 @@ class ReadReceipt(BaseModel, frozen=True):
 class AppServer:
     """One synchronous JSON-RPC connection, retaining early turn events."""
 
-    def __init__(self, reader: IO[str], writer: IO[str]) -> None:
+    def __init__(
+        self, reader: IO[str] | ClientConnection, writer: IO[str] | None = None
+    ) -> None:
         self.reader = reader
         self.writer = writer
         self.sequence = 0
         self.events: deque[RpcMessage] = deque()
 
     def send(self, message: dict[str, object]) -> None:
+        if isinstance(self.reader, ClientConnection):
+            self.reader.send(json.dumps(message))
+            return
+        assert self.writer is not None
         self.writer.write(json.dumps(message) + "\n")
         self.writer.flush()
 
-    def receive(self) -> RpcMessage:
-        if not (line := self.reader.readline()):
+    def receive(self, timeout: float | None = None) -> RpcMessage:
+        line = (
+            self.reader.recv(timeout=timeout)
+            if isinstance(self.reader, ClientConnection)
+            else self.reader.readline()
+        )
+        if not line:
             raise RuntimeError("Codex app-server closed the connection")
         message = RpcMessage.model_validate_json(line)
         if message.method is not None and message.id is not None:
@@ -132,8 +239,18 @@ class AppServer:
         self.sequence += 1
         request_id = self.sequence
         self.send({"id": request_id, "method": method, "params": params})
+        deadline = monotonic() + WATCH_REQUEST_TIMEOUT
         while True:
-            message = self.receive()
+            if isinstance(self.reader, ClientConnection):
+                remaining = deadline - monotonic()
+                if remaining <= 0:
+                    raise TimeoutError(f"{method}: request timed out")
+                try:
+                    message = self.receive(remaining)
+                except TimeoutError:
+                    raise TimeoutError(f"{method}: request timed out") from None
+            else:
+                message = self.receive()
             if message.method is not None:
                 if message.method in {"turn/completed", "item/completed"}:
                     self.events.append(message)
@@ -179,6 +296,23 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
+    if isinstance(command.action, BridgeCommand):
+        if command.dry_run:
+            print("Bridge desktop stdio to its private Unix WebSocket server.")
+            return
+        try:
+            bridge_desktop(command.action.args)
+        except (OSError, RuntimeError, WebSocketException) as error:
+            sys.exit(str(error))
+        return
+    if isinstance(command.action, WatchCommand):
+        try:
+            watch(command.action, command.dry_run)
+        except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
+            sys.exit(str(error))
+        except KeyboardInterrupt:
+            return
+        return
     if isinstance(command.action, FixCommand):
         fix_repositories(command.action, command.dry_run)
         return
@@ -197,10 +331,13 @@ def main() -> None:
 
 @contextmanager
 def app_server(
-    executable: str, experimental: bool = False, quiet: bool = False
+    executable: str,
+    experimental: bool = False,
+    quiet: bool = False,
 ) -> Iterator[AppServer]:
+    arguments = [executable, "app-server"]
     with subprocess.Popen(
-        [executable, "app-server"],
+        arguments,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL if quiet else None,
@@ -222,6 +359,488 @@ def app_server(
             yield server
         finally:
             process.terminate()
+
+
+def bridge_socket(pid: int) -> Path:
+    return Path(f"/tmp/codexo-{os.getuid()}/app-{pid}.sock")
+
+
+def stop_bridge(signum: int, frame: FrameType | None) -> None:
+    raise SystemExit(0)
+
+
+def bridge_desktop(arguments: list[str]) -> None:
+    server_args = (
+        arguments[arguments.index("app-server") + 1 :]
+        if "app-server" in arguments
+        else []
+    )
+    if (
+        "app-server" not in arguments
+        or "--print-startup-config" in server_args
+        or (server_args and not server_args[0].startswith("-"))
+        or os.environ.get("CODEX_INTERNAL_ORIGINATOR_OVERRIDE") != "Codex Desktop"
+    ):
+        os.execv(CODEX_EXECUTABLE, [CODEX_EXECUTABLE, *arguments])
+    path = bridge_socket(os.getpid())
+    path.parent.mkdir(mode=0o700, exist_ok=True)
+    signal.signal(signal.SIGTERM, stop_bridge)
+    with subprocess.Popen(
+        [CODEX_EXECUTABLE, *arguments, "--listen", f"unix://{path}"],
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+    ) as process:
+        try:
+            deadline = monotonic() + WATCH_REQUEST_TIMEOUT
+            while not path.is_socket():
+                if process.poll() is not None:
+                    raise RuntimeError(
+                        f"Desktop app-server exited with status {process.returncode}"
+                    )
+                if monotonic() >= deadline:
+                    raise TimeoutError("Desktop app-server socket startup timed out")
+                sleep(0.05)
+            with unix_connect(
+                path,
+                uri="ws://localhost/rpc",
+                open_timeout=WATCH_REQUEST_TIMEOUT,
+                close_timeout=1,
+                max_size=None,
+            ) as connection:
+                forward_desktop(connection, sys.stdin, sys.stdout)
+        finally:
+            process.terminate()
+            try:
+                process.wait(timeout=WATCH_REQUEST_TIMEOUT)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+
+
+def forward_desktop(
+    connection: ClientConnection, reader: IO[str], writer: IO[str]
+) -> None:
+    errors: list[OSError | WebSocketException] = []
+
+    def send_input() -> None:
+        try:
+            for line in reader:
+                connection.send(line.rstrip("\n"))
+        except (OSError, WebSocketException) as error:
+            errors.append(error)
+        finally:
+            connection.close()
+
+    Thread(target=send_input, daemon=True).start()
+    try:
+        while True:
+            message = connection.recv()
+            writer.write(
+                (message.decode() if isinstance(message, bytes) else message) + "\n"
+            )
+            writer.flush()
+    except ConnectionClosedOK:
+        if errors:
+            raise errors[0] from None
+
+
+def desktop_socket() -> Path:
+    output = subprocess.run(
+        ["/bin/ps", "-axo", "pid,ppid,command"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=WATCH_REQUEST_TIMEOUT,
+    ).stdout
+    processes = [s.split(maxsplit=2) for s in output.splitlines()[1:] if s.strip()]
+    app_pids = {
+        p
+        for p, _, c in processes
+        if c.split(" ", 1)[0] == "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+    }
+    prefix = f"{sys.executable} {Path(__file__).resolve()} bridge -- "
+    paths = [
+        bridge_socket(int(p))
+        for p, parent, c in processes
+        if parent in app_pids and c.startswith(prefix)
+    ]
+    if len(paths) != 1:
+        raise RuntimeError(
+            "Desktop bridge unavailable: run codexo watch install, "
+            "then quit and reopen Codex"
+        )
+    return paths[0]
+
+
+@contextmanager
+def desktop_server() -> Iterator[AppServer]:
+    with unix_connect(
+        desktop_socket(),
+        uri="ws://localhost/rpc",
+        open_timeout=WATCH_REQUEST_TIMEOUT,
+        close_timeout=1,
+        max_size=None,
+    ) as connection:
+        server = AppServer(connection)
+        server.request(
+            "initialize",
+            {
+                "clientInfo": {"name": "codexo", "version": "0.1.0"},
+                "capabilities": {"experimentalApi": True},
+            },
+        )
+        server.send({"method": "initialized", "params": {}})
+        yield server
+
+
+def watch(command: WatchCommand, dry_run: bool) -> None:
+    if command.action is not None:
+        watch_daemon(command, dry_run)
+        return
+    if dry_run:
+        print(f"Poll running Codex every {command.interval:g} seconds.")
+        print("Read both usage windows; record every successful observation.")
+        print("Find the most recently updated idle chat and log usage and send status.")
+        print("An initial zero or nonzero-to-zero transition can trigger a prompt.")
+        print("Keep a detected reset pending until an idle poll sends its prompt.")
+        print(
+            "Skip busy chats; send one prompt to the most recently updated idle chat:"
+        )
+        print(command.prompt)
+        if command.test:
+            print(
+                'On other idle polls, send Say "test" only to the chat titled codexo.'
+            )
+        return
+    state = WatchState()
+    while True:
+        poll = WatchPoll()
+        try:
+            if desktop_running():
+                with desktop_server() as server:
+                    watch_iteration(server, state, command.prompt, poll, command.test)
+            else:
+                poll.detail = "Codex is not running"
+        except (
+            OSError,
+            RuntimeError,
+            ValueError,
+            EOFError,
+            WebSocketException,
+            subprocess.SubprocessError,
+        ) as error:
+            poll.detail = f"error: {error}"
+        finally:
+            log_watch_poll(poll)
+        sleep(command.interval)
+
+
+def log_watch_poll(poll: WatchPoll) -> None:
+    timestamp = datetime.now().astimezone().isoformat(timespec="seconds")
+    primary = "unavailable" if poll.primary is None else str(poll.primary)
+    secondary = "unavailable" if poll.secondary is None else str(poll.secondary)
+    idle = "unknown" if poll.idle is None else str(poll.idle).lower()
+    detail = (
+        f" detail={json.dumps(poll.detail, ensure_ascii=False)}" if poll.detail else ""
+    )
+    print(
+        f"{timestamp} codexo watch: primary.usedPercent={primary} "
+        f"secondary.usedPercent={secondary} idle={idle} "
+        f"prompt_sent={str(poll.prompt_sent).lower()}{detail}",
+        flush=True,
+    )
+
+
+def desktop_running() -> bool:
+    return (
+        subprocess.run(
+            [
+                "/usr/bin/pgrep",
+                "-f",
+                "^/Applications/ChatGPT.app/Contents/MacOS/ChatGPT$",
+            ],
+            capture_output=True,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
+def watch_iteration(
+    server: AppServer,
+    state: WatchState,
+    prompt: str,
+    poll: WatchPoll,
+    test: bool = False,
+) -> bool:
+    limits = UsageLimits.model_validate(
+        server.request("account/rateLimits/read", {})["rateLimits"]
+    )
+    poll.primary = limits.primary.usedPercent if limits.primary is not None else None
+    poll.secondary = (
+        limits.secondary.usedPercent if limits.secondary is not None else None
+    )
+    current = {
+        n: w.usedPercent
+        for n, w in [("primary", limits.primary), ("secondary", limits.secondary)]
+        if w is not None
+    }
+    state.pending_reset |= any(
+        v == 0 and state.previous.get(n) != 0 for n, v in current.items()
+    )
+    state.previous.update(current)
+    reset = state.pending_reset
+    test_only = test and not reset
+    cursor: str | None = None
+    candidates: list[Chat] = []
+    while True:
+        page = ChatPage.model_validate(
+            server.request(
+                "thread/list",
+                {
+                    "cursor": cursor,
+                    "limit": 100,
+                    "sortKey": "updated_at",
+                    "archived": False,
+                    "modelProviders": [],
+                    "sourceKinds": THREAD_SOURCE_KINDS,
+                    "useStateDbOnly": True,
+                },
+            )
+        )
+        candidates.extend(c for c in page.data if not test_only or c.name == "codexo")
+        if page.nextCursor is None:
+            break
+        cursor = page.nextCursor
+    if test_only and len(candidates) != 1:
+        poll.detail = (
+            "no unarchived chat titled codexo"
+            if not candidates
+            else "multiple unarchived chats titled codexo"
+        )
+        return False
+    blocked: list[str] = []
+    for candidate in candidates:
+        chat = Chat.model_validate(
+            server.request("thread/read", {"threadId": candidate.id})["thread"]
+        )
+        if chat.status["type"] not in {"idle", "notLoaded"}:
+            blocked.append(
+                f"{chat.id} ({chat.name or '(unnamed)'}): "
+                f"{json.dumps(chat.status, ensure_ascii=False)}"
+            )
+            continue
+        if not (reset or test):
+            poll.idle = True
+            if blocked:
+                poll.detail = "skipped busy chats: " + "; ".join(blocked)
+            return False
+        chat = Chat.model_validate(
+            server.request(
+                "thread/resume", {"threadId": chat.id, "excludeTurns": True}
+            )["thread"]
+        )
+        if chat.status["type"] != "idle":
+            blocked.append(
+                f"{chat.id} ({chat.name or '(unnamed)'}) after resume: "
+                f"{json.dumps(chat.status, ensure_ascii=False)}"
+            )
+            continue
+        poll.idle = True
+        server.request(
+            "turn/start",
+            {
+                "threadId": chat.id,
+                "input": [{"type": "text", "text": prompt if reset else 'Say "test"'}],
+            },
+        )
+        poll.prompt_sent = True
+        if reset:
+            state.pending_reset = False
+        poll.detail = f"sent to {chat.id} ({chat.name or '(unnamed)'})"
+        if not reset:
+            poll.detail = f"test prompt {poll.detail}"
+        if blocked:
+            poll.detail += "; skipped busy chats: " + "; ".join(blocked)
+        return True
+    poll.idle = False
+    poll.detail = (
+        "no idle chat available; busy chats: " + "; ".join(blocked)
+        if blocked
+        else "no unarchived chat available"
+    )
+    return False
+
+
+def watch_launch_agent(command: WatchCommand) -> dict[str, object]:
+    arguments = [
+        sys.executable,
+        str(Path(__file__).resolve()),
+        "watch",
+        "--interval",
+        str(command.interval),
+        "--prompt",
+        command.prompt,
+    ]
+    if command.test:
+        arguments.append("--test")
+    document: dict[str, object] = {
+        "Label": WATCH_LABEL,
+        "ProgramArguments": arguments,
+        "RunAtLoad": True,
+        "KeepAlive": True,
+        "ProcessType": "Background",
+        "StandardOutPath": str(Path.home() / "Library/Logs/codexo-watch.log"),
+        "StandardErrorPath": str(Path.home() / "Library/Logs/codexo-watch.log"),
+    }
+    if "CODEX_HOME" in os.environ:
+        document["EnvironmentVariables"] = {"CODEX_HOME": os.environ["CODEX_HOME"]}
+    return document
+
+
+def unload_launch_agent(target: str) -> None:
+    subprocess.run(["/bin/launchctl", "bootout", target], check=True)
+    deadline = monotonic() + 10
+    while (
+        subprocess.run(
+            ["/bin/launchctl", "print", target],
+            capture_output=True,
+            check=False,
+        ).returncode
+        == 0
+    ):
+        if monotonic() >= deadline:
+            raise TimeoutError(f"Timed out waiting for launchd to unload {target}")
+        sleep(0.05)
+
+
+def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
+    path = Path.home() / "Library/LaunchAgents" / f"{WATCH_LABEL}.plist"
+    environment_path = path.with_name(f"{WATCH_ENVIRONMENT_LABEL}.plist")
+    launcher = Path.home() / "Library/Application Support/codexo/codex"
+    launcher_text = (
+        f"#!/bin/sh\nexec {shlex.quote(sys.executable)} "
+        f'{shlex.quote(str(Path(__file__).resolve()))} bridge -- "$@"\n'
+    )
+    domain = f"gui/{os.getuid()}"
+    service = f"{domain}/{WATCH_LABEL}"
+    if isinstance(command.action, WatchInstallCommand):
+        agents = {
+            environment_path: {
+                "Label": WATCH_ENVIRONMENT_LABEL,
+                "ProgramArguments": [
+                    "/bin/launchctl",
+                    "setenv",
+                    "CODEX_CLI_PATH",
+                    str(launcher),
+                ],
+                "RunAtLoad": True,
+            },
+            path: watch_launch_agent(command),
+        }
+    if dry_run:
+        if isinstance(command.action, WatchInstallCommand):
+            print(f"Write executable {launcher}:\n{launcher_text}", end="")
+            print(f"launchctl setenv CODEX_CLI_PATH {shlex.quote(str(launcher))}")
+            print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
+            for p, document in agents.items():
+                print(
+                    f"Unload {domain}/{document['Label']} if loaded; wait for removal."
+                )
+                print(f"Write {p} and launchctl bootstrap {domain} {p}:")
+                print(plistlib.dumps(document).decode(), end="")
+        elif isinstance(command.action, WatchUninstallCommand):
+            print(
+                f"Unload {service} and {domain}/{WATCH_ENVIRONMENT_LABEL} "
+                f"if loaded, then remove {path} and {environment_path}; "
+                "error if not installed."
+            )
+            print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
+            print(f"Remove {launcher}; launchctl unsetenv CODEX_CLI_PATH")
+        elif isinstance(command.action, WatchRestartCommand):
+            print(f"Restart the daemon with launchctl kickstart -k {service}.")
+        else:
+            print(f"Print daemon status with launchctl print {service}.")
+        return
+    if isinstance(command.action, WatchInstallCommand):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        (Path.home() / "Library/Logs").mkdir(parents=True, exist_ok=True)
+        launcher.parent.mkdir(parents=True, exist_ok=True)
+        launcher.write_text(launcher_text)
+        launcher.chmod(0o755)
+        subprocess.run(
+            ["/bin/launchctl", "unsetenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON"],
+            check=True,
+        )
+        subprocess.run(
+            ["/bin/launchctl", "setenv", "CODEX_CLI_PATH", str(launcher)],
+            check=True,
+        )
+        for p, document in agents.items():
+            target = f"{domain}/{document['Label']}"
+            status = subprocess.run(
+                ["/bin/launchctl", "print", target],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if status.returncode == 0:
+                unload_launch_agent(target)
+            p.write_bytes(plistlib.dumps(document))
+            subprocess.run(["/bin/launchctl", "bootstrap", domain, str(p)], check=True)
+        print(f"Installed codexo watch: {path}")
+        try:
+            bridge_ready = desktop_socket().is_socket()
+        except (OSError, RuntimeError, subprocess.SubprocessError):
+            bridge_ready = False
+        if not bridge_ready:
+            print("Quit and reopen the desktop app once to use the codexo bridge.")
+        return
+    if isinstance(command.action, WatchRestartCommand):
+        subprocess.run(["/bin/launchctl", "kickstart", "-k", service], check=True)
+        print("Restarted codexo watch.")
+        return
+    if isinstance(command.action, WatchUninstallCommand):
+        installed = False
+        for p, label in [
+            (environment_path, WATCH_ENVIRONMENT_LABEL),
+            (path, WATCH_LABEL),
+        ]:
+            target = f"{domain}/{label}"
+            status = subprocess.run(
+                ["/bin/launchctl", "print", target],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            installed |= p.is_file() or status.returncode == 0
+            if status.returncode == 0:
+                unload_launch_agent(target)
+            p.unlink(missing_ok=True)
+        if not installed:
+            raise RuntimeError("codexo watch is not installed")
+        subprocess.run(
+            ["/bin/launchctl", "unsetenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON"],
+            check=True,
+        )
+        subprocess.run(["/bin/launchctl", "unsetenv", "CODEX_CLI_PATH"], check=True)
+        launcher.unlink(missing_ok=True)
+        print("Uninstalled codexo watch.")
+        return
+    status = subprocess.run(
+        ["/bin/launchctl", "print", service],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if status.returncode == 0:
+        print(status.stdout, end="")
+    else:
+        print(
+            "codexo watch: installed but not loaded"
+            if path.is_file()
+            else "codexo watch: not installed"
+        )
 
 
 def fix_repositories(command: FixCommand, dry_run: bool) -> None:
@@ -250,7 +869,7 @@ def fix_repositories(command: FixCommand, dry_run: bool) -> None:
             try:
                 server = stack.enter_context(
                     app_server(
-                        "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+                        CODEX_EXECUTABLE,
                         experimental=True,
                         quiet=True,
                     )
@@ -469,6 +1088,12 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     server.request("thread/archive", {"threadId": old.id})
     print(f"Archived {old.id}. Continue in {new.id} ({old.name}).")
     return new.id
+
+
+CODEX_EXECUTABLE = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+WATCH_LABEL = "local.codexo.watch"
+WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
+WATCH_REQUEST_TIMEOUT = 10
 
 
 THREAD_SOURCE_KINDS = [
