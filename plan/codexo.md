@@ -162,7 +162,12 @@ no atomic server-wide idle-and-send operation. No new chat is created.
 Observations are recorded even when the app is busy or no destination chat
 exists. A blocked reset is not queued for a later poll. App closure preserves
 the in-memory history; restarting the watcher begins a new observation history.
-Normal unchanged polls stay quiet. Successful sends and query failures are logged.
+Every poll writes a flushed log line containing a local ISO timestamp with UTC
+offset, both `usedPercent` values, idle status, and whether a prompt was sent.
+Idle status is checked on every connected poll, even without a reset. Values
+that could not be queried are logged as `unavailable` or `unknown`, with a reason
+when the app is closed, the shared socket is missing, or a query fails. Available
+partial results are retained in that poll's log; stale prior values are not used.
 
 Daemon commands use a per-user launchd agent:
 

@@ -16,6 +16,7 @@ import sys
 from collections import deque
 from collections.abc import Callable, Iterator
 from contextlib import ExitStack, contextmanager
+from datetime import datetime
 from pathlib import Path
 from tempfile import mkdtemp
 from time import sleep
@@ -102,6 +103,14 @@ class UsageWindow(BaseModel, frozen=True):
 class UsageLimits(BaseModel, frozen=True):
     primary: UsageWindow | None = None
     secondary: UsageWindow | None = None
+
+
+class WatchPoll(BaseModel):
+    primary: int | None = None
+    secondary: int | None = None
+    idle: bool | None = None
+    prompt_sent: bool = False
+    detail: str = ""
 
 
 class ProjectRoot(BaseModel, frozen=True):
@@ -291,28 +300,52 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
         print(f"Poll running Codex every {command.interval:g} seconds.")
         print("Read both usage windows; record every successful observation.")
         print(
-            "On an initial zero or nonzero-to-zero transition, check all loaded chats."
+            "Check all loaded chats on every poll and log usage, idle and send status."
         )
+        print("An initial zero or nonzero-to-zero transition can trigger a prompt.")
         print("If idle, send one prompt to the most recently updated unarchived chat:")
         print(command.prompt)
         return
     previous: dict[str, int] = {}
     while True:
-        if desktop_running():
-            home = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
-            control_socket = home / "app-server-control" / "app-server-control.sock"
-            if control_socket.is_socket():
-                try:
+        poll = WatchPoll()
+        try:
+            if desktop_running():
+                home = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
+                control_socket = home / "app-server-control" / "app-server-control.sock"
+                if control_socket.is_socket():
                     with app_server(
                         CODEX_EXECUTABLE,
                         experimental=True,
                         quiet=True,
                         proxy_socket=control_socket,
                     ) as server:
-                        watch_iteration(server, previous, command.prompt)
-                except (OSError, RuntimeError, ValueError, EOFError) as error:
-                    print(f"codexo watch: {error}", file=sys.stderr)
+                        watch_iteration(server, previous, command.prompt, poll)
+                else:
+                    poll.detail = "shared server socket unavailable"
+            else:
+                poll.detail = "Codex is not running"
+        except (OSError, RuntimeError, ValueError, EOFError) as error:
+            poll.detail = f"error: {error}"
+        finally:
+            log_watch_poll(poll)
         sleep(command.interval)
+
+
+def log_watch_poll(poll: WatchPoll) -> None:
+    timestamp = datetime.now().astimezone().isoformat(timespec="seconds")
+    primary = "unavailable" if poll.primary is None else str(poll.primary)
+    secondary = "unavailable" if poll.secondary is None else str(poll.secondary)
+    idle = "unknown" if poll.idle is None else str(poll.idle).lower()
+    detail = (
+        f" detail={json.dumps(poll.detail, ensure_ascii=False)}" if poll.detail else ""
+    )
+    print(
+        f"{timestamp} codexo watch: primary.usedPercent={primary} "
+        f"secondary.usedPercent={secondary} idle={idle} "
+        f"prompt_sent={str(poll.prompt_sent).lower()}{detail}",
+        flush=True,
+    )
 
 
 def desktop_running() -> bool:
@@ -330,9 +363,15 @@ def desktop_running() -> bool:
     )
 
 
-def watch_iteration(server: AppServer, previous: dict[str, int], prompt: str) -> bool:
+def watch_iteration(
+    server: AppServer, previous: dict[str, int], prompt: str, poll: WatchPoll
+) -> bool:
     limits = UsageLimits.model_validate(
         server.request("account/rateLimits/read", {})["rateLimits"]
+    )
+    poll.primary = limits.primary.usedPercent if limits.primary is not None else None
+    poll.secondary = (
+        limits.secondary.usedPercent if limits.secondary is not None else None
     )
     current = {
         n: w.usedPercent
@@ -341,7 +380,8 @@ def watch_iteration(server: AppServer, previous: dict[str, int], prompt: str) ->
     }
     reset = any(v == 0 and previous.get(n) != 0 for n, v in current.items())
     previous.update(current)
-    if not reset or not chats_idle(server):
+    poll.idle = chats_idle(server)
+    if not reset or not poll.idle:
         return False
     page = ChatPage.model_validate(
         server.request(
@@ -357,6 +397,7 @@ def watch_iteration(server: AppServer, previous: dict[str, int], prompt: str) ->
         )
     )
     if not page.data:
+        poll.detail = "no unarchived chat available"
         return False
     chat = Chat.model_validate(
         server.request(
@@ -365,6 +406,7 @@ def watch_iteration(server: AppServer, previous: dict[str, int], prompt: str) ->
         )["thread"]
     )
     if chat.status["type"] != "idle":
+        poll.idle = False
         return False
     server.request(
         "turn/start",
@@ -373,7 +415,8 @@ def watch_iteration(server: AppServer, previous: dict[str, int], prompt: str) ->
             "input": [{"type": "text", "text": prompt}],
         },
     )
-    print(f"Sent watch prompt to {chat.id} ({chat.name or '(unnamed)'}).", flush=True)
+    poll.prompt_sent = True
+    poll.detail = f"sent to {chat.id} ({chat.name or '(unnamed)'})"
     return True
 
 
