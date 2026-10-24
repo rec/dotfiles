@@ -344,7 +344,14 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
     monkeypatch.setattr(codexo.Path, "write_bytes", unexpected_operation)
     codexo.main()
-    assert capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert output
+    if operation == ["--install"]:
+        assert "launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1" in output
+        assert "local.codexo.watch-environment.plist" in output
+    elif operation == ["--uninstall"]:
+        assert "launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON" in output
+        assert "local.codexo.watch-environment.plist" in output
     assert not (tmp_path / "Library").exists()
 
 
@@ -404,39 +411,73 @@ def test_daemon_install_uses_foreground_watch_with_configured_arguments(
     assert args[args.index("--interval") + 1] == "123.0"
     assert "--install" not in args
     assert document["KeepAlive"] is True
-    assert len(calls) == 1
-    assert calls[0][1] == "bootstrap"
+    helper = path.with_name("local.codexo.watch-environment.plist")
+    environment = plistlib.loads(helper.read_bytes())
+    assert environment == {
+        "Label": "local.codexo.watch-environment",
+        "RunAtLoad": True,
+        "ProgramArguments": [
+            "/bin/launchctl",
+            "setenv",
+            "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
+            "1",
+        ],
+    }
+    assert calls == [
+        environment["ProgramArguments"],
+        ["/bin/launchctl", "bootstrap", f"gui/{codexo.os.getuid()}", str(helper)],
+        ["/bin/launchctl", "bootstrap", f"gui/{codexo.os.getuid()}", str(path)],
+    ]
     with pytest.raises(RuntimeError, match="already installed"):
         codexo.watch_daemon(command, False)
 
 
+@pytest.mark.parametrize(
+    "labels",
+    [
+        ["local.codexo.watch"],
+        ["local.codexo.watch-environment"],
+        ["local.codexo.watch", "local.codexo.watch-environment"],
+    ],
+)
 @pytest.mark.parametrize("loaded,present", [(False, True), (True, True), (True, False)])
 def test_daemon_uninstall_removes_registration_and_file_if_present(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     loaded: bool,
     present: bool,
+    labels: list[str],
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
-    path = tmp_path / "Library/LaunchAgents/local.codexo.watch.plist"
+    directory = tmp_path / "Library/LaunchAgents"
     if present:
-        path.parent.mkdir(parents=True)
-        path.touch()
+        directory.mkdir(parents=True)
+        for label in labels:
+            (directory / f"{label}.plist").touch()
     calls: list[list[str]] = []
-    registered = loaded
+    registered = set(labels) if loaded else set()
 
     def run(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
-        nonlocal registered
         calls.append(args)
-        if args[1] == "bootout":
-            registered = False
+        if args[1] == "unsetenv":
             return subprocess.CompletedProcess(args, 0, "")
-        return subprocess.CompletedProcess(args, 0 if registered else 1, "")
+        label = args[-1].rsplit("/", 1)[-1]
+        if args[1] == "bootout":
+            registered.remove(label)
+            return subprocess.CompletedProcess(args, 0, "")
+        return subprocess.CompletedProcess(args, 0 if label in registered else 1, "")
 
     monkeypatch.setattr(codexo.subprocess, "run", run)
     codexo.watch_daemon(codexo.WatchCommand(uninstall=True), False)
-    assert not path.exists()
-    assert any(c[1] == "bootout" for c in calls) == loaded
+    assert not list(directory.glob("*.plist"))
+    assert sorted(c[-1].rsplit("/", 1)[-1] for c in calls if c[1] == "bootout") == (
+        sorted(labels) if loaded else []
+    )
+    assert calls[-1] == [
+        "/bin/launchctl",
+        "unsetenv",
+        "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
+    ]
     with pytest.raises(RuntimeError, match="not installed"):
         codexo.watch_daemon(codexo.WatchCommand(uninstall=True), False)
 

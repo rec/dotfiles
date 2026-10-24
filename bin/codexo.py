@@ -472,34 +472,85 @@ def watch_launch_agent(command: WatchCommand) -> dict[str, object]:
 
 def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
     path = Path.home() / "Library/LaunchAgents" / f"{WATCH_LABEL}.plist"
+    environment_path = path.with_name(f"{WATCH_ENVIRONMENT_LABEL}.plist")
     domain = f"gui/{os.getuid()}"
     service = f"{domain}/{WATCH_LABEL}"
+    if command.install:
+        agents = {
+            environment_path: {
+                "Label": WATCH_ENVIRONMENT_LABEL,
+                "ProgramArguments": [
+                    "/bin/launchctl",
+                    "setenv",
+                    "CODEX_APP_SERVER_USE_LOCAL_DAEMON",
+                    "1",
+                ],
+                "RunAtLoad": True,
+            },
+            path: watch_launch_agent(command),
+        }
     if dry_run:
         if command.install:
-            print(f"Write {path} and launchctl bootstrap {domain} {path}:")
-            print(plistlib.dumps(watch_launch_agent(command)).decode(), end="")
+            print("launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1")
+            for p, document in agents.items():
+                print(f"Write {p} and launchctl bootstrap {domain} {p}:")
+                print(plistlib.dumps(document).decode(), end="")
         elif command.uninstall:
             print(
-                f"Unload {service} if loaded, then remove {path}; "
+                f"Unload {service} and {domain}/{WATCH_ENVIRONMENT_LABEL} "
+                f"if loaded, then remove {path} and {environment_path}; "
                 "error if not installed."
             )
+            print("launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON")
         elif command.restart:
             print(f"Restart the daemon with launchctl kickstart -k {service}.")
         else:
             print(f"Print daemon status with launchctl print {service}.")
         return
     if command.install:
-        if path.exists():
-            raise RuntimeError(f"codexo watch is already installed: {path}")
+        for p in agents:
+            if p.exists():
+                raise RuntimeError(f"codexo watch is already installed: {p}")
         path.parent.mkdir(parents=True, exist_ok=True)
         (Path.home() / "Library/Logs").mkdir(parents=True, exist_ok=True)
-        path.write_bytes(plistlib.dumps(watch_launch_agent(command)))
-        subprocess.run(["/bin/launchctl", "bootstrap", domain, str(path)], check=True)
+        subprocess.run(
+            ["/bin/launchctl", "setenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON", "1"],
+            check=True,
+        )
+        for p, document in agents.items():
+            p.write_bytes(plistlib.dumps(document))
+            subprocess.run(["/bin/launchctl", "bootstrap", domain, str(p)], check=True)
         print(f"Installed codexo watch: {path}")
+        print("Quit and reopen the desktop app once to use the shared server.")
         return
     if command.restart:
         subprocess.run(["/bin/launchctl", "kickstart", "-k", service], check=True)
         print("Restarted codexo watch.")
+        return
+    if command.uninstall:
+        installed = False
+        for p, label in [
+            (environment_path, WATCH_ENVIRONMENT_LABEL),
+            (path, WATCH_LABEL),
+        ]:
+            target = f"{domain}/{label}"
+            status = subprocess.run(
+                ["/bin/launchctl", "print", target],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            installed |= p.is_file() or status.returncode == 0
+            if status.returncode == 0:
+                subprocess.run(["/bin/launchctl", "bootout", target], check=True)
+            p.unlink(missing_ok=True)
+        if not installed:
+            raise RuntimeError("codexo watch is not installed")
+        subprocess.run(
+            ["/bin/launchctl", "unsetenv", "CODEX_APP_SERVER_USE_LOCAL_DAEMON"],
+            check=True,
+        )
+        print("Uninstalled codexo watch.")
         return
     status = subprocess.run(
         ["/bin/launchctl", "print", service],
@@ -507,14 +558,7 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
         text=True,
         check=False,
     )
-    if command.uninstall:
-        if not path.is_file() and status.returncode != 0:
-            raise RuntimeError("codexo watch is not installed")
-        if status.returncode == 0:
-            subprocess.run(["/bin/launchctl", "bootout", service], check=True)
-        path.unlink(missing_ok=True)
-        print("Uninstalled codexo watch.")
-    elif status.returncode == 0:
+    if status.returncode == 0:
         print(status.stdout, end="")
     else:
         print(
@@ -773,6 +817,7 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
 
 CODEX_EXECUTABLE = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
 WATCH_LABEL = "local.codexo.watch"
+WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
 
 
 THREAD_SOURCE_KINDS = [

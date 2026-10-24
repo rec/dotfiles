@@ -132,8 +132,17 @@ Use `watch --interval 120 --prompt "hello"` to configure the interval in seconds
 and the prompt. The default prompt is `hello`. The first poll runs immediately.
 
 The watcher requires the desktop app to use its shared local app-server. The
-installed app supports this launch mode, verified in its bundled implementation:
-quit the desktop app first, then launch it with:
+installed app supports this launch mode, verified in its bundled implementation.
+`watch --install` sets `CODEX_APP_SERVER_USE_LOCAL_DAEMON=1` in the GUI login
+environment and installs a login helper to set it again at subsequent logins.
+Quit and reopen the desktop app once after installation. Future launches can
+use that environment without a manual shell command. The helper lives outside
+the app bundle, so app updates do not overwrite it. Inheritance through the
+app updater's relaunch has not been verified. Login agents have no guaranteed
+ordering, so an app started automatically at login may precede the helper.
+
+For a foreground watcher without installing the agents, quit the desktop app
+first, then launch it with:
 
 ```sh
 CODEX_APP_SERVER_USE_LOCAL_DAEMON=1 /Applications/ChatGPT.app/Contents/MacOS/ChatGPT
@@ -175,9 +184,14 @@ Daemon commands use a per-user launchd agent:
   `~/Library/LaunchAgents/local.codexo.watch.plist` and loads it into the current
   GUI login session. The configured interval and prompt are saved as arguments.
   It starts immediately and runs at subsequent logins. An existing installation
-  is an error; uninstall it before installing different settings.
-- `watch --uninstall` unloads the agent if loaded and removes its plist. A missing
-  installation is an error.
+  is an error; uninstall it before installing different settings. It also writes
+  `~/Library/LaunchAgents/local.codexo.watch-environment.plist`, a RunAtLoad
+  helper that runs `launchctl setenv CODEX_APP_SERVER_USE_LOCAL_DAEMON 1`,
+  and sets the same variable immediately during installation.
+- `watch --uninstall` unloads both agents if loaded, removes both plists, and
+  runs `launchctl unsetenv CODEX_APP_SERVER_USE_LOCAL_DAEMON`. Existing app
+  processes retain their environment until restarted. A missing installation
+  is an error. Either agent or plist is sufficient to count as installed.
 - `watch --daemon` prints launchctl status, or reports that the agent is absent
   or installed but not loaded.
 - `watch --restart` restarts the registered agent with its saved settings using
