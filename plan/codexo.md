@@ -125,6 +125,65 @@ occurs after creating the replacement, it remains available; the script prints
 its ID and the handover path so work can be recovered manually. It does not
 retry, clean up chats, or continue the handed-over task automatically.
 
+## Watch
+
+`/Users/tom/code/dotfiles/bin/codexo.py watch` polls every 60 seconds by default.
+Use `watch --interval 120 --prompt "hello"` to configure the interval in seconds
+and the prompt. The default prompt is `hello`. The first poll runs immediately.
+
+The watcher requires the desktop app to use its shared local app-server. The
+installed app supports this launch mode, verified in its bundled implementation:
+quit the desktop app first, then launch it with:
+
+```sh
+CODEX_APP_SERVER_USE_LOCAL_DAEMON=1 /Applications/ChatGPT.app/Contents/MacOS/ChatGPT
+```
+
+This is a setting for launching the installed desktop app, not a `config.toml`
+key. The watcher connects through the bundled CLI's `app-server proxy` to
+`$CODEX_HOME/app-server-control/app-server-control.sock`, defaulting to
+`~/.codex/app-server-control/app-server-control.sock`. It never starts an
+app-server. When the desktop app is closed or the shared socket is absent, it
+waits for the next poll. A privately launched desktop app-server cannot be used
+for this watcher; the idle check must observe the same server as the desktop app.
+
+Both primary and secondary `usedPercent` values are recorded in memory. A window
+qualifies when its first observed value is zero, or its most recent recorded
+value was nonzero and the current value is zero. Missing windows are not treated
+as zero. Either or both qualifying in the same poll causes at most one prompt.
+
+Before sending, all loaded local chats are checked across every page. Active
+chats, including those waiting for approval or input, and running background
+terminals block the prompt. The watcher selects the most recently updated
+unarchived chat, resumes it, verifies that it is still idle, and starts a turn
+with the configured prompt. Activity is checked through API snapshots; there is
+no atomic server-wide idle-and-send operation. No new chat is created.
+
+Observations are recorded even when the app is busy or no destination chat
+exists. A blocked reset is not queued for a later poll. App closure preserves
+the in-memory history; restarting the watcher begins a new observation history.
+Normal unchanged polls stay quiet. Successful sends and query failures are logged.
+
+Daemon commands use a per-user launchd agent:
+
+- `watch --install` writes
+  `~/Library/LaunchAgents/local.codexo.watch.plist` and loads it into the current
+  GUI login session. The configured interval and prompt are saved as arguments.
+  It starts immediately and runs at subsequent logins. An existing installation
+  is an error; uninstall it before installing different settings.
+- `watch --uninstall` unloads the agent if loaded and removes its plist. A missing
+  installation is an error.
+- `watch --daemon` prints launchctl status, or reports that the agent is absent
+  or installed but not loaded.
+
+Logs go to `~/Library/Logs/codexo-watch.log`. The agent runs this script using the
+current Python interpreter, preserving its virtual environment. `CODEX_HOME` is
+preserved when set during installation. Top-level `-d` prints the planned watch
+or daemon operations without connecting, sending prompts, or installing anything.
+
+Implementation verification uses unit tests only: no watcher was started, no
+daemon was installed, and no live watch prompt was sent.
+
 ## Additional work beyond the prompt
 
 None.

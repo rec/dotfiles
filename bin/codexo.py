@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import plistlib
 import subprocess
 import sys
 from collections import deque
@@ -16,12 +18,20 @@ from collections.abc import Callable, Iterator
 from contextlib import ExitStack, contextmanager
 from pathlib import Path
 from tempfile import mkdtemp
-from typing import IO, Annotated, cast
+from time import sleep
+from typing import IO, Annotated, Self, cast
 
 import tomlkit
 import tomllib
 import tyro
-from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    TypeAdapter,
+    ValidationError,
+    model_validator,
+)
 
 
 class RetireCommand(BaseModel, frozen=True):
@@ -38,10 +48,31 @@ class FixCommand(BaseModel, frozen=True):
     """Include Codex Project and chat titles."""
 
 
+class WatchCommand(BaseModel, frozen=True):
+    """Prompt an idle Codex chat when either usage window resets."""
+
+    interval: Annotated[float, tyro.conf.arg(prefix_name=False)] = Field(
+        default=60, gt=0
+    )
+    """Polling interval in seconds."""
+    prompt: Annotated[str, tyro.conf.arg(prefix_name=False)] = "hello"
+    install: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
+    uninstall: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
+    daemon: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
+    """Print the installed daemon's status."""
+
+    @model_validator(mode="after")
+    def check_daemon_operation(self) -> Self:
+        if sum([self.install, self.uninstall, self.daemon]) > 1:
+            raise ValueError("Choose only one of --install, --uninstall, or --daemon")
+        return self
+
+
 class CodexoCommand(BaseModel, frozen=True):
     action: (
         Annotated[RetireCommand, tyro.conf.subcommand(name="retire", prefix_name=False)]
         | Annotated[FixCommand, tyro.conf.subcommand(name="fix", prefix_name=False)]
+        | Annotated[WatchCommand, tyro.conf.subcommand(name="watch", prefix_name=False)]
     )
     dry_run: Annotated[bool, tyro.conf.arg(aliases=["-d"])] = False
     """Print planned operations without starting app-server or making changes."""
@@ -57,6 +88,20 @@ class Chat(BaseModel, frozen=True):
 class ChatPage(BaseModel, frozen=True):
     data: list[Chat]
     nextCursor: str | None = None
+
+
+class LoadedChats(BaseModel, frozen=True):
+    data: list[str]
+    nextCursor: str | None = None
+
+
+class UsageWindow(BaseModel, frozen=True):
+    usedPercent: int
+
+
+class UsageLimits(BaseModel, frozen=True):
+    primary: UsageWindow | None = None
+    secondary: UsageWindow | None = None
 
 
 class ProjectRoot(BaseModel, frozen=True):
@@ -179,6 +224,14 @@ class AppServer:
 
 def main() -> None:
     command = tyro.cli(CodexoCommand)
+    if isinstance(command.action, WatchCommand):
+        try:
+            watch(command.action, command.dry_run)
+        except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
+            sys.exit(str(error))
+        except KeyboardInterrupt:
+            return
+        return
     if isinstance(command.action, FixCommand):
         fix_repositories(command.action, command.dry_run)
         return
@@ -197,10 +250,16 @@ def main() -> None:
 
 @contextmanager
 def app_server(
-    executable: str, experimental: bool = False, quiet: bool = False
+    executable: str,
+    experimental: bool = False,
+    quiet: bool = False,
+    proxy_socket: Path | None = None,
 ) -> Iterator[AppServer]:
+    arguments = [executable, "app-server"]
+    if proxy_socket is not None:
+        arguments.extend(["proxy", "--sock", str(proxy_socket)])
     with subprocess.Popen(
-        [executable, "app-server"],
+        arguments,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL if quiet else None,
@@ -222,6 +281,194 @@ def app_server(
             yield server
         finally:
             process.terminate()
+
+
+def watch(command: WatchCommand, dry_run: bool) -> None:
+    if command.install or command.uninstall or command.daemon:
+        watch_daemon(command, dry_run)
+        return
+    if dry_run:
+        print(f"Poll running Codex every {command.interval:g} seconds.")
+        print("Read both usage windows; record every successful observation.")
+        print(
+            "On an initial zero or nonzero-to-zero transition, check all loaded chats."
+        )
+        print("If idle, send one prompt to the most recently updated unarchived chat:")
+        print(command.prompt)
+        return
+    previous: dict[str, int] = {}
+    while True:
+        if desktop_running():
+            home = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
+            control_socket = home / "app-server-control" / "app-server-control.sock"
+            if control_socket.is_socket():
+                try:
+                    with app_server(
+                        CODEX_EXECUTABLE,
+                        experimental=True,
+                        quiet=True,
+                        proxy_socket=control_socket,
+                    ) as server:
+                        watch_iteration(server, previous, command.prompt)
+                except (OSError, RuntimeError, ValueError, EOFError) as error:
+                    print(f"codexo watch: {error}", file=sys.stderr)
+        sleep(command.interval)
+
+
+def desktop_running() -> bool:
+    return (
+        subprocess.run(
+            [
+                "/usr/bin/pgrep",
+                "-f",
+                "^/Applications/ChatGPT.app/Contents/MacOS/ChatGPT$",
+            ],
+            capture_output=True,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
+def watch_iteration(server: AppServer, previous: dict[str, int], prompt: str) -> bool:
+    limits = UsageLimits.model_validate(
+        server.request("account/rateLimits/read", {})["rateLimits"]
+    )
+    current = {
+        n: w.usedPercent
+        for n, w in [("primary", limits.primary), ("secondary", limits.secondary)]
+        if w is not None
+    }
+    reset = any(v == 0 and previous.get(n) != 0 for n, v in current.items())
+    previous.update(current)
+    if not reset or not chats_idle(server):
+        return False
+    page = ChatPage.model_validate(
+        server.request(
+            "thread/list",
+            {
+                "limit": 1,
+                "sortKey": "updated_at",
+                "archived": False,
+                "modelProviders": [],
+                "sourceKinds": THREAD_SOURCE_KINDS,
+                "useStateDbOnly": True,
+            },
+        )
+    )
+    if not page.data:
+        return False
+    chat = Chat.model_validate(
+        server.request(
+            "thread/resume",
+            {"threadId": page.data[0].id, "excludeTurns": True},
+        )["thread"]
+    )
+    if chat.status["type"] != "idle":
+        return False
+    server.request(
+        "turn/start",
+        {
+            "threadId": chat.id,
+            "input": [{"type": "text", "text": prompt}],
+        },
+    )
+    print(f"Sent watch prompt to {chat.id} ({chat.name or '(unnamed)'}).", flush=True)
+    return True
+
+
+def chats_idle(server: AppServer) -> bool:
+    cursor: str | None = None
+    while True:
+        page = LoadedChats.model_validate(
+            server.request("thread/loaded/list", {"cursor": cursor})
+        )
+        for thread_id in page.data:
+            chat = Chat.model_validate(
+                server.request("thread/read", {"threadId": thread_id})["thread"]
+            )
+            if chat.status["type"] not in {"idle", "notLoaded"}:
+                return False
+            terminals = server.request(
+                "thread/backgroundTerminals/list", {"threadId": thread_id, "limit": 1}
+            )
+            if terminals["data"]:
+                return False
+        if page.nextCursor is None:
+            return True
+        cursor = page.nextCursor
+
+
+def watch_launch_agent(command: WatchCommand) -> dict[str, object]:
+    arguments = [
+        sys.executable,
+        str(Path(__file__).resolve()),
+        "watch",
+        "--interval",
+        str(command.interval),
+        "--prompt",
+        command.prompt,
+    ]
+    document: dict[str, object] = {
+        "Label": WATCH_LABEL,
+        "ProgramArguments": arguments,
+        "RunAtLoad": True,
+        "KeepAlive": True,
+        "ProcessType": "Background",
+        "StandardOutPath": str(Path.home() / "Library/Logs/codexo-watch.log"),
+        "StandardErrorPath": str(Path.home() / "Library/Logs/codexo-watch.log"),
+    }
+    if "CODEX_HOME" in os.environ:
+        document["EnvironmentVariables"] = {"CODEX_HOME": os.environ["CODEX_HOME"]}
+    return document
+
+
+def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
+    path = Path.home() / "Library/LaunchAgents" / f"{WATCH_LABEL}.plist"
+    domain = f"gui/{os.getuid()}"
+    service = f"{domain}/{WATCH_LABEL}"
+    if dry_run:
+        if command.install:
+            print(f"Write {path} and launchctl bootstrap {domain} {path}:")
+            print(plistlib.dumps(watch_launch_agent(command)).decode(), end="")
+        elif command.uninstall:
+            print(
+                f"Unload {service} if loaded, then remove {path}; "
+                "error if not installed."
+            )
+        else:
+            print(f"Print daemon status with launchctl print {service}.")
+        return
+    if command.install:
+        if path.exists():
+            raise RuntimeError(f"codexo watch is already installed: {path}")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        (Path.home() / "Library/Logs").mkdir(parents=True, exist_ok=True)
+        path.write_bytes(plistlib.dumps(watch_launch_agent(command)))
+        subprocess.run(["/bin/launchctl", "bootstrap", domain, str(path)], check=True)
+        print(f"Installed codexo watch: {path}")
+        return
+    status = subprocess.run(
+        ["/bin/launchctl", "print", service],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if command.uninstall:
+        if not path.is_file() and status.returncode != 0:
+            raise RuntimeError("codexo watch is not installed")
+        if status.returncode == 0:
+            subprocess.run(["/bin/launchctl", "bootout", service], check=True)
+        path.unlink(missing_ok=True)
+        print("Uninstalled codexo watch.")
+    elif status.returncode == 0:
+        print(status.stdout, end="")
+    else:
+        print(
+            "codexo watch: installed but not loaded"
+            if path.is_file()
+            else "codexo watch: not installed"
+        )
 
 
 def fix_repositories(command: FixCommand, dry_run: bool) -> None:
@@ -250,7 +497,7 @@ def fix_repositories(command: FixCommand, dry_run: bool) -> None:
             try:
                 server = stack.enter_context(
                     app_server(
-                        "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+                        CODEX_EXECUTABLE,
                         experimental=True,
                         quiet=True,
                     )
@@ -469,6 +716,10 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     server.request("thread/archive", {"threadId": old.id})
     print(f"Archived {old.id}. Continue in {new.id} ({old.name}).")
     return new.id
+
+
+CODEX_EXECUTABLE = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+WATCH_LABEL = "local.codexo.watch"
 
 
 THREAD_SOURCE_KINDS = [
