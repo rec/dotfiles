@@ -313,7 +313,7 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
 
 
 @pytest.mark.parametrize(
-    "operation", [[], ["--install"], ["--uninstall"], ["--daemon"]]
+    "operation", [[], ["--install"], ["--uninstall"], ["--restart"], ["--daemon"]]
 )
 def test_watch_dry_run_never_starts_processes_or_writes_files(
     tmp_path: Path,
@@ -345,6 +345,39 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
     monkeypatch.setattr(codexo.Path, "write_bytes", unexpected_operation)
     codexo.main()
     assert capsys.readouterr().out
+    assert not (tmp_path / "Library").exists()
+
+
+@pytest.mark.parametrize("available", [False, True])
+def test_daemon_restart_uses_existing_service_and_reports_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    available: bool,
+) -> None:
+    monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
+    monkeypatch.setattr(sys, "argv", ["codexo.py", "watch", "--restart"])
+    calls: list[list[str]] = []
+
+    def run(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
+        calls.append(args)
+        assert kwargs["check"] is True
+        if not available:
+            raise subprocess.CalledProcessError(113, args)
+        return subprocess.CompletedProcess(args, 0, "")
+
+    monkeypatch.setattr(codexo.subprocess, "run", run)
+    if available:
+        codexo.main()
+        assert capsys.readouterr().out == "Restarted codexo watch.\n"
+    else:
+        with pytest.raises(SystemExit, match="non-zero exit status 113"):
+            codexo.main()
+    assert len(calls) == 1
+    assert calls[0][0] == "/bin/launchctl"
+    assert calls[0][1] == "kickstart"
+    assert calls[0][2] == "-k"
+    assert calls[0][3].endswith("/local.codexo.watch")
     assert not (tmp_path / "Library").exists()
 
 
@@ -443,6 +476,9 @@ def test_daemon_status_reports_loaded_and_installed_states(
         {"interval": -1},
         {"install": True, "uninstall": True},
         {"daemon": True, "install": True},
+        {"restart": True, "install": True},
+        {"restart": True, "uninstall": True},
+        {"restart": True, "daemon": True},
     ],
 )
 def test_invalid_watch_configuration_is_rejected(options: dict[str, object]) -> None:

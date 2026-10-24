@@ -180,6 +180,8 @@ Daemon commands use a per-user launchd agent:
   installation is an error.
 - `watch --daemon` prints launchctl status, or reports that the agent is absent
   or installed but not loaded.
+- `watch --restart` restarts the registered agent with its saved settings using
+  `launchctl kickstart -k`. It reports an error if the service is not loaded.
 
 Logs go to `~/Library/Logs/codexo-watch.log`. The agent runs this script using the
 current Python interpreter, preserving its virtual environment. `CODEX_HOME` is

@@ -59,13 +59,17 @@ class WatchCommand(BaseModel, frozen=True):
     prompt: Annotated[str, tyro.conf.arg(prefix_name=False)] = "hello"
     install: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
     uninstall: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
+    restart: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
+    """Restart the installed daemon."""
     daemon: Annotated[bool, tyro.conf.arg(prefix_name=False)] = False
     """Print the installed daemon's status."""
 
     @model_validator(mode="after")
     def check_daemon_operation(self) -> Self:
-        if sum([self.install, self.uninstall, self.daemon]) > 1:
-            raise ValueError("Choose only one of --install, --uninstall, or --daemon")
+        if sum([self.install, self.uninstall, self.restart, self.daemon]) > 1:
+            raise ValueError(
+                "Choose only one of --install, --uninstall, --restart, or --daemon"
+            )
         return self
 
 
@@ -293,7 +297,7 @@ def app_server(
 
 
 def watch(command: WatchCommand, dry_run: bool) -> None:
-    if command.install or command.uninstall or command.daemon:
+    if command.install or command.uninstall or command.restart or command.daemon:
         watch_daemon(command, dry_run)
         return
     if dry_run:
@@ -479,6 +483,8 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
                 f"Unload {service} if loaded, then remove {path}; "
                 "error if not installed."
             )
+        elif command.restart:
+            print(f"Restart the daemon with launchctl kickstart -k {service}.")
         else:
             print(f"Print daemon status with launchctl print {service}.")
         return
@@ -490,6 +496,10 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
         path.write_bytes(plistlib.dumps(watch_launch_agent(command)))
         subprocess.run(["/bin/launchctl", "bootstrap", domain, str(path)], check=True)
         print(f"Installed codexo watch: {path}")
+        return
+    if command.restart:
+        subprocess.run(["/bin/launchctl", "kickstart", "-k", service], check=True)
+        print("Restarted codexo watch.")
         return
     status = subprocess.run(
         ["/bin/launchctl", "print", service],
