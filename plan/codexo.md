@@ -131,9 +131,11 @@ retry, clean up chats, or continue the handed-over task automatically.
 Use `watch --interval 120 --prompt "hello"` to configure the interval in seconds
 and the prompt. The default prompt is `hello`. The first poll runs immediately.
 
-`watch --test` also sends `Say "test"` to the most recently updated unarchived
-chat on idle polls without a reset. It uses the same interval, 60 seconds by
-default; use `watch --test --interval 120` to change it. Reset detection continues
+`watch --test` also sends `Say "test"` only to the unarchived chat titled exactly
+`codexo` on idle polls without a reset. If that chat is missing or multiple chats
+have that title, it skips the test prompt and logs the reason. It uses the same
+interval, 60 seconds by default; use `watch --test --interval 120` to change it.
+Reset detection continues
 normally, and a qualifying reset sends the configured reset prompt instead of
 the test prompt, with at most one turn started per poll. Test prompts use the
 same idle checks and require the running app's bridge. The first test

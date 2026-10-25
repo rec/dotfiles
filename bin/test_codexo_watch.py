@@ -32,6 +32,7 @@ def watch_context(
         "chat": True,
         "resume_active": False,
         "second_page_busy": False,
+        "test_chat_names": ["codexo"],
     }
     sent: list[dict[str, object]] = []
 
@@ -68,10 +69,25 @@ def watch_context(
         if method == "thread/list":
             assert params["sortKey"] == "updated_at"
             assert params["archived"] is False
+            if params["limit"] == 100:
+                if params["cursor"] is None:
+                    return {"data": [chat], "nextCursor": "test-chats"}
+                assert params["cursor"] == "test-chats"
+                names = state["test_chat_names"]
+                assert isinstance(names, list)
+                return {
+                    "data": [
+                        dict(chat, id=f"test-{i}", name=n) for i, n in enumerate(names)
+                    ]
+                    if state["chat"]
+                    else []
+                }
             assert params["limit"] == 1
             return {"data": [chat] if state["chat"] else []}
         if method == "thread/resume":
-            assert params["threadId"] == "latest"
+            assert params["threadId"] in ["latest", "test-0"]
+            if params["threadId"] == "test-0":
+                chat.update(id="test-0", name="codexo")
             if state["resume_active"]:
                 chat["status"] = {"type": "active"}
             return {"thread": chat}
@@ -210,12 +226,34 @@ def test_test_mode_sends_each_poll_and_preserves_reset_prompt(
         [{"type": "text", "text": p}]
         for p in ['Say "test"', 'Say "test"', "reset prompt", 'Say "test"']
     ]
-    assert all(s["threadId"] == "latest" for s in sent)
+    assert [s["threadId"] for s in sent] == ["test-0", "test-0", "latest", "test-0"]
     lines = capsys.readouterr().out.splitlines()
     assert len(lines) == 4
     assert all("prompt_sent=true" in s for s in lines)
-    assert "test prompt sent to latest" in lines[0]
+    assert "test prompt sent to test-0 (codexo)" in lines[0]
     assert "test prompt" not in lines[2]
+
+
+@pytest.mark.parametrize(
+    "names,detail",
+    [
+        ([], "no unarchived chat titled codexo"),
+        (["Codexo", "Other chat"], "no unarchived chat titled codexo"),
+        (["codexo", "codexo"], "multiple unarchived chats titled codexo"),
+    ],
+)
+def test_test_prompts_skip_missing_or_ambiguous_codexo_chat(
+    watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
+    names: list[str],
+    detail: str,
+) -> None:
+    server, state, sent = watch_context
+    state.update(primary=20, secondary=80, test_chat_names=names)
+    poll = codexo.WatchPoll()
+    assert codexo.watch_iteration(server, {}, "hello", poll, True) is False
+    assert poll.detail == detail
+    assert poll.idle is True
+    assert not sent
 
 
 @pytest.mark.parametrize("running", [False, True])

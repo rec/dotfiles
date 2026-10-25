@@ -89,7 +89,7 @@ class WatchCommand(BaseModel, frozen=True):
     test: Annotated[
         bool, tyro.conf.arg(prefix_name=False), tyro.conf.CascadeSubcommandArgs
     ] = False
-    """Send Say \"test\" on idle polls, using the configured interval."""
+    """Send Say \"test\" to the codexo chat on idle polls."""
     action: tyro.conf.DisallowNone[
         Annotated[
             WatchInstallCommand, tyro.conf.subcommand(name="install", prefix_name=False)
@@ -507,7 +507,9 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
         print("If idle, send one prompt to the most recently updated unarchived chat:")
         print(command.prompt)
         if command.test:
-            print('On other idle polls, send Say "test" to that chat.')
+            print(
+                'On other idle polls, send Say "test" only to the chat titled codexo.'
+            )
         return
     previous: dict[str, int] = {}
     while True:
@@ -589,26 +591,41 @@ def watch_iteration(
     poll.idle = chats_idle(server)
     if not (reset or test) or not poll.idle:
         return False
-    page = ChatPage.model_validate(
-        server.request(
-            "thread/list",
-            {
-                "limit": 1,
-                "sortKey": "updated_at",
-                "archived": False,
-                "modelProviders": [],
-                "sourceKinds": THREAD_SOURCE_KINDS,
-                "useStateDbOnly": True,
-            },
+    cursor: str | None = None
+    candidates: list[Chat] = []
+    while True:
+        page = ChatPage.model_validate(
+            server.request(
+                "thread/list",
+                {
+                    "cursor": cursor,
+                    "limit": 1 if reset else 100,
+                    "sortKey": "updated_at",
+                    "archived": False,
+                    "modelProviders": [],
+                    "sourceKinds": THREAD_SOURCE_KINDS,
+                    "useStateDbOnly": True,
+                },
+            )
         )
-    )
-    if not page.data:
+        candidates.extend(c for c in page.data if reset or c.name == "codexo")
+        if reset or page.nextCursor is None:
+            break
+        cursor = page.nextCursor
+    if not reset and len(candidates) != 1:
+        poll.detail = (
+            "no unarchived chat titled codexo"
+            if not candidates
+            else "multiple unarchived chats titled codexo"
+        )
+        return False
+    if not candidates:
         poll.detail = "no unarchived chat available"
         return False
     chat = Chat.model_validate(
         server.request(
             "thread/resume",
-            {"threadId": page.data[0].id, "excludeTurns": True},
+            {"threadId": candidates[0].id, "excludeTurns": True},
         )["thread"]
     )
     if chat.status["type"] != "idle":
