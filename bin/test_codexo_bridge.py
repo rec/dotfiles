@@ -63,6 +63,35 @@ def test_auxiliary_cli_commands_keep_the_original_executable(
     )
 
 
+@pytest.mark.parametrize("sign_out", [False, True])
+def test_startup_policy_requests_preserve_original_cli_output(
+    monkeypatch: pytest.MonkeyPatch, sign_out: bool
+) -> None:
+    arguments = [
+        "-c",
+        "features.code_mode_host=true",
+        "app-server",
+        "--analytics-default-enabled",
+        "--print-startup-config",
+        "--startup-client-info",
+        '{"name":"codex_desktop","version":"test"}',
+        *(["--startup-sign-out"] if sign_out else []),
+    ]
+    monkeypatch.setenv("CODEX_INTERNAL_ORIGINATOR_OVERRIDE", "Codex Desktop")
+    execute = Mock(side_effect=SystemExit(0))
+    monkeypatch.setattr(codexo.os, "execv", execute)
+    spawn = Mock(
+        side_effect=AssertionError("Startup policy must not start a bridge server")
+    )
+    monkeypatch.setattr(codexo.subprocess, "Popen", spawn)
+    with pytest.raises(SystemExit):
+        codexo.bridge_desktop(arguments)
+    execute.assert_called_once_with(
+        codexo.CODEX_EXECUTABLE, [codexo.CODEX_EXECUTABLE, *arguments]
+    )
+    spawn.assert_not_called()
+
+
 @pytest.mark.parametrize("parent,bridges", [(100, 1), (999, 1), (100, 0), (100, 2)])
 def test_watcher_requires_one_bridge_owned_by_the_desktop_app(
     monkeypatch: pytest.MonkeyPatch, parent: int, bridges: int

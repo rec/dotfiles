@@ -152,8 +152,10 @@ so an app started automatically at login may precede the helper.
 The launcher runs this script's internal `bridge` command. Main desktop
 app-server launches retain the app's original arguments and environment, with
 `--listen unix://PATH` added. The bridge forwards desktop stdio JSON to that
-server as WebSocket messages. Auxiliary CLI commands, including version probes
-and non-desktop servers, execute the original bundled CLI directly. The bridge
+server as WebSocket messages. Auxiliary CLI commands, including version probes,
+`--print-startup-config` requests (with or without `--startup-sign-out`), and
+non-desktop servers, execute the original bundled CLI directly. Startup policy
+JSON must reach the desktop app unchanged. The bridge
 owns its server child and shuts it down when the desktop connection ends.
 The private endpoint is `/tmp/codexo-UID/app-PID.sock`, where PID is the bridge
 process's ID. The watcher discovers that process as a direct child of the
@@ -228,8 +230,11 @@ current Python interpreter, preserving its virtual environment. `CODEX_HOME` is
 preserved when set during installation. Top-level `-d` prints the planned watch
 or daemon operations without connecting, sending prompts, or installing anything.
 
-Implementation verification uses unit tests only: no watcher or desktop bridge
-was started, no daemon was installed, and no live watch prompt was sent.
+Verification includes unit tests and live checks of the installed launcher's
+startup-config response and an isolated desktop bridge. The bridge completed
+its stdio handshake and accepted a second WebSocket client on the same server.
+The isolated server was stopped afterward. The running desktop app was not
+restarted, no daemon was installed, and no live watch prompt was sent.
 
 ## Additional work beyond the prompt
 

@@ -377,6 +377,7 @@ def bridge_desktop(arguments: list[str]) -> None:
     )
     if (
         "app-server" not in arguments
+        or "--print-startup-config" in server_args
         or (server_args and not server_args[0].startswith("-"))
         or os.environ.get("CODEX_INTERNAL_ORIGINATOR_OVERRIDE") != "Codex Desktop"
     ):
