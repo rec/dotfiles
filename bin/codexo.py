@@ -766,7 +766,12 @@ def watch_daemon(command: WatchCommand, dry_run: bool) -> None:
             p.write_bytes(plistlib.dumps(document))
             subprocess.run(["/bin/launchctl", "bootstrap", domain, str(p)], check=True)
         print(f"Installed codexo watch: {path}")
-        print("Quit and reopen the desktop app once to use the codexo bridge.")
+        try:
+            bridge_ready = desktop_socket().is_socket()
+        except (OSError, RuntimeError, subprocess.SubprocessError):
+            bridge_ready = False
+        if not bridge_ready:
+            print("Quit and reopen the desktop app once to use the codexo bridge.")
         return
     if isinstance(command.action, WatchRestartCommand):
         subprocess.run(["/bin/launchctl", "kickstart", "-k", service], check=True)

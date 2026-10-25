@@ -203,7 +203,10 @@ Daemon commands use a per-user launchd agent:
   and sets that variable immediately during installation. It clears the old
   `CODEX_APP_SERVER_USE_LOCAL_DAEMON` login setting. The launcher and helper live
   outside the app bundle; app updates do not overwrite them. Updater relaunch
-  inheritance still requires live verification.
+  inheritance still requires live verification. The quit-and-reopen reminder
+  is suppressed when the running desktop app has a detected bridge process
+  and its socket exists. If that check fails, installation still succeeds
+  and prints the reminder.
 - `watch uninstall` unloads both agents if loaded, removes both plists, and
   removes the launcher and unsets both `CODEX_CLI_PATH` and the old
   `CODEX_APP_SERVER_USE_LOCAL_DAEMON` login setting. Existing app processes

@@ -562,6 +562,37 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
     assert registered == set(labels)
 
 
+@pytest.mark.parametrize(
+    "bridge_state", ["ready", "missing-socket", "unavailable", "inspection-failed"]
+)
+def test_install_only_requests_an_app_restart_when_bridge_is_not_ready(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    bridge_state: str,
+) -> None:
+    monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
+    monkeypatch.setattr(
+        codexo.subprocess,
+        "run",
+        lambda a, **k: subprocess.CompletedProcess(a, 1 if a[1] == "print" else 0, ""),
+    )
+
+    def desktop_socket() -> Path:
+        if bridge_state == "unavailable":
+            raise RuntimeError("Desktop bridge unavailable")
+        if bridge_state == "inspection-failed":
+            raise subprocess.CalledProcessError(1, ["ps"])
+        return tmp_path / "app.sock"
+
+    monkeypatch.setattr(codexo, "desktop_socket", desktop_socket)
+    monkeypatch.setattr(codexo.Path, "is_socket", lambda p: bridge_state == "ready")
+    codexo.watch_daemon(codexo.WatchCommand(action=codexo.WatchInstallCommand()), False)
+    output = capsys.readouterr().out
+    assert "Installed codexo watch:" in output
+    assert ("Quit and reopen" in output) is (bridge_state != "ready")
+
+
 def test_unload_times_out_if_launchd_keeps_the_registration(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
