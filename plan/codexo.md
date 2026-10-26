@@ -39,6 +39,11 @@ The script creates a unique temporary directory and asks the old chat to save
 system cleans its temporary directory. The replacement must return a matching
 SHA-256 checksum before the old chat is archived.
 
+`retire`, `fix`, and `watch` list chats from all source kinds and model providers
+using the state database. They list unarchived chats; `fix` additionally limits
+the results to the requested working directory. With no chat ID, `retire` offers
+an interactive picker with 25 chats per page, most recently updated first.
+
 ## Project and working directory
 
 The user always creates chats from the application Project and never manually

@@ -980,7 +980,7 @@ def print_dry_run(thread_id: str | None) -> None:
     print("Values in <angle brackets> are determined during a real run.")
     print("Start codex app-server; send initialize and initialized.")
     if thread_id is None:
-        print("thread/list: list unarchived app-server chats, 25 per page.")
+        print("thread/list: list unarchived chats from all sources, 25 per page.")
         print("Ask for a chat number, fetching further pages as requested.")
     old_id = thread_id if thread_id is not None else "<selected-chat-id>"
     print(f"thread/read: read {old_id!r}; require a display name and an idle chat.")
@@ -1012,14 +1012,16 @@ def select_chat(server: AppServer) -> str:
                 {
                     "cursor": cursor,
                     "limit": 25,
-                    "sourceKinds": ["appServer"],
+                    "sourceKinds": THREAD_SOURCE_KINDS,
+                    "modelProviders": [],
+                    "useStateDbOnly": True,
                     "archived": False,
                     "sortKey": "updated_at",
                 },
             )
         )
         if not page.data:
-            raise RuntimeError("No Codex app-server chats found")
+            raise RuntimeError("No unarchived Codex chats found")
         for i, chat in enumerate(page.data, 1):
             print(f"{i}. {chat.name or '(unnamed)'} [{chat.id}] ({chat.cwd})")
         choice = input(
