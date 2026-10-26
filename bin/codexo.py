@@ -1079,16 +1079,7 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     handover = old.cwd / "handover.md"
     previous_modified = handover.stat().st_mtime_ns if handover.is_file() else None
     print(f"Handover: {handover}", flush=True)
-    server.run_turn(
-        old.id,
-        f"Create or replace a Markdown handover at {json.dumps(str(handover))}. "
-        "Include the objective, user instructions and decisions, completed work, "
-        "relevant paths and commits, verification results, remaining work "
-        "and blockers. "
-        "Write the file using your file tools. Do not continue implementation, change "
-        "other files, commit, push, create chats, or archive chats. "
-        "Stop when it is saved.",
-    )
+    server.run_turn(old.id, RETIRING_PROMPT)
     if not handover.is_file() or not handover.read_text().strip():
         raise RuntimeError(f"Handover was not written: {handover}; old chat retained")
     if handover.stat().st_mtime_ns == previous_modified:
@@ -1104,9 +1095,8 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     reply = server.run_turn(
         new.id,
         f"Read the complete handover document at {json.dumps(str(handover))} "
-        "using your file tools and retain its context for future work. Compute the "
-        "SHA-256 checksum of the file's bytes using a tool and return it in the sha256 "
-        "field. If you cannot read it, report failure instead of claiming success. "
+        "using your file tools and retain its context for future work."
+        "If you cannot read it, report failure instead of claiming success. "
         "Do not continue the work, modify files, commit, push, or archive chats.",
         receipt=True,
     )
@@ -1132,6 +1122,25 @@ PINNED_SECTION_ID = "01984de2-8f74-7c91-a3b2-5c5e937cf318"
 WATCH_LABEL = "local.codexo.watch"
 WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
 WATCH_REQUEST_TIMEOUT = 10
+
+RETIRING_PROMPT = """
+Start by cleaning up documents in plan/ and doc/. Plans that are completed should
+be removed. Docs should be checked to see they are still up to date. Commit any changes
+as one commit with message 'Update doc/ and plan/'
+
+In a new commit, create or replace handover.md with a handover document for a new
+context. Do not include any information that already appears in doc/ or plan/ or can be
+deduced from reading the codebase. Prioritize information that has appeared on this
+chat and nowhere else.
+
+Consider the objective, user instructions and decisions, completed work relevant
+paths and commits, verification results, remaining work and blockers, and anything else
+you know that isn't documented or planned anywhere else."""
+
+NEW_CHAT_PROMPT = """
+Read the complete handover document at handover.md and write a quick summary of
+what the next tasks should be, if any remain.
+"""
 
 
 THREAD_SOURCE_KINDS = [
