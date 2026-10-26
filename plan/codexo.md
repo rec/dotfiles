@@ -14,6 +14,13 @@ The desired workflow is:
 5. Tell the new chat to read the handover document.
 6. Archive the old chat after the handover succeeds.
 
+After verifying the handover, `retire` preserves a pinned chat's position by
+moving its replacement into the built-in Pinned section immediately before the
+old chat. Archiving the old chat then leaves the replacement in that position.
+Unpinned chats remain unpinned. A failed pin move prevents archiving; the old
+chat is archived only after the move succeeds. This uses the installed
+app-server's `thread.section` and `thread/section/move` interface.
+
 ## Documented interface
 
 [Codex app-server](https://learn.chatgpt.com/docs/app-server) is the relevant

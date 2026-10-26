@@ -123,11 +123,16 @@ class CodexoCommand(BaseModel, frozen=True):
     """Include chat IDs and working directories in the retire picker."""
 
 
+class ChatSection(BaseModel, frozen=True):
+    id: str
+
+
 class Chat(BaseModel, frozen=True):
     id: str
     name: str | None = None
     cwd: Path
     status: dict[str, object]
+    section: ChatSection | None = None
 
 
 class ChatPage(BaseModel, frozen=True):
@@ -1009,6 +1014,10 @@ def print_dry_run(thread_id: str | None) -> None:
         "turn/start: ask the replacement to read the handover and return its SHA-256."
     )
     print("Wait for successful turn/completed; require a matching checksum receipt.")
+    print(
+        "If the old chat is pinned, thread/section/move: insert its replacement "
+        "immediately before it in the Pinned section."
+    )
     print(f"thread/archive: archive {old_id!r} only after verification succeeds.")
     print(
         "Print the replacement ID; disconnect from app-server. Keep the handover file."
@@ -1100,12 +1109,23 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     )
     if ReadReceipt.model_validate_json(reply).sha256 != digest:
         raise RuntimeError("Replacement did not verify the handover; old chat retained")
+    if old.section is not None and old.section.id == PINNED_SECTION_ID:
+        server.request(
+            "thread/section/move",
+            {
+                "threadId": new.id,
+                "sectionId": PINNED_SECTION_ID,
+                "beforeThreadId": old.id,
+            },
+        )
     server.request("thread/archive", {"threadId": old.id})
     print(f"Archived {old.id}. Continue in {new.id} ({old.name}).")
     return new.id
 
 
 CODEX_EXECUTABLE = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+# Built-in Pinned section identity used by the desktop app and app-server.
+PINNED_SECTION_ID = "01984de2-8f74-7c91-a3b2-5c5e937cf318"
 WATCH_LABEL = "local.codexo.watch"
 WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
 WATCH_REQUEST_TIMEOUT = 10
