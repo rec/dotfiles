@@ -107,9 +107,9 @@ def test_initial_zero_in_either_window_sends_only_one_prompt(
 ) -> None:
     server, state, sent = watch_context
     state.update(primary=primary, secondary=secondary)
-    previous: dict[str, int] = {}
+    history = codexo.WatchState()
     poll = codexo.WatchPoll()
-    assert codexo.watch_iteration(server, previous, "custom prompt", poll) is True
+    assert codexo.watch_iteration(server, history, "custom prompt", poll) is True
     assert poll.primary == primary
     assert poll.secondary == secondary
     assert poll.idle is True
@@ -118,33 +118,29 @@ def test_initial_zero_in_either_window_sends_only_one_prompt(
     assert sent[0]["threadId"] == "latest"
     assert sent[0]["input"] == [{"type": "text", "text": "custom prompt"}]
     assert (
-        codexo.watch_iteration(server, previous, "custom prompt", codexo.WatchPoll())
+        codexo.watch_iteration(server, history, "custom prompt", codexo.WatchPoll())
         is False
     )
     assert len(sent) == 1
-    assert previous["primary"] == primary
-    assert previous["secondary"] == secondary
+    assert history.previous["primary"] == primary
+    assert history.previous["secondary"] == secondary
 
 
 def test_windows_are_tracked_independently_and_simultaneous_resets_send_once(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
 ) -> None:
     server, state, sent = watch_context
-    previous: dict[str, int] = {}
+    history = codexo.WatchState()
     state.update(primary=20, secondary=80)
-    assert (
-        codexo.watch_iteration(server, previous, "hello", codexo.WatchPoll()) is False
-    )
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is False
     state["primary"] = 0
-    assert codexo.watch_iteration(server, previous, "hello", codexo.WatchPoll()) is True
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is True
     state["secondary"] = 0
-    assert codexo.watch_iteration(server, previous, "hello", codexo.WatchPoll()) is True
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is True
     state.update(primary=10, secondary=10)
-    assert (
-        codexo.watch_iteration(server, previous, "hello", codexo.WatchPoll()) is False
-    )
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is False
     state.update(primary=0, secondary=0)
-    assert codexo.watch_iteration(server, previous, "hello", codexo.WatchPoll()) is True
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is True
     assert len(sent) == 3
 
 
@@ -152,26 +148,62 @@ def test_windows_are_tracked_independently_and_simultaneous_resets_send_once(
     "blocker", ["busy", "background", "second_page_busy", "resume_active"]
 )
 @pytest.mark.parametrize("test_mode", [False, True])
-def test_any_chat_activity_prevents_prompt_and_zero_is_still_recorded(
+def test_blocked_reset_sends_once_when_idle_even_if_usage_increases(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
     blocker: str,
     test_mode: bool,
 ) -> None:
     server, state, sent = watch_context
     state[blocker] = True
-    previous: dict[str, int] = {}
+    history = codexo.WatchState()
     poll = codexo.WatchPoll()
-    assert codexo.watch_iteration(server, previous, "hello", poll, test_mode) is False
+    assert codexo.watch_iteration(server, history, "hello", poll, test_mode) is False
     assert poll.idle is False
+    assert "Latest chat" in poll.detail
+    assert (
+        "background terminal" if blocker == "background" else "active"
+    ) in poll.detail
+    assert history.pending_reset is True
     assert not sent
     state[blocker] = False
+    state.update(primary=5, secondary=10)
     poll = codexo.WatchPoll()
-    assert (
-        codexo.watch_iteration(server, previous, "hello", poll, test_mode) is test_mode
-    )
+    assert codexo.watch_iteration(server, history, "hello", poll, test_mode) is True
     assert poll.idle is True
-    assert poll.prompt_sent is test_mode
-    assert len(sent) == int(test_mode)
+    assert poll.prompt_sent is True
+    assert history.pending_reset is False
+    assert len(sent) == 1
+    assert sent[0]["input"] == [{"type": "text", "text": "hello"}]
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is False
+    assert len(sent) == 1
+
+
+def test_pending_reset_survives_poll_errors_and_no_destination(
+    watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    server, state, sent = watch_context
+    history = codexo.WatchState()
+    assert isinstance(server, codexo.AppServer)
+    request = server.request
+
+    def fail_send(method: str, params: dict[str, object]) -> dict[str, object]:
+        if method == "turn/start":
+            raise RuntimeError("send failed")
+        return request(method, params)
+
+    monkeypatch.setattr(server, "request", fail_send)
+    with pytest.raises(RuntimeError, match="send failed"):
+        codexo.watch_iteration(server, history, "hello", codexo.WatchPoll())
+    assert history.pending_reset is True
+    monkeypatch.setattr(server, "request", request)
+    state.update(primary=None, secondary=None, chat=False)
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is False
+    assert history.pending_reset is True
+    state["chat"] = True
+    assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is True
+    assert history.pending_reset is False
+    assert len(sent) == 1
 
 
 @pytest.mark.parametrize("missing", ["windows", "chat"])
@@ -188,7 +220,9 @@ def test_missing_usage_only_allows_test_prompts_and_missing_chat_never_sends(
         state["chat"] = False
     should_send = test_mode and missing == "windows"
     assert (
-        codexo.watch_iteration(server, {}, "hello", codexo.WatchPoll(), test_mode)
+        codexo.watch_iteration(
+            server, codexo.WatchState(), "hello", codexo.WatchPoll(), test_mode
+        )
         is should_send
     )
     assert len(sent) == int(should_send)
@@ -250,7 +284,10 @@ def test_test_prompts_skip_missing_or_ambiguous_codexo_chat(
     server, state, sent = watch_context
     state.update(primary=20, secondary=80, test_chat_names=names)
     poll = codexo.WatchPoll()
-    assert codexo.watch_iteration(server, {}, "hello", poll, True) is False
+    assert (
+        codexo.watch_iteration(server, codexo.WatchState(), "hello", poll, True)
+        is False
+    )
     assert poll.detail == detail
     assert poll.idle is True
     assert not sent

@@ -183,10 +183,15 @@ with the configured prompt. Activity is checked through API snapshots; there is
 no atomic server-wide idle-and-send operation. No new chat is created.
 
 Observations are recorded even when the app is busy or no destination chat
-exists. A blocked reset is not queued for a later poll. App closure preserves
-the in-memory history; restarting the watcher begins a new observation history.
+exists. Detected resets remain pending until a prompt is successfully sent on
+an idle poll, even if usage increases before then. Multiple pending resets
+produce one prompt. App closure and poll errors preserve the in-memory history
+and pending reset; restarting the watcher begins a new observation history.
 Every poll writes a flushed log line containing a local ISO timestamp with UTC
 offset, both `usedPercent` values, idle status, and whether a prompt was sent.
+When blocked, the detail identifies the chat by ID and title, with its status
+and active flags, or reports that the chat has a background terminal. A chat
+that becomes active after resuming is identified too.
 Idle status is checked on every connected poll, even without a reset. Values
 that could not be queried are logged as `unavailable` or `unknown`, with a reason
 when the app is closed, its bridge is unavailable, or a query fails. Available

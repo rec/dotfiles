@@ -155,6 +155,11 @@ class WatchPoll(BaseModel):
     detail: str = ""
 
 
+class WatchState(BaseModel):
+    previous: dict[str, int] = Field(default_factory=dict)
+    pending_reset: bool = False
+
+
 class ProjectRoot(BaseModel, frozen=True):
     path: Path
 
@@ -504,6 +509,7 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
             "Check all loaded chats on every poll and log usage, idle and send status."
         )
         print("An initial zero or nonzero-to-zero transition can trigger a prompt.")
+        print("Keep a detected reset pending until an idle poll sends its prompt.")
         print("If idle, send one prompt to the most recently updated unarchived chat:")
         print(command.prompt)
         if command.test:
@@ -511,15 +517,13 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
                 'On other idle polls, send Say "test" only to the chat titled codexo.'
             )
         return
-    previous: dict[str, int] = {}
+    state = WatchState()
     while True:
         poll = WatchPoll()
         try:
             if desktop_running():
                 with desktop_server() as server:
-                    watch_iteration(
-                        server, previous, command.prompt, poll, command.test
-                    )
+                    watch_iteration(server, state, command.prompt, poll, command.test)
             else:
                 poll.detail = "Codex is not running"
         except (
@@ -569,7 +573,7 @@ def desktop_running() -> bool:
 
 def watch_iteration(
     server: AppServer,
-    previous: dict[str, int],
+    state: WatchState,
     prompt: str,
     poll: WatchPoll,
     test: bool = False,
@@ -586,9 +590,12 @@ def watch_iteration(
         for n, w in [("primary", limits.primary), ("secondary", limits.secondary)]
         if w is not None
     }
-    reset = any(v == 0 and previous.get(n) != 0 for n, v in current.items())
-    previous.update(current)
-    poll.idle = chats_idle(server)
+    state.pending_reset |= any(
+        v == 0 and state.previous.get(n) != 0 for n, v in current.items()
+    )
+    state.previous.update(current)
+    reset = state.pending_reset
+    poll.idle = chats_idle(server, poll)
     if not (reset or test) or not poll.idle:
         return False
     cursor: str | None = None
@@ -630,6 +637,10 @@ def watch_iteration(
     )
     if chat.status["type"] != "idle":
         poll.idle = False
+        poll.detail = (
+            f"blocked by chat {chat.id} ({chat.name or '(unnamed)'}) "
+            f"after resume: {json.dumps(chat.status, ensure_ascii=False)}"
+        )
         return False
     server.request(
         "turn/start",
@@ -639,13 +650,15 @@ def watch_iteration(
         },
     )
     poll.prompt_sent = True
+    if reset:
+        state.pending_reset = False
     poll.detail = f"sent to {chat.id} ({chat.name or '(unnamed)'})"
     if not reset:
         poll.detail = f"test prompt {poll.detail}"
     return True
 
 
-def chats_idle(server: AppServer) -> bool:
+def chats_idle(server: AppServer, poll: WatchPoll) -> bool:
     cursor: str | None = None
     while True:
         page = LoadedChats.model_validate(
@@ -656,11 +669,19 @@ def chats_idle(server: AppServer) -> bool:
                 server.request("thread/read", {"threadId": thread_id})["thread"]
             )
             if chat.status["type"] not in {"idle", "notLoaded"}:
+                poll.detail = (
+                    f"blocked by chat {chat.id} ({chat.name or '(unnamed)'}): "
+                    f"{json.dumps(chat.status, ensure_ascii=False)}"
+                )
                 return False
             terminals = server.request(
                 "thread/backgroundTerminals/list", {"threadId": thread_id, "limit": 1}
             )
             if terminals["data"]:
+                poll.detail = (
+                    f"blocked by background terminal in chat "
+                    f"{chat.id} ({chat.name or '(unnamed)'})"
+                )
                 return False
         if page.nextCursor is None:
             return True
