@@ -133,11 +133,6 @@ class ChatPage(BaseModel, frozen=True):
     nextCursor: str | None = None
 
 
-class LoadedChats(BaseModel, frozen=True):
-    data: list[str]
-    nextCursor: str | None = None
-
-
 class UsageWindow(BaseModel, frozen=True):
     usedPercent: int
 
@@ -505,12 +500,12 @@ def watch(command: WatchCommand, dry_run: bool) -> None:
     if dry_run:
         print(f"Poll running Codex every {command.interval:g} seconds.")
         print("Read both usage windows; record every successful observation.")
-        print(
-            "Check all loaded chats on every poll and log usage, idle and send status."
-        )
+        print("Find the most recently updated idle chat and log usage and send status.")
         print("An initial zero or nonzero-to-zero transition can trigger a prompt.")
         print("Keep a detected reset pending until an idle poll sends its prompt.")
-        print("If idle, send one prompt to the most recently updated unarchived chat:")
+        print(
+            "Skip busy chats; send one prompt to the most recently updated idle chat:"
+        )
         print(command.prompt)
         if command.test:
             print(
@@ -595,9 +590,7 @@ def watch_iteration(
     )
     state.previous.update(current)
     reset = state.pending_reset
-    poll.idle = chats_idle(server, poll)
-    if not (reset or test) or not poll.idle:
-        return False
+    test_only = test and not reset
     cursor: str | None = None
     candidates: list[Chat] = []
     while True:
@@ -606,7 +599,7 @@ def watch_iteration(
                 "thread/list",
                 {
                     "cursor": cursor,
-                    "limit": 1 if reset else 100,
+                    "limit": 100,
                     "sortKey": "updated_at",
                     "archived": False,
                     "modelProviders": [],
@@ -615,77 +608,68 @@ def watch_iteration(
                 },
             )
         )
-        candidates.extend(c for c in page.data if reset or c.name == "codexo")
-        if reset or page.nextCursor is None:
+        candidates.extend(c for c in page.data if not test_only or c.name == "codexo")
+        if page.nextCursor is None:
             break
         cursor = page.nextCursor
-    if not reset and len(candidates) != 1:
+    if test_only and len(candidates) != 1:
         poll.detail = (
             "no unarchived chat titled codexo"
             if not candidates
             else "multiple unarchived chats titled codexo"
         )
         return False
-    if not candidates:
-        poll.detail = "no unarchived chat available"
-        return False
-    chat = Chat.model_validate(
+    blocked: list[str] = []
+    for candidate in candidates:
+        chat = Chat.model_validate(
+            server.request("thread/read", {"threadId": candidate.id})["thread"]
+        )
+        if chat.status["type"] not in {"idle", "notLoaded"}:
+            blocked.append(
+                f"{chat.id} ({chat.name or '(unnamed)'}): "
+                f"{json.dumps(chat.status, ensure_ascii=False)}"
+            )
+            continue
+        if not (reset or test):
+            poll.idle = True
+            if blocked:
+                poll.detail = "skipped busy chats: " + "; ".join(blocked)
+            return False
+        chat = Chat.model_validate(
+            server.request(
+                "thread/resume", {"threadId": chat.id, "excludeTurns": True}
+            )["thread"]
+        )
+        if chat.status["type"] != "idle":
+            blocked.append(
+                f"{chat.id} ({chat.name or '(unnamed)'}) after resume: "
+                f"{json.dumps(chat.status, ensure_ascii=False)}"
+            )
+            continue
+        poll.idle = True
         server.request(
-            "thread/resume",
-            {"threadId": candidates[0].id, "excludeTurns": True},
-        )["thread"]
-    )
-    if chat.status["type"] != "idle":
-        poll.idle = False
-        poll.detail = (
-            f"blocked by chat {chat.id} ({chat.name or '(unnamed)'}) "
-            f"after resume: {json.dumps(chat.status, ensure_ascii=False)}"
+            "turn/start",
+            {
+                "threadId": chat.id,
+                "input": [{"type": "text", "text": prompt if reset else 'Say "test"'}],
+            },
         )
-        return False
-    server.request(
-        "turn/start",
-        {
-            "threadId": chat.id,
-            "input": [{"type": "text", "text": prompt if reset else 'Say "test"'}],
-        },
+        poll.prompt_sent = True
+        if reset:
+            state.pending_reset = False
+        poll.detail = f"sent to {chat.id} ({chat.name or '(unnamed)'})"
+        if not reset:
+            poll.detail = f"test prompt {poll.detail}"
+        if blocked:
+            poll.detail += "; skipped busy chats: " + "; ".join(blocked)
+        return True
+    poll.idle = False
+    poll.detail = (
+        "no idle chat available; busy chats: " + "; ".join(blocked)
+        if blocked
+        else "no unarchived chat available"
     )
-    poll.prompt_sent = True
-    if reset:
-        state.pending_reset = False
-    poll.detail = f"sent to {chat.id} ({chat.name or '(unnamed)'})"
-    if not reset:
-        poll.detail = f"test prompt {poll.detail}"
-    return True
-
-
-def chats_idle(server: AppServer, poll: WatchPoll) -> bool:
-    cursor: str | None = None
-    while True:
-        page = LoadedChats.model_validate(
-            server.request("thread/loaded/list", {"cursor": cursor})
-        )
-        for thread_id in page.data:
-            chat = Chat.model_validate(
-                server.request("thread/read", {"threadId": thread_id})["thread"]
-            )
-            if chat.status["type"] not in {"idle", "notLoaded"}:
-                poll.detail = (
-                    f"blocked by chat {chat.id} ({chat.name or '(unnamed)'}): "
-                    f"{json.dumps(chat.status, ensure_ascii=False)}"
-                )
-                return False
-            terminals = server.request(
-                "thread/backgroundTerminals/list", {"threadId": thread_id, "limit": 1}
-            )
-            if terminals["data"]:
-                poll.detail = (
-                    f"blocked by background terminal in chat "
-                    f"{chat.id} ({chat.name or '(unnamed)'})"
-                )
-                return False
-        if page.nextCursor is None:
-            return True
-        cursor = page.nextCursor
+    return False
 
 
 def watch_launch_agent(command: WatchCommand) -> dict[str, object]:

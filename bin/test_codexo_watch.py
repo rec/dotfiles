@@ -6,6 +6,7 @@ from contextlib import nullcontext
 from datetime import datetime
 from io import StringIO
 from pathlib import Path
+from typing import Never
 
 import pytest
 
@@ -28,10 +29,10 @@ def watch_context(
         "primary": 0,
         "secondary": 0,
         "busy": False,
-        "background": False,
         "chat": True,
         "resume_active": False,
-        "second_page_busy": False,
+        "latest_resume_active": False,
+        "latest_busy": False,
         "test_chat_names": ["codexo"],
     }
     sent: list[dict[str, object]] = []
@@ -50,45 +51,46 @@ def watch_context(
                     for n in ["primary", "secondary"]
                 }
             }
-        if method == "thread/loaded/list":
-            if params["cursor"] == "next":
-                return {"data": ["busy-on-second-page"]}
-            return {
-                "data": ["loaded"],
-                "nextCursor": "next" if state["second_page_busy"] else None,
-            }
+        if method == "thread/backgroundTerminals/list":
+            pytest.fail("Background servers must not affect chat selection")
         if method == "thread/read":
-            if state["busy"] or params["threadId"] == "busy-on-second-page":
+            chat["id"] = params["threadId"]
+            if params["threadId"] != "latest":
+                chat["name"] = "codexo"
+            if state["busy"] or (
+                state["latest_busy"] and params["threadId"] == "latest"
+            ):
                 chat["status"] = {
                     "type": "active",
                     "activeFlags": ["waitingOnApproval"],
                 }
             return {"thread": chat}
-        if method == "thread/backgroundTerminals/list":
-            return {"data": ["terminal"] if state["background"] else []}
         if method == "thread/list":
             assert params["sortKey"] == "updated_at"
             assert params["archived"] is False
-            if params["limit"] == 100:
-                if params["cursor"] is None:
-                    return {"data": [chat], "nextCursor": "test-chats"}
-                assert params["cursor"] == "test-chats"
-                names = state["test_chat_names"]
-                assert isinstance(names, list)
+            assert params["limit"] == 100
+            if params["cursor"] is None:
                 return {
-                    "data": [
-                        dict(chat, id=f"test-{i}", name=n) for i, n in enumerate(names)
-                    ]
-                    if state["chat"]
-                    else []
+                    "data": [chat] if state["chat"] else [],
+                    "nextCursor": "test-chats",
                 }
-            assert params["limit"] == 1
-            return {"data": [chat] if state["chat"] else []}
+            assert params["cursor"] == "test-chats"
+            names = state["test_chat_names"]
+            assert isinstance(names, list)
+            return {
+                "data": [
+                    dict(chat, id=f"test-{i}", name=n) for i, n in enumerate(names)
+                ]
+                if state["chat"]
+                else []
+            }
         if method == "thread/resume":
             assert params["threadId"] in ["latest", "test-0"]
             if params["threadId"] == "test-0":
                 chat.update(id="test-0", name="codexo")
-            if state["resume_active"]:
+            if state["resume_active"] or (
+                state["latest_resume_active"] and params["threadId"] == "latest"
+            ):
                 chat["status"] = {"type": "active"}
             return {"thread": chat}
         assert method == "turn/start"
@@ -144,9 +146,7 @@ def test_windows_are_tracked_independently_and_simultaneous_resets_send_once(
     assert len(sent) == 3
 
 
-@pytest.mark.parametrize(
-    "blocker", ["busy", "background", "second_page_busy", "resume_active"]
-)
+@pytest.mark.parametrize("blocker", ["busy", "resume_active"])
 @pytest.mark.parametrize("test_mode", [False, True])
 def test_blocked_reset_sends_once_when_idle_even_if_usage_increases(
     watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
@@ -160,9 +160,7 @@ def test_blocked_reset_sends_once_when_idle_even_if_usage_increases(
     assert codexo.watch_iteration(server, history, "hello", poll, test_mode) is False
     assert poll.idle is False
     assert "Latest chat" in poll.detail
-    assert (
-        "background terminal" if blocker == "background" else "active"
-    ) in poll.detail
+    assert "active" in poll.detail
     assert history.pending_reset is True
     assert not sent
     state[blocker] = False
@@ -176,6 +174,37 @@ def test_blocked_reset_sends_once_when_idle_even_if_usage_increases(
     assert sent[0]["input"] == [{"type": "text", "text": "hello"}]
     assert codexo.watch_iteration(server, history, "hello", codexo.WatchPoll()) is False
     assert len(sent) == 1
+
+
+@pytest.mark.parametrize("blocker", ["latest_busy", "latest_resume_active"])
+def test_reset_skips_busy_latest_chat_and_sends_to_idle_chat_on_next_page(
+    watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
+    blocker: str,
+) -> None:
+    server, state, sent = watch_context
+    state[blocker] = True
+    history = codexo.WatchState()
+    poll = codexo.WatchPoll()
+    assert codexo.watch_iteration(server, history, "hello", poll) is True
+    assert sent[0]["threadId"] == "test-0"
+    assert poll.idle is True
+    assert "skipped busy chats: latest (Latest chat)" in poll.detail
+    assert history.pending_reset is False
+
+
+def test_test_prompt_ignores_activity_in_other_chats(
+    watch_context: tuple[object, dict[str, object], list[dict[str, object]]],
+) -> None:
+    server, state, sent = watch_context
+    state.update(primary=20, secondary=80, latest_busy=True)
+    assert (
+        codexo.watch_iteration(
+            server, codexo.WatchState(), "hello", codexo.WatchPoll(), True
+        )
+        is True
+    )
+    assert sent[0]["threadId"] == "test-0"
+    assert sent[0]["input"] == [{"type": "text", "text": 'Say "test"'}]
 
 
 def test_pending_reset_survives_poll_errors_and_no_destination(
@@ -289,7 +318,7 @@ def test_test_prompts_skip_missing_or_ambiguous_codexo_chat(
         is False
     )
     assert poll.detail == detail
-    assert poll.idle is True
+    assert poll.idle is None
     assert not sent
 
 
@@ -408,7 +437,7 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
     monkeypatch.setattr(codexo.Path, "is_socket", lambda p: True)
     monkeypatch.setattr(codexo, "desktop_server", lambda *a, **k: nullcontext(server))
 
-    def unavailable(*args: object, **kwargs: object) -> None:
+    def unavailable(*args: object, **kwargs: object) -> Never:
         if failure == "timeout":
             raise TimeoutError("initialize: request timed out")
         raise RuntimeError("query failed\nwith details")
@@ -418,7 +447,15 @@ def test_poll_errors_log_only_known_values_and_stay_on_one_line(
     elif failure == "usage":
         monkeypatch.setattr(server, "request", unavailable)
     else:
-        monkeypatch.setattr(codexo, "chats_idle", unavailable)
+        assert isinstance(server, codexo.AppServer)
+        request = server.request
+
+        def fail_idle(method: str, params: dict[str, object]) -> dict[str, object]:
+            if method == "thread/read":
+                return unavailable()
+            return request(method, params)
+
+        monkeypatch.setattr(server, "request", fail_idle)
 
     def wait(interval: float) -> None:
         raise KeyboardInterrupt

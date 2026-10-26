@@ -175,23 +175,27 @@ qualifies when its first observed value is zero, or its most recent recorded
 value was nonzero and the current value is zero. Missing windows are not treated
 as zero. Either or both qualifying in the same poll causes at most one prompt.
 
-Before sending, all loaded local chats are checked across every page. Active
-chats, including those waiting for approval or input, and running background
-terminals block the prompt. The watcher selects the most recently updated
-unarchived chat, resumes it, verifies that it is still idle, and starts a turn
-with the configured prompt. Activity is checked through API snapshots; there is
-no atomic server-wide idle-and-send operation. No new chat is created.
+The watcher lists unarchived local chats across every page in order of most
+recent update and selects the first idle chat. Active chats, including those
+waiting for approval or input, are skipped. Background terminals and servers
+do not affect selection. The watcher resumes the selected chat, verifies that
+it is still idle, and starts a turn with the configured prompt. If the chat
+became active, it tries the next candidate. Test prompts check only the chat
+titled `codexo`; activity in other chats does not block them. Activity is checked
+through API snapshots, so a chat could start working between the idle check and
+sending. No new chat is created.
 
-Observations are recorded even when the app is busy or no destination chat
-exists. Detected resets remain pending until a prompt is successfully sent on
+Observations are recorded even when all candidate chats are busy or no
+destination chat exists. Detected resets remain pending until a prompt is successfully sent on
 an idle poll, even if usage increases before then. Multiple pending resets
 produce one prompt. App closure and poll errors preserve the in-memory history
 and pending reset; restarting the watcher begins a new observation history.
 Every poll writes a flushed log line containing a local ISO timestamp with UTC
 offset, both `usedPercent` values, idle status, and whether a prompt was sent.
-When blocked, the detail identifies the chat by ID and title, with its status
-and active flags, or reports that the chat has a background terminal. A chat
-that becomes active after resuming is identified too.
+The detail identifies skipped busy chats by ID and title, with their status
+and active flags. A chat that becomes active after resuming is identified too.
+`idle=true` means an eligible idle destination was found; it does not mean every
+chat is idle. If all candidates are busy, the reset stays pending.
 Idle status is checked on every connected poll, even without a reset. Values
 that could not be queried are logged as `unavailable` or `unknown`, with a reason
 when the app is closed, its bridge is unavailable, or a query fails. Available
