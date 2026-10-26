@@ -41,10 +41,10 @@ The documented operations cover the core sequence:
 | Request that it read the document | `turn/start` with the accessible document path |
 | Archive the old chat | `thread/archive` |
 
-The script creates a unique temporary directory and asks the old chat to save
-`handover.md` there. The file remains available after the script exits, until the
-system cleans its temporary directory. The replacement must return a matching
-SHA-256 checksum before the old chat is archived.
+The script asks the old chat to write `handover.md` in its project working
+directory, replacing an existing file there. The file remains after retirement.
+An unchanged file from a previous run is not accepted as a new handover. The
+replacement must return a matching SHA-256 checksum before the old chat is archived.
 
 `retire`, `fix`, and `watch` list chats from all source kinds and model providers
 using the state database. They list unarchived chats; `fix` additionally limits

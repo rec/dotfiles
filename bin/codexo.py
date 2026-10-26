@@ -20,7 +20,6 @@ from collections.abc import Callable, Iterator
 from contextlib import ExitStack, contextmanager
 from datetime import datetime
 from pathlib import Path
-from tempfile import mkdtemp
 from threading import Thread
 from time import monotonic, sleep
 from types import FrameType
@@ -1002,10 +1001,11 @@ def print_dry_run(thread_id: str | None) -> None:
     print("Preserve <old-chat-name> and <old-working-directory>.")
     print("Application Project membership is unverified.")
     print(f"thread/resume: resume {old_id!r}; require it to remain idle.")
-    print("Create a unique codexo- temporary directory.")
-    print("Use <temporary-directory>/handover.md as the handover path.")
+    print("Use <old-working-directory>/handover.md as the handover path.")
     print(f"turn/start: ask {old_id!r} to write the handover document.")
-    print("Wait for successful turn/completed; require a nonempty handover file.")
+    print(
+        "Wait for successful turn/completed; require a newly written nonempty handover."
+    )
     print("Compute the handover file's SHA-256 checksum.")
     print("thread/start: create <replacement-chat-id> in <old-working-directory>.")
     print("Require the replacement working directory to match the old one.")
@@ -1076,11 +1076,12 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     )
     if resumed.status["type"] != "idle":
         raise RuntimeError("Selected chat is not idle after resume")
-    handover = Path(mkdtemp(prefix="codexo-")) / "handover.md"
+    handover = old.cwd / "handover.md"
+    previous_modified = handover.stat().st_mtime_ns if handover.is_file() else None
     print(f"Handover: {handover}", flush=True)
     server.run_turn(
         old.id,
-        f"Create a Markdown handover document at {json.dumps(str(handover))}. "
+        f"Create or replace a Markdown handover at {json.dumps(str(handover))}. "
         "Include the objective, user instructions and decisions, completed work, "
         "relevant paths and commits, verification results, remaining work "
         "and blockers. "
@@ -1090,6 +1091,8 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     )
     if not handover.is_file() or not handover.read_text().strip():
         raise RuntimeError(f"Handover was not written: {handover}; old chat retained")
+    if handover.stat().st_mtime_ns == previous_modified:
+        raise RuntimeError(f"Handover was not updated: {handover}; old chat retained")
     digest = hashlib.sha256(handover.read_bytes()).hexdigest()
     new = Chat.model_validate(
         server.request("thread/start", {"cwd": str(old.cwd)})["thread"]

@@ -65,7 +65,6 @@ def test_dry_run_prints_operations_without_performing_them(
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
     monkeypatch.setattr(codexo, "desktop_server", unexpected_operation)
-    monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
     codexo.main()
     output = capsys.readouterr().out
     assert "no app-server, file, or chat operations" in output
@@ -110,7 +109,6 @@ def test_fix_dry_run_lists_repositories_without_reading_them(
         pytest.fail("Dry-run must not start app-server or read repositories")
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
-    monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
     monkeypatch.setattr(codexo, "report_repository", unexpected_operation)
     codexo.main()
     output = capsys.readouterr()
@@ -596,19 +594,21 @@ def test_client_request_fails_instead_of_waiting_forever() -> None:
         "wrong_cwd",
         "busy",
         "pin_failed",
+        "unchanged_handover",
     ],
 )
 @pytest.mark.parametrize("pinned", [False, True])
 def test_old_chat_is_archived_only_after_verified_handover(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str | None, pinned: bool
 ) -> None:
-    monkeypatch.setattr(codexo, "mkdtemp", lambda **_: str(tmp_path))
     archived: list[str] = []
     started: list[dict[str, object]] = []
     named: list[dict[str, object]] = []
     turns: list[str] = []
     pins = ["first", "old", "last"] if pinned else ["first", "last"]
     handover = tmp_path / "handover.md"
+    if failure == "unchanged_handover":
+        handover.write_text("Handover from a previous retirement.")
 
     def request(method: str, params: dict[str, object]) -> dict[str, object]:
         if method in {"thread/read", "thread/resume"}:
@@ -657,7 +657,7 @@ def test_old_chat_is_archived_only_after_verified_handover(
         assert str(handover) in prompt
         if thread_id == "old":
             assert not receipt
-            if failure != "missing":
+            if failure not in {"missing", "unchanged_handover"}:
                 handover.write_text(
                     "" if failure == "empty" else "Hand over this objective."
                 )
