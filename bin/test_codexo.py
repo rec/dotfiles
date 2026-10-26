@@ -3,6 +3,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+from contextlib import nullcontext
 from io import StringIO
 from pathlib import Path
 
@@ -17,6 +18,33 @@ assert spec is not None and spec.loader is not None
 codexo = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = codexo
 spec.loader.exec_module(codexo)
+
+
+@pytest.mark.parametrize("flags", [[], ["-v"], ["--verbose"]])
+def test_retire_picker_only_includes_chat_details_in_verbose_mode(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    flags: list[str],
+) -> None:
+    server = codexo.AppServer(StringIO(), StringIO())
+    monkeypatch.setattr(
+        server,
+        "request",
+        lambda *a: {
+            "data": [
+                {"id": "chat-id", "name": "Chat name", "cwd": "/repo", "status": {}}
+            ]
+        },
+    )
+    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    monkeypatch.setattr("builtins.input", lambda p: "1")
+    selected: list[str] = []
+    monkeypatch.setattr(codexo, "replace_chat", lambda s, i: selected.append(i))
+    monkeypatch.setattr(sys, "argv", ["codexo.py", *flags, "retire"])
+    codexo.main()
+    detail = " [chat-id] (/repo)" if flags else ""
+    assert capsys.readouterr().out == f"1. Chat name{detail}\n"
+    assert selected == ["chat-id"]
 
 
 @pytest.mark.parametrize("flag", ["-d", "--dry-run"])

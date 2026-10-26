@@ -119,6 +119,8 @@ class CodexoCommand(BaseModel, frozen=True):
     )
     dry_run: Annotated[bool, tyro.conf.arg(aliases=["-d"])] = False
     """Print planned operations without starting app-server or making changes."""
+    verbose: Annotated[bool, tyro.conf.arg(aliases=["-v"])] = False
+    """Include chat IDs and working directories in the retire picker."""
 
 
 class Chat(BaseModel, frozen=True):
@@ -321,7 +323,7 @@ def main() -> None:
         return
     try:
         with app_server("codex", experimental=True) as server:
-            thread_id = command.action.thread_id or select_chat(server)
+            thread_id = command.action.thread_id or select_chat(server, command.verbose)
             replace_chat(server, thread_id)
     except (OSError, RuntimeError, ValidationError, EOFError) as error:
         sys.exit(str(error))
@@ -1004,7 +1006,7 @@ def print_dry_run(thread_id: str | None) -> None:
     print("Print the replacement ID; stop app-server. Keep the handover file.")
 
 
-def select_chat(server: AppServer) -> str:
+def select_chat(server: AppServer, verbose: bool) -> str:
     cursor: str | None = None
     while True:
         page = ChatPage.model_validate(
@@ -1024,7 +1026,8 @@ def select_chat(server: AppServer) -> str:
         if not page.data:
             raise RuntimeError("No unarchived Codex chats found")
         for i, chat in enumerate(page.data, 1):
-            print(f"{i}. {chat.name or '(unnamed)'} [{chat.id}] ({chat.cwd})")
+            detail = f" [{chat.id}] ({chat.cwd})" if verbose else ""
+            print(f"{i}. {chat.name or '(unnamed)'}{detail}")
         choice = input(
             "Select chat number"
             + (" or n for next page" if page.nextCursor else "")
