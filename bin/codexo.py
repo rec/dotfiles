@@ -1092,14 +1092,7 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     if new.cwd != old.cwd:
         raise RuntimeError("Replacement working directory differs; old chat retained")
     server.request("thread/name/set", {"threadId": new.id, "name": old.name})
-    reply = server.run_turn(
-        new.id,
-        f"Read the complete handover document at {json.dumps(str(handover))} "
-        "using your file tools and retain its context for future work."
-        "If you cannot read it, report failure instead of claiming success. "
-        "Do not continue the work, modify files, commit, push, or archive chats.",
-        receipt=True,
-    )
+    reply = server.run_turn(new.id, NEW_CHAT_PROMPT)
     if ReadReceipt.model_validate_json(reply).sha256 != digest:
         raise RuntimeError("Replacement did not verify the handover; old chat retained")
     if old.section is not None and old.section.id == PINNED_SECTION_ID:
