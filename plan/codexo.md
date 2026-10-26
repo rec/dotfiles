@@ -43,6 +43,8 @@ SHA-256 checksum before the old chat is archived.
 using the state database. They list unarchived chats; `fix` additionally limits
 the results to the requested working directory. With no chat ID, `retire` offers
 an interactive picker with 25 chats per page, most recently updated first.
+The picker shows numbered chat names by default. Use top-level `--verbose` or
+`-v`, as in `codexo.py -v retire`, to also show chat IDs and working directories.
 
 ## Project and working directory
 
