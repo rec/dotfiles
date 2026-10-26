@@ -320,7 +320,7 @@ def main() -> None:
         print_dry_run(command.action.thread_id)
         return
     try:
-        with app_server("codex") as server:
+        with app_server("codex", experimental=True) as server:
             thread_id = command.action.thread_id or select_chat(server)
             replace_chat(server, thread_id)
     except (OSError, RuntimeError, ValidationError, EOFError) as error:
@@ -978,7 +978,8 @@ def codex_info(server: AppServer, directory: Path) -> CodexInfo:
 def print_dry_run(thread_id: str | None) -> None:
     print("Dry run: no app-server, file, or chat operations will be performed.")
     print("Values in <angle brackets> are determined during a real run.")
-    print("Start codex app-server; send initialize and initialized.")
+    print("Start codex app-server; initialize with experimentalApi enabled.")
+    print("Send initialized.")
     if thread_id is None:
         print("thread/list: list unarchived chats from all sources, 25 per page.")
         print("Ask for a chat number, fetching further pages as requested.")
