@@ -14,6 +14,13 @@ The desired workflow is:
 5. Tell the new chat to read the handover document.
 6. Archive the old chat after the handover succeeds.
 
+After verifying the handover, `retire` preserves a pinned chat's position by
+moving its replacement into the built-in Pinned section immediately before the
+old chat. Archiving the old chat then leaves the replacement in that position.
+Unpinned chats remain unpinned. A failed pin move prevents archiving; the old
+chat is archived only after the move succeeds. This uses the installed
+app-server's `thread.section` and `thread/section/move` interface.
+
 ## Documented interface
 
 [Codex app-server](https://learn.chatgpt.com/docs/app-server) is the relevant
@@ -34,10 +41,10 @@ The documented operations cover the core sequence:
 | Request that it read the document | `turn/start` with the accessible document path |
 | Archive the old chat | `thread/archive` |
 
-The script creates a unique temporary directory and asks the old chat to save
-`handover.md` there. The file remains available after the script exits, until the
-system cleans its temporary directory. The replacement must return a matching
-SHA-256 checksum before the old chat is archived.
+The script asks the old chat to write `handover.md` in its project working
+directory, replacing an existing file there. The file remains after retirement.
+An unchanged file from a previous run is not accepted as a new handover. The
+replacement must return a matching SHA-256 checksum before the old chat is archived.
 
 `retire`, `fix`, and `watch` list chats from all source kinds and model providers
 using the state database. They list unarchived chats; `fix` additionally limits
@@ -56,14 +63,17 @@ without asking the user to choose a directory.
 An application Project and a working directory must not be assumed to be identical.
 Reusing the directory does not establish that the replacement will belong to
 the same application Project. The user has accepted preserving the working
-directory with Project membership explicitly unverified. The older `codex` on
-PATH used by `retire` has no application Project membership operation. The newer
-desktop-bundled executable used by `fix` does expose Project operations.
+directory with Project membership explicitly unverified. `retire` connects to
+the desktop app's server through the bridge used by `watch`; it requires that
+bridge setup. `fix` launches the desktop-bundled executable for read-only queries.
+Although it exposes Project operations, `retire` does not currently
+preserve application Project membership.
 
 ## Remaining verification
 
-- Verify that a separately launched app-server can see the existing chats in this
-  desktop installation.
+- Verify retirement through the desktop bridge on live chats. A separately
+  launched app-server cannot resume a chat whose writer is owned by the app,
+  even when that chat is idle.
 - Verify the complete handover on live chats. Unit tests cover the archive gate,
   but do not establish desktop integration or model behavior.
 
@@ -74,16 +84,17 @@ independent Python program.
 ## Status
 
 Implemented in `bin/codexo.py`, using the existing dotfiles environment's Tyro
-and Pydantic dependencies. The script launches `codex app-server` over stdio.
-No live app-server session has been launched and no chats have been changed
-during implementation. The installed protocol schema was generated and inspected.
+and Pydantic dependencies. `retire` uses the desktop bridge's WebSocket connection;
+`fix` launches a separate app-server over stdio. The installed protocol schema
+was generated and inspected.
 
 Run `/Users/tom/code/dotfiles/bin/codexo.py retire` to select a chat from paginated
 app-server results, or pass a thread ID after `retire`. It preserves
 the display name and recorded working directory, using configured model and
 permission defaults. Run only when the old chat is idle, and leave it idle in
-the desktop app throughout the handover. A separate server may not observe work
-running in another process.
+the desktop app throughout the handover. Retirement uses the same server that
+owns the desktop chat, avoiding a second thread writer. On exit it closes its
+connection and leaves the app's server running.
 
 Add the top-level `-d` or `--dry-run` flag before the command, for example
 `/Users/tom/code/dotfiles/bin/codexo.py -d retire`, to print the planned operations
@@ -119,8 +130,7 @@ Codex interrogation is enabled by default and can be explicitly enabled with
 
 `fix` uses the desktop app's bundled executable at
 `/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex`, whose installed
-schema supports `project/list`. The older `codex` on PATH used by `retire` lacks
-that operation. This reads Projects through app-server rather than relying on
+schema supports `project/list`. This reads Projects through app-server rather than relying on
 internal desktop state files. `gh repo view` reads the GitHub description using
 the repository's configured remote. `-d fix <repo>...` prints only the planned
 reads, without starting app-server or contacting GitHub.
@@ -174,8 +184,8 @@ idle check. A separate shared daemon is neither required nor used.
 
 WebSocket connection setup and individual RPC requests time out after ten
 seconds. Notifications do not extend an RPC deadline. Poll failures are logged
-before polling continues. The existing stdio connection remains in use for
-`retire` and `fix`; watch no longer sends JSON through `app-server proxy`.
+before polling continues. `retire` also uses this bridge; `fix` uses a separate
+stdio connection. Watch no longer sends JSON through `app-server proxy`.
 
 Both primary and secondary `usedPercent` values are recorded in memory. A window
 qualifies when its first observed value is zero, or its most recent recorded

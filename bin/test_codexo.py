@@ -36,7 +36,7 @@ def test_retire_picker_only_includes_chat_details_in_verbose_mode(
             ]
         },
     )
-    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    monkeypatch.setattr(codexo, "desktop_server", lambda: nullcontext(server))
     monkeypatch.setattr("builtins.input", lambda p: "1")
     selected: list[str] = []
     monkeypatch.setattr(codexo, "replace_chat", lambda s, i: selected.append(i))
@@ -64,7 +64,7 @@ def test_dry_run_prints_operations_without_performing_them(
         pytest.fail("Dry-run must not start app-server or create files")
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
-    monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
+    monkeypatch.setattr(codexo, "desktop_server", unexpected_operation)
     codexo.main()
     output = capsys.readouterr().out
     assert "no app-server, file, or chat operations" in output
@@ -82,7 +82,7 @@ def test_dry_run_prints_operations_without_performing_them(
         "thread/name/set",
         "matching checksum",
         "thread/archive",
-        "stop app-server",
+        "disconnect from app-server",
     ]:
         assert operation in output
 
@@ -109,7 +109,6 @@ def test_fix_dry_run_lists_repositories_without_reading_them(
         pytest.fail("Dry-run must not start app-server or read repositories")
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
-    monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
     monkeypatch.setattr(codexo, "report_repository", unexpected_operation)
     codexo.main()
     output = capsys.readouterr()
@@ -594,17 +593,22 @@ def test_client_request_fails_instead_of_waiting_forever() -> None:
         "failed_read",
         "wrong_cwd",
         "busy",
+        "pin_failed",
+        "unchanged_handover",
     ],
 )
+@pytest.mark.parametrize("pinned", [False, True])
 def test_old_chat_is_archived_only_after_verified_handover(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str | None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str | None, pinned: bool
 ) -> None:
-    monkeypatch.setattr(codexo, "mkdtemp", lambda **_: str(tmp_path))
     archived: list[str] = []
     started: list[dict[str, object]] = []
     named: list[dict[str, object]] = []
     turns: list[str] = []
+    pins = ["first", "old", "last"] if pinned else ["first", "last"]
     handover = tmp_path / "handover.md"
+    if failure == "unchanged_handover":
+        handover.write_text("Handover from a previous retirement.")
 
     def request(method: str, params: dict[str, object]) -> dict[str, object]:
         if method in {"thread/read", "thread/resume"}:
@@ -614,6 +618,7 @@ def test_old_chat_is_archived_only_after_verified_handover(
                     "name": "Original name",
                     "cwd": str(tmp_path),
                     "status": {"type": "active" if failure == "busy" else "idle"},
+                    "section": {"id": codexo.PINNED_SECTION_ID} if pinned else None,
                 }
             }
         if method == "thread/start":
@@ -631,9 +636,20 @@ def test_old_chat_is_archived_only_after_verified_handover(
         if method == "thread/name/set":
             named.append(params)
             return {}
+        if method == "thread/section/move":
+            assert turns == ["old", "new"]
+            assert pinned
+            if failure == "pin_failed":
+                raise RuntimeError("Pin move failed")
+            pins.insert(
+                pins.index(str(params["beforeThreadId"])), str(params["threadId"])
+            )
+            return {}
         assert method == "thread/archive"
         assert turns == ["old", "new"]
         archived.append(str(params["threadId"]))
+        if pinned:
+            pins.remove("old")
         return {}
 
     def run_turn(thread_id: str, prompt: str, receipt: bool = False) -> str:
@@ -641,7 +657,7 @@ def test_old_chat_is_archived_only_after_verified_handover(
         assert str(handover) in prompt
         if thread_id == "old":
             assert not receipt
-            if failure != "missing":
+            if failure not in {"missing", "unchanged_handover"}:
                 handover.write_text(
                     "" if failure == "empty" else "Hand over this objective."
                 )
@@ -657,12 +673,14 @@ def test_old_chat_is_archived_only_after_verified_handover(
     server = codexo.AppServer(StringIO(), StringIO())
     monkeypatch.setattr(server, "request", request)
     monkeypatch.setattr(server, "run_turn", run_turn)
-    if failure is None:
+    if failure is None or (failure == "pin_failed" and not pinned):
         assert codexo.replace_chat(server, "old") == "new"
         assert archived == ["old"]
         assert started == [{"cwd": str(tmp_path)}]
         assert named == [{"threadId": "new", "name": "Original name"}]
+        assert pins == (["first", "new", "last"] if pinned else ["first", "last"])
     else:
         with pytest.raises((RuntimeError, codexo.ValidationError)):
             codexo.replace_chat(server, "old")
         assert not archived
+        assert pins == (["first", "old", "last"] if pinned else ["first", "last"])

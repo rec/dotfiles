@@ -20,7 +20,6 @@ from collections.abc import Callable, Iterator
 from contextlib import ExitStack, contextmanager
 from datetime import datetime
 from pathlib import Path
-from tempfile import mkdtemp
 from threading import Thread
 from time import monotonic, sleep
 from types import FrameType
@@ -123,11 +122,16 @@ class CodexoCommand(BaseModel, frozen=True):
     """Include chat IDs and working directories in the retire picker."""
 
 
+class ChatSection(BaseModel, frozen=True):
+    id: str
+
+
 class Chat(BaseModel, frozen=True):
     id: str
     name: str | None = None
     cwd: Path
     status: dict[str, object]
+    section: ChatSection | None = None
 
 
 class ChatPage(BaseModel, frozen=True):
@@ -322,10 +326,17 @@ def main() -> None:
         print_dry_run(command.action.thread_id)
         return
     try:
-        with app_server("codex", experimental=True) as server:
+        with desktop_server() as server:
             thread_id = command.action.thread_id or select_chat(server, command.verbose)
             replace_chat(server, thread_id)
-    except (OSError, RuntimeError, ValidationError, EOFError) as error:
+    except (
+        OSError,
+        RuntimeError,
+        ValidationError,
+        EOFError,
+        WebSocketException,
+        subprocess.SubprocessError,
+    ) as error:
         sys.exit(str(error))
     except KeyboardInterrupt:
         sys.exit("Interrupted; any unfinished handover has not archived the old chat.")
@@ -980,7 +991,7 @@ def codex_info(server: AppServer, directory: Path) -> CodexInfo:
 def print_dry_run(thread_id: str | None) -> None:
     print("Dry run: no app-server, file, or chat operations will be performed.")
     print("Values in <angle brackets> are determined during a real run.")
-    print("Start codex app-server; initialize with experimentalApi enabled.")
+    print("Connect to the desktop bridge; initialize with experimentalApi enabled.")
     print("Send initialized.")
     if thread_id is None:
         print("thread/list: list unarchived chats from all sources, 25 per page.")
@@ -990,10 +1001,11 @@ def print_dry_run(thread_id: str | None) -> None:
     print("Preserve <old-chat-name> and <old-working-directory>.")
     print("Application Project membership is unverified.")
     print(f"thread/resume: resume {old_id!r}; require it to remain idle.")
-    print("Create a unique codexo- temporary directory.")
-    print("Use <temporary-directory>/handover.md as the handover path.")
+    print("Use <old-working-directory>/handover.md as the handover path.")
     print(f"turn/start: ask {old_id!r} to write the handover document.")
-    print("Wait for successful turn/completed; require a nonempty handover file.")
+    print(
+        "Wait for successful turn/completed; require a newly written nonempty handover."
+    )
     print("Compute the handover file's SHA-256 checksum.")
     print("thread/start: create <replacement-chat-id> in <old-working-directory>.")
     print("Require the replacement working directory to match the old one.")
@@ -1002,8 +1014,14 @@ def print_dry_run(thread_id: str | None) -> None:
         "turn/start: ask the replacement to read the handover and return its SHA-256."
     )
     print("Wait for successful turn/completed; require a matching checksum receipt.")
+    print(
+        "If the old chat is pinned, thread/section/move: insert its replacement "
+        "immediately before it in the Pinned section."
+    )
     print(f"thread/archive: archive {old_id!r} only after verification succeeds.")
-    print("Print the replacement ID; stop app-server. Keep the handover file.")
+    print(
+        "Print the replacement ID; disconnect from app-server. Keep the handover file."
+    )
 
 
 def select_chat(server: AppServer, verbose: bool) -> str:
@@ -1058,11 +1076,12 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     )
     if resumed.status["type"] != "idle":
         raise RuntimeError("Selected chat is not idle after resume")
-    handover = Path(mkdtemp(prefix="codexo-")) / "handover.md"
+    handover = old.cwd / "handover.md"
+    previous_modified = handover.stat().st_mtime_ns if handover.is_file() else None
     print(f"Handover: {handover}", flush=True)
     server.run_turn(
         old.id,
-        f"Create a Markdown handover document at {json.dumps(str(handover))}. "
+        f"Create or replace a Markdown handover at {json.dumps(str(handover))}. "
         "Include the objective, user instructions and decisions, completed work, "
         "relevant paths and commits, verification results, remaining work "
         "and blockers. "
@@ -1072,6 +1091,8 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     )
     if not handover.is_file() or not handover.read_text().strip():
         raise RuntimeError(f"Handover was not written: {handover}; old chat retained")
+    if handover.stat().st_mtime_ns == previous_modified:
+        raise RuntimeError(f"Handover was not updated: {handover}; old chat retained")
     digest = hashlib.sha256(handover.read_bytes()).hexdigest()
     new = Chat.model_validate(
         server.request("thread/start", {"cwd": str(old.cwd)})["thread"]
@@ -1091,12 +1112,23 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     )
     if ReadReceipt.model_validate_json(reply).sha256 != digest:
         raise RuntimeError("Replacement did not verify the handover; old chat retained")
+    if old.section is not None and old.section.id == PINNED_SECTION_ID:
+        server.request(
+            "thread/section/move",
+            {
+                "threadId": new.id,
+                "sectionId": PINNED_SECTION_ID,
+                "beforeThreadId": old.id,
+            },
+        )
     server.request("thread/archive", {"threadId": old.id})
     print(f"Archived {old.id}. Continue in {new.id} ({old.name}).")
     return new.id
 
 
 CODEX_EXECUTABLE = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+# Built-in Pinned section identity used by the desktop app and app-server.
+PINNED_SECTION_ID = "01984de2-8f74-7c91-a3b2-5c5e937cf318"
 WATCH_LABEL = "local.codexo.watch"
 WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
 WATCH_REQUEST_TIMEOUT = 10
