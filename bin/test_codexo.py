@@ -1,4 +1,3 @@
-import hashlib
 import importlib.util
 import json
 import subprocess
@@ -80,7 +79,7 @@ def test_dry_run_prints_operations_without_performing_them(
         "turn/completed",
         "thread/start",
         "thread/name/set",
-        "matching checksum",
+        "summarize next tasks",
         "thread/archive",
         "disconnect from app-server",
     ]:
@@ -529,7 +528,7 @@ def test_turn_retains_events_received_before_start_response() -> None:
             "params": {
                 "threadId": "old",
                 "turnId": "turn",
-                "item": {"type": "agentMessage", "text": "receipt"},
+                "item": {"type": "agentMessage", "text": "summary"},
             },
         },
         {
@@ -544,7 +543,7 @@ def test_turn_retains_events_received_before_start_response() -> None:
     server = codexo.AppServer(
         StringIO("".join(json.dumps(m) + "\n" for m in messages)), StringIO()
     )
-    assert server.run_turn("old", "read") == "receipt"
+    assert server.run_turn("old", "read") == "summary"
 
 
 @pytest.mark.parametrize("status", ["failed", "interrupted"])
@@ -588,8 +587,6 @@ def test_client_request_fails_instead_of_waiting_forever() -> None:
         None,
         "missing",
         "empty",
-        "wrong_digest",
-        "refusal",
         "failed_read",
         "wrong_cwd",
         "busy",
@@ -598,7 +595,7 @@ def test_client_request_fails_instead_of_waiting_forever() -> None:
     ],
 )
 @pytest.mark.parametrize("pinned", [False, True])
-def test_old_chat_is_archived_only_after_verified_handover(
+def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str | None, pinned: bool
 ) -> None:
     archived: list[str] = []
@@ -652,23 +649,18 @@ def test_old_chat_is_archived_only_after_verified_handover(
             pins.remove("old")
         return {}
 
-    def run_turn(thread_id: str, prompt: str, receipt: bool = False) -> str:
+    def run_turn(thread_id: str, prompt: str) -> str:
         turns.append(thread_id)
-        assert str(handover) in prompt
+        assert handover.name in prompt
         if thread_id == "old":
-            assert not receipt
             if failure not in {"missing", "unchanged_handover"}:
                 handover.write_text(
                     "" if failure == "empty" else "Hand over this objective."
                 )
             return "saved"
-        assert receipt
         if failure == "failed_read":
             raise RuntimeError("Read turn failed")
-        if failure == "refusal":
-            return "Unable to read the file"
-        digest = hashlib.sha256(handover.read_bytes()).hexdigest()
-        return json.dumps({"sha256": "wrong" if failure == "wrong_digest" else digest})
+        return "The next task is to continue the objective."
 
     server = codexo.AppServer(StringIO(), StringIO())
     monkeypatch.setattr(server, "request", request)

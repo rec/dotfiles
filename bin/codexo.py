@@ -7,7 +7,6 @@ Run `retire` to select a chat, or `retire THREAD_ID` for a specific chat.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import plistlib
@@ -30,7 +29,6 @@ import tomllib
 import tyro
 from pydantic import (
     BaseModel,
-    ConfigDict,
     Field,
     TypeAdapter,
     ValidationError,
@@ -40,7 +38,7 @@ from websockets.sync.client import ClientConnection, unix_connect
 
 
 class RetireCommand(BaseModel, frozen=True):
-    """Replace a chat using a verified handover, then archive the old chat."""
+    """Replace a chat using a handover and summary, then archive the old chat."""
 
     thread_id: Annotated[str | None, tyro.conf.Positional] = None
 
@@ -194,12 +192,6 @@ class Turn(BaseModel, frozen=True):
     error: dict[str, object] | None = None
 
 
-class ReadReceipt(BaseModel, frozen=True):
-    sha256: str
-
-    model_config = ConfigDict(extra="forbid")
-
-
 class AppServer:
     """One synchronous JSON-RPC connection, retaining early turn events."""
 
@@ -269,13 +261,11 @@ class AppServer:
                 raise RuntimeError(f"{method}: missing result")
             return message.result
 
-    def run_turn(self, thread_id: str, prompt: str, receipt: bool = False) -> str:
+    def run_turn(self, thread_id: str, prompt: str) -> str:
         params: dict[str, object] = {
             "threadId": thread_id,
             "input": [{"type": "text", "text": prompt}],
         }
-        if receipt:
-            params["outputSchema"] = ReadReceipt.model_json_schema()
         result = self.request("turn/start", params)
         started = Turn.model_validate(result["turn"])
         reply = ""
@@ -1006,19 +996,18 @@ def print_dry_run(thread_id: str | None) -> None:
     print(
         "Wait for successful turn/completed; require a newly written nonempty handover."
     )
-    print("Compute the handover file's SHA-256 checksum.")
     print("thread/start: create <replacement-chat-id> in <old-working-directory>.")
     print("Require the replacement working directory to match the old one.")
     print("thread/name/set: name <replacement-chat-id> <old-chat-name>.")
     print(
-        "turn/start: ask the replacement to read the handover and return its SHA-256."
+        "turn/start: ask the replacement to read the handover and summarize next tasks."
     )
-    print("Wait for successful turn/completed; require a matching checksum receipt.")
+    print("Wait for the replacement's successful turn/completed.")
     print(
         "If the old chat is pinned, thread/section/move: insert its replacement "
         "immediately before it in the Pinned section."
     )
-    print(f"thread/archive: archive {old_id!r} only after verification succeeds.")
+    print(f"thread/archive: archive {old_id!r} only after both turns succeed.")
     print(
         "Print the replacement ID; disconnect from app-server. Keep the handover file."
     )
@@ -1084,7 +1073,6 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
         raise RuntimeError(f"Handover was not written: {handover}; old chat retained")
     if handover.stat().st_mtime_ns == previous_modified:
         raise RuntimeError(f"Handover was not updated: {handover}; old chat retained")
-    digest = hashlib.sha256(handover.read_bytes()).hexdigest()
     new = Chat.model_validate(
         server.request("thread/start", {"cwd": str(old.cwd)})["thread"]
     )
@@ -1092,9 +1080,7 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
     if new.cwd != old.cwd:
         raise RuntimeError("Replacement working directory differs; old chat retained")
     server.request("thread/name/set", {"threadId": new.id, "name": old.name})
-    reply = server.run_turn(new.id, NEW_CHAT_PROMPT)
-    if ReadReceipt.model_validate_json(reply).sha256 != digest:
-        raise RuntimeError("Replacement did not verify the handover; old chat retained")
+    server.run_turn(new.id, NEW_CHAT_PROMPT)
     if old.section is not None and old.section.id == PINNED_SECTION_ID:
         server.request(
             "thread/section/move",

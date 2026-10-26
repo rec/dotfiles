@@ -14,9 +14,10 @@ The desired workflow is:
 5. Tell the new chat to read the handover document.
 6. Archive the old chat after the handover succeeds.
 
-After verifying the handover, `retire` preserves a pinned chat's position by
-moving its replacement into the built-in Pinned section immediately before the
-old chat. Archiving the old chat then leaves the replacement in that position.
+After the replacement's summary turn succeeds, `retire` preserves a pinned
+chat's position by moving its replacement into the built-in Pinned section
+immediately before the old chat. Archiving the old chat then leaves the replacement
+in that position.
 Unpinned chats remain unpinned. A failed pin move prevents archiving; the old
 chat is archived only after the move succeeds. This uses the installed
 app-server's `thread.section` and `thread/section/move` interface.
@@ -44,7 +45,10 @@ The documented operations cover the core sequence:
 The script asks the old chat to write `handover.md` in its project working
 directory, replacing an existing file there. The file remains after retirement.
 An unchanged file from a previous run is not accepted as a new handover. The
-replacement must return a matching SHA-256 checksum before the old chat is archived.
+replacement is asked to read the handover and summarize the next tasks. Its turn
+must complete successfully before archiving; there is no checksum verification
+or independent check that the model read the complete file. The prompts are
+editable as `RETIRING_PROMPT` and `NEW_CHAT_PROMPT` in `bin/codexo.py`.
 
 `retire`, `fix`, and `watch` list chats from all source kinds and model providers
 using the state database. They list unarchived chats; `fix` additionally limits
@@ -136,9 +140,9 @@ the repository's configured remote. `-d fix <repo>...` prints only the planned
 reads, without starting app-server or contacting GitHub.
 
 `retire` stops if Codex requests approvals, user input, or app-only tools that
-this standalone client cannot supply. Missing or empty documents, unsuccessful
-turns, and invalid or mismatching read receipts prevent archiving. If failure
-occurs after creating the replacement, it remains available; the script prints
+this standalone client cannot supply. Missing, empty, or unchanged handover
+documents and unsuccessful turns prevent archiving. If failure occurs after
+creating the replacement, it remains available; the script prints
 its ID and the handover path so work can be recovered manually. It does not
 retry, clean up chats, or continue the handed-over task automatically.
 
