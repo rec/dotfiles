@@ -56,9 +56,10 @@ without asking the user to choose a directory.
 An application Project and a working directory must not be assumed to be identical.
 Reusing the directory does not establish that the replacement will belong to
 the same application Project. The user has accepted preserving the working
-directory with Project membership explicitly unverified. The older `codex` on
-PATH used by `retire` has no application Project membership operation. The newer
-desktop-bundled executable used by `fix` does expose Project operations.
+directory with Project membership explicitly unverified. Both `retire` and
+`fix` use the desktop-bundled executable, matching the app's CLI version.
+Although it exposes Project operations, `retire` does not currently
+preserve application Project membership.
 
 ## Remaining verification
 
