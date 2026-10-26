@@ -36,7 +36,7 @@ def test_retire_picker_only_includes_chat_details_in_verbose_mode(
             ]
         },
     )
-    monkeypatch.setattr(codexo, "app_server", lambda *a, **k: nullcontext(server))
+    monkeypatch.setattr(codexo, "desktop_server", lambda: nullcontext(server))
     monkeypatch.setattr("builtins.input", lambda p: "1")
     selected: list[str] = []
     monkeypatch.setattr(codexo, "replace_chat", lambda s, i: selected.append(i))
@@ -64,6 +64,7 @@ def test_dry_run_prints_operations_without_performing_them(
         pytest.fail("Dry-run must not start app-server or create files")
 
     monkeypatch.setattr(codexo.subprocess, "Popen", unexpected_operation)
+    monkeypatch.setattr(codexo, "desktop_server", unexpected_operation)
     monkeypatch.setattr(codexo, "mkdtemp", unexpected_operation)
     codexo.main()
     output = capsys.readouterr().out
@@ -82,7 +83,7 @@ def test_dry_run_prints_operations_without_performing_them(
         "thread/name/set",
         "matching checksum",
         "thread/archive",
-        "stop app-server",
+        "disconnect from app-server",
     ]:
         assert operation in output
 
