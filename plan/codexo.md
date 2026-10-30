@@ -50,6 +50,11 @@ must complete successfully before archiving; there is no checksum verification
 or independent check that the model read the complete file. The prompts are
 editable as `RETIRING_PROMPT` and `NEW_CHAT_PROMPT` in `bin/codexo.py`.
 
+Use `codexo.py retire --no-retire-prompt` to skip prompting the retiring chat
+and reuse its existing `handover.md`. The file must exist and be nonempty; it
+does not need to be updated during this run. The replacement still receives
+`NEW_CHAT_PROMPT`, and pin transfer and final archiving follow the usual checks.
+
 `retire`, `fix`, and `watch` list chats from all source kinds and model providers
 using the state database. They list unarchived chats; `fix` additionally limits
 the results to the requested working directory. With no chat ID, `retire` offers

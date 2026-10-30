@@ -20,10 +20,12 @@ spec.loader.exec_module(codexo)
 
 
 @pytest.mark.parametrize("flags", [[], ["-v"], ["--verbose"]])
+@pytest.mark.parametrize("retire_prompt", [False, True])
 def test_retire_picker_only_includes_chat_details_in_verbose_mode(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     flags: list[str],
+    retire_prompt: bool,
 ) -> None:
     server = codexo.AppServer(StringIO(), StringIO())
     monkeypatch.setattr(
@@ -37,26 +39,39 @@ def test_retire_picker_only_includes_chat_details_in_verbose_mode(
     )
     monkeypatch.setattr(codexo, "desktop_server", lambda: nullcontext(server))
     monkeypatch.setattr("builtins.input", lambda p: "1")
-    selected: list[str] = []
-    monkeypatch.setattr(codexo, "replace_chat", lambda s, i: selected.append(i))
-    monkeypatch.setattr(sys, "argv", ["codexo.py", *flags, "retire"])
+    selected: list[tuple[str, bool]] = []
+    monkeypatch.setattr(codexo, "replace_chat", lambda s, i, p: selected.append((i, p)))
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "codexo.py",
+            *flags,
+            "retire",
+            *([] if retire_prompt else ["--no-retire-prompt"]),
+        ],
+    )
     codexo.main()
     detail = " [chat-id] (/repo)" if flags else ""
     assert capsys.readouterr().out == f"1. Chat name{detail}\n"
-    assert selected == ["chat-id"]
+    assert selected == [("chat-id", retire_prompt)]
 
 
 @pytest.mark.parametrize("flag", ["-d", "--dry-run"])
 @pytest.mark.parametrize("thread_id", [None, "old-chat-id"])
+@pytest.mark.parametrize("retire_prompt", [False, True])
 def test_dry_run_prints_operations_without_performing_them(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     flag: str,
     thread_id: str | None,
+    retire_prompt: bool,
 ) -> None:
     args = ["codexo.py", flag, "retire"]
     if thread_id is not None:
         args.append(thread_id)
+    if not retire_prompt:
+        args.append("--no-retire-prompt")
     monkeypatch.setattr(sys, "argv", args)
 
     def unexpected_operation(*args: object, **kwargs: object) -> None:
@@ -68,12 +83,13 @@ def test_dry_run_prints_operations_without_performing_them(
     output = capsys.readouterr().out
     assert "no app-server, file, or chat operations" in output
     assert ("thread/list:" in output) == (thread_id is None)
+    assert ("thread/resume:" in output) is retire_prompt
+    assert ("send no prompt to the retiring chat" in output) is not retire_prompt
     assert (thread_id or "<selected-chat-id>") in output
     for operation in [
         "initialize",
         "initialized",
         "thread/read",
-        "thread/resume",
         "handover.md",
         "turn/start",
         "turn/completed",
@@ -595,20 +611,28 @@ def test_client_request_fails_instead_of_waiting_forever() -> None:
     ],
 )
 @pytest.mark.parametrize("pinned", [False, True])
+@pytest.mark.parametrize("retire_prompt", [False, True])
 def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str | None, pinned: bool
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    failure: str | None,
+    pinned: bool,
+    retire_prompt: bool,
 ) -> None:
     archived: list[str] = []
     started: list[dict[str, object]] = []
     named: list[dict[str, object]] = []
     turns: list[str] = []
+    expected_turns = ["old", "new"] if retire_prompt else ["new"]
     pins = ["first", "old", "last"] if pinned else ["first", "last"]
     handover = tmp_path / "handover.md"
-    if failure == "unchanged_handover":
-        handover.write_text("Handover from a previous retirement.")
+    if failure == "unchanged_handover" or (not retire_prompt and failure != "missing"):
+        handover.write_text("" if failure == "empty" else "Existing handover.")
 
     def request(method: str, params: dict[str, object]) -> dict[str, object]:
         if method in {"thread/read", "thread/resume"}:
+            if method == "thread/resume":
+                assert retire_prompt
             return {
                 "thread": {
                     "id": "old",
@@ -620,7 +644,7 @@ def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
             }
         if method == "thread/start":
             started.append(params)
-            assert turns == ["old"] and handover.is_file()
+            assert turns == expected_turns[:-1] and handover.is_file()
             return {
                 "thread": {
                     "id": "new",
@@ -634,7 +658,7 @@ def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
             named.append(params)
             return {}
         if method == "thread/section/move":
-            assert turns == ["old", "new"]
+            assert turns == expected_turns
             assert pinned
             if failure == "pin_failed":
                 raise RuntimeError("Pin move failed")
@@ -643,7 +667,7 @@ def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
             )
             return {}
         assert method == "thread/archive"
-        assert turns == ["old", "new"]
+        assert turns == expected_turns
         archived.append(str(params["threadId"]))
         if pinned:
             pins.remove("old")
@@ -653,6 +677,7 @@ def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
         turns.append(thread_id)
         assert handover.name in prompt
         if thread_id == "old":
+            assert retire_prompt
             if failure not in {"missing", "unchanged_handover"}:
                 handover.write_text(
                     "" if failure == "empty" else "Hand over this objective."
@@ -665,14 +690,19 @@ def test_old_chat_is_archived_only_after_handover_and_summary_succeed(
     server = codexo.AppServer(StringIO(), StringIO())
     monkeypatch.setattr(server, "request", request)
     monkeypatch.setattr(server, "run_turn", run_turn)
-    if failure is None or (failure == "pin_failed" and not pinned):
-        assert codexo.replace_chat(server, "old") == "new"
+    if (
+        failure is None
+        or (failure == "pin_failed" and not pinned)
+        or (failure == "unchanged_handover" and not retire_prompt)
+    ):
+        assert codexo.replace_chat(server, "old", retire_prompt) == "new"
+        assert turns == expected_turns
         assert archived == ["old"]
         assert started == [{"cwd": str(tmp_path)}]
         assert named == [{"threadId": "new", "name": "Original name"}]
         assert pins == (["first", "new", "last"] if pinned else ["first", "last"])
     else:
         with pytest.raises((RuntimeError, codexo.ValidationError)):
-            codexo.replace_chat(server, "old")
+            codexo.replace_chat(server, "old", retire_prompt)
         assert not archived
         assert pins == (["first", "old", "last"] if pinned else ["first", "last"])

@@ -41,6 +41,8 @@ class RetireCommand(BaseModel, frozen=True):
     """Replace a chat using a handover and summary, then archive the old chat."""
 
     thread_id: Annotated[str | None, tyro.conf.Positional] = None
+    retire_prompt: Annotated[bool, tyro.conf.arg(prefix_name=False)] = True
+    """Prompt the retiring chat to write handover.md; disable to reuse it."""
 
 
 class FixCommand(BaseModel, frozen=True):
@@ -313,12 +315,12 @@ def main() -> None:
         fix_repositories(command.action, command.dry_run)
         return
     if command.dry_run:
-        print_dry_run(command.action.thread_id)
+        print_dry_run(command.action.thread_id, command.action.retire_prompt)
         return
     try:
         with desktop_server() as server:
             thread_id = command.action.thread_id or select_chat(server, command.verbose)
-            replace_chat(server, thread_id)
+            replace_chat(server, thread_id, command.action.retire_prompt)
     except (
         OSError,
         RuntimeError,
@@ -978,7 +980,7 @@ def codex_info(server: AppServer, directory: Path) -> CodexInfo:
         cursor = chats.nextCursor
 
 
-def print_dry_run(thread_id: str | None) -> None:
+def print_dry_run(thread_id: str | None, retire_prompt: bool = True) -> None:
     print("Dry run: no app-server, file, or chat operations will be performed.")
     print("Values in <angle brackets> are determined during a real run.")
     print("Connect to the desktop bridge; initialize with experimentalApi enabled.")
@@ -990,12 +992,15 @@ def print_dry_run(thread_id: str | None) -> None:
     print(f"thread/read: read {old_id!r}; require a display name and an idle chat.")
     print("Preserve <old-chat-name> and <old-working-directory>.")
     print("Application Project membership is unverified.")
-    print(f"thread/resume: resume {old_id!r}; require it to remain idle.")
     print("Use <old-working-directory>/handover.md as the handover path.")
-    print(f"turn/start: ask {old_id!r} to write the handover document.")
-    print(
-        "Wait for successful turn/completed; require a newly written nonempty handover."
-    )
+    if retire_prompt:
+        print(f"thread/resume: resume {old_id!r}; require it to remain idle.")
+        print(f"turn/start: ask {old_id!r} to write the handover document.")
+        print("Wait for turn/completed; require a newly written nonempty handover.")
+    else:
+        print(
+            "Use the existing nonempty handover; send no prompt to the retiring chat."
+        )
     print("thread/start: create <replacement-chat-id> in <old-working-directory>.")
     print("Require the replacement working directory to match the old one.")
     print("thread/name/set: name <replacement-chat-id> <old-chat-name>.")
@@ -1007,7 +1012,7 @@ def print_dry_run(thread_id: str | None) -> None:
         "If the old chat is pinned, thread/section/move: insert its replacement "
         "immediately before it in the Pinned section."
     )
-    print(f"thread/archive: archive {old_id!r} only after both turns succeed.")
+    print(f"thread/archive: archive {old_id!r} after handover and replacement succeed.")
     print(
         "Print the replacement ID; disconnect from app-server. Keep the handover file."
     )
@@ -1048,7 +1053,7 @@ def select_chat(server: AppServer, verbose: bool) -> str:
             print("Choose a number from this page.", file=sys.stderr)
 
 
-def replace_chat(server: AppServer, thread_id: str) -> str:
+def replace_chat(server: AppServer, thread_id: str, retire_prompt: bool = True) -> str:
     old = Chat.model_validate(
         server.request("thread/read", {"threadId": thread_id})["thread"]
     )
@@ -1058,21 +1063,24 @@ def replace_chat(server: AppServer, thread_id: str) -> str:
         raise RuntimeError("Selected chat must be idle before handover")
     print(f"Replacing {old.name!r}; preserving {old.cwd}.")
     print("Application Project membership is unverified.")
-    resumed = Chat.model_validate(
-        server.request("thread/resume", {"threadId": old.id, "excludeTurns": True})[
-            "thread"
-        ]
-    )
-    if resumed.status["type"] != "idle":
-        raise RuntimeError("Selected chat is not idle after resume")
     handover = old.cwd / "handover.md"
-    previous_modified = handover.stat().st_mtime_ns if handover.is_file() else None
     print(f"Handover: {handover}", flush=True)
-    server.run_turn(old.id, RETIRING_PROMPT)
+    if retire_prompt:
+        resumed = Chat.model_validate(
+            server.request("thread/resume", {"threadId": old.id, "excludeTurns": True})[
+                "thread"
+            ]
+        )
+        if resumed.status["type"] != "idle":
+            raise RuntimeError("Selected chat is not idle after resume")
+        previous_modified = handover.stat().st_mtime_ns if handover.is_file() else None
+        server.run_turn(old.id, RETIRING_PROMPT)
+        if handover.is_file() and handover.stat().st_mtime_ns == previous_modified:
+            raise RuntimeError(
+                f"Handover was not updated: {handover}; old chat retained"
+            )
     if not handover.is_file() or not handover.read_text().strip():
         raise RuntimeError(f"Handover was not written: {handover}; old chat retained")
-    if handover.stat().st_mtime_ns == previous_modified:
-        raise RuntimeError(f"Handover was not updated: {handover}; old chat retained")
     new = Chat.model_validate(
         server.request("thread/start", {"cwd": str(old.cwd)})["thread"]
     )
@@ -1102,10 +1110,9 @@ WATCH_LABEL = "local.codexo.watch"
 WATCH_ENVIRONMENT_LABEL = "local.codexo.watch-environment"
 WATCH_REQUEST_TIMEOUT = 10
 
-RETIRING_PROMPT = """
-Start by cleaning up documents in plan/ and doc/. Plans that are completed should
-be removed. Docs should be checked to see they are still up to date. Commit any changes
-as one commit with message 'Update doc/ and plan/'
+RETIRING_PROMPT = """Start by cleaning up documents in plan/ and doc/. Plans that are
+completed should be removed. Docs should be checked to see they are still up to
+date. Commit any changes as one commit with message 'Update doc/ and plan/'.
 
 In a new commit, create or replace handover.md with a handover document for a new
 context. Do not include any information that already appears in doc/ or plan/ or can be
