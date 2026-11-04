@@ -3,6 +3,7 @@ import json
 import subprocess
 import sys
 from contextlib import nullcontext
+from importlib.machinery import SourceFileLoader
 from io import StringIO
 from pathlib import Path
 
@@ -11,7 +12,9 @@ import tomllib
 from pytest_regressions.file_regression import FileRegressionFixture
 
 spec = importlib.util.spec_from_file_location(
-    "codexo", Path(__file__).with_name("codexo.py")
+    "codexo",
+    Path(__file__).with_name("codexo"),
+    loader=SourceFileLoader("codexo", str(Path(__file__).with_name("codexo"))),
 )
 assert spec is not None and spec.loader is not None
 codexo = importlib.util.module_from_spec(spec)
@@ -45,7 +48,7 @@ def test_retire_picker_only_includes_chat_details_in_verbose_mode(
         sys,
         "argv",
         [
-            "codexo.py",
+            "codexo",
             *flags,
             "retire",
             *([] if retire_prompt else ["--no-retire-prompt"]),
@@ -67,7 +70,7 @@ def test_dry_run_prints_operations_without_performing_them(
     thread_id: str | None,
     retire_prompt: bool,
 ) -> None:
-    args = ["codexo.py", flag, "retire"]
+    args = ["codexo", flag, "retire"]
     if thread_id is not None:
         args.append(thread_id)
     if not retire_prompt:
@@ -117,7 +120,7 @@ def test_fix_dry_run_lists_repositories_without_reading_them(
         (directory / "pyproject.toml").touch()
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     monkeypatch.setattr(
-        sys, "argv", ["codexo.py", flag, "fix", *codex_flags, "safer", "tuney"]
+        sys, "argv", ["codexo", flag, "fix", *codex_flags, "safer", "tuney"]
     )
 
     def unexpected_operation(*args: object, **kwargs: object) -> None:
@@ -159,7 +162,7 @@ def test_fix_without_codex_reports_partial_repos_and_ignores_non_directories(
         sys,
         "argv",
         [
-            "codexo.py",
+            "codexo",
             *flags,
             "fix",
             "--no-codex",
@@ -254,7 +257,7 @@ def test_codex_startup_failure_still_reports_other_sources(
     for r in ["first", "second"]:
         (tmp_path / "code" / r).mkdir(parents=True)
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
-    monkeypatch.setattr(sys, "argv", ["codexo.py", "fix", "first", "second"])
+    monkeypatch.setattr(sys, "argv", ["codexo", "fix", "first", "second"])
     monkeypatch.setattr(codexo, "pyproject_description", lambda p: "Local description")
     monkeypatch.setattr(codexo, "readme_heading", lambda p: "README title")
     monkeypatch.setattr(codexo, "github_description", lambda p: "GitHub description")
@@ -371,7 +374,7 @@ def test_fix_silently_ignores_all_invalid_entries(
     (tmp_path / "code" / "file").touch()
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
     flags = ["-d"] if dry_run else []
-    monkeypatch.setattr(sys, "argv", ["codexo.py", *flags, "fix", "missing", "file"])
+    monkeypatch.setattr(sys, "argv", ["codexo", *flags, "fix", "missing", "file"])
 
     def unexpected_operation(*args: object, **kwargs: object) -> None:
         pytest.fail("Ignored entries must not trigger external operations")

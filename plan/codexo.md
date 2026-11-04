@@ -48,9 +48,9 @@ An unchanged file from a previous run is not accepted as a new handover. The
 replacement is asked to read the handover and summarize the next tasks. Its turn
 must complete successfully before archiving; there is no checksum verification
 or independent check that the model read the complete file. The prompts are
-editable as `RETIRING_PROMPT` and `NEW_CHAT_PROMPT` in `bin/codexo.py`.
+editable as `RETIRING_PROMPT` and `NEW_CHAT_PROMPT` in `bin/codexo`.
 
-Use `codexo.py retire --no-retire-prompt` to skip prompting the retiring chat
+Use `codexo retire --no-retire-prompt` to skip prompting the retiring chat
 and reuse its existing `handover.md`. The file must exist and be nonempty; it
 does not need to be updated during this run. The replacement still receives
 `NEW_CHAT_PROMPT`, and pin transfer and final archiving follow the usual checks.
@@ -60,7 +60,7 @@ using the state database. They list unarchived chats; `fix` additionally limits
 the results to the requested working directory. With no chat ID, `retire` offers
 an interactive picker with 25 chats per page, most recently updated first.
 The picker shows numbered chat names by default. Use top-level `--verbose` or
-`-v`, as in `codexo.py -v retire`, to also show chat IDs and working directories.
+`-v`, as in `codexo -v retire`, to also show chat IDs and working directories.
 
 ## Project and working directory
 
@@ -92,12 +92,12 @@ independent Python program.
 
 ## Status
 
-Implemented in `bin/codexo.py`, using the existing dotfiles environment's Tyro
+Implemented in `bin/codexo`, using the existing dotfiles environment's Tyro
 and Pydantic dependencies. `retire` uses the desktop bridge's WebSocket connection;
 `fix` launches a separate app-server over stdio. The installed protocol schema
 was generated and inspected.
 
-Run `/Users/tom/code/dotfiles/bin/codexo.py retire` to select a chat from paginated
+Run `/Users/tom/code/dotfiles/bin/codexo retire` to select a chat from paginated
 app-server results, or pass a thread ID after `retire`. It preserves
 the display name and recorded working directory, using configured model and
 permission defaults. Run only when the old chat is idle, and leave it idle in
@@ -106,7 +106,7 @@ owns the desktop chat, avoiding a second thread writer. On exit it closes its
 connection and leaves the app's server running.
 
 Add the top-level `-d` or `--dry-run` flag before the command, for example
-`/Users/tom/code/dotfiles/bin/codexo.py -d retire`, to print the planned operations
+`/Users/tom/code/dotfiles/bin/codexo -d retire`, to print the planned operations
 without starting app-server, creating files, or changing chats. This mode runs
 offline, so it shows placeholders for metadata and paths that a real run would
 discover or create.
@@ -153,7 +153,7 @@ retry, clean up chats, or continue the handed-over task automatically.
 
 ## Watch
 
-`/Users/tom/code/dotfiles/bin/codexo.py watch` polls every 60 seconds by default.
+`/Users/tom/code/dotfiles/bin/codexo watch` polls every 60 seconds by default.
 Use `watch --interval 120 --prompt "hello"` to configure the interval in seconds
 and the prompt. The default prompt is `hello`. The first poll runs immediately.
 

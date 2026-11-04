@@ -4,6 +4,7 @@ import subprocess
 import sys
 from contextlib import nullcontext
 from datetime import datetime
+from importlib.machinery import SourceFileLoader
 from io import StringIO
 from pathlib import Path
 from typing import Never
@@ -11,7 +12,9 @@ from typing import Never
 import pytest
 
 spec = importlib.util.spec_from_file_location(
-    "codexo_watch", Path(__file__).with_name("codexo.py")
+    "codexo_watch",
+    Path(__file__).with_name("codexo"),
+    loader=SourceFileLoader("codexo_watch", str(Path(__file__).with_name("codexo"))),
 )
 assert spec is not None and spec.loader is not None
 codexo = importlib.util.module_from_spec(spec)
@@ -495,7 +498,7 @@ def test_watch_dry_run_never_starts_processes_or_writes_files(
         sys,
         "argv",
         [
-            "codexo.py",
+            "codexo",
             "-d",
             "watch",
             *operation,
@@ -537,7 +540,7 @@ def test_daemon_restart_uses_existing_service_and_reports_failure(
     available: bool,
 ) -> None:
     monkeypatch.setattr(codexo.Path, "home", lambda: tmp_path)
-    monkeypatch.setattr(sys, "argv", ["codexo.py", "watch", "restart"])
+    monkeypatch.setattr(sys, "argv", ["codexo", "watch", "restart"])
     calls: list[list[str]] = []
 
     def run(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
@@ -617,7 +620,7 @@ def test_daemon_install_replaces_settings_and_reloads_existing_agents(
         sys,
         "argv",
         [
-            "codexo.py",
+            "codexo",
             "watch",
             "install",
             "--interval",
@@ -832,7 +835,7 @@ def test_invalid_watch_configuration_is_rejected(options: dict[str, object]) -> 
 def test_watch_rejects_old_flags_and_multiple_subcommands(
     monkeypatch: pytest.MonkeyPatch, arguments: list[str]
 ) -> None:
-    monkeypatch.setattr(sys, "argv", ["codexo.py", "watch", *arguments])
+    monkeypatch.setattr(sys, "argv", ["codexo", "watch", *arguments])
 
     def unexpected_operation(*args: object, **kwargs: object) -> None:
         pytest.fail("Invalid arguments must not start processes")

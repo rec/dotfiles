@@ -3,6 +3,7 @@ import json
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
+from importlib.machinery import SourceFileLoader
 from io import StringIO
 from pathlib import Path
 from socket import socketpair
@@ -17,7 +18,9 @@ from websockets.sync.client import ClientConnection, connect
 from websockets.sync.server import Server, ServerConnection
 
 spec = importlib.util.spec_from_file_location(
-    "codexo_bridge", Path(__file__).with_name("codexo.py")
+    "codexo_bridge",
+    Path(__file__).with_name("codexo"),
+    loader=SourceFileLoader("codexo_bridge", str(Path(__file__).with_name("codexo"))),
 )
 assert spec is not None and spec.loader is not None
 codexo = importlib.util.module_from_spec(spec)
@@ -34,7 +37,7 @@ def test_bridge_accepts_desktop_cli_arguments_without_reinterpreting_them(
         "app-server",
         "--analytics-default-enabled",
     ]
-    monkeypatch.setattr(sys, "argv", ["codexo.py", "bridge", "--", *arguments])
+    monkeypatch.setattr(sys, "argv", ["codexo", "bridge", "--", *arguments])
     bridge = Mock()
     monkeypatch.setattr(codexo, "bridge_desktop", bridge)
     codexo.main()
@@ -99,7 +102,7 @@ def test_watcher_requires_one_bridge_owned_by_the_desktop_app(
     output = (
         "PID PPID COMMAND\n100 1 /Applications/ChatGPT.app/Contents/MacOS/ChatGPT\n"
     )
-    script = Path(__file__).with_name("codexo.py").resolve()
+    script = Path(__file__).with_name("codexo").resolve()
     for pid in range(200, 200 + bridges):
         output += (
             f"{pid} {parent} {sys.executable} {script} bridge -- "
