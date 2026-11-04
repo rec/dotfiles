@@ -10,7 +10,8 @@ The desired workflow is:
 1. Select an existing chat and read its display name.
 2. Send it a prompt asking it to create a handover document.
 3. Wait for the document to be created.
-4. Create a new chat in the same application Project with the same display name.
+4. Create a new chat in the same working directory with the same display name.
+   Exact application Project membership remains unverified, as accepted by the user.
 5. Tell the new chat to read the handover document.
 6. Archive the old chat after the handover succeeds.
 
@@ -80,15 +81,13 @@ preserve application Project membership.
 
 ## Remaining verification
 
-- Verify retirement through the desktop bridge on live chats. A separately
+- Verify a complete retirement through the desktop bridge on live chats,
+  including pin ordering and final archiving. A separately
   launched app-server cannot resume a chat whose writer is owned by the app,
   even when that chat is idle.
-- Verify the complete handover on live chats. Unit tests cover the archive gate,
-  but do not establish desktop integration or model behavior.
-
-The current chat also exposes app-provided chat management tools, but their
-availability does not establish a supported interface callable directly by an
-independent Python program.
+- Verify ordinary Dock/Finder launches and app-update relaunches retain the
+  bridge environment. Explicit environment launches have worked; ordinary launch
+  inheritance has not been established.
 
 ## Status
 
@@ -145,8 +144,9 @@ the repository's configured remote. `-d fix <repo>...` prints only the planned
 reads, without starting app-server or contacting GitHub.
 
 `retire` stops if Codex requests approvals, user input, or app-only tools that
-this standalone client cannot supply. Missing, empty, or unchanged handover
-documents and unsuccessful turns prevent archiving. If failure occurs after
+this standalone client cannot supply. Missing or empty handover documents and
+unsuccessful turns prevent archiving. Unless `--no-retire-prompt` is used, an
+unchanged handover also prevents archiving. If failure occurs after
 creating the replacement, it remains available; the script prints
 its ID and the handover path so work can be recovered manually. It does not
 retry, clean up chats, or continue the handed-over task automatically.
@@ -170,7 +170,19 @@ Use `watch install --test` to enable this in the daemon; reinstall without
 `--test` to disable it.
 
 The watcher connects to the desktop app's own server through a Unix WebSocket
-bridge. Run `watch install`, then fully quit and reopen the desktop app once.
+bridge. Run `codexo watch install`, then fully quit and reopen the desktop app.
+Ordinary Dock/Finder launches have not reliably inherited the GUI environment
+setting. To explicitly launch with the installed bridge:
+
+```sh
+open --env "CODEX_CLI_PATH=$HOME/Library/Application Support/codexo/codex" \
+  -a /Applications/ChatGPT.app
+```
+
+After renaming or moving the script, reinstall with `codexo watch install` and
+reopen the app so the saved daemon arguments and launcher use the current path.
+Include any custom interval, prompt, or test setting again when reinstalling.
+
 Installation sets the GUI login environment's `CODEX_CLI_PATH` to an executable
 launcher at `~/Library/Application Support/codexo/codex`. The login helper
 restores that setting at future logins. Existing app processes retain their
@@ -270,8 +282,20 @@ or daemon operations without connecting, sending prompts, or installing anything
 Verification includes unit tests and live checks of the installed launcher's
 startup-config response and an isolated desktop bridge. The bridge completed
 its stdio handshake and accepted a second WebSocket client on the same server.
-The isolated server was stopped afterward. The running desktop app was not
-restarted, no daemon was installed, and no live watch prompt was sent.
+The isolated server was stopped afterward. The user subsequently installed the
+daemon and confirmed repeated live test prompts in the `codexo` chat, then
+disabled test mode. A user-supplied log entry from 2026-10-28 at 07:55:41 +01:00
+confirmed a real reset send: primary usage was zero, `idle=true`, and
+`prompt_sent=true`, targeting `cntrl (3)`. This confirms the API accepted the
+prompt; the log does not establish completion of the response.
+
+Inspect recent polls with `tail -n 30 ~/Library/Logs/codexo-watch.log`, or follow
+them with `tail -f ~/Library/Logs/codexo-watch.log`. List successful reset sends,
+excluding test prompts, with:
+
+```sh
+grep 'prompt_sent=true' ~/Library/Logs/codexo-watch.log | grep -v 'test prompt'
+```
 
 ## Additional work beyond the prompt
 
